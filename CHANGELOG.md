@@ -1,7 +1,7 @@
 # v1.1.1
 
 - Set valign default to middle
-
+- Remove outdated reference to scss files in config
 
 # v1.1.0
 
