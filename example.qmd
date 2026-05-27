@@ -20,7 +20,7 @@ A simple value box can help convey points...
 
 Or display a metric
 
-::: {.value-box value=60 icon="bi-arrow-down-up" icon-type="bi"}
+::: {.value-box value=60 icon="bi-arrow-down-up" icon-size="2rem" icon-type="bi"}
 Number of bibbles bobbled this week
 :::
 
@@ -43,22 +43,17 @@ And they work nicely with fragments too
 
 ## Fragment types
 
-::: {.value-box icon="bi-arrow-down-up" color="bg-blue" width="60%" align="center"}
-We can use them without fragments
+::: {.value-box value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" fragment="fade-in-then-out"}
+We can use them with special named fragment types like 'fade in, then out'
 :::
 
-::: {.value-box value="Big text" icon="bi-arrow-down-up" color="bg-olive" width="60%" align="center" fragment="fade-in-then-out"}
-Or special named fragment types like 'fade in, then out'
-:::
-
-::: {.value-box value="Big text" icon="bi-arrow-down-up" color="bg-olive" width="60%" align="center" fragment="true"}
+::: {.value-box value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" fragment="true"}
 Or standard fragments
 :::
 
-::: {.value-box value="Big text" icon="bi-arrow-down-up" color="bg-olive" width="60%" align="center"}
-That disappear when you move on.
+::: {.value-box icon="bi-arrow-down-up" icon-size="2rem" color="bg-blue" width="60%" align="center"}
+Or without fragments
 :::
-
 
 
 
@@ -78,6 +73,117 @@ This appears SECOND (Index 2)
 ::: {.value-box fragment="true" index="1" width="70%"}
 This appears FIRST (Index 1)
 :::
+:::
+
+::::
+
+
+## Icon position
+
+::: {.value-box icon="bi-star" icon-position="left" color="bg-blue" value="42"}
+Left-aligned icon
+:::
+
+::: {.value-box icon="bi-star" icon-position="right" color="bg-green" value="99"}
+Right-aligned icon
+:::
+
+::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" color="bg-red" value="7"}
+Icon below text
+:::
+
+## Text Position
+
+We can also combine this with text position
+
+::: {.value-box icon="bi-star" icon-position="left" align="right" color="bg-blue" value="42"}
+Left-aligned icon with right-aligned text
+:::
+
+::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" color="bg-red" value="7" align="center"}
+Icon below text, all centred
+:::
+
+## And we can use different icon types
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="bi-star" icon-position="left" color="bg-blue" value="42"}
+Bootstrap icons
+:::
+
+:::
+
+::: {.column width='50%'}
+
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
+Font awesome icons
+:::
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="example-icon.svg" icon-position="left" color="bg-blue" value="42"}
+Local svg file
+:::
+
+:::
+
+::: {.column width='50%'}
+
+::: {.value-box icon="example-icon.png" icon-position="left" color="bg-blue" value="42"}
+Local png file
+:::
+
+
+:::
+
+::::
+
+
+## Width
+
+We can manually override the width.
+
+
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
+Bootstrap icons
+:::
+
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" width="30%"}
+Font awesome icons
+:::
+
+
+
+
+## Height
+
+And we can manually override the height.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
+Bootstrap icons
+:::
+
+:::
+
+::: {.column width='50%'}
+
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" height="500px"}
+Font awesome icons
+:::
+
 :::
 
 ::::
