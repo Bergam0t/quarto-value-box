@@ -77,7 +77,7 @@ Here's a more advanced type of box with an icon and some formatting, but no valu
 | `width` | string | `80%` | Width of the box. Accepts any valid CSS size unit e.g. `50%`, `300px`. |
 | `height` | string | `""` | Height of the box. If omitted the box sizes to its content. Accepts any valid CSS size unit e.g. `200px`. |
 | `align` | `left` \| `center` \| `right` | `left` | Horizontal text alignment within the box. |
-| `align` | `top` \| `middle` \| `bottom` | Vertical alignment within the box. Accepts one of the example strings given for ease, but any valid css align-items or justify-content value should be accepted. |
+| `valign` | `top` \| `middle` \| `bottom` | `middle` | Vertical alignment within the box. Accepts one of the example strings given for ease, but any valid css align-items or justify-content value should be accepted. |
 | `href` | string | `""` | If provided, wraps the entire box in a link. |
 | `fragment` | string \| `true` | — | Enables Reveal.js fragment animation. Set to `true` for the default `fade-in-then-semi-out` animation, or provide any valid Reveal.js fragment class (see https://quarto.org/docs/presentations/revealjs/advanced.html#fragment-classes). |
 | `index` | string | — | Sets the `data-fragment-index` for controlling Reveal.js fragment ordering. |

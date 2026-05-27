@@ -29,7 +29,7 @@ function Div(el)
     local width     = el.attributes["width"] or "80%"
     local height    = el.attributes["height"] or ""
     local align     = el.attributes["align"] or "left"
-    local valign = el.attributes["valign"] or ""
+    local valign = el.attributes["valign"] or "middle"
     local href      = el.attributes["href"] or ""
     local icon_pos  = el.attributes["icon-position"] or "top" -- "top" | "bottom" | "left" | "right"
 
