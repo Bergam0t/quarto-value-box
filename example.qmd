@@ -1,0 +1,83 @@
+---
+title: "Value Box Demo"
+format:
+    revealjs:
+        output-file: index.html
+filters:
+    - value-box
+---
+
+
+## Simple boxes 1
+
+::: {.value-box .bg-amber style="font-size: 1.25rem;"}
+
+**Value boxes**
+
+A simple value box can help convey points...
+
+:::
+
+Or display a metric
+
+::: {.value-box value=60 icon="bi-arrow-down-up" icon-type="bi"}
+Number of bibbles bobbled this week
+:::
+
+## Simple boxes 2
+
+Or display a metric with an icon
+
+::: {.value-box value=60}
+Number of bibbles bobbled this week
+:::
+
+::: {.value-box .bg-amber style="font-size: 1.25rem;" fragment="true"}
+
+**Value boxes**
+
+And they work nicely with fragments too
+
+:::
+
+
+## Fragment types
+
+::: {.value-box icon="bi-arrow-down-up" color="bg-blue" width="60%" align="center"}
+We can use them without fragments
+:::
+
+::: {.value-box value="Big text" icon="bi-arrow-down-up" color="bg-olive" width="60%" align="center" fragment="fade-in-then-out"}
+Or special named fragment types like 'fade in, then out'
+:::
+
+::: {.value-box value="Big text" icon="bi-arrow-down-up" color="bg-olive" width="60%" align="center" fragment="true"}
+Or standard fragments
+:::
+
+::: {.value-box value="Big text" icon="bi-arrow-down-up" color="bg-olive" width="60%" align="center"}
+That disappear when you move on.
+:::
+
+
+
+
+## Complex icon box layouts with index parameter
+
+:::: {.columns}
+
+::: {.column width="50%"}
+### Left Column
+::: {.value-box fragment="true" index="2" width="70%"}
+This appears SECOND (Index 2)
+:::
+:::
+
+::: {.column width="50%"}
+### Right Column
+::: {.value-box fragment="true" index="1" width="70%"}
+This appears FIRST (Index 1)
+:::
+:::
+
+::::
