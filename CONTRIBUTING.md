@@ -1,6 +1,6 @@
 # Contributing
 
-We welcome contributions to `lokigi`. You can either:
+We welcome contributions to `quarto_value_box`. You can either:
 
 ## Reporting Issues
 
