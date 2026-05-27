@@ -20,10 +20,6 @@ quarto add bergam0t/quarto_value_box
 
 First, you must make sure the filter is added to the list of extensions in your document header.
 
-> [!WARNING]
-> Note that it is called 'value-box' when added to your document - not 'quarto_-_value_box'
-
-
 ```yml
 ---
 format:
@@ -32,6 +28,10 @@ filters:
   - value-box
 ---
 ```
+
+> [!WARNING]
+> Note that it is called 'value-box' when added to your document - not 'quarto_value_box'
+
 
 > [!TIP]
 > You could also do
@@ -73,7 +73,7 @@ Here's a more advanced type of box with an icon and some formatting, but no valu
 | `icon-type` | `bi` \| `fa` \| `svg` \| `png` | auto | Icon library or format to use. If omitted the type is auto-detected from the `icon` value, falling back to Bootstrap Icons. |
 | `icon-size` | string | `8em` / `256px` | Size of the icon. Font-based icons (`bi`, `fa`) default to `2em`; image-based (`svg`, `png`) default to `128px`. Accepts any valid CSS size unit. |
 | `icon-position` | `top` \| `bottom` \| `left` \| `right` | `top` | Where the icon is rendered relative to the box content. |
-| `color` | string | `bg-blue` | CSS class or value controlling the box background colour. Prespecified options are bg-blue, bg-navy, bg-teal, bg-green, bg-olive, bg-amber, bg-orange, bg-red, bg-pink, bg-purple, bg-slate, bg-grey. For details on how to change or add colours, see the advanced customisation section below. |
+| `color` | string | `bg-blue` | CSS class or value controlling the box background colour. Prespecified options are bg-blue, bg-navy, bg-teal, bg-green, bg-olive, bg-amber, bg-orange, bg-red, bg-pink, bg-purple, bg-slate, bg-grey. For details on how to change or add colours, see the [advanced customisation](https://github.com/Bergam0t/quarto_value_box?tab=readme-ov-file#colours) section below. |
 | `width` | string | `80%` | Width of the box. Accepts any valid CSS size unit e.g. `50%`, `300px`. |
 | `height` | string | `""` | Height of the box. If omitted the box sizes to its content. Accepts any valid CSS size unit e.g. `200px`. |
 | `align` | `left` \| `center` \| `right` | `left` | Horizontal text alignment within the box. |
