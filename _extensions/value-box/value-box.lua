@@ -132,11 +132,10 @@ function Div(el)
         if png_file then
           png_file:close()
           icon_html = string.format(
-            '<img class="icon" src="%s" style="width:%s; height:%s; object-fit:contain;%s" alt="">',
+            '<img class="icon" src="%s" style="width:%s; height:%s; object-fit:contain; display:block; margin:0 auto;%s" alt="">',
             icon, icon_size_img, icon_size_img, icon_extra_style
           )
         else
-          -- PNG file not found — fall back to Bootstrap Icons and warn
           io.stderr:write(string.format("value-box warning: PNG file not found '%s', falling back to Bootstrap Icons\n", icon))
           quarto.doc.include_text("in-header", '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">')
           icon_html = string.format(
