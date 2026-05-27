@@ -6,7 +6,7 @@ This is a small filter to allow you to set up value boxes in any Quarto document
 
 ![](assets/2026-05-27-13-00-53.png)
 
-There are a wide range of customisation options available for size, icon type, and more (see the full list in the <a name="customisation">customisation</a> section below.)
+There are a wide range of customisation options available for size, icon type, and more (see the full list in the [customisation](https://github.com/Bergam0t/quarto_value_box#customisation) section below.)
 
 ## Installation
 
