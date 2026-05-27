@@ -20,7 +20,7 @@ A simple value box can help convey points...
 
 Or display a metric
 
-::: {.value-box value=60 icon="bi-arrow-down-up" icon-size="2rem" icon-type="bi"}
+::: {.value-box value=60}
 Number of bibbles bobbled this week
 :::
 
@@ -28,7 +28,7 @@ Number of bibbles bobbled this week
 
 Or display a metric with an icon
 
-::: {.value-box value=60}
+::: {.value-box value=60 icon="bi-arrow-down-up" icon-size="2rem"}
 Number of bibbles bobbled this week
 :::
 
@@ -43,17 +43,19 @@ And they work nicely with fragments too
 
 ## Fragment types
 
-::: {.value-box value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" fragment="fade-in-then-out"}
-We can use them with special named fragment types like 'fade in, then out'
+::: {.value-box value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" fragment="fade-in-then-semi-out"}
+We can use them with special named fragment types like 'fade in, then semi out'
+(this is also the default if you set fragment="true")
 :::
 
-::: {.value-box value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" fragment="true"}
+::: {.value-box value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" fragment="fade-in-then-out"}
 Or standard fragments
 :::
 
-::: {.value-box icon="bi-arrow-down-up" icon-size="2rem" color="bg-blue" width="60%" align="center"}
-Or without fragments
+:::{.fragment}
+Tada!
 :::
+
 
 
 
@@ -130,7 +132,7 @@ Font awesome icons
 
 ::: {.column width='50%'}
 
-::: {.value-box icon="example-icon.svg" icon-position="left" color="bg-blue" value="42"}
+::: {.value-box icon="example-icon.svg" icon-position="left" color="bg-grey" value="42"}
 Local svg file
 :::
 
@@ -138,7 +140,7 @@ Local svg file
 
 ::: {.column width='50%'}
 
-::: {.value-box icon="example-icon.png" icon-position="left" color="bg-blue" value="42"}
+::: {.value-box icon="example-icon.png" icon-size="256px" icon-position="left" color="bg-blue"}
 Local png file
 :::
 
@@ -154,11 +156,11 @@ We can manually override the width.
 
 
 ::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
-Bootstrap icons
+No width specified - defaults to 80% of container
 :::
 
 ::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" width="30%"}
-Font awesome icons
+Width of 30% specified.
 :::
 
 
@@ -173,7 +175,7 @@ And we can manually override the height.
 ::: {.column width='50%'}
 
 ::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
-Bootstrap icons
+Example with no height specified - it will fit the contents
 :::
 
 :::
@@ -181,7 +183,7 @@ Bootstrap icons
 ::: {.column width='50%'}
 
 ::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" height="500px"}
-Font awesome icons
+Example with height of 500 pixels (500px) specified
 :::
 
 :::

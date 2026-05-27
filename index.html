@@ -133,9 +133,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -159,14 +157,14 @@
 <p>A simple value box can help convey points…</p>
 </div></div>
 <p>Or display a metric</p>
-<div class="value-box bg-blue" style="width:80%; height:; text-align:left;"><i class="icon bi bi-arrow-down-up" style="font-size:2rem;"></i><div class="value">60</div><div class="details">
+<div class="value-box bg-blue" style="width:80%; height:; text-align:left;"><div class="value">60</div><div class="details">
 <p>Number of bibbles bobbled this week</p>
 </div></div>
 </section>
 <section id="simple-boxes-2" class="slide level2">
 <h2>Simple boxes 2</h2>
 <p>Or display a metric with an icon</p>
-<div class="value-box bg-blue" style="width:80%; height:; text-align:left;"><div class="value">60</div><div class="details">
+<div class="value-box bg-blue" style="width:80%; height:; text-align:left;"><i class="icon bi bi-arrow-down-up" style="font-size:2rem;"></i><div class="value">60</div><div class="details">
 <p>Number of bibbles bobbled this week</p>
 </div></div>
 <div class="value-box bg-blue fragment fade-in-then-semi-out" style="width:80%; height:; text-align:left;"><div class="details">
@@ -176,15 +174,15 @@
 </section>
 <section id="fragment-types" class="slide level2">
 <h2>Fragment types</h2>
-<div class="value-box bg-olive fragment fade-in-then-out" style="width:60%; height:; text-align:center;"><i class="icon bi bi-arrow-down-up" style="font-size:2rem;"></i><div class="value">Big text</div><div class="details">
-<p>We can use them with special named fragment types like ‘fade in, then out’</p>
-</div></div>
 <div class="value-box bg-olive fragment fade-in-then-semi-out" style="width:60%; height:; text-align:center;"><i class="icon bi bi-arrow-down-up" style="font-size:2rem;"></i><div class="value">Big text</div><div class="details">
+<p>We can use them with special named fragment types like ‘fade in, then semi out’</p>
+</div></div>
+<div class="value-box bg-olive fragment fade-in-then-out" style="width:60%; height:; text-align:center;"><i class="icon bi bi-arrow-down-up" style="font-size:2rem;"></i><div class="value">Big text</div><div class="details">
 <p>Or standard fragments</p>
 </div></div>
-<div class="value-box bg-blue" style="width:60%; height:; text-align:center;"><i class="icon bi bi-arrow-down-up" style="font-size:2rem;"></i><div class="details">
-<p>Or without fragments</p>
-</div></div>
+<div class="fragment">
+<p>Tada!</p>
+</div>
 </section>
 <section id="complex-icon-box-layouts-with-index-parameter" class="slide level2">
 <h2>Complex icon box layouts with index parameter</h2>
@@ -237,17 +235,18 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; height:; text-align:left; display:flex; flex-direction:row; align-items:center; gap:1em;"><div class="value">42</div><div class="details" style=" flex:1;">
+<div class="value-box bg-grey" style="width:80%; height:; text-align:left; display:flex; flex-direction:row; align-items:center; gap:1em;"><span class="icon" style="width:128px; height:128px; display:inline-flex; align-items:center; justify-content:center; font-size:inherit; flex-shrink:0;"><!--?xml version="1.0" encoding="utf-8"?--><svg style="width:128px; height:128px;" version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="110px" height="110px" viewbox="0.21 -0.077 110 110" enable-background="new 0.21 -0.077 110 110" space="preserve"><lineargradient id="SVGID_1_" gradientunits="userSpaceOnUse" x1="63.8159" y1="56.6829" x2="118.4934" y2="1.8225" gradienttransform="matrix(1 0 0 -1 -53.2974 66.4321)"> <stop offset="0" style="stop-color:#387EB8"></stop> <stop offset="1" style="stop-color:#366994"></stop></lineargradient><path fill="url(#SVGID_1_)" d="M55.023-0.077c-25.971,0-26.25,10.081-26.25,12.156c0,3.148,0,12.594,0,12.594h26.75v3.781 c0,0-27.852,0-37.375,0c-7.949,0-17.938,4.833-17.938,26.25c0,19.673,7.792,27.281,15.656,27.281c2.335,0,9.344,0,9.344,0 s0-9.765,0-13.125c0-5.491,2.721-15.656,15.406-15.656c15.91,0,19.971,0,26.531,0c3.902,0,14.906-1.696,14.906-14.406 c0-13.452,0-17.89,0-24.219C82.054,11.426,81.515-0.077,55.023-0.077z M40.273,8.392c2.662,0,4.813,2.15,4.813,4.813 c0,2.661-2.151,4.813-4.813,4.813s-4.813-2.151-4.813-4.813C35.46,10.542,37.611,8.392,40.273,8.392z"></path><lineargradient id="SVGID_2_" gradientunits="userSpaceOnUse" x1="97.0444" y1="21.6321" x2="155.6665" y2="-34.5308" gradienttransform="matrix(1 0 0 -1 -53.2974 66.4321)"> <stop offset="0" style="stop-color:#FFE052"></stop> <stop offset="1" style="stop-color:#FFC331"></stop></lineargradient><path fill="url(#SVGID_2_)" d="M55.397,109.923c25.959,0,26.282-10.271,26.282-12.156c0-3.148,0-12.594,0-12.594H54.897v-3.781 c0,0,28.032,0,37.375,0c8.009,0,17.938-4.954,17.938-26.25c0-23.322-10.538-27.281-15.656-27.281c-2.336,0-9.344,0-9.344,0 s0,10.216,0,13.125c0,5.491-2.631,15.656-15.406,15.656c-15.91,0-19.476,0-26.532,0c-3.892,0-14.906,1.896-14.906,14.406 c0,14.475,0,18.265,0,24.219C28.366,100.497,31.562,109.923,55.397,109.923z M70.148,101.454c-2.662,0-4.813-2.151-4.813-4.813 s2.15-4.813,4.813-4.813c2.661,0,4.813,2.151,4.813,4.813S72.809,101.454,70.148,101.454z"></path></svg></span><div class="value">42</div><div class="details" style=" flex:1;">
 <p>Local svg file</p>
 </div></div>
 </div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; height:; text-align:left; display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi example-icon.png" style="font-size:3em; flex-shrink:0;"></i><div class="value">42</div><div class="details" style=" flex:1;">
+<div class="value-box bg-blue" style="width:80%; height:; text-align:left; display:flex; flex-direction:row; align-items:center; gap:1em;"><img class="icon" src="example-icon.png" style="width:256px; height:256px; object-fit:contain; flex-shrink:0;" alt=""><div class="details" style=" flex:1;">
 <p>Local png file</p>
 </div></div>
 </div></div>
 </section>
 <section id="width" class="slide level2">
 <h2>Width</h2>
+<p>We can manually override the width.</p>
 <div class="value-box bg-blue" style="width:80%; height:; text-align:left; display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; flex-shrink:0;"></i><div class="value">42</div><div class="details" style=" flex:1;">
 <p>Bootstrap icons</p>
 </div></div>
