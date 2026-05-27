@@ -2,11 +2,11 @@ This is a small filter to allow you to set up value boxes in any Quarto document
 
 ![](assets/2026-05-27-13-00-27.png)
 
-![](assets/2026-05-27-13-00-38.png)
+![](assets/2026-05-27-13-22-09.png)
 
 ![](assets/2026-05-27-13-00-53.png)
 
-There are a wide range of customisation options available for size, icon type, and
+There are a wide range of customisation options available for size, icon type, and more (see the full list in the <a name="customisation">customisation</a> section below.)
 
 ## Installation
 
@@ -62,9 +62,9 @@ Here's a more advanced type of box with an icon and some formatting, but no valu
 :::
 ```
 
-![](assets/2026-05-27-13-03-12.png)
+![](assets/2026-05-27-13-21-07.png)
 
-## Customisation
+## [Customisation](#customisation)
 
 | Parameter | Type | Default | Description |
 |---|---|---|---|

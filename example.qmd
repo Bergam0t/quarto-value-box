@@ -34,7 +34,7 @@ Number of bibbles bobbled this week
 
 
 ::: {.value-box icon="bi-arrow-down-up" color="bg-amber" width="60%" align="center"}
-Here's a more advanced type of box with an icon and some formatting
+Here's a more advanced type of box with an icon and some formatting, but no value
 :::
 
 
