@@ -29,6 +29,7 @@ function Div(el)
     local width     = el.attributes["width"] or "80%"
     local height    = el.attributes["height"] or ""
     local align     = el.attributes["align"] or "left"
+    local valign = el.attributes["valign"] or ""
     local href      = el.attributes["href"] or ""
     local icon_pos  = el.attributes["icon-position"] or "top" -- "top" | "bottom" | "left" | "right"
 
@@ -71,6 +72,19 @@ function Div(el)
       outer_extra_style  = " display:flex; flex-direction:row-reverse; align-items:center; gap:1em;"
       icon_extra_style   = " flex-shrink:0;"
       details_extra_style = " flex:1;"
+    end
+
+    -- Vertical alignment — requires flex on the outer wrapper
+    if valign ~= "" then
+      local valign_map = { top = "flex-start", middle = "center", bottom = "flex-end" }
+      local align_value = valign_map[valign] or valign  -- fall back to raw value if not a shorthand
+      if outer_extra_style:find("display:flex") then
+        -- Already flex (left/right icon position) — just override align-items
+        outer_extra_style = outer_extra_style:gsub("align%-items:[^;]+;", string.format("align-items:%s;", align_value))
+      else
+        -- Add flex column layout so justify-content controls vertical alignment
+        outer_extra_style = outer_extra_style .. string.format(" display:flex; flex-direction:column; justify-content:%s;", align_value)
+      end
     end
 
     -- Build the outer wrapper

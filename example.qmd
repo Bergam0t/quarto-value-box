@@ -186,3 +186,27 @@ Example with height of 500 pixels (500px) specified
 :::
 
 ::::
+
+## Vertical Alignment
+
+And we can also add vertical alignment options.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="500px"}
+No valign specified
+:::
+
+:::
+
+::: {.column width='50%'}
+
+::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="500px" valign="top"}
+Top alginment specified
+:::
+
+:::
+
+::::
