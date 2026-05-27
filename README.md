@@ -1,10 +1,10 @@
 This is a small filter to allow you to set up value boxes in any Quarto document.
 
-![](assets\2026-05-27-13-00-27.png)
+![](assets/2026-05-27-13-00-27.png)
 
-![](assets\2026-05-27-13-00-38.png)
+![](assets/2026-05-27-13-00-38.png)
 
-![](assets\2026-05-27-13-00-53.png)
+![](assets/2026-05-27-13-00-53.png)
 
 There are a wide range of customisation options available for size, icon type, and
 
@@ -13,7 +13,7 @@ There are a wide range of customisation options available for size, icon type, a
 You can add this extension to your project by running
 
 ```
-quarto add bergam0t/quarto-value-box
+quarto add bergam0t/quarto_value_box
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ quarto add bergam0t/quarto-value-box
 First, you must make sure the filter is added to the list of extensions in your document header.
 
 > [!WARNING]
-> Note that it is called 'value-box' when added to your document - not 'quarto-value-box'
+> Note that it is called 'value-box' when added to your document - not 'quarto_-_value_box'
 
 
 ```yml
@@ -54,7 +54,7 @@ Number of bibbles bobbled this week
 :::
 ```
 
-![](assets\2026-05-27-13-01-53.png)
+![](assets/2026-05-27-13-01-53.png)
 
 ```md
 ::: {.value-box icon="bi-arrow-down-up" color="bg-amber" width="60%" align="center"}
@@ -62,7 +62,7 @@ Here's a more advanced type of box with an icon and some formatting, but no valu
 :::
 ```
 
-![](assets\2026-05-27-13-03-12.png)
+![](assets/2026-05-27-13-03-12.png)
 
 ## Customisation
 
