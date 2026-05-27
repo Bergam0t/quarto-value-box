@@ -133,6 +133,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -167,15 +168,14 @@
 <div class="value-box bg-blue" style="width:80%; height:; text-align:left;"><i class="icon bi bi-arrow-down-up" style="font-size:2rem;"></i><div class="value">60</div><div class="details">
 <p>Number of bibbles bobbled this week</p>
 </div></div>
-<div class="value-box bg-blue fragment fade-in-then-semi-out" style="width:80%; height:; text-align:left;"><div class="details">
-<p><strong>Value boxes</strong></p>
-<p>And they work nicely with fragments too</p>
+<div class="value-box bg-amber" style="width:60%; height:; text-align:center;"><i class="icon bi bi-arrow-down-up" style="font-size:3em;"></i><div class="details">
+<p>Here’s a more advanced type of box with an icon and some formatting</p>
 </div></div>
 </section>
 <section id="fragment-types" class="slide level2">
 <h2>Fragment types</h2>
 <div class="value-box bg-olive fragment fade-in-then-semi-out" style="width:60%; height:; text-align:center;"><i class="icon bi bi-arrow-down-up" style="font-size:2rem;"></i><div class="value">Big text</div><div class="details">
-<p>We can use them with special named fragment types like ‘fade in, then semi out’</p>
+<p>We can use them with special named fragment types like ‘fade in, then semi out’ (this is also the default if you set fragment=“true”)</p>
 </div></div>
 <div class="value-box bg-olive fragment fade-in-then-out" style="width:60%; height:; text-align:center;"><i class="icon bi bi-arrow-down-up" style="font-size:2rem;"></i><div class="value">Big text</div><div class="details">
 <p>Or standard fragments</p>
@@ -248,10 +248,10 @@
 <h2>Width</h2>
 <p>We can manually override the width.</p>
 <div class="value-box bg-blue" style="width:80%; height:; text-align:left; display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; flex-shrink:0;"></i><div class="value">42</div><div class="details" style=" flex:1;">
-<p>Bootstrap icons</p>
+<p>No width specified - defaults to 80% of container</p>
 </div></div>
 <div class="value-box bg-blue" style="width:30%; height:; text-align:left; display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; flex-shrink:0;"></i><div class="value">42</div><div class="details" style=" flex:1;">
-<p>Font awesome icons</p>
+<p>Width of 30% specified.</p>
 </div></div>
 </section>
 <section id="height" class="slide level2">
@@ -260,11 +260,11 @@
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="value-box bg-blue" style="width:80%; height:; text-align:left; display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; flex-shrink:0;"></i><div class="value">42</div><div class="details" style=" flex:1;">
-<p>Bootstrap icons</p>
+<p>Example with no height specified - it will fit the contents</p>
 </div></div>
 </div><div class="column" style="width:50%;">
 <div class="value-box bg-blue" style="width:80%; height:500px; text-align:left; display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; flex-shrink:0;"></i><div class="value">42</div><div class="details" style=" flex:1;">
-<p>Font awesome icons</p>
+<p>Example with height of 500 pixels (500px) specified</p>
 </div></div>
 </div></div>
 

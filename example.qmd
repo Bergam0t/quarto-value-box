@@ -32,12 +32,9 @@ Or display a metric with an icon
 Number of bibbles bobbled this week
 :::
 
-::: {.value-box .bg-amber style="font-size: 1.25rem;" fragment="true"}
 
-**Value boxes**
-
-And they work nicely with fragments too
-
+::: {.value-box icon="bi-arrow-down-up" color="bg-amber" width="60%" align="center"}
+Here's a more advanced type of box with an icon and some formatting
 :::
 
 

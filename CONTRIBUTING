@@ -25,9 +25,9 @@ If you find a bug or have a feature request, please [open an issue](https://gith
 
 6. **Open a pull request** against `main` with a description of what you changed and why.
 
-:::note
-We are happy to accept AI-supported contributions to the extension, but reserve the right to reject wholly AI generated pull requests which are not felt to add value to the project.
-:::
+> [!NOTE]
+> We are happy to accept AI-supported contributions to the extension, but reserve the right to reject wholly AI generated pull requests which are not felt to add value to the project.
+
 
 
 ### Code Style
