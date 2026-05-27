@@ -53,8 +53,24 @@ Here's a more advanced type of box with an icon and some formatting
 :::
 ```
 
-
 ## Customisation
+
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `icon` | string | `""` | Icon identifier or file path. For Bootstrap Icons use e.g. `bi-star`, for Font Awesome `fa-star`, for image types provide a file path e.g. `images/icon.svg`. Supported options are font awesome, bootstrap icons, svg, and png. If font awesome or bootstrap icons are used, the required stylesheet will automatically be linked to in your document header. |
+| `icon-type` | `bi` \| `fa` \| `svg` \| `png` | auto | Icon library or format to use. If omitted the type is auto-detected from the `icon` value, falling back to Bootstrap Icons. |
+| `icon-size` | string | `8em` / `256px` | Size of the icon. Font-based icons (`bi`, `fa`) default to `2em`; image-based (`svg`, `png`) default to `128px`. Accepts any valid CSS size unit. |
+| `icon-position` | `top` \| `bottom` \| `left` \| `right` | `top` | Where the icon is rendered relative to the box content. |
+| `color` | string | `bg-blue` | CSS class or value controlling the box background colour. Prespecified options are bg-blue, bg-navy, bg-teal, bg-green, bg-olive, bg-amber, bg-orange, bg-red, bg-pink, bg-purple, bg-slate, bg-grey. For details on how to change or add colours, see the advanced customisation section below. |
+| `value` | string | `""` | A prominent value or stat displayed above the main content. |
+| `width` | string | `80%` | Width of the box. Accepts any valid CSS size unit e.g. `50%`, `300px`. |
+| `height` | string | `""` | Height of the box. If omitted the box sizes to its content. Accepts any valid CSS size unit e.g. `200px`. |
+| `align` | `left` \| `center` \| `right` | `left` | Horizontal text alignment within the box. |
+| `href` | string | `""` | If provided, wraps the entire box in a link. |
+| `fragment` | string \| `true` | — | Enables Reveal.js fragment animation. Set to `true` for the default `fade-in-then-semi-out` animation, or provide any valid Reveal.js fragment class (see https://quarto.org/docs/presentations/revealjs/advanced.html#fragment-classes). |
+| `index` | string | — | Sets the `data-fragment-index` for controlling Reveal.js fragment ordering. |
+
+## Advanced Customisation
 
 ### Colours
 
@@ -94,51 +110,6 @@ $brand-neutral:   #4a4f57;
 .bg-brand-secondary { background-color: $brand-secondary; color: white; }
 .bg-brand-neutral   { background-color: $brand-neutral;   color: white; }
 ```
-
-### Icon Types
-
-Supported icon types are bootstrap icons (bi) font-awesome (fa), local scalable vector graphics (svg), and local portable network graphics (png).
-
-:::note
-If using font-awesome, you will need to include this in your _quarto.yml (or a specific page if you would prefer).
-
-e.g.
-
-```yml
-project:
-  type: website
-  #etc
-
-website:
-  title: lokigi
-  # etc
-
-format:
-  html:
-    include-in-header:
-      - text: |
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-```
-
-or
-
-```yml
-title: "My page"
-format:
-    html:
-        include-in-header:
-        - text: |
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-```
-
-:::
-
-
-
-### Adding custom background colours
-
-
 
 
 
