@@ -111,10 +111,9 @@ $brand-neutral:   #4a4f57;
 .bg-brand-neutral   { background-color: $brand-neutral;   color: white; }
 ```
 
-
-
 ### Contributing
 
+Please take a look at our [contributor guidance](CONTRIBUTING) and [code of conduct](CODE_OF_CONDUCT)
 
 
 ### Generative AI use disclosure and policy
