@@ -13,7 +13,7 @@ There are a wide range of customisation options available for size, icon type, a
 You can add this extension to your project by running
 
 ```
-quarto add bergam0t/quarto_value_box
+quarto add bergam0t/quarto-value-box
 ```
 
 ## Usage
@@ -30,7 +30,7 @@ filters:
 ```
 
 > [!WARNING]
-> Note that it is called 'value-box' when added to your document - not 'quarto_value_box'
+> Note that it is called 'value-box' when added to your document - not 'quarto-value-box'
 
 
 > [!TIP]
