@@ -299,6 +299,7 @@
 </section>
 <section id="complex-icon-box-layouts-with-index-parameter" class="slide level2">
 <h2>Complex icon box layouts with index parameter</h2>
+<p>By using the ‘index’ parameter, we can determine the order that fragments appear by passing a number that indicates the order.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <h3 id="left-column">Left Column</h3>
@@ -320,25 +321,26 @@
 </section>
 <section id="icon-position" class="slide level2">
 <h2>Icon position</h2>
+<p>Icons can be repositioned with the <code>icon-position</code> parameter.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="value-box bg-blue" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:3em; flex-shrink:0;"></i><div class="value">42</div><div class="details" style=" flex:1;">
 <p>Left-aligned icon</p>
 </div></div>
-<div class="value-box bg-green" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:row-reverse; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:3em; flex-shrink:0;"></i><div class="value">99</div><div class="details" style=" flex:1;">
+<div class="value-box bg-blue" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:row-reverse; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:3em; flex-shrink:0;"></i><div class="value">99</div><div class="details" style=" flex:1;">
 <p>Right-aligned icon</p>
 </div></div>
-<div class="value-box bg-red" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:column; justify-content:center;"><div class="value">7</div><div class="details">
+<div class="value-box bg-blue" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:column; justify-content:center;"><div class="value">7</div><div class="details">
 <p>Icon below text</p>
 </div><i class="icon bi bi-star" style="font-size:1.5rem;"></i></div>
 </div><div class="column" style="width:50%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" icon-position="left" color="bg-blue" value="42"}</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" icon-position="left" value="42"}</span>
 <span id="cb10-2"><a href="" aria-label="2"></a>Left-aligned icon</span>
 <span id="cb10-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" icon-position="right" color="bg-green" value="99"}</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" icon-position="right" value="99"}</span>
 <span id="cb11-2"><a href="" aria-label="2"></a>Right-aligned icon</span>
 <span id="cb11-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" color="bg-red" value="7"}</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" value="7"}</span>
 <span id="cb12-2"><a href="" aria-label="2"></a>Icon below text</span>
 <span id="cb12-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
@@ -400,6 +402,55 @@
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="" aria-label="1"></a>::: {.value-box icon="example-icon.png" icon-size="256px" icon-position="left" color="bg-blue"}</span>
 <span id="cb18-2"><a href="" aria-label="2"></a>Local png file</span>
 <span id="cb18-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+</section>
+<section id="box-colours" class="slide level2">
+<h2>Box colours</h2>
+<div style="font-size:50%;">
+<p>You can also change the <code>color</code> parameter. A number of predefined colours are available: bg-blue, bg-navy, bg-teal, bg-green, bg-olive, bg-amber, bg-orange, bg-red, bg-pink, bg-purple, bg-slate, bg-grey</p>
+<p>For details on how to change or add colours, see the <a href="https://github.com/Bergam0t/quarto-value-box?tab=readme-ov-file#colours">advanced customisation</a> section in the readme.</p>
+</div>
+<div class="columns">
+<div class="column" style="width:25%;">
+<div class="value-box bg-blue" style="width:80%; height:100px; text-align:left; font-size: display:flex; display:flex; flex-direction:column; justify-content:center;"><div class="details">
+<p>Blue</p>
+</div></div>
+<div class="value-box bg-navy" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:column; justify-content:center;"><div class="details">
+<p>Navy</p>
+</div></div>
+<div class="value-box bg-teal" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:column; justify-content:center;"><div class="details">
+<p>Teal</p>
+</div></div>
+</div><div class="column" style="width:25%;">
+<div class="value-box bg-green" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:column; justify-content:center;"><div class="details">
+<p>Green</p>
+</div></div>
+<div class="value-box bg-olive" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:column; justify-content:center;"><div class="details">
+<p>Olive</p>
+</div></div>
+<div class="value-box bg-slate" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:column; justify-content:center;"><div class="details">
+<p>Slate</p>
+</div></div>
+</div><div class="column" style="width:25%;">
+<div class="value-box bg-red" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:column; justify-content:center;"><div class="details">
+<p>Red</p>
+</div></div>
+<div class="value-box bg-orange" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:column; justify-content:center;"><div class="details">
+<p>Orange</p>
+</div></div>
+<div class="value-box bg-amber" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:column; justify-content:center;"><div class="details">
+<p>Amber</p>
+</div></div>
+</div><div class="column" style="width:25%;">
+<div class="value-box bg-purple" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:column; justify-content:center;"><div class="details">
+<p>Purple</p>
+</div></div>
+<div class="value-box bg-pink" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:column; justify-content:center;"><div class="details">
+<p>Pink</p>
+</div></div>
+<div class="value-box bg-grey" style="width:80%; height:; text-align:left; font-size: display:flex; display:flex; flex-direction:column; justify-content:center;"><div class="details">
+<p>Grey</p>
+</div></div>
 </div></div>
 </section>
 <section id="width" class="slide level2">

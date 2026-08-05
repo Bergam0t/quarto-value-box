@@ -151,6 +151,8 @@ Tada!
 
 ## Complex icon box layouts with index parameter
 
+By using the 'index' parameter, we can determine the order that fragments appear by passing a number that indicates the order.
+
 :::: {.columns}
 
 ::: {.column width="50%"}
@@ -186,19 +188,21 @@ This appears FIRST (Index 1)
 
 ## Icon position
 
+Icons can be repositioned with the `icon-position` parameter.
+
 :::: {.columns}
 
 ::: {.column width='50%'}
 
-::: {.value-box icon="bi-star" icon-position="left" color="bg-blue" value="42"}
+::: {.value-box icon="bi-star" icon-position="left" value="42"}
 Left-aligned icon
 :::
 
-::: {.value-box icon="bi-star" icon-position="right" color="bg-green" value="99"}
+::: {.value-box icon="bi-star" icon-position="right" value="99"}
 Right-aligned icon
 :::
 
-::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" color="bg-red" value="7"}
+::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" value="7"}
 Icon below text
 :::
 
@@ -207,19 +211,19 @@ Icon below text
 ::: {.column width='50%'}
 
 ```md
-::: {.value-box icon="bi-star" icon-position="left" color="bg-blue" value="42"}
+::: {.value-box icon="bi-star" icon-position="left" value="42"}
 Left-aligned icon
 :::
 ```
 
 ```md
-::: {.value-box icon="bi-star" icon-position="right" color="bg-green" value="99"}
+::: {.value-box icon="bi-star" icon-position="right" value="99"}
 Right-aligned icon
 :::
 ```
 
 ```md
-::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" color="bg-red" value="7"}
+::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" value="7"}
 Icon below text
 :::
 ```
@@ -227,8 +231,6 @@ Icon below text
 :::
 
 ::::
-
-
 
 ## Text Position
 
@@ -338,6 +340,98 @@ Local png file
 :::
 
 ::::
+
+
+
+## Box colours
+
+<div style="font-size:50%;">
+
+You can also change the `color` parameter. A number of predefined colours are available: bg-blue, bg-navy, bg-teal, bg-green, bg-olive, bg-amber, bg-orange, bg-red, bg-pink, bg-purple, bg-slate, bg-grey
+
+For details on how to change or add colours, see the [advanced customisation](https://github.com/Bergam0t/quarto-value-box?tab=readme-ov-file#colours) section in the readme.
+</div>
+
+
+
+:::: {.columns}
+
+::: {.column width='25%'}
+
+::: {.value-box color="bg-blue" height="100px"}
+Blue
+:::
+
+::: {.value-box color="bg-navy"}
+Navy
+:::
+
+
+::: {.value-box color="bg-teal"}
+Teal
+:::
+
+
+
+:::
+
+::: {.column  width='25%'}
+
+::: {.value-box color="bg-green"}
+Green
+:::
+
+::: {.value-box color="bg-olive"}
+Olive
+:::
+
+
+::: {.value-box color="bg-slate"}
+Slate
+:::
+
+
+:::
+
+::: {.column  width='25%'}
+
+::: {.value-box color="bg-red"}
+Red
+:::
+
+::: {.value-box color="bg-orange"}
+Orange
+:::
+
+
+::: {.value-box color="bg-amber"}
+Amber
+:::
+
+:::
+
+::: {.column  width='25%'}
+
+::: {.value-box color="bg-purple"}
+Purple
+:::
+
+::: {.value-box color="bg-pink"}
+Pink
+:::
+
+::: {.value-box color="bg-grey"}
+Grey
+:::
+
+
+:::
+
+::::
+
+
+
+
 
 
 ## Width
