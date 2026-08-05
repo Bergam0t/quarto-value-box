@@ -599,3 +599,114 @@ EM units
 :::
 
 ::::
+
+
+## Font Color
+
+
+:::: {.columns}
+
+::: {.column width='30%'}
+
+::: {.value-box font-color="yellow"}
+Yellow Font
+:::
+
+:::
+
+::: {.column width='70%'}
+
+
+```md
+::: {.value-box font-color="yellow"}
+Yellow Font
+:::
+```
+
+:::
+
+::::
+
+
+
+
+:::: {.columns}
+
+::: {.column width='30%'}
+
+::: {.value-box font-color="yellow" value="Value"}
+Value font follows icon font by default
+:::
+
+:::
+
+::: {.column width='70%'}
+
+
+```md
+::: {.value-box font-color="yellow"}
+Yellow Font
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='30%'}
+
+::: {.value-box font-color="yellow" value="Value" value-color="fuchsia"}
+But they can differ
+:::
+
+:::
+
+::: {.column width='70%'}
+```md
+::: {.value-box font-color="yellow" value="Value" value-color="fuchsia"}
+But they can differ
+:::
+```
+:::
+
+::::
+
+## Icon Color
+
+Font awesome and bootstrap icons support recoloring
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="bi-star" icon-position="left" icon-color="red"}
+Bootstrap icons
+:::
+
+```md
+
+::: {.value-box icon="bi-star" icon-position="left" icon-color="red"}
+Bootstrap icons
+:::
+```
+
+:::
+
+::: {.column width='50%'}
+
+::: {.value-box icon="fa-brands fa-python" icon-position="left" value="42" icon-color="fuchsia"}
+Font awesome icons
+:::
+
+```md
+::: {.value-box icon="fa-brands fa-python" icon-position="left" icon-color="fuchsia"}
+Font awesome icons
+:::
+```
+
+
+:::
+
+::::
