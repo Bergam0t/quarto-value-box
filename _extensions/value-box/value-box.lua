@@ -32,6 +32,7 @@ function Div(el)
     local valign = el.attributes["valign"] or "middle"
     local href      = el.attributes["href"] or ""
     local icon_pos  = el.attributes["icon-position"] or "top" -- "top" | "bottom" | "left" | "right"
+    local font_size = el.attributes["font-size"] or "display:flex"
 
     local icon_size_raw = el.attributes["icon-size"]
 
@@ -92,11 +93,11 @@ function Div(el)
     if href ~= "" then
       html_open = string.format(
         '<a href="%s" class="value-box %s%s" style="width:%s; height:%s; text-align:%s; display:block; text-decoration:none; cursor:pointer;%s"%s>',
-        href, color, fragment_class, width, height, align, outer_extra_style, index_data
+        href, color, fragment_class, width, height, align,  outer_extra_style, index_data
       )
     else
       html_open = string.format(
-        '<div class="value-box %s%s" style="width:%s; height:%s; text-align:%s;%s"%s>',
+        '<div class="value-box %s%s" style="width:%s; height:%s; text-align:%s; %s"%s>',
         color, fragment_class, width, height, align, outer_extra_style, index_data
       )
     end
@@ -166,9 +167,12 @@ function Div(el)
 
     -- Open the details wrapper
     html_open = html_open .. string.format('<div class="details"%s>',
-      details_extra_style ~= "" and string.format(' style="%s"', details_extra_style) or "")
+      string.format(
+        'style="font-size: %s;%s"',
+        font_size, details_extra_style
+      ) or "")
 
-    -- Close details, optionally append icon below, then close outer
+  -- Close details, optionally append icon below, then close outer
     local html_close
     if icon_pos == "bottom" then
       html_close = string.format('</div>%s%s',

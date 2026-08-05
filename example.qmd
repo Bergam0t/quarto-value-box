@@ -534,3 +534,68 @@ Top alignment specified
 :::
 
 ::::
+
+## Font Sizing
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box}
+Standard
+:::
+
+```md
+::: {.value-box}
+Standard
+:::
+```
+
+:::
+
+::: {.column width='50%'}
+
+::: {.value-box font-size="150%"}
+150% Font Size
+:::
+
+```md
+::: {.value-box font-size="150%"}
+150% Font Size
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box font-size="2rem"}
+REM units
+:::
+
+```md
+::: {.value-box font-size="2rem"}
+REM units
+:::
+```
+
+:::
+
+::: {.column width='50%'}
+::: {.value-box font-size="2em"}
+EM units
+:::
+
+```md
+::: {.value-box font-size="2em"}
+EM units
+:::
+```
+
+:::
+
+::::
