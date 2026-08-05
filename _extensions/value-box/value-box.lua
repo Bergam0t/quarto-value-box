@@ -67,10 +67,10 @@ function Div(el)
     end
 
     -- Flex layout styles for left/right icon positioning
-    local outer_extra_style = ""
-    local icon_extra_style  = ""
-    local details_extra_style = ""
-    local value_extra_style = ""
+    local outer_extra_style = el.attributes["outer-extra-style"] or ""
+    local icon_extra_style  = el.attributes["icon-extra-style"] or ""
+    local details_extra_style = el.attributes["details-extra-style"] or ""
+    local value_extra_style = el.attributes["value-extra-style"] or ""
 
     if icon_pos == "left" then
       outer_extra_style  = " display:flex; flex-direction:row; align-items:center; gap:1em;"

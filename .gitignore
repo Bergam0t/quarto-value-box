@@ -1,1 +1,5 @@
 /example.html
+/.luarc.json
+
+/.quarto/
+**/*.quarto_ipynb
