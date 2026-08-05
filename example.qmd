@@ -3,8 +3,14 @@ title: "Value Box Demo"
 format:
     revealjs:
         output-file: index.html
+        height: 800 # default height and width ensure consistent behaviour on different screens
+        width: 1250 # would recommend leaving this and height value as they are
+        preview-links: true
+        transition: fade
+        background-transition: fade
 filters:
     - value-box
+
 ---
 
 
