@@ -217,7 +217,7 @@ function Div(el)
         )
 
       elseif icon_type == "tabler" then
-        quarto.doc.include_text("in-header", '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.46.0/tabler-icons.min.css">')
+        quarto.doc.include_text("in-header", '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.46.0/dist/tabler-icons.min.css">')
         icon_html = string.format(
           '<i class="icon ti %s" style="font-size:%s;color:%s;%s"></i>',
           icon, icon_size_font, icon_color, icon_extra_style
