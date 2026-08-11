@@ -215,7 +215,29 @@ This appears FIRST (Index 1)
 
 ## Icon position
 
-Icons can be repositioned with the `icon-position` parameter.
+Icons can be repositioned with the `icon-position` parameter. `top` is the default — the icon, value, and details all stay flush against the same edge for `left`/`right` alignment.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="fa-solid fa-clipboard" value="Step 1"}
+Add logging steps for arrivals, queues, resource use, and departures
+:::
+
+:::
+
+::: {.column width='50%'}
+
+```md
+::: {.value-box icon="fa-solid fa-clipboard" value="Step 1"}
+Add logging steps for arrivals, queues, resource use, and departures
+:::
+```
+
+:::
+
+::::
 
 :::: {.columns}
 

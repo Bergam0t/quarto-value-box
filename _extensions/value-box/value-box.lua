@@ -96,6 +96,17 @@ function Div(el)
       details_extra_style = details_extra_style .. " flex:1;"
     end
 
+    -- Compensate for icon-font glyphs' built-in optical bearing so a stacked
+    -- icon visually lines up with the left/right edge of the value/details text.
+    if (icon_pos == "top" or icon_pos == "bottom") and (icon_type == "fa" or icon_type == "bi") then
+      local bearing = "0.12em"
+      if align == "left" then
+        icon_extra_style = icon_extra_style .. string.format(" margin-left:-%s;", bearing)
+      elseif align == "right" then
+        icon_extra_style = icon_extra_style .. string.format(" margin-right:-%s;", bearing)
+      end
+    end
+
     -- Vertical alignment — requires flex on the outer wrapper
     if valign ~= "" then
       local valign_map = { top = "flex-start", middle = "center", bottom = "flex-end" }
