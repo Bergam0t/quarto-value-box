@@ -36,6 +36,37 @@ local phosphor_weight_dirs = {
   ["ph-duotone"] = "duotone",
 }
 
+-- Icon webfont stylesheets. The two *_FMT entries are string.format templates,
+-- not usable URLs: the Material Symbols font family and the Phosphor weight
+-- directory are substituted in at the point of use.
+local BOOTSTRAP_ICONS_CSS      = "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+local FONT_AWESOME_CSS         = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+local TABLER_ICONS_CSS         = "https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.46.0/dist/tabler-icons.min.css"
+local MATERIAL_SYMBOLS_CSS_FMT = "https://fonts.googleapis.com/css2?family=%s:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"
+local PHOSPHOR_ICONS_CSS_FMT   = "https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/%s/style.css"
+
+-- Link an external icon stylesheet into the document head.
+--
+-- Registered as an HTML dependency rather than via quarto.doc.include_text for
+-- two reasons. Quarto deduplicates dependencies, so a document with many boxes
+-- gets one <link> per stylesheet instead of one per box; and HTML dependencies
+-- are only consumed when rendering to HTML, whereas include_text("in-header")
+-- injects into every format's header — which drops a raw <link> tag into the
+-- LaTeX preamble on PDF renders.
+--
+-- The dependency name is derived from the href because Quarto dedupes on name
+-- alone and ignores version. Stylesheets differing only in the substituted
+-- family or weight (e.g. two Material Symbols variants) must therefore produce
+-- distinct names, so a shared hand-written name would silently drop every
+-- variant after the first.
+local function include_icon_stylesheet(href)
+  quarto.doc.add_html_dependency({
+    name = "value-box-icons-" .. href:gsub("[^%w]", "-"),
+    version = "1.0.0",
+    links = {{ rel = "stylesheet", href = href }}
+  })
+end
+
 
 function Div(el)
   if el.classes:includes("value-box") then
@@ -166,7 +197,7 @@ function Div(el)
     local icon_html = ""
     if icon ~= "" then
       if icon_type == "fa" then
-        quarto.doc.include_text("in-header", '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">')
+        include_icon_stylesheet(FONT_AWESOME_CSS)
         icon_html = string.format(
           '<i class="icon %s" style="font-size:%s;color:%s;%s"></i>',
           icon, icon_size_font, icon_color, icon_extra_style
@@ -198,7 +229,7 @@ function Div(el)
           )
         else
           io.stderr:write(string.format("value-box warning: PNG file not found '%s', falling back to Bootstrap Icons\n", icon))
-          quarto.doc.include_text("in-header", '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">')
+          include_icon_stylesheet(BOOTSTRAP_ICONS_CSS)
           icon_html = string.format(
             '<i class="icon bi %s" style="font-size:%s; color:%s;%s"></i>',
             icon, icon_size_font, icon_color, icon_extra_style
@@ -207,17 +238,14 @@ function Div(el)
 
       elseif material_variants[icon_type] then
         local variant = material_variants[icon_type]
-        quarto.doc.include_text("in-header", string.format(
-          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=%s:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block">',
-          variant.family
-        ))
+        include_icon_stylesheet(string.format(MATERIAL_SYMBOLS_CSS_FMT, variant.family))
         icon_html = string.format(
           '<span class="icon %s" style="font-size:%s;color:%s;%s">%s</span>',
           variant.class, icon_size_font, icon_color, icon_extra_style, icon
         )
 
       elseif icon_type == "tabler" then
-        quarto.doc.include_text("in-header", '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.46.0/dist/tabler-icons.min.css">')
+        include_icon_stylesheet(TABLER_ICONS_CSS)
         icon_html = string.format(
           '<i class="icon ti %s" style="font-size:%s;color:%s;%s"></i>',
           icon, icon_size_font, icon_color, icon_extra_style
@@ -226,10 +254,7 @@ function Div(el)
       elseif icon_type == "phosphor" then
         local weight_token = icon:match("^(%S+)")
         local weight_dir = phosphor_weight_dirs[weight_token] or "regular"
-        quarto.doc.include_text("in-header", string.format(
-          '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/%s/style.css">',
-          weight_dir
-        ))
+        include_icon_stylesheet(string.format(PHOSPHOR_ICONS_CSS_FMT, weight_dir))
         icon_html = string.format(
           '<i class="icon %s" style="font-size:%s;color:%s;%s"></i>',
           icon, icon_size_font, icon_color, icon_extra_style
@@ -237,7 +262,7 @@ function Div(el)
 
       else
         -- Bootstrap Icons (default)
-        quarto.doc.include_text("in-header", '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">')
+        include_icon_stylesheet(BOOTSTRAP_ICONS_CSS)
         icon_html = string.format(
           '<i class="icon bi %s" style="font-size:%s; color:%s;%s"></i>',
           icon, icon_size_font, icon_color, icon_extra_style

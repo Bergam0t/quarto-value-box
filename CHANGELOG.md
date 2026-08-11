@@ -1,6 +1,8 @@
 # v1.6.0
 
 - Add Phosphor Icons support (`icon-type="phosphor"`, auto-detected from a `ph`/`ph-<weight>` prefixed `icon` value, e.g. `icon="ph ph-star"` or `icon="ph-bold ph-star"`). Loads the weight-specific stylesheet matching the icon's weight class
+- Fix: icon stylesheets are now linked once per document instead of once per value box. A document with many boxes previously repeated the same `<link>` tag dozens of times in its `<head>`
+- Fix: icon stylesheet `<link>` tags no longer leak into non-HTML output. Rendering a document containing a value box to PDF previously injected a raw `<link>` tag into the LaTeX preamble, which fails to compile
 
 # v1.5.0
 
