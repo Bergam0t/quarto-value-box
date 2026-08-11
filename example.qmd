@@ -204,14 +204,6 @@ Icons can be repositioned with the `icon-position` parameter.
 Left-aligned icon
 :::
 
-::: {.value-box icon="bi-star" icon-position="right" value="99"}
-Right-aligned icon
-:::
-
-::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" value="7"}
-Icon below text
-:::
-
 :::
 
 ::: {.column width='50%'}
@@ -222,11 +214,43 @@ Left-aligned icon
 :::
 ```
 
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="bi-star" icon-position="right" value="99"}
+Right-aligned icon
+:::
+
+:::
+
+::: {.column width='50%'}
+
 ```md
 ::: {.value-box icon="bi-star" icon-position="right" value="99"}
 Right-aligned icon
 :::
 ```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" value="7"}
+Icon below text
+:::
+
+:::
+
+::: {.column width='50%'}
 
 ```md
 ::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" value="7"}
