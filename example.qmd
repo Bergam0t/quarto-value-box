@@ -238,9 +238,55 @@ Icon below text
 
 ::::
 
+## Value position
+
+The value can be repositioned relative to the details text with the `value-position` parameter, completely independently of `icon-position`.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="bi-star" value-position="left" value="42"}
+Left-aligned value
+:::
+
+::: {.value-box icon="bi-star" value-position="right" value="99"}
+Right-aligned value
+:::
+
+::: {.value-box icon="bi-star" value-position="bottom" value="7"}
+Value below details
+:::
+
+:::
+
+::: {.column width='50%'}
+
+```md
+::: {.value-box icon="bi-star" value-position="left" value="42"}
+Left-aligned value
+:::
+```
+
+```md
+::: {.value-box icon="bi-star" value-position="right" value="99"}
+Right-aligned value
+:::
+```
+
+```md
+::: {.value-box icon="bi-star" value-position="bottom" value="7"}
+Value below details
+:::
+```
+
+:::
+
+::::
+
 ## Text Position
 
-We can also combine this with text position
+We can also combine this with text position. Note that `icon-position` and `value-position` are independent — an icon on the left doesn't force the value into a row with it.
 
 :::: {.columns}
 
@@ -248,6 +294,10 @@ We can also combine this with text position
 
 ::: {.value-box icon="bi-star" icon-position="left" align="right" color="bg-blue" value="42"}
 Left-aligned icon with right-aligned text
+:::
+
+::: {.value-box icon="bi-star" icon-position="left" value-position="left" align="right" color="bg-teal" value="42"}
+Left-aligned icon AND left-aligned value, together
 :::
 
 ::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" color="bg-red" value="7" align="center"}
@@ -262,6 +312,12 @@ Icon below text, all centred
 ```md
 ::: {.value-box icon="bi-star" icon-position="left" align="right" color="bg-blue" value="42"}
 Left-aligned icon with right-aligned text
+:::
+```
+
+```md
+::: {.value-box icon="bi-star" icon-position="left" value-position="left" align="right" color="bg-teal" value="42"}
+Left-aligned icon AND left-aligned value, together
 :::
 ```
 

@@ -32,6 +32,7 @@ function Div(el)
     local valign = el.attributes["valign"] or "middle"
     local href      = el.attributes["href"] or ""
     local icon_pos  = el.attributes["icon-position"] or "top" -- "top" | "bottom" | "left" | "right"
+    local value_pos = el.attributes["value-position"] or "top" -- "top" | "bottom" | "left" | "right"
     local font_size = el.attributes["font-size"] or "display:flex"
     local value_font_size = el.attributes["value-font-size"] or "2.2rem"
 
@@ -66,20 +67,33 @@ function Div(el)
       index_data = string.format(' data-fragment-index="%s"', index_attr)
     end
 
-    -- Flex layout styles for left/right icon positioning
-    local outer_extra_style = el.attributes["outer-extra-style"] or ""
-    local icon_extra_style  = el.attributes["icon-extra-style"] or ""
+    -- Flex layout styles for left/right icon and value positioning
+    local outer_extra_style   = el.attributes["outer-extra-style"] or ""
+    local icon_extra_style    = el.attributes["icon-extra-style"] or ""
+    local content_extra_style = el.attributes["content-extra-style"] or ""
     local details_extra_style = el.attributes["details-extra-style"] or ""
-    local value_extra_style = el.attributes["value-extra-style"] or ""
+    local value_extra_style   = el.attributes["value-extra-style"] or ""
 
+    -- icon-position controls the outer wrapper: icon vs. everything else
     if icon_pos == "left" then
-      outer_extra_style  = " display:flex; flex-direction:row; align-items:center; gap:1em;"
-      icon_extra_style   = " flex-shrink:0;"
-      details_extra_style = " flex:1;"
+      outer_extra_style   = outer_extra_style .. " display:flex; flex-direction:row; align-items:center; gap:1em;"
+      icon_extra_style    = icon_extra_style .. " flex-shrink:0;"
+      content_extra_style = content_extra_style .. " flex:1;"
     elseif icon_pos == "right" then
-      outer_extra_style  = " display:flex; flex-direction:row-reverse; align-items:center; gap:1em;"
-      icon_extra_style   = " flex-shrink:0;"
-      details_extra_style = " flex:1;"
+      outer_extra_style   = outer_extra_style .. " display:flex; flex-direction:row-reverse; align-items:center; gap:1em;"
+      icon_extra_style    = icon_extra_style .. " flex-shrink:0;"
+      content_extra_style = content_extra_style .. " flex:1;"
+    end
+
+    -- value-position controls the inner content wrapper: value vs. details, independent of icon-position
+    if value_pos == "left" then
+      content_extra_style = content_extra_style .. " display:flex; flex-direction:row; align-items:center; gap:0.75em;"
+      value_extra_style   = value_extra_style .. " flex-shrink:0;"
+      details_extra_style = details_extra_style .. " flex:1;"
+    elseif value_pos == "right" then
+      content_extra_style = content_extra_style .. " display:flex; flex-direction:row-reverse; align-items:center; gap:0.75em;"
+      value_extra_style   = value_extra_style .. " flex-shrink:0;"
+      details_extra_style = details_extra_style .. " flex:1;"
     end
 
     -- Vertical alignment — requires flex on the outer wrapper
@@ -162,37 +176,42 @@ function Div(el)
       end
     end
 
+    -- Build value HTML (empty string if no value)
+    local value_html = ""
+    if value ~= "" then
+      value_html = string.format(
+        '<div class="value" style="font-size: %s; color:%s;%s">%s</div>',
+        value_font_size, value_color, value_extra_style, value
+      )
+    end
+
     -- For bottom placement, defer icon injection; otherwise inject it now
     if icon_pos ~= "bottom" then
       html_open = html_open .. icon_html
     end
 
-    -- ADD VALUE (if it exists)
-    if value ~= "" then
-      html_open = html_open .. string.format(
-        '<div class="value" style="font-size: %s; color:%s;%s">%s</div>',
-      value_font_size, value_color, value_extra_style,
-        value
-      )
+    -- Open the content wrapper (holds value + details, positioned independently of the icon)
+    html_open = html_open .. string.format('<div class="vb-content" style="%s">', content_extra_style)
+
+    -- For bottom placement, defer value injection; otherwise inject it now
+    if value_pos ~= "bottom" then
+      html_open = html_open .. value_html
     end
 
     -- Open the details wrapper
-    html_open = html_open .. string.format('<div class="details"%s>',
-      string.format(
-        'style="font-size: %s;color:%s;%s"',
-        font_size, font_color, details_extra_style
-      ) or "")
+    html_open = html_open .. string.format('<div class="details" style="font-size: %s;color:%s;%s">',
+      font_size, font_color, details_extra_style)
 
-  -- Close details, optionally append icon below, then close outer
-    local html_close
-    if icon_pos == "bottom" then
-      html_close = string.format('</div>%s%s',
-        icon_html,
-        href ~= "" and '</a>' or '</div>'
-      )
-    else
-      html_close = href ~= "" and '</div></a>' or '</div></div>'
+    -- Close details, optionally append value below, close content wrapper, optionally append icon below, then close outer
+    local html_close = '</div>' -- close .details
+    if value_pos == "bottom" then
+      html_close = html_close .. value_html
     end
+    html_close = html_close .. '</div>' -- close .vb-content
+    if icon_pos == "bottom" then
+      html_close = html_close .. icon_html
+    end
+    html_close = html_close .. (href ~= "" and '</a>' or '</div>')
 
     local result = pandoc.List({pandoc.RawBlock("html", html_open)})
     result:extend(el.content)
