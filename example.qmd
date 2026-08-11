@@ -4,7 +4,7 @@ format:
     revealjs:
         output-file: index.html
         height: 800 # default height and width ensure consistent behaviour on different screens
-        width: 1250 # would recommend leaving this and height value as they are
+        width: 1450 # would recommend leaving this and height value as they are
         preview-links: true
         transition: fade
         background-transition: fade
@@ -81,19 +81,19 @@ Here's a more advanced type of box with an icon and some formatting, but no valu
 
 :::: {.columns}
 
-::: {.column width='50%'}
+::: {.column width='40%'}
 
-::: {.value-box value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" fragment="fade-in-then-semi-out"}
+::: {.value-box fragment="fade-in-then-semi-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" }
 We can use them with special named fragment types like 'fade in, then semi out'
 (this is also the default if you set fragment="true")
 :::
 
 :::
 
-::: {.column width='50%'}
+::: {.column width='60%'}
 
 ```md
-::: {.value-box value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" fragment="fade-in-then-semi-out"}
+::: {.value-box fragment="fade-in-then-semi-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}
 We can use them with special named fragment types like 'fade in, then semi out'
 (this is also the default if you set fragment="true")
 :::
@@ -106,18 +106,18 @@ We can use them with special named fragment types like 'fade in, then semi out'
 
 :::: {.columns}
 
-::: {.column width='50%'}
+::: {.column width='40%'}
 
-::: {.value-box value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" fragment="fade-in-then-out"}
+::: {.value-box fragment="fade-in-then-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" }
 Or standard fragments
 :::
 
 :::
 
-::: {.column width='50%'}
+::: {.column width='60%'}
 
 ```md
-::: {.value-box value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" fragment="fade-in-then-out"}
+::: {.value-box fragment="fade-in-then-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}
 Or standard fragments
 :::
 ```
@@ -129,7 +129,7 @@ Or standard fragments
 
 :::: {.columns}
 
-::: {.column width='50%'}
+::: {.column width='40%'}
 
 :::{.fragment}
 Tada!
@@ -138,7 +138,7 @@ Tada!
 
 :::
 
-::: {.column width='50%'}
+::: {.column width='60%'}
 
 ```md
 :::{.fragment}
@@ -209,7 +209,7 @@ Left-aligned icon
 ::: {.column width='50%'}
 
 ```md
-::: {.value-box icon="bi-star" icon-position="left" value="42"}
+::: {.value-box icon-position="left" icon="bi-star" value="42"}
 Left-aligned icon
 :::
 ```
@@ -231,7 +231,7 @@ Right-aligned icon
 ::: {.column width='50%'}
 
 ```md
-::: {.value-box icon="bi-star" icon-position="right" value="99"}
+::: {.value-box icon-position="right" icon="bi-star" value="99"}
 Right-aligned icon
 :::
 ```
@@ -253,7 +253,7 @@ Icon below text
 ::: {.column width='50%'}
 
 ```md
-::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" value="7"}
+::: {.value-box icon-position="bottom" icon="bi-star" icon-size="1.5rem" value="7"}
 Icon below text
 :::
 ```
@@ -279,7 +279,7 @@ Left-aligned value
 ::: {.column width='65%'}
 
 ```md
-::: {.value-box icon="bi-star" icon-size="1.5rem" value-position="left" value="42"}
+::: {.value-box value-position="left" value="42" icon="bi-star" icon-size="1.5rem" }
 Left-aligned value
 :::
 ```
@@ -301,7 +301,7 @@ Right-aligned value
 ::: {.column width='65%'}
 
 ```md
-::: {.value-box icon="bi-star" icon-size="1.5rem" value-position="right" value="99"}
+::: {.value-box value-position="right" value="99" icon="bi-star" icon-size="1.5rem"}
 Right-aligned value
 :::
 ```
@@ -323,7 +323,7 @@ Value below details
 ::: {.column width='65%'}
 
 ```md
-::: {.value-box icon="bi-star" icon-size="1.5rem" value-position="bottom" value="7"}
+::: {.value-box value-position="bottom" value="7" icon="bi-star" icon-size="1.5rem"}
 Value below details
 :::
 ```
@@ -334,11 +334,15 @@ Value below details
 
 ## Text Position
 
-We can also combine this with text position. Note that `icon-position` and `value-position` are independent — an icon on the left doesn't force the value into a row with it.
+::: {style='font-size: 65%;'}
+We can also combine this with text position using the `align` parameter.
+
+Note that `icon-position` and `value-position` are independent — an icon on the left doesn't force the value into a row with it.
+:::
 
 :::: {.columns}
 
-::: {.column width='50%'}
+::: {.column width='40%'}
 
 ::: {.value-box icon="bi-star" icon-position="left" align="right" color="bg-blue" value="42"}
 Left-aligned icon with right-aligned text
@@ -346,10 +350,10 @@ Left-aligned icon with right-aligned text
 
 :::
 
-::: {.column width='50%'}
+::: {.column width='60%'}
 
 ```md
-::: {.value-box icon="bi-star" icon-position="left" align="right" color="bg-blue" value="42"}
+::: {.value-box icon-position="left" align="right" icon="bi-star" color="bg-blue" value="42"}
 Left-aligned icon with right-aligned text
 :::
 ```
@@ -360,18 +364,18 @@ Left-aligned icon with right-aligned text
 
 :::: {.columns}
 
-::: {.column width='50%'}
+::: {.column width='40%'}
 
-::: {.value-box icon="bi-star" icon-position="left" value-position="left" align="right" color="bg-teal" value="42"}
+::: {.value-box icon-position="left" value-position="left" align="right" icon="bi-star" color="bg-teal" value="42"}
 Left-aligned icon AND left-aligned value, together
 :::
 
 :::
 
-::: {.column width='50%'}
+::: {.column width='60%'}
 
 ```md
-::: {.value-box icon="bi-star" icon-position="left" value-position="left" align="right" color="bg-teal" value="42"}
+::: {.value-box icon-position="left" value-position="left" align="right" icon="bi-star" color="bg-teal" value="42"}
 Left-aligned icon AND left-aligned value, together
 :::
 ```
@@ -382,7 +386,7 @@ Left-aligned icon AND left-aligned value, together
 
 :::: {.columns}
 
-::: {.column width='50%'}
+::: {.column width='40%'}
 
 ::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" color="bg-red" value="7" align="center"}
 Icon below text, all centred
@@ -390,7 +394,7 @@ Icon below text, all centred
 
 :::
 
-::: {.column width='50%'}
+::: {.column width='60%'}
 
 ```md
 ::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" color="bg-red" value="7" align="center"}
@@ -492,16 +496,16 @@ For details on how to change or add colours, see the [advanced customisation](ht
 ::: {.column width='25%'}
 
 ::: {.value-box color="bg-blue" height="100px"}
-Blue
+bg-blue
 :::
 
 ::: {.value-box color="bg-navy"}
-Navy
+bg-navy
 :::
 
 
 ::: {.value-box color="bg-teal"}
-Teal
+bg-teal
 :::
 
 
@@ -511,16 +515,16 @@ Teal
 ::: {.column  width='25%'}
 
 ::: {.value-box color="bg-green"}
-Green
+bg-green
 :::
 
 ::: {.value-box color="bg-olive"}
-Olive
+bg-olive
 :::
 
 
 ::: {.value-box color="bg-slate"}
-Slate
+bg-slate
 :::
 
 
@@ -529,16 +533,16 @@ Slate
 ::: {.column  width='25%'}
 
 ::: {.value-box color="bg-red"}
-Red
+bg-red
 :::
 
 ::: {.value-box color="bg-orange"}
-Orange
+bg-orange
 :::
 
 
 ::: {.value-box color="bg-amber"}
-Amber
+bg-amber
 :::
 
 :::
@@ -546,15 +550,15 @@ Amber
 ::: {.column  width='25%'}
 
 ::: {.value-box color="bg-purple"}
-Purple
+bg-purple
 :::
 
 ::: {.value-box color="bg-pink"}
-Pink
+bg-pink
 :::
 
 ::: {.value-box color="bg-grey"}
-Grey
+bg-grey
 :::
 
 
@@ -616,12 +620,12 @@ Example with no height specified - it will fit the contents
 
 ::: {.column width='50%'}
 
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" height="400px"}
+::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
 Example with height of 400 pixels (400px) specified
 :::
 
 ```md
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" height="400px"}
+::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
 Example with height of 400 pixels (400px) specified
 :::
 
@@ -669,6 +673,8 @@ Top alignment specified
 ::::
 
 ## Font Sizing
+
+The font for the general text can be tweaked with the font-size parameter
 
 :::: {.columns}
 
@@ -812,34 +818,46 @@ Font awesome and bootstrap icons support recoloring
 
 :::: {.columns}
 
-::: {.column width='50%'}
+::: {.column width='30%'}
 
 ::: {.value-box icon="bi-star" icon-position="left" icon-color="red"}
 Bootstrap icons
 :::
 
+
+
+:::
+
+::: {.column width='70%'}
+
 ```md
 
-::: {.value-box icon="bi-star" icon-position="left" icon-color="red"}
+::: {.value-box icon-color="red" icon="bi-star" icon-position="left" }
 Bootstrap icons
 :::
 ```
 
 :::
 
-::: {.column width='50%'}
+::::
 
+:::: {.columns}
+
+::: {.column width='30%'}
 ::: {.value-box icon="fa-brands fa-python" icon-position="left" value="42" icon-color="fuchsia"}
 Font awesome icons
 :::
 
+
+
+:::
+
+::: {.column width='70%'}
 ```md
-::: {.value-box icon="fa-brands fa-python" icon-position="left" icon-color="fuchsia"}
+::: {.value-box icon-color="fuchsia" icon="fa-brands fa-python" icon-position="left" }
 Font awesome icons
 :::
 ```
-
-
 :::
 
 ::::
