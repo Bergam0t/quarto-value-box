@@ -520,6 +520,24 @@ Material Symbols icons (rounded)
 
 ::::
 
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="ti-star" icon-position="left" color="bg-blue" value="42"}
+Tabler icons
+:::
+
+```md
+::: {.value-box icon="ti-star" icon-position="left" color="bg-blue" value="42"}
+Tabler icons
+:::
+```
+
+:::
+
+::::
+
 
 ## Font Awesome Icon Sets
 
@@ -1004,7 +1022,7 @@ But they can differ
 
 ## Icon Color
 
-Font awesome, bootstrap icons, and material symbols support recoloring
+Font awesome, bootstrap icons, tabler icons, and material symbols support recoloring
 
 :::: {.columns}
 
@@ -1067,6 +1085,27 @@ Material Symbols icons
 ```md
 ::: {.value-box icon-color="lime" icon="home" icon-type="material" icon-position="left" }
 Material Symbols icons
+:::
+```
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {.value-box icon="ti-star" icon-position="left" value="42" icon-color="cyan"}
+Tabler icons
+:::
+
+
+
+:::
+
+::: {.column width='70%'}
+```md
+::: {.value-box icon-color="cyan" icon="ti-star" icon-position="left" }
+Tabler icons
 :::
 ```
 :::
