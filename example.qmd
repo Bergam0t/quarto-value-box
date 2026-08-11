@@ -519,6 +519,83 @@ Material Symbols icons (rounded)
 ::::
 
 
+## Font Awesome Icon Sets
+
+::: {style='font-size: 55%;'}
+Font Awesome icons come in different styles, selected via a class prefix. `fa-solid`, `fa-regular`, and `fa-brands` are all available here, via the free Font Awesome CDN this extension loads.
+:::
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box icon="fa-solid fa-star" icon-position="left" color="bg-amber" value="Solid" value-font-size="80%" icon-size="2em"}
+Filled-in icons
+:::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box icon="fa-solid fa-star" icon-position="left" color="bg-amber" value="Solid (fa-solid)" value-font-size="80%" icon-size="2em"}
+Filled-in icons
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box icon="fa-regular fa-star" icon-position="left" color="bg-teal" value="Regular (fa-regular)" value-font-size="80%" icon-size="2em"}
+Outlined icons
+:::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box icon="fa-regular fa-star" icon-position="left" color="bg-teal" value="Regular" value-font-size="80%" icon-size="2em"}
+Outlined icons
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="Brands (fa-brands)" value-font-size="80%" icon-size="2em"}
+Logos, only available in this one style
+:::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="Brands" value-font-size="80%" icon-size="2em"}
+Logos, only available in this one style
+:::
+```
+
+:::
+
+::::
+
+<div style="font-size:50%;">
+Font Awesome also has Pro-only styles &mdash; `fa-light`, `fa-thin`, and `fa-duotone` &mdash; which aren't demoed here, as they require a paid Font Awesome Pro kit and this extension only loads the free CDN build.
+</div>
+
+
 ## Including local files
 
 :::: {.columns}
