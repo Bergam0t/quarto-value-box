@@ -520,6 +520,9 @@ Material Symbols icons (rounded)
 
 ::::
 
+
+## More icon types
+
 :::: {.columns}
 
 ::: {.column width='50%'}
