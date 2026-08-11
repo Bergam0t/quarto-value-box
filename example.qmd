@@ -486,6 +486,38 @@ Font awesome icons
 
 ::::
 
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="home" icon-type="material" icon-position="left" color="bg-blue" value="42"}
+Material Symbols icons
+:::
+
+```md
+::: {.value-box icon="home" icon-type="material" icon-position="left" color="bg-blue" value="42"}
+Material Symbols icons
+:::
+```
+
+:::
+
+::: {.column width='50%'}
+
+::: {.value-box icon="home" icon-type="material-rounded" icon-position="left" color="bg-blue" value="42"}
+Material Symbols icons (rounded)
+:::
+
+```md
+::: {.value-box icon="home" icon-type="material-rounded" icon-position="left" color="bg-blue" value="42"}
+Material Symbols icons (rounded)
+:::
+```
+
+:::
+
+::::
+
 
 ## Including local files
 
@@ -857,7 +889,7 @@ But they can differ
 
 ## Icon Color
 
-Font awesome and bootstrap icons support recoloring
+Font awesome, bootstrap icons, and material symbols support recoloring
 
 :::: {.columns}
 
@@ -899,6 +931,27 @@ Font awesome icons
 ```md
 ::: {.value-box icon-color="fuchsia" icon="fa-brands fa-python" icon-position="left" }
 Font awesome icons
+:::
+```
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {.value-box icon="home" icon-type="material" icon-position="left" value="42" icon-color="lime"}
+Material Symbols icons
+:::
+
+
+
+:::
+
+::: {.column width='70%'}
+```md
+::: {.value-box icon-color="lime" icon="home" icon-type="material" icon-position="left" }
+Material Symbols icons
 :::
 ```
 :::
