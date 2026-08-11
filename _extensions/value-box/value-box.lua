@@ -38,6 +38,8 @@ function Div(el)
     local value     = el.attributes["value"] or ""
     local width     = el.attributes["width"] or "80%"
     local height    = el.attributes["height"] or ""
+    local min_height = el.attributes["min-height"] or "100px"
+    local padding     = el.attributes["padding"] or "1.5rem"
     local align     = el.attributes["align"] or "left"
     local valign = el.attributes["valign"] or "middle"
     local href      = el.attributes["href"] or ""
@@ -134,13 +136,13 @@ function Div(el)
     local html_open
     if href ~= "" then
       html_open = string.format(
-        '<a href="%s" class="value-box %s%s" style="width:%s; height:%s; text-align:%s; display:block; text-decoration:none; cursor:pointer;%s"%s>',
-        href, color, fragment_class, width, height, align,  outer_extra_style, index_data
+        '<a href="%s" class="value-box %s%s" style="width:%s; height:%s; min-height:%s; padding:%s; text-align:%s; display:block; text-decoration:none; cursor:pointer;%s"%s>',
+        href, color, fragment_class, width, height, min_height, padding, align,  outer_extra_style, index_data
       )
     else
       html_open = string.format(
-        '<div class="value-box %s%s" style="width:%s; height:%s; text-align:%s; %s"%s>',
-        color, fragment_class, width, height, align, outer_extra_style, index_data
+        '<div class="value-box %s%s" style="width:%s; height:%s; min-height:%s; padding:%s; text-align:%s; %s"%s>',
+        color, fragment_class, width, height, min_height, padding, align, outer_extra_style, index_data
       )
     end
 

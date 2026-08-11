@@ -221,7 +221,7 @@ Icons can be repositioned with the `icon-position` parameter. `top` is the defau
 
 ::: {.column width='50%'}
 
-::: {.value-box icon="fa-solid fa-clipboard" value="Step 1"}
+::: {.value-box icon="fa-solid fa-clipboard" value="Step 1" icon-size="2em"}
 Add logging steps for arrivals, queues, resource use, and departures
 :::
 
@@ -230,7 +230,7 @@ Add logging steps for arrivals, queues, resource use, and departures
 ::: {.column width='50%'}
 
 ```md
-::: {.value-box icon="fa-solid fa-clipboard" value="Step 1"}
+::: {.value-box icon="fa-solid fa-clipboard" value="Step 1" icon-size="2em"}
 Add logging steps for arrivals, queues, resource use, and departures
 :::
 ```
@@ -243,7 +243,7 @@ Add logging steps for arrivals, queues, resource use, and departures
 
 ::: {.column width='50%'}
 
-::: {.value-box icon="bi-star" icon-position="left" value="42"}
+::: {.value-box icon="bi-star" icon-position="left" value="42" icon-size="2em"}
 Left-aligned icon
 :::
 
@@ -252,7 +252,7 @@ Left-aligned icon
 ::: {.column width='50%'}
 
 ```md
-::: {.value-box icon-position="left" icon="bi-star" value="42"}
+::: {.value-box icon-position="left" icon="bi-star" value="42" icon-size="2em"}
 Left-aligned icon
 :::
 ```
@@ -261,11 +261,13 @@ Left-aligned icon
 
 ::::
 
+## Icon position (continued)
+
 :::: {.columns}
 
 ::: {.column width='50%'}
 
-::: {.value-box icon="bi-star" icon-position="right" value="99"}
+::: {.value-box icon="bi-star" icon-position="right" value="99" icon-size="2em"}
 Right-aligned icon
 :::
 
@@ -274,7 +276,7 @@ Right-aligned icon
 ::: {.column width='50%'}
 
 ```md
-::: {.value-box icon-position="right" icon="bi-star" value="99"}
+::: {.value-box icon-position="right" icon="bi-star" value="99" icon-size="2em"}
 Right-aligned icon
 :::
 ```
@@ -817,6 +819,42 @@ Top alignment specified
 ```md
 ::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px" valign="top"}
 Top alignment specified
+:::
+```
+
+:::
+
+::::
+
+## Minimum height & padding
+
+If a box's content is short (or `height` is set below the default floor), `min-height` and `padding` can be lowered to reclaim space — handy on busy slides.
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box icon="bi-star" value="42"}
+Default min-height (100px) and padding (1.5rem)
+:::
+
+```md
+::: {.value-box icon="bi-star" value="42"}
+Default min-height (100px) and padding (1.5rem)
+:::
+```
+
+:::
+
+::: {.column width='60%'}
+
+::: {.value-box icon="bi-star" icon-size="1.5rem" value="42" min-height="40px" padding="0.5rem"}
+Tightened min-height and padding
+:::
+
+```md
+::: {.value-box min-height="40px" padding="0.5rem" icon="bi-star" icon-size="1.5rem" value="42" }
+Tightened min-height and padding
 :::
 ```
 
