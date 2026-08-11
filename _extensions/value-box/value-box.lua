@@ -45,7 +45,7 @@ function Div(el)
     local href      = el.attributes["href"] or ""
     local icon_pos  = el.attributes["icon-position"] or "top" -- "top" | "bottom" | "left" | "right"
     local value_pos = el.attributes["value-position"] or "top" -- "top" | "bottom" | "left" | "right"
-    local font_size = el.attributes["font-size"] or "display:flex"
+    local font_size = el.attributes["font-size"] or ""
     local value_font_size = el.attributes["value-font-size"] or "2.2rem"
 
     local font_color = el.attributes["font-color"] or "white"
