@@ -355,24 +355,32 @@
 <h2>Value position</h2>
 <p>The value can be repositioned relative to the details text with the <code>value-position</code> parameter, completely independently of <code>icon-position</code>.</p>
 <div class="columns">
-<div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; height:; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:3em; color:white;"></i><div class="vb-content" style=" display:flex; flex-direction:row; align-items:center; gap:0.75em;"><div class="value" style="font-size: 2.2rem; color:white; flex-shrink:0;">42</div><div class="details" style="font-size: display:flex;color:white; flex:1;">
+<div class="column" style="width:35%;">
+<div class="value-box bg-blue" style="width:80%; height:; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:1.5rem; color:white;"></i><div class="vb-content" style=" display:flex; flex-direction:row; align-items:center; gap:0.75em;"><div class="value" style="font-size: 2.2rem; color:white; flex-shrink:0;">42</div><div class="details" style="font-size: display:flex;color:white; flex:1;">
 <p>Left-aligned value</p>
 </div></div></div>
-<div class="value-box bg-blue" style="width:80%; height:; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:3em; color:white;"></i><div class="vb-content" style=" display:flex; flex-direction:row-reverse; align-items:center; gap:0.75em;"><div class="value" style="font-size: 2.2rem; color:white; flex-shrink:0;">99</div><div class="details" style="font-size: display:flex;color:white; flex:1;">
-<p>Right-aligned value</p>
-</div></div></div>
-<div class="value-box bg-blue" style="width:80%; height:; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:3em; color:white;"></i><div class="vb-content" style=""><div class="details" style="font-size: display:flex;color:white;">
-<p>Value below details</p>
-</div><div class="value" style="font-size: 2.2rem; color:white;">7</div></div></div>
-</div><div class="column" style="width:50%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" value-position="left" value="42"}</span>
+</div><div class="column" style="width:65%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" icon-size="1.5rem" value-position="left" value="42"}</span>
 <span id="cb13-2"><a href="" aria-label="2"></a>Left-aligned value</span>
 <span id="cb13-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" value-position="right" value="99"}</span>
+</div></div>
+<div class="columns">
+<div class="column" style="width:35%;">
+<div class="value-box bg-blue" style="width:80%; height:; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:1.5rem; color:white;"></i><div class="vb-content" style=" display:flex; flex-direction:row-reverse; align-items:center; gap:0.75em;"><div class="value" style="font-size: 2.2rem; color:white; flex-shrink:0;">99</div><div class="details" style="font-size: display:flex;color:white; flex:1;">
+<p>Right-aligned value</p>
+</div></div></div>
+</div><div class="column" style="width:65%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" icon-size="1.5rem" value-position="right" value="99"}</span>
 <span id="cb14-2"><a href="" aria-label="2"></a>Right-aligned value</span>
 <span id="cb14-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" value-position="bottom" value="7"}</span>
+</div></div>
+<div class="columns">
+<div class="column" style="width:35%;">
+<div class="value-box bg-blue" style="width:80%; height:; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:1.5rem; color:white;"></i><div class="vb-content" style=""><div class="details" style="font-size: display:flex;color:white;">
+<p>Value below details</p>
+</div><div class="value" style="font-size: 2.2rem; color:white;">7</div></div></div>
+</div><div class="column" style="width:65%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" icon-size="1.5rem" value-position="bottom" value="7"}</span>
 <span id="cb15-2"><a href="" aria-label="2"></a>Value below details</span>
 <span id="cb15-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
@@ -385,19 +393,27 @@
 <div class="value-box bg-blue" style="width:80%; height:; text-align:right;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:3em; color:white; flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size: 2.2rem; color:white;">42</div><div class="details" style="font-size: display:flex;color:white;">
 <p>Left-aligned icon with right-aligned text</p>
 </div></div></div>
-<div class="value-box bg-teal" style="width:80%; height:; text-align:right;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:3em; color:white; flex-shrink:0;"></i><div class="vb-content" style=" flex:1; display:flex; flex-direction:row; align-items:center; gap:0.75em;"><div class="value" style="font-size: 2.2rem; color:white; flex-shrink:0;">42</div><div class="details" style="font-size: display:flex;color:white; flex:1;">
-<p>Left-aligned icon AND left-aligned value, together</p>
-</div></div></div>
-<div class="value-box bg-red" style="width:80%; height:; text-align:center;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size: 2.2rem; color:white;">7</div><div class="details" style="font-size: display:flex;color:white;">
-<p>Icon below text, all centred</p>
-</div></div><i class="icon bi bi-star" style="font-size:1.5rem; color:white;"></i></div>
 </div><div class="column" style="width:50%;">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" icon-position="left" align="right" color="bg-blue" value="42"}</span>
 <span id="cb16-2"><a href="" aria-label="2"></a>Left-aligned icon with right-aligned text</span>
 <span id="cb16-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="value-box bg-teal" style="width:80%; height:; text-align:right;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:3em; color:white; flex-shrink:0;"></i><div class="vb-content" style=" flex:1; display:flex; flex-direction:row; align-items:center; gap:0.75em;"><div class="value" style="font-size: 2.2rem; color:white; flex-shrink:0;">42</div><div class="details" style="font-size: display:flex;color:white; flex:1;">
+<p>Left-aligned icon AND left-aligned value, together</p>
+</div></div></div>
+</div><div class="column" style="width:50%;">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" icon-position="left" value-position="left" align="right" color="bg-teal" value="42"}</span>
 <span id="cb17-2"><a href="" aria-label="2"></a>Left-aligned icon AND left-aligned value, together</span>
 <span id="cb17-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="value-box bg-red" style="width:80%; height:; text-align:center;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size: 2.2rem; color:white;">7</div><div class="details" style="font-size: display:flex;color:white;">
+<p>Icon below text, all centred</p>
+</div></div><i class="icon bi bi-star" style="font-size:1.5rem; color:white;"></i></div>
+</div><div class="column" style="width:50%;">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" color="bg-red" value="7" align="center"}</span>
 <span id="cb18-2"><a href="" aria-label="2"></a>Icon below text, all centred</span>
 <span id="cb18-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
