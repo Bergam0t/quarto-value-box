@@ -7,6 +7,8 @@ function detect_icon_type(icon)
     return "fa"
   elseif icon:match("^ti%-.+") then
     return "tabler"
+  elseif icon:match("^ph%-?%a*%s+ph%-.+") then
+    return "phosphor"
   else
     return "bi"  -- fallback: assume Bootstrap Icons
   end
@@ -22,13 +24,25 @@ local material_variants = {
   ["material-sharp"]    = { class = "material-symbols-sharp",    family = "Material+Symbols+Sharp" },
 }
 
+-- Phosphor Icons ships one stylesheet per weight rather than a single bundle,
+-- so the leading weight class in the icon value (e.g. "ph-bold ph-heart")
+-- picks which CDN file gets linked.
+local phosphor_weight_dirs = {
+  ["ph"]         = "regular",
+  ["ph-thin"]    = "thin",
+  ["ph-light"]   = "light",
+  ["ph-bold"]    = "bold",
+  ["ph-fill"]    = "fill",
+  ["ph-duotone"] = "duotone",
+}
+
 
 function Div(el)
   if el.classes:includes("value-box") then
 
     -- Existing attributes
     local icon      = el.attributes["icon"] or ""
-    local icon_type -- supports "fa" | "bi" | "svg" | "png" | "material" | "material-outlined" | "material-rounded" | "material-sharp" | "tabler"
+    local icon_type -- supports "fa" | "bi" | "svg" | "png" | "material" | "material-outlined" | "material-rounded" | "material-sharp" | "tabler" | "phosphor"
     if el.attributes["icon-type"] then
       icon_type = el.attributes["icon-type"]
     elseif icon ~= "" then
@@ -112,7 +126,7 @@ function Div(el)
 
     -- Compensate for icon-font glyphs' built-in optical bearing so a stacked
     -- icon visually lines up with the left/right edge of the value/details text.
-    if (icon_pos == "top" or icon_pos == "bottom") and (icon_type == "fa" or icon_type == "bi" or icon_type == "tabler" or material_variants[icon_type]) then
+    if (icon_pos == "top" or icon_pos == "bottom") and (icon_type == "fa" or icon_type == "bi" or icon_type == "tabler" or icon_type == "phosphor" or material_variants[icon_type]) then
       local bearing = "0.12em"
       if align == "left" then
         icon_extra_style = icon_extra_style .. string.format(" margin-left:-%s;", bearing)
@@ -206,6 +220,18 @@ function Div(el)
         quarto.doc.include_text("in-header", '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.46.0/tabler-icons.min.css">')
         icon_html = string.format(
           '<i class="icon ti %s" style="font-size:%s;color:%s;%s"></i>',
+          icon, icon_size_font, icon_color, icon_extra_style
+        )
+
+      elseif icon_type == "phosphor" then
+        local weight_token = icon:match("^(%S+)")
+        local weight_dir = phosphor_weight_dirs[weight_token] or "regular"
+        quarto.doc.include_text("in-header", string.format(
+          '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/%s/style.css">',
+          weight_dir
+        ))
+        icon_html = string.format(
+          '<i class="icon %s" style="font-size:%s;color:%s;%s"></i>',
           icon, icon_size_font, icon_color, icon_extra_style
         )
 
