@@ -142,7 +142,7 @@ Please take a look at our [contributor guidance](CONTRIBUTING) and [code of cond
 
 ### Generative AI use disclosure and policy
 
-This filter has been written with the help of Claude Sonnet 4.6 and Gemini 3.1 Pro.
+This filter has been written with the help of Claude Sonnet 4.6, Claude Sonnet 5.0, Claude Opus 5.0, and Gemini 3.1 Pro.
 
 All AI-generated code has been thoroughly reviewed and tested before inclusion.
 
