@@ -35,7 +35,7 @@ filters:
 ---
 
 
-## Simple boxes 1
+## Simple boxes
 
 ::: {.value-box}
 **Value boxes**
@@ -57,7 +57,7 @@ A simple value box can help make points stand out...
 
 
 
-## Simple boxes 2
+## Values
 
 Or display a metric
 
@@ -71,7 +71,7 @@ Number of bibbles bobbled this week
 :::
 ```
 
-## Simple boxes 3
+## Icons
 
 Or display a metric with an icon
 
@@ -85,7 +85,7 @@ Number of bibbles bobbled this week
 :::
 ```
 
-## Simple boxes 4
+## Center Alignment
 
 ::: {.value-box icon="bi-arrow-down-up" color="bg-amber" width="60%" align="center"}
 Here's a more advanced type of box with an icon and some formatting, but no value
@@ -129,7 +129,7 @@ This week
 ::: {.column width='40%'}
 
 ::: {.value-box title="Styled title" title-color="#ffd54f" title-font-size="1.3rem" value="42" color="bg-purple"}
-`title-color` and `title-font-size` work like their value equivalents
+**title-color** and **title-font-size** work like their value equivalents
 :::
 
 :::
@@ -138,17 +138,13 @@ This week
 
 ```md
 ::: {.value-box title="Styled title" title-color="#ffd54f" title-font-size="1.3rem" value="42" color="bg-purple"}
-`title-color` and `title-font-size` work like their value equivalents
+**title-color** and **title-font-size** work like their value equivalents
 :::
 ```
 
 :::
 
 ::::
-
-::: {style='font-size: 60%;'}
-By default the title's size comes from the extension's stylesheet (`0.9rem`) rather than being set inline, so your own CSS can restyle titles without needing `!important`.
-:::
 
 
 ## Fragment types
@@ -1160,6 +1156,8 @@ Material Symbols icons
 :::
 
 ::::
+
+## Icon Color (continued)
 
 :::: {.columns}
 
