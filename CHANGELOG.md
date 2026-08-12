@@ -1,5 +1,6 @@
 # v1.6.0
 
+- Add `title` option: a small label rendered above the `value`, with `title-color`, `title-font-size` and `title-extra-style` to style it. The default size comes from the extension's stylesheet rather than being set inline, so your own CSS can restyle titles without needing `!important`. When `value-position` is `left` or `right`, the title spans the full width above that row rather than becoming a third item in it
 - Add Phosphor Icons support (`icon-type="phosphor"`, auto-detected from a `ph`/`ph-<weight>` prefixed `icon` value, e.g. `icon="ph ph-star"` or `icon="ph-bold ph-star"`). Loads the weight-specific stylesheet matching the icon's weight class
 - Fix: icon stylesheets are now linked once per document instead of once per value box. A document with many boxes previously repeated the same `<link>` tag dozens of times in its `<head>`
 - Fix: icon stylesheet `<link>` tags no longer leak into non-HTML output. Rendering a document containing a value box to PDF previously injected a raw `<link>` tag into the LaTeX preamble, which fails to compile

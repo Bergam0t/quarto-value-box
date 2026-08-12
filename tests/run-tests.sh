@@ -293,6 +293,30 @@ for fmt in "${formats[@]}"; do
 
           # Blanked attributes must not suppress a default into "font-size:;".
           assert_present 'style="font-size:3em;  margin-left:-0.12em;"' "$out" "$fixture/$fmt blank icon-color omits the declaration"
+
+          # title. No font-size is emitted by default, on purpose: the
+          # stylesheet's .value-box .title rule supplies it unless overridden.
+          assert_present '<div class="title" style="color:white; ">Bibbles</div>' "$out" "$fixture/$fmt renders the title and leaves its size to the stylesheet"
+          assert_present '<div class="title" style="font-size:1.4rem; color:yellow; text-transform:uppercase;">Styled</div>' "$out" "$fixture/$fmt title colour, size and style hook all apply"
+
+          # A title above a left/right value row needs an extra wrapper, so the
+          # title spans the width instead of becoming a third item in the row.
+          assert_present '<div class="title" style="color:white; ">Rowed</div><div class="vb-row" style=" display:flex; flex-direction:row;' "$out" "$fixture/$fmt title sits above the value row, not inside it"
+          # ...and must not appear otherwise: without a title the row styles
+          # stay on .vb-content exactly as they did before the feature existed.
+          assert_present '<div class="vb-content" style=" display:flex; flex-direction:row; align-items:center; gap:0.75em;"><div class="value"' "$out" "$fixture/$fmt value-position row is unwrapped when there is no title"
+          assert_count 1 'class="vb-row"' "$out" "$fixture/$fmt emits the row wrapper only where it is needed"
+
+          # Title placement is fixed at the top of the content, so a bottom
+          # value gives title, details, value. A deliberate choice, pinned here.
+          assert_present '<div class="title" style="color:white; ">Bottomed</div><div class="details"' "$out" "$fixture/$fmt title stays above the details when the value is below"
+
+          # Guards the wrapper's *closing* tag, which nothing else can. Dropping
+          # it does not fail the render or unbalance the tag counts: Quarto
+          # re-parses and repairs the HTML, silently reparenting everything that
+          # follows into the broken box. The only visible trace is the depth of
+          # this close-tag run, which only the wrapped box produces.
+          assert_count 1 '</div></div></div></div>' "$out" "$fixture/$fmt closes the row wrapper"
         fi
         ;;
 

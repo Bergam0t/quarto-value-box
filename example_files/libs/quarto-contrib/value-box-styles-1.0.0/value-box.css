@@ -21,6 +21,8 @@
     font-weight: 600;
     font-size: 0.9rem;
     opacity: 0.9;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
 }
 
 .value-box .value {

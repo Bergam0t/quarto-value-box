@@ -98,6 +98,59 @@ Here's a more advanced type of box with an icon and some formatting, but no valu
 ```
 
 
+## Titles
+
+A `title` adds a small label above the value — useful when the value alone needs naming.
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box title="Bibbles bobbled" value="60" icon="bi-arrow-down-up" icon-position="left" icon-size="2em"}
+This week
+:::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box title="Bibbles bobbled" value="60" icon="bi-arrow-down-up" icon-position="left" icon-size="2em"}
+This week
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box title="Styled title" title-color="#ffd54f" title-font-size="1.3rem" value="42" color="bg-purple"}
+`title-color` and `title-font-size` work like their value equivalents
+:::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box title="Styled title" title-color="#ffd54f" title-font-size="1.3rem" value="42" color="bg-purple"}
+`title-color` and `title-font-size` work like their value equivalents
+:::
+```
+
+:::
+
+::::
+
+::: {style='font-size: 60%;'}
+By default the title's size comes from the extension's stylesheet (`0.9rem`) rather than being set inline, so your own CSS can restyle titles without needing `!important`.
+:::
+
+
 ## Fragment types
 
 :::: {.columns}

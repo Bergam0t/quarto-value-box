@@ -270,7 +270,14 @@ release and the pre-release.
 - `docx` and `typst` are close to smoke-tests only. Before adding a non-HTML
   representation of the value, add content baselines to both (typst needs
   `keep-typ` to leave a greppable `.typ`) so the change shows up as a check going
-  from red to green.
+  from red to green. Note **both** `value` and `title` are currently absent from
+  non-HTML output — only the box's body text survives — so both need baselines.
+  A naive `assert_absent` on the title text would be a tautology: it is absent
+  from a filter-less render too, because Pandoc's LaTeX writer ignores div
+  attributes.
+- `title` combined with `value-position="right"` is uncovered. Adding a box for
+  it means first scoping the document-wide `flex-direction:row-reverse` count,
+  which would otherwise fail for an unrelated reason.
 - Only `material` / `material-rounded` and two of six Phosphor weights are
   exercised; `material-sharp` and the unknown-weight fallback are not.
 - No fixture covers a missing icon file, so the warning-text guard

@@ -109,6 +109,13 @@ function Div(el)
     local value_color = el.attributes["value-color"] or font_color
     local icon_color = el.attributes["icon-color"] or "white"
 
+    -- A short label rendered above the value. title-font-size is deliberately
+    -- left unset by default so the stylesheet's .value-box .title rule supplies
+    -- it; setting the attribute overrides that rule.
+    local title = el.attributes["title"] or ""
+    local title_color = el.attributes["title-color"] or font_color
+    local title_font_size = el.attributes["title-font-size"] or ""
+
     local icon_size_raw = el.attributes["icon-size"]
 
     -- em units for font-based icons (BI/FA), px for image-based (SVG/PNG).
@@ -144,6 +151,7 @@ function Div(el)
     local content_extra_style = el.attributes["content-extra-style"] or ""
     local details_extra_style = el.attributes["details-extra-style"] or ""
     local value_extra_style   = el.attributes["value-extra-style"] or ""
+    local title_extra_style   = el.attributes["title-extra-style"] or ""
 
     -- icon-position controls the outer wrapper: icon vs. everything else
     if icon_pos == "left" then
@@ -156,13 +164,17 @@ function Div(el)
       content_extra_style = content_extra_style .. " flex:1;"
     end
 
-    -- value-position controls the inner content wrapper: value vs. details, independent of icon-position
+    -- value-position controls the inner content wrapper: value vs. details, independent of icon-position.
+    -- Kept separate from content_extra_style because a title has to sit above
+    -- this row rather than become a third item in it — see the content wrapper
+    -- below, which moves these styles onto an inner element when both apply.
+    local value_row_style = ""
     if value_pos == "left" then
-      content_extra_style = content_extra_style .. " display:flex; flex-direction:row; align-items:center; gap:0.75em;"
+      value_row_style     = " display:flex; flex-direction:row; align-items:center; gap:0.75em;"
       value_extra_style   = value_extra_style .. " flex-shrink:0;"
       details_extra_style = details_extra_style .. " flex:1;"
     elseif value_pos == "right" then
-      content_extra_style = content_extra_style .. " display:flex; flex-direction:row-reverse; align-items:center; gap:0.75em;"
+      value_row_style     = " display:flex; flex-direction:row-reverse; align-items:center; gap:0.75em;"
       value_extra_style   = value_extra_style .. " flex-shrink:0;"
       details_extra_style = details_extra_style .. " flex:1;"
     end
@@ -299,8 +311,33 @@ function Div(el)
       html_open = html_open .. icon_html
     end
 
-    -- Open the content wrapper (holds value + details, positioned independently of the icon)
-    html_open = html_open .. string.format('<div class="vb-content" style="%s">', content_extra_style)
+    -- Build title HTML (empty string if no title)
+    local title_html = ""
+    if title ~= "" then
+      title_html = string.format(
+        '<div class="title" style="%s%s%s">%s</div>',
+        css_decl("font-size", title_font_size), css_decl("color", title_color),
+        title_extra_style, title
+      )
+    end
+
+    -- A left/right value-position turns the value and details into a flex row.
+    -- A title has to sit above that row rather than become a third item in it,
+    -- so when both are in play the row styles move to an inner wrapper and
+    -- .vb-content becomes the column that stacks title above row. With no
+    -- title, or no row, the markup is unchanged.
+    local use_row_wrapper = (title ~= "" and value_row_style ~= "")
+
+    -- Open the content wrapper (holds title, value and details, positioned
+    -- independently of the icon)
+    html_open = html_open .. string.format('<div class="vb-content" style="%s%s">',
+      content_extra_style, use_row_wrapper and "" or value_row_style)
+
+    html_open = html_open .. title_html
+
+    if use_row_wrapper then
+      html_open = html_open .. string.format('<div class="vb-row" style="%s">', value_row_style)
+    end
 
     -- For bottom placement, defer value injection; otherwise inject it now
     if value_pos ~= "bottom" then
@@ -311,10 +348,15 @@ function Div(el)
     html_open = html_open .. string.format('<div class="details" style="%s%s%s">',
       css_decl("font-size", font_size), css_decl("color", font_color), details_extra_style)
 
-    -- Close details, optionally append value below, close content wrapper, optionally append icon below, then close outer
+    -- Close details, optionally append value below, close the row wrapper if
+    -- one was opened, close content wrapper, optionally append icon below,
+    -- then close outer
     local html_close = '</div>' -- close .details
     if value_pos == "bottom" then
       html_close = html_close .. value_html
+    end
+    if use_row_wrapper then
+      html_close = html_close .. '</div>' -- close .vb-row
     end
     html_close = html_close .. '</div>' -- close .vb-content
     if icon_pos == "bottom" then

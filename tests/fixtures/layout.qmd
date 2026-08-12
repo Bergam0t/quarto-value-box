@@ -65,6 +65,37 @@ Fragment, second
 Fragment, first
 :::
 
+## Title
+
+::: {.value-box title="Bibbles" value="60"}
+Title above the value
+:::
+
+::: {.value-box title="Styled" title-color="yellow" title-font-size="1.4rem" title-extra-style="text-transform:uppercase;" value="61"}
+Title with its own colour, size and style hook
+:::
+
+A title has to sit above the value/details row rather than become a third item
+in it, so this combination gets an extra wrapper.
+
+::: {.value-box title="Rowed" value-position="left" value="62"}
+Title above a left-positioned value
+:::
+
+Without a title there must be no wrapper, so the markup stays as it was.
+
+::: {.value-box value-position="left" value="63"}
+Left-positioned value, no title
+:::
+
+The title stays at the top even when the value is moved below the details, so
+the order becomes title, details, value. Pinning that here because it is a
+deliberate choice rather than a fallout.
+
+::: {.value-box title="Bottomed" value-position="bottom" value="64"}
+Title above, value below
+:::
+
 ## Explicitly blanked attributes
 
 An empty string is truthy in Lua, so a blanked attribute is easy to mistake for
