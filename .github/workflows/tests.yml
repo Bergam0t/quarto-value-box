@@ -1,0 +1,55 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A rapid series of pushes to a PR should not pile up redundant matrix runs.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  render:
+    name: ${{ matrix.os }} / quarto ${{ matrix.quarto }}
+    runs-on: ${{ matrix.os }}
+    # Four legs, each installing TinyTeX and compiling PDFs; Windows runners
+    # are slower and bill at 2x. Generous enough to absorb a slow CTAN mirror,
+    # tight enough to fail in minutes rather than hours.
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        quarto: [release, pre-release]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: ${{ matrix.quarto }}
+          # The PDF leg needs a LaTeX toolchain. It is the slowest part of the
+          # matrix and also the only check that catches a corrupted preamble:
+          # rendering to "latex" exits 0 even when the .tex will not compile.
+          tinytex: true
+
+      # The runner also builds example.qmd, so this covers the project's
+      # long-standing bar of "the demo deck renders".
+      - name: Run the test matrix
+        shell: bash
+        run: bash tests/run-tests.sh
+
+      - name: Upload rendered output on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-output-${{ matrix.os }}-quarto-${{ matrix.quarto }}
+          path: tests/_work/
+          if-no-files-found: ignore
+          retention-days: 7

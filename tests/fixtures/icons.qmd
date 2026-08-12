@@ -1,0 +1,82 @@
+---
+title: "Icon families"
+format: html
+filters:
+  - value-box
+---
+
+Exercises every branch of the icon handling. Several families appear more
+than once on purpose: the stylesheet for a family must be linked exactly
+once however many boxes use it.
+
+## Bootstrap Icons (three boxes, one stylesheet)
+
+::: {.value-box icon="bi-star" value="1"}
+Bootstrap one
+:::
+
+::: {.value-box icon="bi-arrow-down-up" value="2"}
+Bootstrap two
+:::
+
+::: {.value-box icon="bi-heart" value="3"}
+Bootstrap three
+:::
+
+## Font Awesome (two styles, one stylesheet)
+
+::: {.value-box icon="fa-solid fa-clipboard" value="4"}
+Font Awesome solid
+:::
+
+::: {.value-box icon="fa-brands fa-python" value="5"}
+Font Awesome brands
+:::
+
+## Material Symbols (two families, two stylesheets)
+
+::: {.value-box icon="home" icon-type="material" value="6"}
+Material outlined
+:::
+
+::: {.value-box icon="star" icon-type="material" value="7"}
+Material outlined again — same family, must not add a second link
+:::
+
+::: {.value-box icon="home" icon-type="material-rounded" value="8"}
+Material rounded — a distinct family, so a distinct link
+:::
+
+## Tabler (two boxes, one stylesheet)
+
+::: {.value-box icon="ti-star" value="9"}
+Tabler one
+:::
+
+::: {.value-box icon="ti-heart" value="10"}
+Tabler two
+:::
+
+## Phosphor (two weights, two stylesheets)
+
+::: {.value-box icon="ph ph-star" value="11"}
+Phosphor regular
+:::
+
+::: {.value-box icon="ph ph-heart" value="12"}
+Phosphor regular again — same weight, must not add a second link
+:::
+
+::: {.value-box icon="ph-bold ph-heart" value="13"}
+Phosphor bold — a distinct weight, so a distinct stylesheet
+:::
+
+## Local image files
+
+::: {.value-box icon="example-icon.svg" value="14"}
+Local SVG, inlined into the document
+:::
+
+::: {.value-box icon="example-icon.png" icon-size="64px" value="15"}
+Local PNG, referenced by src
+:::

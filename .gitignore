@@ -4,4 +4,6 @@
 /.quarto/
 **/*.quarto_ipynb
 
+/tests/_work/
+
 CLAUDE.md

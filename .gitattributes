@@ -1,0 +1,9 @@
+# Normalise line endings on commit so files authored on Windows and Linux do
+# not produce whole-file diffs.
+* text=auto
+
+# Shell scripts must keep LF endings in the working tree too. With
+# core.autocrlf=true on Windows a CRLF-terminated shebang line becomes
+# "/usr/bin/env bash\r", which Linux CI rejects with a confusing
+# "bad interpreter" error.
+*.sh text eol=lf
