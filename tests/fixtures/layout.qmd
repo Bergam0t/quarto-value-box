@@ -1,0 +1,117 @@
+---
+title: "Layout and styling options"
+format: revealjs
+filters:
+  - value-box
+---
+
+## Icon and value positioning
+
+::: {.value-box icon="bi-star" icon-position="left" value="1"}
+Icon left
+:::
+
+::: {.value-box icon="bi-star" icon-position="right" value="2"}
+Icon right
+:::
+
+::: {.value-box icon="bi-star" icon-position="bottom" value="3"}
+Icon bottom
+:::
+
+::: {.value-box icon="bi-star" value-position="left" value="4"}
+Value left
+:::
+
+::: {.value-box icon="bi-star" value-position="bottom" value="5"}
+Value bottom
+:::
+
+::: {.value-box icon="bi-star" icon-position="left" value-position="left" value="6"}
+Both left — the two options are independent
+:::
+
+## Alignment
+
+::: {.value-box icon="bi-star" align="center" valign="top" value="7" height="300px"}
+Centred text, top aligned
+:::
+
+::: {.value-box icon="bi-star" align="right" valign="bottom" value="8" height="300px"}
+Right aligned text, bottom aligned
+:::
+
+## Sizing and colour
+
+::: {.value-box color="bg-teal" width="40%" height="200px" min-height="40px" padding="0.5rem" value="9"}
+Sizing options
+:::
+
+::: {.value-box font-size="150%" value-font-size="3rem" font-color="yellow" value-color="fuchsia" icon-color="lime" icon="bi-star" value="10"}
+Font and colour options
+:::
+
+## Links and fragments
+
+::: {.value-box href="https://example.com" value="11"}
+Wrapped in a link
+:::
+
+::: {.value-box fragment="true" index="2" value="12"}
+Fragment, second
+:::
+
+::: {.value-box fragment="fade-in-then-out" index="1" value="13"}
+Fragment, first
+:::
+
+## Title
+
+::: {.value-box title="Bibbles" value="60"}
+Title above the value
+:::
+
+::: {.value-box title="Styled" title-color="yellow" title-font-size="1.4rem" title-extra-style="text-transform:uppercase;" value="61"}
+Title with its own colour, size and style hook
+:::
+
+A title has to sit above the value/details row rather than become a third item
+in it, so this combination gets an extra wrapper.
+
+::: {.value-box title="Rowed" value-position="left" value="62"}
+Title above a left-positioned value
+:::
+
+Without a title there must be no wrapper, so the markup stays as it was.
+
+::: {.value-box value-position="left" value="63"}
+Left-positioned value, no title
+:::
+
+The title stays at the top even when the value is moved below the details, so
+the order becomes title, details, value. Pinning that here because it is a
+deliberate choice rather than a fallout.
+
+::: {.value-box title="Bottomed" value-position="bottom" value="64"}
+Title above, value below
+:::
+
+## Explicitly blanked attributes
+
+An empty string is truthy in Lua, so a blanked attribute is easy to mistake for
+a set one and emit `font-size:;` from. These boxes exist so the "no empty CSS
+declarations" assertion has something to bite on.
+
+::: {.value-box icon="bi-star" icon-size="" icon-color="" value="14"}
+Blank icon sizing and colour
+:::
+
+::: {.value-box height="" width="" align="" font-size="" value="15"}
+Blank box sizing and alignment
+:::
+
+## Escape hatches
+
+::: {.value-box outer-extra-style="border:2px solid red;" icon-extra-style="opacity:0.5;" content-extra-style="letter-spacing:1px;" details-extra-style="font-style:italic;" value-extra-style="text-decoration:underline;" icon="bi-star" value="16"}
+All five extra-style hooks
+:::

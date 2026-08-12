@@ -1,0 +1,19 @@
+---
+title: "Minimal value box"
+format: html
+filters:
+  - value-box
+---
+
+The plainest possible box, rendered to every supported format. Guards the
+base path: no icon, no layout options, nothing optional set.
+
+::: {.value-box value="60"}
+Bibbles bobbled this week
+:::
+
+A box with no value either — content only.
+
+::: {.value-box}
+Just some details text
+:::

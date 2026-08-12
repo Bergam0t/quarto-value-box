@@ -4,17 +4,38 @@ format:
     revealjs:
         output-file: index.html
         height: 800 # default height and width ensure consistent behaviour on different screens
-        width: 1250 # would recommend leaving this and height value as they are
+        width: 1450 # would recommend leaving this and height value as they are
         preview-links: true
         transition: fade
         background-transition: fade
+        include-after-body:
+            text: |
+                <a href="https://github.com/Bergam0t/quarto-value-box" target="_blank" rel="noopener" class="footer-logo-link" aria-label="View on GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <style>
+                .footer-logo-link {
+                    display: block;
+                    position: fixed;
+                    bottom: 0;
+                    right: 12px;
+                    height: 2.2rem;
+                    line-height: 2.2rem;
+                    font-size: 1.6rem;
+                    color: #222;
+                    z-index: 2;
+                }
+                .footer-logo-link:hover {
+                    color: #3d6a9e;
+                }
+                </style>
 filters:
     - value-box
 
 ---
 
 
-## Simple boxes 1
+## Simple boxes
 
 ::: {.value-box}
 **Value boxes**
@@ -36,7 +57,7 @@ A simple value box can help make points stand out...
 
 
 
-## Simple boxes 2
+## Values
 
 Or display a metric
 
@@ -50,7 +71,7 @@ Number of bibbles bobbled this week
 :::
 ```
 
-## Simple boxes 3
+## Icons
 
 Or display a metric with an icon
 
@@ -64,7 +85,7 @@ Number of bibbles bobbled this week
 :::
 ```
 
-## Simple boxes 4
+## Center Alignment
 
 ::: {.value-box icon="bi-arrow-down-up" color="bg-amber" width="60%" align="center"}
 Here's a more advanced type of box with an icon and some formatting, but no value
@@ -75,25 +96,74 @@ Here's a more advanced type of box with an icon and some formatting, but no valu
 Here's a more advanced type of box with an icon and some formatting, but no value
 :::
 ```
+
+
+## Titles
+
+A `title` adds a small label above the value — useful when the value alone needs naming.
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box title="Bibbles bobbled" value="60" icon="bi-arrow-down-up" icon-position="left" icon-size="2em"}
+This week
+:::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box title="Bibbles bobbled" value="60" icon="bi-arrow-down-up" icon-position="left" icon-size="2em"}
+This week
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box title="Styled title" title-color="#ffd54f" title-font-size="1.3rem" value="42" color="bg-purple"}
+**title-color** and **title-font-size** work like their value equivalents
+:::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box title="Styled title" title-color="#ffd54f" title-font-size="1.3rem" value="42" color="bg-purple"}
+**title-color** and **title-font-size** work like their value equivalents
+:::
+```
+
+:::
+
+::::
 
 
 ## Fragment types
 
 :::: {.columns}
 
-::: {.column width='50%'}
+::: {.column width='40%'}
 
-::: {.value-box value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" fragment="fade-in-then-semi-out"}
+::: {.value-box fragment="fade-in-then-semi-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" }
 We can use them with special named fragment types like 'fade in, then semi out'
 (this is also the default if you set fragment="true")
 :::
 
 :::
 
-::: {.column width='50%'}
+::: {.column width='60%'}
 
 ```md
-::: {.value-box value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" fragment="fade-in-then-semi-out"}
+::: {.value-box fragment="fade-in-then-semi-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}
 We can use them with special named fragment types like 'fade in, then semi out'
 (this is also the default if you set fragment="true")
 :::
@@ -106,18 +176,18 @@ We can use them with special named fragment types like 'fade in, then semi out'
 
 :::: {.columns}
 
-::: {.column width='50%'}
+::: {.column width='40%'}
 
-::: {.value-box value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" fragment="fade-in-then-out"}
+::: {.value-box fragment="fade-in-then-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" }
 Or standard fragments
 :::
 
 :::
 
-::: {.column width='50%'}
+::: {.column width='60%'}
 
 ```md
-::: {.value-box value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" fragment="fade-in-then-out"}
+::: {.value-box fragment="fade-in-then-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}
 Or standard fragments
 :::
 ```
@@ -129,7 +199,7 @@ Or standard fragments
 
 :::: {.columns}
 
-::: {.column width='50%'}
+::: {.column width='40%'}
 
 :::{.fragment}
 Tada!
@@ -138,7 +208,7 @@ Tada!
 
 :::
 
-::: {.column width='50%'}
+::: {.column width='60%'}
 
 ```md
 :::{.fragment}
@@ -194,19 +264,79 @@ This appears FIRST (Index 1)
 
 ## Icon position
 
-Icons can be repositioned with the `icon-position` parameter.
+Icons can be repositioned with the `icon-position` parameter. `top` is the default — the icon, value, and details all stay flush against the same edge for `left`/`right` alignment.
 
 :::: {.columns}
 
 ::: {.column width='50%'}
 
-::: {.value-box icon="bi-star" icon-position="left" value="42"}
+::: {.value-box icon="fa-solid fa-clipboard" value="Step 1" icon-size="2em"}
+Add logging steps for arrivals, queues, resource use, and departures
+:::
+
+:::
+
+::: {.column width='50%'}
+
+```md
+::: {.value-box icon="fa-solid fa-clipboard" value="Step 1" icon-size="2em"}
+Add logging steps for arrivals, queues, resource use, and departures
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="bi-star" icon-position="left" value="42" icon-size="2em"}
 Left-aligned icon
 :::
 
-::: {.value-box icon="bi-star" icon-position="right" value="99"}
+:::
+
+::: {.column width='50%'}
+
+```md
+::: {.value-box icon-position="left" icon="bi-star" value="42" icon-size="2em"}
+Left-aligned icon
+:::
+```
+
+:::
+
+::::
+
+## Icon position (continued)
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="bi-star" icon-position="right" value="99" icon-size="2em"}
 Right-aligned icon
 :::
+
+:::
+
+::: {.column width='50%'}
+
+```md
+::: {.value-box icon-position="right" icon="bi-star" value="99" icon-size="2em"}
+Right-aligned icon
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='50%'}
 
 ::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" value="7"}
 Icon below text
@@ -217,20 +347,78 @@ Icon below text
 ::: {.column width='50%'}
 
 ```md
-::: {.value-box icon="bi-star" icon-position="left" value="42"}
-Left-aligned icon
-:::
-```
-
-```md
-::: {.value-box icon="bi-star" icon-position="right" value="99"}
-Right-aligned icon
-:::
-```
-
-```md
-::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" value="7"}
+::: {.value-box icon-position="bottom" icon="bi-star" icon-size="1.5rem" value="7"}
 Icon below text
+:::
+```
+
+:::
+
+::::
+
+## Value position
+
+The value can be repositioned relative to the details text with the `value-position` parameter, completely independently of `icon-position`.
+
+:::: {.columns}
+
+::: {.column width='35%'}
+
+::: {.value-box icon="bi-star" icon-size="1.5rem" value-position="left" value="42"}
+Left-aligned value
+:::
+
+:::
+
+::: {.column width='65%'}
+
+```md
+::: {.value-box value-position="left" value="42" icon="bi-star" icon-size="1.5rem" }
+Left-aligned value
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='35%'}
+
+::: {.value-box icon="bi-star" icon-size="1.5rem" value-position="right" value="99"}
+Right-aligned value
+:::
+
+:::
+
+::: {.column width='65%'}
+
+```md
+::: {.value-box value-position="right" value="99" icon="bi-star" icon-size="1.5rem"}
+Right-aligned value
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='35%'}
+
+::: {.value-box icon="bi-star" icon-size="1.5rem" value-position="bottom" value="7"}
+Value below details
+:::
+
+:::
+
+::: {.column width='65%'}
+
+```md
+::: {.value-box value-position="bottom" value="7" icon="bi-star" icon-size="1.5rem"}
+Value below details
 :::
 ```
 
@@ -240,30 +428,67 @@ Icon below text
 
 ## Text Position
 
-We can also combine this with text position
+::: {style='font-size: 65%;'}
+We can also combine this with text position using the `align` parameter.
+
+Note that `icon-position` and `value-position` are independent — an icon on the left doesn't force the value into a row with it.
+:::
 
 :::: {.columns}
 
-::: {.column width='50%'}
+::: {.column width='40%'}
 
 ::: {.value-box icon="bi-star" icon-position="left" align="right" color="bg-blue" value="42"}
 Left-aligned icon with right-aligned text
 :::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box icon-position="left" align="right" icon="bi-star" color="bg-blue" value="42"}
+Left-aligned icon with right-aligned text
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box icon-position="left" value-position="left" align="right" icon="bi-star" color="bg-teal" value="42"}
+Left-aligned icon AND left-aligned value, together
+:::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box icon-position="left" value-position="left" align="right" icon="bi-star" color="bg-teal" value="42"}
+Left-aligned icon AND left-aligned value, together
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='40%'}
 
 ::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" color="bg-red" value="7" align="center"}
 Icon below text, all centred
 :::
 
-
 :::
 
-::: {.column width='50%'}
-
-```md
-::: {.value-box icon="bi-star" icon-position="left" align="right" color="bg-blue" value="42"}
-Left-aligned icon with right-aligned text
-:::
-```
+::: {.column width='60%'}
 
 ```md
 ::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" color="bg-red" value="7" align="center"}
@@ -311,6 +536,150 @@ Font awesome icons
 :::
 
 ::::
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="home" icon-type="material" icon-position="left" color="bg-blue" value="42"}
+Material Symbols icons
+:::
+
+```md
+::: {.value-box icon="home" icon-type="material" icon-position="left" color="bg-blue" value="42"}
+Material Symbols icons
+:::
+```
+
+:::
+
+::: {.column width='50%'}
+
+::: {.value-box icon="home" icon-type="material-rounded" icon-position="left" color="bg-blue" value="42"}
+Material Symbols icons (rounded)
+:::
+
+```md
+::: {.value-box icon="home" icon-type="material-rounded" icon-position="left" color="bg-blue" value="42"}
+Material Symbols icons (rounded)
+:::
+```
+
+:::
+
+::::
+
+
+## More icon types
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="ti-star" icon-position="left" color="bg-blue" value="42"}
+Tabler icons
+:::
+
+```md
+::: {.value-box icon="ti-star" icon-position="left" color="bg-blue" value="42"}
+Tabler icons
+:::
+```
+
+:::
+
+::: {.column width='50%'}
+
+::: {.value-box icon="ph ph-star" icon-position="left" color="bg-blue" value="42"}
+Phosphor icons
+:::
+
+```md
+::: {.value-box icon="ph ph-star" icon-position="left" color="bg-blue" value="42"}
+Phosphor icons
+:::
+```
+
+:::
+
+::::
+
+
+## Font Awesome Icon Sets
+
+::: {style='font-size: 55%;'}
+Font Awesome icons come in different styles, selected via a class prefix. `fa-solid`, `fa-regular`, and `fa-brands` are all available here, via the free Font Awesome CDN this extension loads.
+:::
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box icon="fa-solid fa-star" icon-position="left" color="bg-amber" value="Solid" value-font-size="80%" icon-size="2em"}
+Filled-in icons
+:::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box icon="fa-solid fa-star" icon-position="left" color="bg-amber" value="Solid (fa-solid)" value-font-size="80%" icon-size="2em"}
+Filled-in icons
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box icon="fa-regular fa-star" icon-position="left" color="bg-teal" value="Regular (fa-regular)" value-font-size="80%" icon-size="2em"}
+Outlined icons
+:::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box icon="fa-regular fa-star" icon-position="left" color="bg-teal" value="Regular" value-font-size="80%" icon-size="2em"}
+Outlined icons
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="Brands (fa-brands)" value-font-size="80%" icon-size="2em"}
+Logos, only available in this one style
+:::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="Brands" value-font-size="80%" icon-size="2em"}
+Logos, only available in this one style
+:::
+```
+
+:::
+
+::::
+
+<div style="font-size:50%;">
+Font Awesome also has Pro-only styles &mdash; `fa-light`, `fa-thin`, and `fa-duotone` &mdash; which aren't demoed here, as they require a paid Font Awesome Pro kit and this extension only loads the free CDN build.
+</div>
 
 
 ## Including local files
@@ -365,16 +734,16 @@ For details on how to change or add colours, see the [advanced customisation](ht
 ::: {.column width='25%'}
 
 ::: {.value-box color="bg-blue" height="100px"}
-Blue
+bg-blue
 :::
 
 ::: {.value-box color="bg-navy"}
-Navy
+bg-navy
 :::
 
 
 ::: {.value-box color="bg-teal"}
-Teal
+bg-teal
 :::
 
 
@@ -384,16 +753,16 @@ Teal
 ::: {.column  width='25%'}
 
 ::: {.value-box color="bg-green"}
-Green
+bg-green
 :::
 
 ::: {.value-box color="bg-olive"}
-Olive
+bg-olive
 :::
 
 
 ::: {.value-box color="bg-slate"}
-Slate
+bg-slate
 :::
 
 
@@ -402,16 +771,16 @@ Slate
 ::: {.column  width='25%'}
 
 ::: {.value-box color="bg-red"}
-Red
+bg-red
 :::
 
 ::: {.value-box color="bg-orange"}
-Orange
+bg-orange
 :::
 
 
 ::: {.value-box color="bg-amber"}
-Amber
+bg-amber
 :::
 
 :::
@@ -419,15 +788,15 @@ Amber
 ::: {.column  width='25%'}
 
 ::: {.value-box color="bg-purple"}
-Purple
+bg-purple
 :::
 
 ::: {.value-box color="bg-pink"}
-Pink
+bg-pink
 :::
 
 ::: {.value-box color="bg-grey"}
-Grey
+bg-grey
 :::
 
 
@@ -489,12 +858,12 @@ Example with no height specified - it will fit the contents
 
 ::: {.column width='50%'}
 
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" height="400px"}
+::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
 Example with height of 400 pixels (400px) specified
 :::
 
 ```md
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" height="400px"}
+::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
 Example with height of 400 pixels (400px) specified
 :::
 
@@ -541,7 +910,45 @@ Top alignment specified
 
 ::::
 
+## Minimum height & padding
+
+If a box's content is short (or `height` is set below the default floor), `min-height` and `padding` can be lowered to reclaim space — handy on busy slides.
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box icon="bi-star" value="42"}
+Default min-height (100px) and padding (1.5rem)
+:::
+
+```md
+::: {.value-box icon="bi-star" value="42"}
+Default min-height (100px) and padding (1.5rem)
+:::
+```
+
+:::
+
+::: {.column width='60%'}
+
+::: {.value-box icon="bi-star" icon-size="1.5rem" value="42" min-height="40px" padding="0.5rem"}
+Tightened min-height and padding
+:::
+
+```md
+::: {.value-box min-height="40px" padding="0.5rem" icon="bi-star" icon-size="1.5rem" value="42" }
+Tightened min-height and padding
+:::
+```
+
+:::
+
+::::
+
 ## Font Sizing
+
+The font for the general text can be tweaked with the font-size parameter
 
 :::: {.columns}
 
@@ -681,38 +1088,115 @@ But they can differ
 
 ## Icon Color
 
-Font awesome and bootstrap icons support recoloring
+Font awesome, bootstrap icons, tabler icons, phosphor icons, and material symbols support recoloring
 
 :::: {.columns}
 
-::: {.column width='50%'}
+::: {.column width='30%'}
 
 ::: {.value-box icon="bi-star" icon-position="left" icon-color="red"}
 Bootstrap icons
 :::
 
+
+
+:::
+
+::: {.column width='70%'}
+
 ```md
 
-::: {.value-box icon="bi-star" icon-position="left" icon-color="red"}
+::: {.value-box icon-color="red" icon="bi-star" icon-position="left" }
 Bootstrap icons
 :::
 ```
 
 :::
 
-::: {.column width='50%'}
+::::
 
+:::: {.columns}
+
+::: {.column width='30%'}
 ::: {.value-box icon="fa-brands fa-python" icon-position="left" value="42" icon-color="fuchsia"}
 Font awesome icons
 :::
 
+
+
+:::
+
+::: {.column width='70%'}
 ```md
-::: {.value-box icon="fa-brands fa-python" icon-position="left" icon-color="fuchsia"}
+::: {.value-box icon-color="fuchsia" icon="fa-brands fa-python" icon-position="left" }
 Font awesome icons
 :::
 ```
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {.value-box icon="home" icon-type="material" icon-position="left" value="42" icon-color="lime"}
+Material Symbols icons
+:::
 
 
+
+:::
+
+::: {.column width='70%'}
+```md
+::: {.value-box icon-color="lime" icon="home" icon-type="material" icon-position="left" }
+Material Symbols icons
+:::
+```
+:::
+
+::::
+
+## Icon Color (continued)
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {.value-box icon="ti-star" icon-position="left" value="42" icon-color="cyan"}
+Tabler icons
+:::
+
+
+
+:::
+
+::: {.column width='70%'}
+```md
+::: {.value-box icon-color="cyan" icon="ti-star" icon-position="left" }
+Tabler icons
+:::
+```
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {.value-box icon="ph ph-star" icon-position="left" value="42" icon-color="orange"}
+Phosphor icons
+:::
+
+
+
+:::
+
+::: {.column width='70%'}
+```md
+::: {.value-box icon-color="orange" icon="ph ph-star" icon-position="left" }
+Phosphor icons
+:::
+```
 :::
 
 ::::
