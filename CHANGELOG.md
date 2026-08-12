@@ -1,3 +1,8 @@
+# v1.4.0
+
+- Add support for the div's own `#id`, extra classes, and unrecognised attributes: these now pass through onto the rendered box instead of being silently dropped, so things like `{#kpi .value-box}` with `data-id`, `role`, or `aria-*` attributes work the same as they would on any other div. A small set of standard global attributes (`role`, `tabindex`, `lang`, `dir`, `hidden`, and a few others), plus anything already `data-*`/`aria-*`, pass through unprefixed; everything else gets a `data-` prefix so the output stays valid HTML. A literal `style` attribute is dropped (with a warning) rather than colliding with the box's own `style`; a literal `data-fragment-index` attribute is dropped the same way if it would collide with the one generated from `index`
+- Fix: every attribute value that reaches an HTML attribute (`href`, `icon`, `color`, `index`, and all six `*-extra-style` attributes, plus the sizing/alignment attributes) is now HTML-escaped. Previously only values in element *content* (`value`, `title`) were ever meant to contain markup, but nothing stopped a quote in, say, `href` or an `*-extra-style` value from breaking out of its attribute and injecting a new one
+
 # v1.3.0
 
 - Add `value-position` option (`top | bottom | left | right`) to control where the value is rendered relative to the details text, independently of `icon-position`

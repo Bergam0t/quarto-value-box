@@ -77,12 +77,64 @@ local function css_decl(property, value)
   return string.format("%s:%s; ", property, value)
 end
 
+-- Escape a value for interpolation into a double-quoted HTML attribute.
+local function escape_attr(s)
+  return (tostring(s):gsub('[&<>"]', {
+    ["&"] = "&amp;",
+    ["<"] = "&lt;",
+    [">"] = "&gt;",
+    ['"'] = "&quot;",
+  }))
+end
+
+-- Every attribute key this filter reads elsewhere in Div(). Anything on the
+-- div that is not in this set is not part of value-box's own vocabulary, so
+-- it is passed through onto the outer wrapper rather than silently dropped —
+-- see the passthrough block in Div() for what that unlocks and why.
+local known_attrs = {
+  ["icon"] = true, ["icon-type"] = true, ["icon-size"] = true, ["icon-color"] = true,
+  ["icon-position"] = true, ["icon-extra-style"] = true,
+  ["color"] = true,
+  ["value"] = true, ["value-position"] = true, ["value-font-size"] = true,
+  ["value-color"] = true, ["value-extra-style"] = true,
+  ["title"] = true, ["title-color"] = true, ["title-font-size"] = true, ["title-extra-style"] = true,
+  ["width"] = true, ["height"] = true, ["min-height"] = true, ["padding"] = true,
+  ["align"] = true, ["valign"] = true, ["href"] = true,
+  ["font-size"] = true, ["font-color"] = true,
+  ["fragment"] = true, ["index"] = true,
+  ["outer-extra-style"] = true, ["content-extra-style"] = true, ["details-extra-style"] = true,
+  -- Not read anywhere, but reserved: a literal style="..." on the div would
+  -- collide with the style attribute this filter builds for the same
+  -- element. Two style attributes on one tag isn't undefined — HTML parsers
+  -- keep the first and silently drop the second — so without this reservation
+  -- a user's own style would be dropped with no warning at all.
+  ["style"] = true,
+  -- Not read anywhere either, but reserved for the same reason: index above
+  -- already generates a data-fragment-index attribute, so a literal
+  -- data-fragment-index="..." on the div would silently collide with it.
+  ["data-fragment-index"] = true,
+}
+
 
 function Div(el)
   if el.classes:includes("value-box") then
 
-    -- Existing attributes
+    -- Existing attributes.
+    --
+    -- Every value below that ends up interpolated into an HTML attribute is
+    -- escaped at the point it's read, EXCEPT: icon (kept raw — it's used for
+    -- file I/O via io.open() and pattern-matched against literal prefixes
+    -- like "fa-"/"ph-" by detect_icon_type(); a separate icon_attr below
+    -- holds the escaped form for the class=/src= sites that actually need
+    -- it), and value/title (interpolated into element *content*, not an
+    -- attribute — raw HTML there is a documented feature, not an oversight;
+    -- see the README note on markdown not being processed in either).
+    -- Escaping at read time is safe for every attribute compared against a
+    -- known keyword (align, valign, icon-position, ...): escape_attr() is a
+    -- no-op unless the value contains & < > ", and a value containing any of
+    -- those was never going to match a plain keyword like "left" anyway.
     local icon      = el.attributes["icon"] or ""
+    local icon_attr = escape_attr(icon)
     local icon_type -- supports "fa" | "bi" | "svg" | "png" | "material" | "material-outlined" | "material-rounded" | "material-sharp" | "tabler" | "phosphor"
     if el.attributes["icon-type"] then
       icon_type = el.attributes["icon-type"]
@@ -91,36 +143,39 @@ function Div(el)
     else
       icon_type = "bi"
     end
-    local color     = el.attributes["color"] or "bg-blue"
+    local color     = escape_attr(el.attributes["color"] or "bg-blue")
     local value     = el.attributes["value"] or ""
-    local width     = el.attributes["width"] or "80%"
-    local height    = el.attributes["height"] or ""
-    local min_height = el.attributes["min-height"] or "100px"
-    local padding     = el.attributes["padding"] or "1.5rem"
-    local align     = el.attributes["align"] or "left"
-    local valign = el.attributes["valign"] or "middle"
-    local href      = el.attributes["href"] or ""
+    local width     = escape_attr(el.attributes["width"] or "80%")
+    local height    = escape_attr(el.attributes["height"] or "")
+    local min_height = escape_attr(el.attributes["min-height"] or "100px")
+    local padding     = escape_attr(el.attributes["padding"] or "1.5rem")
+    local align     = escape_attr(el.attributes["align"] or "left")
+    local valign = escape_attr(el.attributes["valign"] or "middle")
+    local href      = escape_attr(el.attributes["href"] or "")
     local icon_pos  = el.attributes["icon-position"] or "top" -- "top" | "bottom" | "left" | "right"
     local value_pos = el.attributes["value-position"] or "top" -- "top" | "bottom" | "left" | "right"
-    local font_size = el.attributes["font-size"] or ""
-    local value_font_size = el.attributes["value-font-size"] or "2.2rem"
+    local font_size = escape_attr(el.attributes["font-size"] or "")
+    local value_font_size = escape_attr(el.attributes["value-font-size"] or "2.2rem")
 
-    local font_color = el.attributes["font-color"] or "white"
-    local value_color = el.attributes["value-color"] or font_color
-    local icon_color = el.attributes["icon-color"] or "white"
+    local font_color = escape_attr(el.attributes["font-color"] or "white")
+    local value_color = escape_attr(el.attributes["value-color"] or (el.attributes["font-color"] or "white"))
+    local icon_color = escape_attr(el.attributes["icon-color"] or "white")
 
     -- A short label rendered above the value. title-font-size is deliberately
     -- left unset by default so the stylesheet's .value-box .title rule supplies
     -- it; setting the attribute overrides that rule.
     local title = el.attributes["title"] or ""
-    local title_color = el.attributes["title-color"] or font_color
-    local title_font_size = el.attributes["title-font-size"] or ""
+    local title_color = escape_attr(el.attributes["title-color"] or (el.attributes["font-color"] or "white"))
+    local title_font_size = escape_attr(el.attributes["title-font-size"] or "")
 
     local icon_size_raw = el.attributes["icon-size"]
 
     -- em units for font-based icons (BI/FA), px for image-based (SVG/PNG).
     -- An empty string is truthy in Lua, so icon-size="" must be treated as
-    -- unset explicitly or it would suppress the default entirely.
+    -- unset explicitly or it would suppress the default entirely. Escaped
+    -- after resolving rather than at el.attributes read time, since
+    -- icon_size_raw can be Lua nil (no "or" fallback) and escape_attr(nil)
+    -- would turn that into the literal string "nil" via tostring().
     local icon_size_font
     local icon_size_img
     if icon_size_raw and icon_size_raw ~= "" then
@@ -130,28 +185,80 @@ function Div(el)
       icon_size_font = "3em"
       icon_size_img  = "128px"
     end
+    icon_size_font = escape_attr(icon_size_font)
+    icon_size_img  = escape_attr(icon_size_img)
 
     -- Fragment logic
     local fragment_attr = el.attributes["fragment"]
     local fragment_class = ""
     if fragment_attr then
-      fragment_class = " fragment " .. (fragment_attr == "true" and "fade-in-then-semi-out" or fragment_attr)
+      local effect = (fragment_attr == "true") and "fade-in-then-semi-out" or fragment_attr
+      fragment_class = " fragment " .. escape_attr(effect)
     end
 
     -- Fragment Index logic
     local index_attr = el.attributes["index"]
     local index_data = ""
     if index_attr then
-      index_data = string.format(' data-fragment-index="%s"', index_attr)
+      index_data = string.format(' data-fragment-index="%s"', escape_attr(index_attr))
     end
 
     -- Flex layout styles for left/right icon and value positioning
-    local outer_extra_style   = el.attributes["outer-extra-style"] or ""
-    local icon_extra_style    = el.attributes["icon-extra-style"] or ""
-    local content_extra_style = el.attributes["content-extra-style"] or ""
-    local details_extra_style = el.attributes["details-extra-style"] or ""
-    local value_extra_style   = el.attributes["value-extra-style"] or ""
-    local title_extra_style   = el.attributes["title-extra-style"] or ""
+    local outer_extra_style   = escape_attr(el.attributes["outer-extra-style"] or "")
+    local icon_extra_style    = escape_attr(el.attributes["icon-extra-style"] or "")
+    local content_extra_style = escape_attr(el.attributes["content-extra-style"] or "")
+    local details_extra_style = escape_attr(el.attributes["details-extra-style"] or "")
+    local value_extra_style   = escape_attr(el.attributes["value-extra-style"] or "")
+    local title_extra_style   = escape_attr(el.attributes["title-extra-style"] or "")
+
+    -- Preserve the id, plus any classes and attributes this filter does not
+    -- itself interpret, so a value-box behaves like an ordinary div for
+    -- anything outside its own vocabulary: revealjs auto-animate matching via
+    -- data-id, crossref targets via #id, custom per-box classes, and ARIA
+    -- attributes all keep working even though the div is replaced with raw
+    -- HTML below rather than going through Pandoc's own div-to-HTML writer.
+    local id_attr = ""
+    if el.identifier ~= "" then
+      id_attr = string.format(' id="%s"', escape_attr(el.identifier))
+    end
+
+    local extra_classes = ""
+    for _, class in ipairs(el.classes) do
+      if class ~= "value-box" then
+        extra_classes = extra_classes .. " " .. escape_attr(class)
+      end
+    end
+
+    if el.attributes["style"] then
+      io.stderr:write("value-box warning: a literal 'style' attribute is ignored to avoid clashing with the box's own style — use outer-extra-style instead\n")
+    end
+    if el.attributes["data-fragment-index"] then
+      io.stderr:write("value-box warning: a literal 'data-fragment-index' attribute is ignored to avoid clashing with the one generated from the index attribute\n")
+    end
+
+    -- Kept unprefixed, matching what Pandoc's own HTML writer does with these
+    -- on an ordinary div — not its full allowlist (that's large), just the
+    -- global attributes most likely to actually change a box's behaviour.
+    -- Everything else gets a data- prefix so the output stays valid HTML,
+    -- which is what Pandoc falls back to for the attributes it doesn't
+    -- recognise either. Matched case-insensitively: HTML attribute names are
+    -- case-insensitive, and Quarto's own HTML postprocessing lowercases them
+    -- regardless, so an unprefixed comparison against a mixed-case key like
+    -- "Role" would otherwise miss and it would get double-prefixed instead.
+    local unprefixed_attrs = {
+      ["role"] = true, ["tabindex"] = true, ["lang"] = true, ["dir"] = true,
+      ["hidden"] = true, ["translate"] = true, ["spellcheck"] = true,
+      ["draggable"] = true, ["accesskey"] = true, ["part"] = true, ["slot"] = true,
+    }
+    local passthrough_attrs = ""
+    for key, val in pairs(el.attributes) do
+      if not known_attrs[key] then
+        local key_lower = key:lower()
+        local attr_name = (unprefixed_attrs[key_lower] or key_lower:match("^data%-") or key_lower:match("^aria%-"))
+          and key_lower or ("data-" .. key_lower)
+        passthrough_attrs = passthrough_attrs .. string.format(' %s="%s"', attr_name, escape_attr(val))
+      end
+    end
 
     -- icon-position controls the outer wrapper: icon vs. everything else
     if icon_pos == "left" then
@@ -218,13 +325,13 @@ function Div(el)
       -- never both appear on the same element.
       local link_display = outer_extra_style:find("display:flex", 1, true) and "" or "display:block; "
       html_open = string.format(
-        '<a href="%s" class="value-box %s%s" style="%s%stext-decoration:none; cursor:pointer;%s"%s>',
-        href, color, fragment_class, base_style, link_display, outer_extra_style, index_data
+        '<a%s href="%s" class="value-box %s%s%s" style="%s%stext-decoration:none; cursor:pointer;%s"%s%s>',
+        id_attr, href, color, fragment_class, extra_classes, base_style, link_display, outer_extra_style, index_data, passthrough_attrs
       )
     else
       html_open = string.format(
-        '<div class="value-box %s%s" style="%s%s"%s>',
-        color, fragment_class, base_style, outer_extra_style, index_data
+        '<div%s class="value-box %s%s%s" style="%s%s"%s%s>',
+        id_attr, color, fragment_class, extra_classes, base_style, outer_extra_style, index_data, passthrough_attrs
       )
     end
 
@@ -241,7 +348,7 @@ function Div(el)
     if icon ~= "" then
       if icon_type == "fa" then
         include_icon_stylesheet(FONT_AWESOME_CSS)
-        icon_html = string.format('<i class="icon %s" style="%s"></i>', icon, icon_font_style)
+        icon_html = string.format('<i class="icon %s" style="%s"></i>', icon_attr, icon_font_style)
 
       elseif icon_type == "svg" then
         local svg_file = io.open(icon, "r")
@@ -263,12 +370,12 @@ function Div(el)
           png_file:close()
           icon_html = string.format(
             '<img class="icon" src="%s" style="%sobject-fit:contain; display:block; margin:0 auto;%s" alt="">',
-            icon, icon_img_size, icon_extra_style
+            icon_attr, icon_img_size, icon_extra_style
           )
         else
           io.stderr:write(string.format("value-box warning: PNG file not found '%s', falling back to Bootstrap Icons\n", icon))
           include_icon_stylesheet(BOOTSTRAP_ICONS_CSS)
-          icon_html = string.format('<i class="icon bi %s" style="%s"></i>', icon, icon_font_style)
+          icon_html = string.format('<i class="icon bi %s" style="%s"></i>', icon_attr, icon_font_style)
         end
 
       elseif material_variants[icon_type] then
@@ -276,23 +383,23 @@ function Div(el)
         include_icon_stylesheet(string.format(MATERIAL_SYMBOLS_CSS_FMT, variant.family))
         icon_html = string.format(
           '<span class="icon %s" style="%s">%s</span>',
-          variant.class, icon_font_style, icon
+          variant.class, icon_font_style, icon_attr
         )
 
       elseif icon_type == "tabler" then
         include_icon_stylesheet(TABLER_ICONS_CSS)
-        icon_html = string.format('<i class="icon ti %s" style="%s"></i>', icon, icon_font_style)
+        icon_html = string.format('<i class="icon ti %s" style="%s"></i>', icon_attr, icon_font_style)
 
       elseif icon_type == "phosphor" then
         local weight_token = icon:match("^(%S+)")
         local weight_dir = phosphor_weight_dirs[weight_token] or "regular"
         include_icon_stylesheet(string.format(PHOSPHOR_ICONS_CSS_FMT, weight_dir))
-        icon_html = string.format('<i class="icon %s" style="%s"></i>', icon, icon_font_style)
+        icon_html = string.format('<i class="icon %s" style="%s"></i>', icon_attr, icon_font_style)
 
       else
         -- Bootstrap Icons (default)
         include_icon_stylesheet(BOOTSTRAP_ICONS_CSS)
-        icon_html = string.format('<i class="icon bi %s" style="%s"></i>', icon, icon_font_style)
+        icon_html = string.format('<i class="icon bi %s" style="%s"></i>', icon_attr, icon_font_style)
       end
     end
 

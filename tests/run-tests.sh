@@ -228,7 +228,15 @@ for fmt in "${formats[@]}"; do
     fi
 
     log="$work/$fmt/$fixture.$fmt.log"
-    assert_absent "value-box warning" "$log" "$fixture/$fmt emits no filter warnings"
+    if [ "$fixture" = "passthrough" ]; then
+      # Deliberately triggers both collision warnings (style and
+      # data-fragment-index), once each, in every format — the Lua that
+      # emits them isn't gated on output format, so this runs here rather
+      # than only inside the html|revealjs case below.
+      assert_count 2 "value-box warning" "$log" "$fixture/$fmt warns about both dropped colliding attributes"
+    else
+      assert_absent "value-box warning" "$log" "$fixture/$fmt emits no filter warnings"
+    fi
 
     case "$fmt" in
       html|revealjs)
@@ -317,6 +325,59 @@ for fmt in "${formats[@]}"; do
           # follows into the broken box. The only visible trace is the depth of
           # this close-tag run, which only the wrapped box produces.
           assert_count 1 '</div></div></div></div>' "$out" "$fixture/$fmt closes the row wrapper"
+        fi
+
+        if [ "$fixture" = "passthrough" ]; then
+          # Regression guard: a box using none of these attributes must render
+          # identically to how every other box in this suite already does.
+          assert_present '<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">1<' \
+            "$out" "$fixture/$fmt a box with no extra attributes is unchanged"
+
+          # id, an extra class alongside value-box, role/aria-label kept
+          # unprefixed (a small curated set, not Pandoc's full allowlist — see
+          # README), an already-namespaced data-id kept as-is, and an
+          # arbitrary attribute (top) that is neither gets a data- prefix.
+          assert_present '<div id="kpi-1" class="value-box bg-blue custom-hook" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" role="group" aria-label="Sales this quarter" data-id="box1" data-top="200px">' \
+            "$out" "$fixture/$fmt passes through id, extra class, role/aria-label, data-id and prefixes an arbitrary attribute"
+
+          # A literal style attribute is dropped, not emitted as a second
+          # style attribute alongside the box's own — the warning assertion
+          # for this lives outside this format-scoped block, see above.
+          assert_absent 'style="color:red"' "$out" "$fixture/$fmt drops a literal style attribute"
+
+          # The href branch (an anchor, not a div) gets passthrough too.
+          assert_present '<a href="https://example.com" class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left; text-decoration:none; cursor:pointer; display:flex; flex-direction:column; justify-content:center;" data-tracking="promo">' \
+            "$out" "$fixture/$fmt passes through a data attribute on the href branch"
+
+          # A double-quote in a passthrough value must not be able to close
+          # the attribute early and inject a new one (e.g. onmouseover=...).
+          # Note: deleting the filters: key does NOT falsify this pair, unlike
+          # every other check in this fixture — Pandoc's own native div writer
+          # independently escapes quotes too, so a filter-less render produces
+          # the same escaped string by coincidence. Verified instead by
+          # mutating escape_attr() directly to a no-op: the injected
+          # onmouseover became a live attribute, confirming this protection is
+          # this filter's own and not something Quarto's HTML postprocessing
+          # would supply for free. See tests/README.md.
+          assert_present 'data-note="payload&quot; onmouseover=&quot;alert(1)"' "$out" "$fixture/$fmt escapes a quote in a passthrough value"
+          assert_absent 'onmouseover="alert' "$out" "$fixture/$fmt passthrough value cannot break out of its attribute"
+
+          # A literal data-fragment-index would silently collide with the one
+          # generated from index — dropped instead (warning asserted above,
+          # outside this format-scoped block).
+          assert_present 'data-fragment-index="1"' "$out" "$fixture/$fmt keeps the generated data-fragment-index"
+          assert_absent 'data-fragment-index="9"' "$out" "$fixture/$fmt drops a literal data-fragment-index"
+
+          # HTML attribute names are case-insensitive, and Quarto's own
+          # postprocessing lowercases them regardless, so matching case-
+          # sensitively would turn a mixed-case Role into data-role instead
+          # of role. Asserted on the exact tag rather than a bare 'role='
+          # search: this fixture's own explanatory prose contains the literal
+          # string "data-role", which a document-wide search would also match
+          # — the tautology trap tests/README.md warns about, hit here while
+          # writing this very assertion.
+          assert_present '<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" role="group">' \
+            "$out" "$fixture/$fmt matches a mixed-case attribute name case-insensitively, without double-prefixing it"
         fi
         ;;
 

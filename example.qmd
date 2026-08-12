@@ -1200,3 +1200,37 @@ Phosphor icons
 :::
 
 ::::
+
+## Escape hatch: id, extra classes and attributes
+
+<style>
+/* Proves .highlight-box below actually landed on the box, rather than
+   just being a class name mentioned in the slide text. */
+.highlight-box { outline: 3px dashed gold; outline-offset: 4px; }
+</style>
+
+::: {style='font-size: 55%;'}
+Beyond the parameters this extension defines, a value box behaves like any other div: an `#id`, extra `.classes`, and attributes it doesn't itself use (`role`, `aria-*`, `data-*`, or anything else) all pass through onto the rendered box.
+:::
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box #kpi-example .highlight-box value="42" role="group" aria-label="Sales this quarter" data-id="kpi-example"}
+id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-animate) all survive
+:::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box #kpi-example .highlight-box value="42" role="group" aria-label="Sales this quarter" data-id="kpi-example"}
+id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-animate) all survive
+:::
+```
+
+:::
+
+::::
