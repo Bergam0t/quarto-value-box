@@ -67,6 +67,16 @@ local function include_icon_stylesheet(href)
   })
 end
 
+-- Build a CSS declaration, or nothing at all when the value is empty.
+-- Attributes that default to "" (height, font-size) would otherwise emit
+-- "height:;", an invalid declaration that browsers discard silently.
+local function css_decl(property, value)
+  if value == nil or value == "" then
+    return ""
+  end
+  return string.format("%s:%s; ", property, value)
+end
+
 
 function Div(el)
   if el.classes:includes("value-box") then
@@ -101,10 +111,12 @@ function Div(el)
 
     local icon_size_raw = el.attributes["icon-size"]
 
-    -- em units for font-based icons (BI/FA), px for image-based (SVG/PNG)
+    -- em units for font-based icons (BI/FA), px for image-based (SVG/PNG).
+    -- An empty string is truthy in Lua, so icon-size="" must be treated as
+    -- unset explicitly or it would suppress the default entirely.
     local icon_size_font
     local icon_size_img
-    if icon_size_raw then
+    if icon_size_raw and icon_size_raw ~= "" then
       icon_size_font = icon_size_raw
       icon_size_img  = icon_size_raw
     else
@@ -170,7 +182,7 @@ function Div(el)
     if valign ~= "" then
       local valign_map = { top = "flex-start", middle = "center", bottom = "flex-end" }
       local align_value = valign_map[valign] or valign  -- fall back to raw value if not a shorthand
-      if outer_extra_style:find("display:flex") then
+      if outer_extra_style:find("display:flex", 1, true) then
         -- Already flex (left/right icon position) — just override align-items
         outer_extra_style = outer_extra_style:gsub("align%-items:[^;]+;", string.format("align-items:%s;", align_value))
       else
@@ -180,40 +192,54 @@ function Div(el)
     end
 
     -- Build the outer wrapper
+    local base_style =
+      css_decl("width", width) ..
+      css_decl("height", height) ..
+      css_decl("min-height", min_height) ..
+      css_decl("padding", padding) ..
+      css_decl("text-align", align)
+
     local html_open
     if href ~= "" then
+      -- The valign block above sets display:flex unless valign was explicitly
+      -- blanked. Only fall back to display:block when it did not, so the two
+      -- never both appear on the same element.
+      local link_display = outer_extra_style:find("display:flex", 1, true) and "" or "display:block; "
       html_open = string.format(
-        '<a href="%s" class="value-box %s%s" style="width:%s; height:%s; min-height:%s; padding:%s; text-align:%s; display:block; text-decoration:none; cursor:pointer;%s"%s>',
-        href, color, fragment_class, width, height, min_height, padding, align,  outer_extra_style, index_data
+        '<a href="%s" class="value-box %s%s" style="%s%stext-decoration:none; cursor:pointer;%s"%s>',
+        href, color, fragment_class, base_style, link_display, outer_extra_style, index_data
       )
     else
       html_open = string.format(
-        '<div class="value-box %s%s" style="width:%s; height:%s; min-height:%s; padding:%s; text-align:%s; %s"%s>',
-        color, fragment_class, width, height, min_height, padding, align, outer_extra_style, index_data
+        '<div class="value-box %s%s" style="%s%s"%s>',
+        color, fragment_class, base_style, outer_extra_style, index_data
       )
     end
 
-    -- Build icon HTML (empty string if no icon)
+    -- Build icon HTML (empty string if no icon).
+    -- Every icon-font branch shares the same style prelude, and the two image
+    -- branches share a sizing pair. Both go through css_decl so that a blank
+    -- icon-size or icon-color omits the declaration instead of emitting
+    -- "font-size:;".
+    local icon_font_style = css_decl("font-size", icon_size_font)
+      .. css_decl("color", icon_color) .. icon_extra_style
+    local icon_img_size = css_decl("width", icon_size_img) .. css_decl("height", icon_size_img)
+
     local icon_html = ""
     if icon ~= "" then
       if icon_type == "fa" then
         include_icon_stylesheet(FONT_AWESOME_CSS)
-        icon_html = string.format(
-          '<i class="icon %s" style="font-size:%s;color:%s;%s"></i>',
-          icon, icon_size_font, icon_color, icon_extra_style
-        )
+        icon_html = string.format('<i class="icon %s" style="%s"></i>', icon, icon_font_style)
 
       elseif icon_type == "svg" then
         local svg_file = io.open(icon, "r")
         if svg_file then
           local svg_content = svg_file:read("*all")
           svg_file:close()
-          svg_content = svg_content:gsub('<svg', string.format(
-            '<svg style="width:%s; height:%s;"', icon_size_img, icon_size_img
-          ))
+          svg_content = svg_content:gsub('<svg', string.format('<svg style="%s"', icon_img_size))
           icon_html = string.format(
-            '<span class="icon" style="width:%s; height:%s; display:inline-flex; align-items:center; justify-content:center; font-size:inherit;%s">%s</span>',
-            icon_size_img, icon_size_img, icon_extra_style, svg_content
+            '<span class="icon" style="%sdisplay:inline-flex; align-items:center; justify-content:center; font-size:inherit;%s">%s</span>',
+            icon_img_size, icon_extra_style, svg_content
           )
         else
           io.stderr:write(string.format("value-box warning: SVG file not found: %s\n", icon))
@@ -224,49 +250,37 @@ function Div(el)
         if png_file then
           png_file:close()
           icon_html = string.format(
-            '<img class="icon" src="%s" style="width:%s; height:%s; object-fit:contain; display:block; margin:0 auto;%s" alt="">',
-            icon, icon_size_img, icon_size_img, icon_extra_style
+            '<img class="icon" src="%s" style="%sobject-fit:contain; display:block; margin:0 auto;%s" alt="">',
+            icon, icon_img_size, icon_extra_style
           )
         else
           io.stderr:write(string.format("value-box warning: PNG file not found '%s', falling back to Bootstrap Icons\n", icon))
           include_icon_stylesheet(BOOTSTRAP_ICONS_CSS)
-          icon_html = string.format(
-            '<i class="icon bi %s" style="font-size:%s; color:%s;%s"></i>',
-            icon, icon_size_font, icon_color, icon_extra_style
-          )
+          icon_html = string.format('<i class="icon bi %s" style="%s"></i>', icon, icon_font_style)
         end
 
       elseif material_variants[icon_type] then
         local variant = material_variants[icon_type]
         include_icon_stylesheet(string.format(MATERIAL_SYMBOLS_CSS_FMT, variant.family))
         icon_html = string.format(
-          '<span class="icon %s" style="font-size:%s;color:%s;%s">%s</span>',
-          variant.class, icon_size_font, icon_color, icon_extra_style, icon
+          '<span class="icon %s" style="%s">%s</span>',
+          variant.class, icon_font_style, icon
         )
 
       elseif icon_type == "tabler" then
         include_icon_stylesheet(TABLER_ICONS_CSS)
-        icon_html = string.format(
-          '<i class="icon ti %s" style="font-size:%s;color:%s;%s"></i>',
-          icon, icon_size_font, icon_color, icon_extra_style
-        )
+        icon_html = string.format('<i class="icon ti %s" style="%s"></i>', icon, icon_font_style)
 
       elseif icon_type == "phosphor" then
         local weight_token = icon:match("^(%S+)")
         local weight_dir = phosphor_weight_dirs[weight_token] or "regular"
         include_icon_stylesheet(string.format(PHOSPHOR_ICONS_CSS_FMT, weight_dir))
-        icon_html = string.format(
-          '<i class="icon %s" style="font-size:%s;color:%s;%s"></i>',
-          icon, icon_size_font, icon_color, icon_extra_style
-        )
+        icon_html = string.format('<i class="icon %s" style="%s"></i>', icon, icon_font_style)
 
       else
         -- Bootstrap Icons (default)
         include_icon_stylesheet(BOOTSTRAP_ICONS_CSS)
-        icon_html = string.format(
-          '<i class="icon bi %s" style="font-size:%s; color:%s;%s"></i>',
-          icon, icon_size_font, icon_color, icon_extra_style
-        )
+        icon_html = string.format('<i class="icon bi %s" style="%s"></i>', icon, icon_font_style)
       end
     end
 
@@ -274,8 +288,9 @@ function Div(el)
     local value_html = ""
     if value ~= "" then
       value_html = string.format(
-        '<div class="value" style="font-size: %s; color:%s;%s">%s</div>',
-        value_font_size, value_color, value_extra_style, value
+        '<div class="value" style="%s%s%s">%s</div>',
+        css_decl("font-size", value_font_size), css_decl("color", value_color),
+        value_extra_style, value
       )
     end
 
@@ -293,8 +308,8 @@ function Div(el)
     end
 
     -- Open the details wrapper
-    html_open = html_open .. string.format('<div class="details" style="font-size: %s;color:%s;%s">',
-      font_size, font_color, details_extra_style)
+    html_open = html_open .. string.format('<div class="details" style="%s%s%s">',
+      css_decl("font-size", font_size), css_decl("color", font_color), details_extra_style)
 
     -- Close details, optionally append value below, close content wrapper, optionally append icon below, then close outer
     local html_close = '</div>' -- close .details
