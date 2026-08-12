@@ -69,7 +69,7 @@ Here's a more advanced type of box with an icon and some formatting, but no valu
 > [!NOTE]
 > `title` and `value` are inserted into the page as raw HTML. Inline tags work — `value="<b>42</b>"` renders bold — but **markdown is not processed**, so `title="**Q4** revenue"` renders the asterisks literally. This differs from Quarto's own callout `title=`, which does parse markdown. The main content of the box (everything between the `:::` fences) is ordinary markdown as usual.
 
-Beyond the parameters below, a value box also behaves like any other div: an `#id`, any extra `.classes`, and attributes this extension doesn't itself use (e.g. `role`, `aria-label`, `tabindex`, `data-id`) all pass through onto the rendered box rather than being dropped.
+Beyond the parameters below, an `#id` and any extra `.classes` on a value box pass through onto the rendered box, along with `data-*`/`aria-*` attributes and `role`/`tabindex`/`lang`.
 
 ```md
 ::: {#kpi-1 .value-box value="42" role="group" aria-label="Sales this quarter" data-id="kpi-1"}
@@ -77,7 +77,7 @@ Useful for revealjs auto-animate (`data-id`), crossref targets (`#id`), your own
 :::
 ```
 
-A handful of standard global attributes (`role`, `tabindex`, `lang`, `dir`, `hidden`, and a few others), plus anything already namespaced `data-*` or `aria-*`, pass through unprefixed. Anything else is given a `data-` prefix so the output stays valid HTML — this is a smaller set than Pandoc's own HTML writer keeps unprefixed on an ordinary div, so an attribute that would survive untouched on a plain div may still get `data-`-prefixed here. A literal `style` attribute is dropped, with a warning, rather than colliding with the `style` the box itself generates — use `outer-extra-style` instead.
+Anything outside that list is left off rather than renamed to a `data-` attribute — an attribute that would have worked on a plain Pandoc div (`onclick`, say) is not silently turned into one that doesn't. A literal `style` attribute is dropped, with a warning, rather than colliding with the `style` the box itself generates — use `outer-extra-style` instead.
 
 > [!WARNING]
 > Class-driven Quarto/revealjs features that work by a *filter* rewriting attributes on the div — `.absolute` positioning is the main example — do **not** work on a value box. The div is already replaced with raw HTML by the time those filters would run, so the class survives but the behaviour it triggers does not.

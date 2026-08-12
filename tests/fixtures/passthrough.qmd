@@ -12,13 +12,13 @@ did before this feature existed.
 No extras
 :::
 
-The id, an extra class, and a mix of attributes: role/aria-label are the
-kind Pandoc itself keeps unprefixed on an ordinary div, data-id is already
-namespaced, top is neither and gets a data- prefix so the output stays
-valid HTML. Note the extra class is a made-up name, not `.absolute` —
-that particular class only positions an element via a *different* Quarto
-filter that runs before divs become raw HTML, so it never sees this one;
-the class name survives here but would do nothing.
+The id, an extra class, and a mix of attributes: role/aria-label/data-id all
+pass through, but top is outside the small set of attributes this extension
+recognises and is left off entirely rather than renamed into something that
+looks like it survived. Note the extra class is a made-up name, not
+`.absolute` — that particular class only positions an element via a
+*different* Quarto filter that runs before divs become raw HTML, so it
+never sees this one; the class name survives here but would do nothing.
 
 ::: {#kpi-1 .value-box .custom-hook role="group" aria-label="Sales this quarter" data-id="box1" top="200px" value="2"}
 Kitchen sink
@@ -54,11 +54,27 @@ literal style attribute is.
 Literal data-fragment-index is dropped
 :::
 
+Without an index attribute there is nothing for a literal data-fragment-index
+to collide with, so it must pass through untouched — not be dropped just
+because its name matches what index would have generated.
+
+::: {.value-box fragment="true" data-fragment-index="3" value="7"}
+data-fragment-index survives when there's no index to collide with
+:::
+
 Attribute names are matched case-insensitively, since HTML attribute names
 are themselves case-insensitive and Quarto's own postprocessing lowercases
 them regardless — so a mixed-case Role should pass through unprefixed, not
 end up double-prefixed as data-role.
 
-::: {.value-box Role="group" value="7"}
+::: {.value-box Role="group" value="8"}
 Mixed-case attribute name
+:::
+
+Case-insensitivity has to apply to collision detection too, not just to the
+data- prefix decision — a mixed-case Style must still be recognised as
+colliding with the box's own style, not silently leak through as data-style.
+
+::: {.value-box Style="color:red" value="9"}
+Mixed-case Style is still caught and dropped
 :::

@@ -87,35 +87,6 @@ local function escape_attr(s)
   }))
 end
 
--- Every attribute key this filter reads elsewhere in Div(). Anything on the
--- div that is not in this set is not part of value-box's own vocabulary, so
--- it is passed through onto the outer wrapper rather than silently dropped —
--- see the passthrough block in Div() for what that unlocks and why.
-local known_attrs = {
-  ["icon"] = true, ["icon-type"] = true, ["icon-size"] = true, ["icon-color"] = true,
-  ["icon-position"] = true, ["icon-extra-style"] = true,
-  ["color"] = true,
-  ["value"] = true, ["value-position"] = true, ["value-font-size"] = true,
-  ["value-color"] = true, ["value-extra-style"] = true,
-  ["title"] = true, ["title-color"] = true, ["title-font-size"] = true, ["title-extra-style"] = true,
-  ["width"] = true, ["height"] = true, ["min-height"] = true, ["padding"] = true,
-  ["align"] = true, ["valign"] = true, ["href"] = true,
-  ["font-size"] = true, ["font-color"] = true,
-  ["fragment"] = true, ["index"] = true,
-  ["outer-extra-style"] = true, ["content-extra-style"] = true, ["details-extra-style"] = true,
-  -- Not read anywhere, but reserved: a literal style="..." on the div would
-  -- collide with the style attribute this filter builds for the same
-  -- element. Two style attributes on one tag isn't undefined — HTML parsers
-  -- keep the first and silently drop the second — so without this reservation
-  -- a user's own style would be dropped with no warning at all.
-  ["style"] = true,
-  -- Not read anywhere either, but reserved for the same reason: index above
-  -- already generates a data-fragment-index attribute, so a literal
-  -- data-fragment-index="..." on the div would silently collide with it.
-  ["data-fragment-index"] = true,
-}
-
-
 function Div(el)
   if el.classes:includes("value-box") then
 
@@ -229,34 +200,50 @@ function Div(el)
       end
     end
 
-    if el.attributes["style"] then
-      io.stderr:write("value-box warning: a literal 'style' attribute is ignored to avoid clashing with the box's own style — use outer-extra-style instead\n")
-    end
-    if el.attributes["data-fragment-index"] then
-      io.stderr:write("value-box warning: a literal 'data-fragment-index' attribute is ignored to avoid clashing with the one generated from the index attribute\n")
-    end
-
-    -- Kept unprefixed, matching what Pandoc's own HTML writer does with these
-    -- on an ordinary div — not its full allowlist (that's large), just the
-    -- global attributes most likely to actually change a box's behaviour.
-    -- Everything else gets a data- prefix so the output stays valid HTML,
-    -- which is what Pandoc falls back to for the attributes it doesn't
-    -- recognise either. Matched case-insensitively: HTML attribute names are
-    -- case-insensitive, and Quarto's own HTML postprocessing lowercases them
-    -- regardless, so an unprefixed comparison against a mixed-case key like
-    -- "Role" would otherwise miss and it would get double-prefixed instead.
-    local unprefixed_attrs = {
-      ["role"] = true, ["tabindex"] = true, ["lang"] = true, ["dir"] = true,
-      ["hidden"] = true, ["translate"] = true, ["spellcheck"] = true,
-      ["draggable"] = true, ["accesskey"] = true, ["part"] = true, ["slot"] = true,
+    -- Attributes that pass through onto the outer wrapper: the two
+    -- namespaces built for exactly this (data-*, aria-*), plus role/
+    -- tabindex/lang — the standard globals most likely to actually matter on
+    -- a value box (ARIA landmarks/labelling, keyboard reachability,
+    -- screen-reader pronunciation). Anything else is not part of value-box's
+    -- own vocabulary and is not passed through.
+    --
+    -- This is an allowlist rather than a denylist deliberately. An earlier
+    -- version listed every attribute the filter itself reads and passed
+    -- through anything absent from that list, prefixed with data- so the
+    -- output stayed valid HTML — which meant every new filter option (like
+    -- title, added later) had to be added to that second list too, or it
+    -- would silently leak through renamed to a data-* attribute instead of
+    -- doing its job. It also meant something like onclick="..." — which
+    -- would have worked on a plain Pandoc div — silently became the inert
+    -- data-onclick instead. The allowlist has neither failure mode: growing
+    -- the filter's own vocabulary needs no change here, and an attribute
+    -- outside these namespaces is simply left off rather than renamed into
+    -- something that looks like it survived but doesn't work.
+    local passthrough_names = {
+      ["role"] = true, ["tabindex"] = true, ["lang"] = true,
     }
+    -- Keyed on the lowercased attribute name throughout — HTML attribute
+    -- names are case-insensitive, and Quarto's own HTML postprocessing
+    -- lowercases them regardless, so a mixed-case key like "Style" or
+    -- "Data-Id" must still be recognised as the thing it is.
     local passthrough_attrs = ""
     for key, val in pairs(el.attributes) do
-      if not known_attrs[key] then
-        local key_lower = key:lower()
-        local attr_name = (unprefixed_attrs[key_lower] or key_lower:match("^data%-") or key_lower:match("^aria%-"))
-          and key_lower or ("data-" .. key_lower)
-        passthrough_attrs = passthrough_attrs .. string.format(' %s="%s"', attr_name, escape_attr(val))
+      local key_lower = key:lower()
+      if key_lower == "style" then
+        -- A literal style="..." would collide with the style attribute this
+        -- filter builds for the same element. Two style attributes on one
+        -- tag isn't undefined — HTML parsers keep the first and silently
+        -- drop the second — so without this, a user's own style would be
+        -- dropped with no warning at all.
+        io.stderr:write("value-box warning: a literal 'style' attribute is ignored to avoid clashing with the box's own style — use outer-extra-style instead\n")
+      elseif key_lower == "data-fragment-index" and index_attr then
+        -- Only a real collision when index is actually set — that's what
+        -- generates this filter's own data-fragment-index. Without an index,
+        -- a literal data-fragment-index is just an ordinary data-* attribute
+        -- and falls through to the passthrough case below instead.
+        io.stderr:write("value-box warning: a literal 'data-fragment-index' attribute is ignored to avoid clashing with the one generated from the index attribute\n")
+      elseif passthrough_names[key_lower] or key_lower:match("^data%-") or key_lower:match("^aria%-") then
+        passthrough_attrs = passthrough_attrs .. string.format(' %s="%s"', key_lower, escape_attr(val))
       end
     end
 

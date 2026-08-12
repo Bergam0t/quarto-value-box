@@ -1210,7 +1210,7 @@ Phosphor icons
 </style>
 
 ::: {style='font-size: 55%;'}
-Beyond the parameters this extension defines, a value box behaves like any other div: an `#id`, extra `.classes`, and attributes it doesn't itself use (`role`, `aria-*`, `data-*`, or anything else) all pass through onto the rendered box.
+Beyond the parameters this extension defines, an `#id` and extra `.classes` pass through onto the rendered box, along with `data-*`/`aria-*` attributes and `role`/`tabindex`/`lang`. Anything else is left off rather than renamed to a `data-` attribute.
 :::
 
 :::: {.columns}

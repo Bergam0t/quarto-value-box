@@ -229,11 +229,12 @@ for fmt in "${formats[@]}"; do
 
     log="$work/$fmt/$fixture.$fmt.log"
     if [ "$fixture" = "passthrough" ]; then
-      # Deliberately triggers both collision warnings (style and
-      # data-fragment-index), once each, in every format — the Lua that
-      # emits them isn't gated on output format, so this runs here rather
-      # than only inside the html|revealjs case below.
-      assert_count 2 "value-box warning" "$log" "$fixture/$fmt warns about both dropped colliding attributes"
+      # Deliberately triggers three collision warnings — a literal style, a
+      # literal data-fragment-index that collides with a generated one, and a
+      # mixed-case Style that must still be recognised as the same collision
+      # — in every format, since the Lua that emits them isn't gated on
+      # output format.
+      assert_count 3 "value-box warning" "$log" "$fixture/$fmt warns about every dropped colliding attribute"
     else
       assert_absent "value-box warning" "$log" "$fixture/$fmt emits no filter warnings"
     fi
@@ -333,12 +334,14 @@ for fmt in "${formats[@]}"; do
           assert_present '<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">1<' \
             "$out" "$fixture/$fmt a box with no extra attributes is unchanged"
 
-          # id, an extra class alongside value-box, role/aria-label kept
-          # unprefixed (a small curated set, not Pandoc's full allowlist — see
-          # README), an already-namespaced data-id kept as-is, and an
-          # arbitrary attribute (top) that is neither gets a data- prefix.
-          assert_present '<div id="kpi-1" class="value-box bg-blue custom-hook" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" role="group" aria-label="Sales this quarter" data-id="box1" data-top="200px">' \
-            "$out" "$fixture/$fmt passes through id, extra class, role/aria-label, data-id and prefixes an arbitrary attribute"
+          # id, an extra class alongside value-box, role/aria-label and an
+          # already-namespaced data-id all pass through — but an arbitrary
+          # attribute (top) that isn't data-*/aria-*/role/tabindex/lang is
+          # left off entirely, not renamed into a data-* attribute that looks
+          # like it survived but is actually inert.
+          assert_present '<div id="kpi-1" class="value-box bg-blue custom-hook" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" role="group" aria-label="Sales this quarter" data-id="box1">' \
+            "$out" "$fixture/$fmt passes through id, extra class, role/aria-label, data-id and drops an unrecognised attribute"
+          assert_absent 'data-top' "$out" "$fixture/$fmt does not rename an unrecognised attribute into a data- attribute"
 
           # A literal style attribute is dropped, not emitted as a second
           # style attribute alongside the box's own — the warning assertion
@@ -368,6 +371,13 @@ for fmt in "${formats[@]}"; do
           assert_present 'data-fragment-index="1"' "$out" "$fixture/$fmt keeps the generated data-fragment-index"
           assert_absent 'data-fragment-index="9"' "$out" "$fixture/$fmt drops a literal data-fragment-index"
 
+          # Regression guard for a real bug: the drop above must only fire
+          # when index is actually set. Earlier this attribute was reserved
+          # unconditionally, so it was dropped (and warned about) even with
+          # nothing to collide with.
+          assert_present '<div class="value-box bg-blue fragment fade-in-then-semi-out" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" data-fragment-index="3">' \
+            "$out" "$fixture/$fmt keeps a literal data-fragment-index when there is no index to collide with"
+
           # HTML attribute names are case-insensitive, and Quarto's own
           # postprocessing lowercases them regardless, so matching case-
           # sensitively would turn a mixed-case Role into data-role instead
@@ -378,6 +388,22 @@ for fmt in "${formats[@]}"; do
           # writing this very assertion.
           assert_present '<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" role="group">' \
             "$out" "$fixture/$fmt matches a mixed-case attribute name case-insensitively, without double-prefixing it"
+
+          # Regression guard for a real bug: collision detection (not just the
+          # data- prefix decision) must also be case-insensitive. A mixed-case
+          # Style previously slipped past the exact-case "style" check and
+          # leaked through as an inert data-style attribute instead of being
+          # recognised as the same collision a lowercase style triggers.
+          # Anchored through to the value text (">9<"), not just the tag: the
+          # tag alone is byte-identical to earlier boxes in this same fixture
+          # (the "no extras" and "style dropped" cases), so a bare tag match
+          # would be tautological — always present regardless of whether this
+          # specific box's handling is correct. Also not a bare 'data-style'
+          # search — this fixture's own prose explaining the fix contains
+          # that literal string, the same trap that caught the Role assertion
+          # above.
+          assert_present '<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">9<' \
+            "$out" "$fixture/$fmt does not leak a mixed-case Style as data-style"
         fi
         ;;
 

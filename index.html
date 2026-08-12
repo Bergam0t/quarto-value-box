@@ -823,7 +823,7 @@
 .highlight-box { outline: 3px dashed gold; outline-offset: 4px; }
 </style>
 <div style="font-size: 55%;">
-<p>Beyond the parameters this extension defines, a value box behaves like any other div: an <code>#id</code>, extra <code>.classes</code>, and attributes it doesn’t itself use (<code>role</code>, <code>aria-*</code>, <code>data-*</code>, or anything else) all pass through onto the rendered box.</p>
+<p>Beyond the parameters this extension defines, an <code>#id</code> and extra <code>.classes</code> pass through onto the rendered box, along with <code>data-*</code>/<code>aria-*</code> attributes and <code>role</code>/<code>tabindex</code>/<code>lang</code>. Anything else is left off rather than renamed to a <code>data-</code> attribute.</p>
 </div>
 <div class="columns">
 <div class="column" style="width:40%;">
