@@ -16,8 +16,10 @@ If you find a bug or have a feature request, please [open an issue](https://gith
 
 2. **Make your changes** to the Lua filter (`value-box.lua`) and/or stylesheet (`value-box.css`).
 
-3. **Test your changes** against a range of cases before submitting. The best way to do this is to preview the example.qmd file.
-    - add any additional examples to this to demonstrate your new features.
+3. **Test your changes** against a range of cases before submitting.
+    - Run the test suite: `bash tests/run-tests.sh` (add `--no-pdf` to skip the slow LaTeX leg). It renders a set of fixtures to every supported output format and checks the results. CI runs the same script.
+    - Add a case to `tests/fixtures/` covering your change, and an assertion for it. **[tests/README.md](tests/README.md) explains how the suite works and how to write a check that can actually fail — it assumes no prior testing experience, so start there if this is unfamiliar.**
+    - Preview `example.qmd` too, and add any additional examples to it to demonstrate your new features.
 
 4. **Update the README.md** if you have added any new parameters or features.
 

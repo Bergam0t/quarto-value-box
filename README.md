@@ -141,6 +141,8 @@ $brand-neutral:   #4a4f57;
 
 Please take a look at our [contributor guidance](CONTRIBUTING) and [code of conduct](CODE_OF_CONDUCT)
 
+Changes are checked by a test suite that renders a set of fixtures to every supported output format — run it with `bash tests/run-tests.sh`. If you have not tested a Quarto extension before, [tests/README.md](tests/README.md) walks through what is being tested and why, and how to add a check for a new feature.
+
 
 ### Generative AI use disclosure and policy
 
