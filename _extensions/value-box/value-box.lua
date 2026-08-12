@@ -97,9 +97,12 @@ function Div(el)
     -- file I/O via io.open() and pattern-matched against literal prefixes
     -- like "fa-"/"ph-" by detect_icon_type(); a separate icon_attr below
     -- holds the escaped form for the class=/src= sites that actually need
-    -- it), and value/title (interpolated into element *content*, not an
+    -- it), value/title (interpolated into element *content*, not an
     -- attribute — raw HTML there is a documented feature, not an oversight;
-    -- see the README note on markdown not being processed in either).
+    -- see the README note on markdown not being processed in either), and
+    -- delta (also content, but escaped rather than raw HTML — kept raw at
+    -- read time only because it's pattern-matched for sign inference below;
+    -- see escape_attr(delta) at the point it's interpolated, further down).
     -- Escaping at read time is safe for every attribute compared against a
     -- known keyword (align, valign, icon-position, ...): escape_attr() is a
     -- no-op unless the value contains & < > ", and a value containing any of
@@ -138,6 +141,44 @@ function Div(el)
     local title = el.attributes["title"] or ""
     local title_color = escape_attr(el.attributes["title-color"] or (el.attributes["font-color"] or "white"))
     local title_font_size = escape_attr(el.attributes["title-font-size"] or "")
+
+    -- Delta / trend indicator: a small badge next to the value, e.g. "+12%"
+    -- with an arrow. delta-direction picks the arrow glyph; when unset it's
+    -- inferred from a leading "+"/"-" in the delta text, which covers the
+    -- common case without direction becoming another required attribute.
+    -- Colour is left to inherit by default rather than mapped from
+    -- direction — "up" isn't always good news (a falling cost, say), so
+    -- this filter doesn't guess; set delta-color explicitly for that.
+    -- delta itself is escaped rather than treated as raw HTML content like
+    -- value/title — see the CONTRIBUTING.md note on not growing that list.
+    local delta = el.attributes["delta"] or ""
+    -- Matched case-insensitively for the same reason passthrough attribute
+    -- names are: HTML authors reach for "Up"/"Down" as often as not, and
+    -- there is no reason to make that fail silently.
+    local delta_direction = el.attributes["delta-direction"] -- "up" | "down" | "flat" | nil
+    if delta_direction then
+      delta_direction = delta_direction:lower()
+    end
+    if not delta_direction and delta ~= "" then
+      if delta:match("^%+") then
+        delta_direction = "up"
+      elseif delta:match("^%-") then
+        delta_direction = "down"
+      end
+    end
+    -- "flat" uses an arrow rather than a dash so all three glyphs read as
+    -- one family (a rising/falling/level line) rather than mixing shapes.
+    local delta_arrows = { up = "▲", down = "▼", flat = "→" }
+    local delta_arrow = delta_arrows[delta_direction or ""] or ""
+    if delta_direction and delta_direction ~= "" and not delta_arrows[delta_direction] then
+      io.stderr:write(string.format("value-box warning: unrecognised delta-direction '%s' — expected up, down or flat; showing no arrow\n", delta_direction))
+    end
+    local delta_color = escape_attr(el.attributes["delta-color"] or "")
+    local delta_font_size = escape_attr(el.attributes["delta-font-size"] or "")
+    local delta_extra_style = escape_attr(el.attributes["delta-extra-style"] or "")
+    -- Escape hatch for the value+delta row wrapper itself (see below), kept
+    -- consistent with every other structural element this filter builds.
+    local value_row_extra_style = escape_attr(el.attributes["value-row-extra-style"] or "")
 
     local icon_size_raw = el.attributes["icon-size"]
 
@@ -397,6 +438,32 @@ function Div(el)
         '<div class="value" style="%s%s%s">%s</div>',
         css_decl("font-size", value_font_size), css_decl("color", value_color),
         value_extra_style, value
+      )
+    end
+
+    -- Build delta HTML (empty string if no delta) and, if present, wrap it
+    -- alongside the value in a row so the two sit side by side wherever
+    -- value_html ends up placed (top/bottom/left/right value-position all
+    -- inject value_html the same way, so wrapping it here covers every case).
+    if delta ~= "" then
+      local arrow_html = ""
+      if delta_arrow ~= "" then
+        arrow_html = string.format('<span class="delta-arrow" aria-hidden="true">%s</span> ', delta_arrow)
+      end
+      local delta_html = string.format(
+        '<div class="delta" style="%s%s%s">%s%s</div>',
+        css_decl("font-size", delta_font_size), css_decl("color", delta_color),
+        delta_extra_style, arrow_html, escape_attr(delta)
+      )
+      -- When value-position is left/right, this wrapper — not the .value div
+      -- inside it — is the actual flex item in .vb-row/.vb-content, so it
+      -- needs the same flex-shrink:0 that left/right already gives .value on
+      -- its own (see value_extra_style above); otherwise the value+delta
+      -- pair can be squeezed by .details under space pressure.
+      local value_row_shrink = (value_row_style ~= "") and "flex-shrink:0; min-width:0; " or ""
+      value_html = string.format(
+        '<div class="vb-value-row" style="display:flex; align-items:baseline; gap:0.5em; flex-wrap:wrap; %s%s">%s%s</div>',
+        value_row_shrink, value_row_extra_style, value_html, delta_html
       )
     end
 

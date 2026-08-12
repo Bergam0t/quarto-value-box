@@ -147,6 +147,57 @@ This week
 ::::
 
 
+## Delta / trend indicator
+
+A `delta` renders a small badge next to the value, e.g. a change since the last period. The arrow is inferred from a leading `+`/`-` in the text unless `delta-direction` is set explicitly.
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box title="Revenue" value="$1.2M" delta="+12%" color="bg-green"}
+This quarter
+:::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box title="Revenue" value="$1.2M" delta="+12%" color="bg-green"}
+This quarter
+:::
+```
+
+:::
+
+::::
+
+`delta-color` is never inferred from direction, because "up" is not always good news — a rising cost and a falling cost are both "up" or "down" depending on which one you're looking at. Set the colour explicitly for a semantic red/green treatment:
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box title="Operating cost" value="$430K" delta="-8%" delta-color="#8bc34a" color="bg-navy"}
+Lower is better here, so a fall is shown in green
+:::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box title="Operating cost" value="$430K" delta="-8%" delta-color="#8bc34a" color="bg-navy"}
+Lower is better here, so a fall is shown in green
+:::
+```
+
+:::
+
+::::
+
+
 ## Fragment types
 
 :::: {.columns}

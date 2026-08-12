@@ -1,3 +1,7 @@
+# v1.5.0
+
+- Add `delta` option for a small trend indicator next to the `value`, e.g. `delta="+12%"`, with `delta-color`, `delta-font-size`, `delta-extra-style` and `value-row-extra-style` to style it. The arrow glyph is picked by `delta-direction` (`up`/`down`/`flat`, matched case-insensitively) if set, otherwise inferred from a leading `+`/`-` in `delta`; an unrecognised `delta-direction` shows no arrow, with a warning. Colour is never inferred from direction — an "up" delta isn't always good news, so `delta-color` defaults to inheriting the surrounding text colour rather than a green/red guess
+
 # v1.4.0
 
 - Add support for the div's own `#id` and extra classes, plus `data-*`/`aria-*` attributes and `role`/`tabindex`/`lang`: these now pass through onto the rendered box instead of being silently dropped, so things like `{#kpi .value-box}` with `data-id` (revealjs auto-animate) or ARIA attributes work the same as they would on any other div. Anything outside that set is left off entirely rather than renamed to a `data-` attribute. A literal `style` attribute is dropped (with a warning) rather than colliding with the box's own `style`; a literal `data-fragment-index` attribute is dropped the same way if it would collide with the one generated from `index`

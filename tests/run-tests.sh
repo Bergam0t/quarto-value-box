@@ -235,6 +235,9 @@ for fmt in "${formats[@]}"; do
       # — in every format, since the Lua that emits them isn't gated on
       # output format.
       assert_count 3 "value-box warning" "$log" "$fixture/$fmt warns about every dropped colliding attribute"
+    elif [ "$fixture" = "layout" ]; then
+      # Deliberately triggers one warning: an unrecognised delta-direction.
+      assert_count 1 "value-box warning" "$log" "$fixture/$fmt warns about the one unrecognised delta-direction"
     else
       assert_absent "value-box warning" "$log" "$fixture/$fmt emits no filter warnings"
     fi
@@ -326,6 +329,38 @@ for fmt in "${formats[@]}"; do
           # follows into the broken box. The only visible trace is the depth of
           # this close-tag run, which only the wrapped box produces.
           assert_count 1 '</div></div></div></div>' "$out" "$fixture/$fmt closes the row wrapper"
+
+          # Delta: arrow inference from a leading +/-, an explicit delta-color
+          # override, no arrow when there is neither a sign nor an explicit
+          # delta-direction, an explicit delta-direction overriding inference,
+          # the size/style hooks, and escaping. Each is anchored to the
+          # "vb-value-row" wrapper the filter builds around value+delta (not
+          # just the delta div), so a change that drops that wrapper — the
+          # thing that keeps the two side by side — fails these too. Without
+          # the filter, Pandoc echoes delta as a bare data-delta="..."
+          # attribute with no escaping of its own, so these do not pass by
+          # coincidence the way an escaped-quote check can (see tests/README.md).
+          assert_present '<div class="vb-value-row" style="display:flex; align-items:baseline; gap:0.5em; flex-wrap:wrap; "><div class="value" style="font-size:2.2rem; color:white; ">17</div><div class="delta" style=""><span class="delta-arrow" aria-hidden="true">▲</span> +12%</div></div>' "$out" "$fixture/$fmt delta infers an up arrow from a leading + and sits beside the value"
+          assert_present '<div class="delta" style="color:#ff5252; "><span class="delta-arrow" aria-hidden="true">▼</span> -8%</div>' "$out" "$fixture/$fmt delta infers a down arrow and applies delta-color"
+          assert_present '<div class="delta" style="">steady</div>' "$out" "$fixture/$fmt delta with no sign and no delta-direction gets no arrow"
+          assert_present '<span class="delta-arrow" aria-hidden="true">→</span> 0%' "$out" "$fixture/$fmt delta-direction=flat overrides sign inference"
+          assert_present '<div class="delta" style="font-size:1.3rem; font-style:italic;">' "$out" "$fixture/$fmt delta-font-size and delta-extra-style apply"
+          assert_present '<div class="delta" style="">&lt;img src=x onerror=alert(1)&gt;</div>' "$out" "$fixture/$fmt delta is escaped, not raw HTML like value/title"
+          assert_absent '<img src=x onerror=alert(1)>' "$out" "$fixture/$fmt escaped delta cannot inject a live tag"
+
+          # delta-direction is matched case-insensitively and, when set,
+          # overrides sign inference — "Down" must win over the "+" in "+3%".
+          assert_present '<span class="delta-arrow" aria-hidden="true">▼</span> +3%' "$out" "$fixture/$fmt mixed-case delta-direction overrides an inferred arrow"
+
+          # An unrecognised delta-direction shows no arrow rather than
+          # crashing or falling back to a guess (the accompanying warning is
+          # checked by the value-box-warning count above).
+          assert_present '<div class="delta" style="">5%</div>' "$out" "$fixture/$fmt unrecognised delta-direction shows no arrow"
+
+          # value-position=left makes the vb-value-row wrapper itself the
+          # flex item next to .details, so it — not just the .value div
+          # inside it — needs flex-shrink:0 to hold its size under pressure.
+          assert_present '<div class="vb-value-row" style="display:flex; align-items:baseline; gap:0.5em; flex-wrap:wrap; flex-shrink:0; min-width:0; ">' "$out" "$fixture/$fmt delta with value-position=left protects the wrapper from shrinking"
         fi
 
         if [ "$fixture" = "passthrough" ]; then
