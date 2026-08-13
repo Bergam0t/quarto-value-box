@@ -1,4 +1,4 @@
-name: tests
+name: CI (test + publish demo)
 
 on:
   push:
@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  render:
+  test:
     name: ${{ matrix.os }} / quarto ${{ matrix.quarto }}${{ !matrix.tinytex && ' (no PDF)' || '' }}
     runs-on: ${{ matrix.os }}
     # Three legs. TinyTeX/PDF-compile only runs on one of them: it is the only
@@ -89,11 +89,11 @@ jobs:
 
   # index.html / example_files/ are no longer committed (see CONTRIBUTING.md)
   # — this is the only place the demo deck is actually rendered for publishing.
-  # Gated behind `render` passing on every matrix leg, so a broken filter or
+  # Gated behind `test` passing on every matrix leg, so a broken filter or
   # deck never reaches the live site.
   deploy:
     name: Deploy demo to GitHub Pages
-    needs: render
+    needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:

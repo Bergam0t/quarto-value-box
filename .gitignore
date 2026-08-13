@@ -1,7 +1,7 @@
 /example.html
 /.luarc.json
 
-# Rendered by the "deploy" job in .github/workflows/tests.yml, not committed
+# Rendered by the "deploy" job in .github/workflows/ci.yml, not committed
 # — see CONTRIBUTING.md.
 /index.html
 /example_files/
