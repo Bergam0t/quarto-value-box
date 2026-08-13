@@ -50,6 +50,28 @@ jobs:
           version: ${{ matrix.quarto }}
           tinytex: ${{ matrix.tinytex }}
 
+      # example.qmd has a live {python} cell (the "Driven by computed data"
+      # example), so the demo deck build below needs a Jupyter kernel. Two
+      # interpreters are involved and Quarto resolves each independently, so
+      # both get pinned rather than left to auto-detection (unreliable
+      # across shells/virtual envs — see CONTRIBUTING.md): QUARTO_PYTHON
+      # below pins the "driver" Quarto itself uses to run its jupyter
+      # control script, and the named kernel pins the interpreter that
+      # actually executes the cell, matching example.qmd's frontmatter.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install Python deps for example.qmd's live code cell
+        run: pip install -r requirements-docs.txt
+
+      - name: Point Quarto's jupyter driver at this interpreter
+        shell: bash
+        run: echo "QUARTO_PYTHON=$(python -c 'import sys; print(sys.executable)')" >> "$GITHUB_ENV"
+
+      - name: Register the Jupyter kernel example.qmd targets by name
+        run: python -m ipykernel install --user --name quarto-value-box-docs --display-name "quarto-value-box docs"
+
       # The runner also builds example.qmd, so this covers the project's
       # long-standing bar of "the demo deck renders".
       - name: Run the test matrix
@@ -64,3 +86,69 @@ jobs:
           path: tests/_work/
           if-no-files-found: ignore
           retention-days: 7
+
+  # index.html / example_files/ are no longer committed (see CONTRIBUTING.md)
+  # — this is the only place the demo deck is actually rendered for publishing.
+  # Gated behind `render` passing on every matrix leg, so a broken filter or
+  # deck never reaches the live site.
+  deploy:
+    name: Deploy demo to GitHub Pages
+    needs: render
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # Deploys must not be cancelled mid-flight (could leave Pages serving a
+    # half-uploaded site), so this gets its own serialised group rather than
+    # sharing the workflow's cancel-in-progress group above.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: release
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install Python deps for example.qmd's live code cell
+        run: pip install -r requirements-docs.txt
+
+      - name: Point Quarto's jupyter driver at this interpreter
+        shell: bash
+        run: echo "QUARTO_PYTHON=$(python -c 'import sys; print(sys.executable)')" >> "$GITHUB_ENV"
+
+      - name: Register the Jupyter kernel example.qmd targets by name
+        run: python -m ipykernel install --user --name quarto-value-box-docs --display-name "quarto-value-box docs"
+
+      - name: Render the demo deck
+        run: quarto render example.qmd
+
+      # index.html renders into the repo root alongside source files, and
+      # itself references example-icon.png/.svg directly (not copied into
+      # example_files/ by Quarto) — so stage exactly the published site's
+      # files rather than uploading the whole checkout.
+      - name: Stage the site
+        run: |
+          mkdir _site
+          cp index.html example-icon.png example-icon.svg _site/
+          cp -r example_files _site/
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

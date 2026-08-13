@@ -26,7 +26,22 @@ If you find a bug or have a feature request, please [open an issue](https://gith
     - `CHANGELOG.md` — add a line under the section for the next unreleased version (or start a new section if none exists yet).
     - `_extensions/value-box/_extension.yml` — bump `version` to match the `CHANGELOG.md` section you added to.
 
-5. **Re-render the demo deck** if you touched `example.qmd`, `value-box.lua`, or `value-box.css`: `quarto render example.qmd`. `index.html` and `example_files/` are committed build output, not generated at CI/release time — a PR that changes the filter or the demo without a re-rendered `index.html` will produce a stale doc, and this is easy to forget.
+5. **Preview the demo deck** if you touched `example.qmd`, `value-box.lua`, or `value-box.css`: `quarto preview example.qmd`. `index.html` and `example_files/` are no longer committed — a dedicated `deploy` job in CI renders and publishes them to GitHub Pages on every push to `main`, so there's nothing to re-render and stage locally before opening a PR.
+    - `example.qmd` has a live `{python}` cell (the "Driven by computed data" example under Delta), so rendering it needs the deps in `requirements-docs.txt`. Two separate Python interpreters are involved, and both have to be sorted out: the **kernel** that actually executes the `{python}` cell, and the **driver** — a separate interpreter Quarto itself uses to run its own jupyter control script (`nbclient`/`notebook`), chosen independently before it ever looks at which kernel to launch. Relying on Quarto's own auto-detection for either is unreliable across shells, especially if you also have conda or another virtual environment tool that sets `VIRTUAL_ENV` on shell startup, since that can silently shadow whichever env you think is active. So both are pinned explicitly instead: the frontmatter targets the kernel by name (`quarto-value-box-docs`), and `QUARTO_PYTHON` pins the driver. One-time setup per machine:
+      ```sh
+      python -m venv .venv
+      # macOS/Linux: source .venv/bin/activate
+      # Windows (PowerShell): .venv\Scripts\Activate.ps1
+      pip install -r requirements-docs.txt
+      python -m ipykernel install --user --name quarto-value-box-docs --display-name "quarto-value-box docs"
+      ```
+      Then, once per terminal session, before running `quarto render`/`quarto preview`:
+      ```sh
+      # macOS/Linux: source ./activate-docs.sh
+      # Windows (PowerShell): . .\activate-docs.ps1
+      # Windows (cmd.exe): activate-docs.bat
+      ```
+      These scripts set `QUARTO_PYTHON` to `.venv`'s interpreter, resolved relative to the script's own location — no hardcoded paths, so it works regardless of where the repo is cloned. (A committed `_environment` file would be the more obvious place for this, but `QUARTO_PYTHON` specifically [is read too late in Quarto's startup to take effect there](https://github.com/quarto-dev/quarto-cli/issues/6162) — hence the script instead.) Re-run the `ipykernel install` command if you ever delete and recreate `.venv`, since the registered kernel hardcodes the path to its `python.exe`.
 
 6. **Commit** with a short, descriptive message.
 
