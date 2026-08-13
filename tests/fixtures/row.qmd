@@ -1,0 +1,107 @@
+---
+title: "Row / grid container"
+format: revealjs
+filters:
+  - value-box
+---
+
+## Default: single row, no wrap
+
+With no `columns` attribute, boxes lay out in a flex row rather than a grid —
+one column per child, no explicit count needed.
+
+::: {.value-box-row}
+
+::: {.value-box value="1"}
+First
+:::
+
+::: {.value-box value="2"}
+Second
+:::
+
+:::
+
+## Explicit columns: grid that wraps
+
+Four boxes at `columns="3"` must wrap onto a second row, both kept the same
+height via `grid-auto-rows:1fr`.
+
+::: {.value-box-row columns="3"}
+
+::: {.value-box value="1"}
+One
+:::
+
+::: {.value-box value="2"}
+Two
+:::
+
+::: {.value-box value="3"}
+Three
+:::
+
+::: {.value-box value="4"}
+Four, wraps onto row two
+:::
+
+:::
+
+## Gap and extra-style
+
+::: {.value-box-row gap="3rem" extra-style="border:1px dashed red;"}
+
+::: {.value-box value="1"}
+Custom gap
+:::
+
+::: {.value-box value="2"}
+Custom gap
+:::
+
+:::
+
+## Passthrough: id, extra class, data/aria/role, and an unrecognised attribute
+
+The id, an extra class, and role/aria-label/data-id all pass through — but
+`top` is outside the recognised set and is left off entirely, not renamed
+into a data- attribute.
+
+::: {#kpi-row .value-box-row .custom-hook role="group" aria-label="Key metrics" data-id="row1" top="200px"}
+
+::: {.value-box value="1"}
+Kitchen sink
+:::
+
+:::
+
+## A literal style attribute is dropped
+
+A literal `style` would collide with the row's own generated style, so it is
+dropped (with a warning) rather than producing two style attributes on one
+tag.
+
+::: {.value-box-row style="color:red"}
+
+::: {.value-box value="1"}
+Literal style is dropped
+:::
+
+:::
+
+## An unrecognised columns value falls back to a single row
+
+`columns="lots"` isn't a number, so this must warn and fall back to the
+default flex-row behaviour rather than emitting invalid CSS or crashing.
+
+::: {.value-box-row columns="lots"}
+
+::: {.value-box value="1"}
+Falls back to a row
+:::
+
+::: {.value-box value="2"}
+Falls back to a row
+:::
+
+:::

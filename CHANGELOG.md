@@ -1,3 +1,7 @@
+# v1.6.0
+
+- Add `.value-box-row` container: wrap a set of value boxes in `::: {.value-box-row}` for an equal-width, equal-height KPI strip, instead of hand-rolling `.columns`/`.column` scaffolding and hand-setting `height` on every box. With no `columns` attribute set, boxes lay out in a single non-wrapping row; set `columns="N"` to switch to a grid where extra boxes wrap onto further rows, with every row (not just each one individually) kept the same height. `gap` controls spacing (default `1.5rem`, matching a standalone box's own margin), and `extra-style` is an escape hatch for the row wrapper itself. Like `.value-box`, the row passes through its own `#id`, extra classes, and `data-*`/`aria-*`/`role`/`tabindex`/`lang` attributes
+
 # v1.5.0
 
 - Add `delta` option for a small trend indicator next to the `value`, e.g. `delta="+12%"`, with `delta-color`, `delta-font-size`, `delta-extra-style` and `value-row-extra-style` to style it. The arrow glyph is picked by `delta-direction` (`up`/`down`/`flat`, matched case-insensitively) if set, otherwise inferred from a leading `+`/`-` in `delta`; an unrecognised `delta-direction` shows no arrow, with a warning. Colour is never inferred from direction — an "up" delta isn't always good news, so `delta-color` defaults to inheriting the surrounding text colour rather than a green/red guess

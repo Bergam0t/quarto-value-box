@@ -238,6 +238,10 @@ for fmt in "${formats[@]}"; do
     elif [ "$fixture" = "layout" ]; then
       # Deliberately triggers one warning: an unrecognised delta-direction.
       assert_count 1 "value-box warning" "$log" "$fixture/$fmt warns about the one unrecognised delta-direction"
+    elif [ "$fixture" = "row" ]; then
+      # Deliberately triggers two warnings: a literal style collision and an
+      # unrecognised (non-numeric) columns value.
+      assert_count 2 "value-box warning" "$log" "$fixture/$fmt warns about the dropped style and the unrecognised columns value"
     else
       assert_absent "value-box warning" "$log" "$fixture/$fmt emits no filter warnings"
     fi
@@ -439,6 +443,29 @@ for fmt in "${formats[@]}"; do
           # above.
           assert_present '<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">9<' \
             "$out" "$fixture/$fmt does not leak a mixed-case Style as data-style"
+        fi
+
+        if [ "$fixture" = "row" ]; then
+          # display:flex/display:grid only ever come from the filter itself —
+          # a plain Pandoc div never turns a columns/gap attribute into CSS —
+          # so these anchor to filter-generated markup, not an echoed attribute.
+          assert_present 'class="value-box-row" style="display:flex; flex-wrap:nowrap; gap:1.5rem; ">' \
+            "$out" "$fixture/$fmt no columns attribute lays out a non-wrapping flex row"
+          assert_present 'style="display:grid; grid-template-columns:repeat(3, 1fr); grid-auto-rows:1fr; gap:1.5rem; ">' \
+            "$out" "$fixture/$fmt columns=3 switches to a grid with equal-height wrapped rows"
+          assert_present 'style="display:flex; flex-wrap:nowrap; gap:3rem; border:1px dashed red;">' \
+            "$out" "$fixture/$fmt gap and extra-style apply to the row wrapper"
+
+          # id, an extra class, and role/aria-label/data-id all pass through,
+          # but top is outside the recognised set and must be left off
+          # entirely rather than renamed into a data- attribute.
+          assert_present '<div id="kpi-row" class="value-box-row custom-hook" style="display:flex; flex-wrap:nowrap; gap:1.5rem; " role="group" aria-label="Key metrics" data-id="row1">' \
+            "$out" "$fixture/$fmt passes through id, extra class, role/aria-label and data-id"
+          assert_absent 'data-top' "$out" "$fixture/$fmt does not rename an unrecognised attribute into a data- attribute"
+
+          # A literal style attribute must not survive as a second style
+          # attribute alongside the row's own generated one.
+          assert_absent 'style="color:red"' "$out" "$fixture/$fmt drops a literal style attribute on the row wrapper"
         fi
         ;;
 

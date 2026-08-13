@@ -87,6 +87,72 @@ local function escape_attr(s)
   }))
 end
 
+-- Shared by value-box and value-box-row: pass through the div's own #id, any
+-- classes beyond own_class, and the data-*/aria-*/role/tabindex/lang
+-- namespace, exactly as an ordinary Pandoc div would. A literal style="..."
+-- is dropped (with a warning naming extra_style_hint as the escape hatch to
+-- use instead) rather than colliding with the wrapper's own generated style.
+-- reserved_attr, when given, additionally drops one further attribute name
+-- that the caller generates itself (value-box's data-fragment-index) so a
+-- literal copy can't collide with it — {name=..., active=..., warning=...}.
+--
+-- Factored out rather than duplicated per caller: this repo has already
+-- shipped one real regression from this exact logic (the reserved-namespace
+-- matching had a case-sensitivity bug — see the v1.4.0 changelog entry), so
+-- two independently-maintained copies would be a real drift hazard, not just
+-- repetition.
+local function build_wrapper_attrs(el, own_class, extra_style_hint, reserved_attr)
+  local id_attr = ""
+  if el.identifier ~= "" then
+    id_attr = string.format(' id="%s"', escape_attr(el.identifier))
+  end
+
+  local extra_classes = ""
+  for _, class in ipairs(el.classes) do
+    if class ~= own_class then
+      extra_classes = extra_classes .. " " .. escape_attr(class)
+    end
+  end
+
+  -- Attributes that pass through onto the wrapper: the two namespaces built
+  -- for exactly this (data-*, aria-*), plus role/tabindex/lang — the standard
+  -- globals most likely to actually matter (ARIA landmarks/labelling,
+  -- keyboard reachability, screen-reader pronunciation). Anything else is not
+  -- part of this filter's own vocabulary and is not passed through.
+  --
+  -- This is an allowlist rather than a denylist deliberately — see the
+  -- CONTRIBUTING.md note on why (a denylist meant every new filter option had
+  -- to be added to a second list too, and silently renamed something like
+  -- onclick="..." into an inert data-onclick).
+  local passthrough_names = {
+    ["role"] = true, ["tabindex"] = true, ["lang"] = true,
+  }
+  -- Keyed on the lowercased attribute name throughout — HTML attribute names
+  -- are case-insensitive, and Quarto's own HTML postprocessing lowercases
+  -- them regardless, so a mixed-case key like "Style" or "Data-Id" must still
+  -- be recognised as the thing it is.
+  local passthrough_attrs = ""
+  for key, val in pairs(el.attributes) do
+    local key_lower = key:lower()
+    if key_lower == "style" then
+      -- A literal style="..." would collide with the style attribute this
+      -- filter builds for the same element. Two style attributes on one tag
+      -- isn't undefined — HTML parsers keep the first and silently drop the
+      -- second — so without this, a user's own style would be dropped with
+      -- no warning at all.
+      io.stderr:write(string.format(
+        "value-box warning: a literal 'style' attribute is ignored to avoid clashing with the %s's own style — use %s instead\n",
+        own_class, extra_style_hint))
+    elseif reserved_attr and key_lower == reserved_attr.name and reserved_attr.active then
+      io.stderr:write(reserved_attr.warning)
+    elseif passthrough_names[key_lower] or key_lower:match("^data%-") or key_lower:match("^aria%-") then
+      passthrough_attrs = passthrough_attrs .. string.format(' %s="%s"', key_lower, escape_attr(val))
+    end
+  end
+
+  return id_attr, extra_classes, passthrough_attrs
+end
+
 function Div(el)
   if el.classes:includes("value-box") then
 
@@ -229,64 +295,15 @@ function Div(el)
     -- data-id, crossref targets via #id, custom per-box classes, and ARIA
     -- attributes all keep working even though the div is replaced with raw
     -- HTML below rather than going through Pandoc's own div-to-HTML writer.
-    local id_attr = ""
-    if el.identifier ~= "" then
-      id_attr = string.format(' id="%s"', escape_attr(el.identifier))
-    end
-
-    local extra_classes = ""
-    for _, class in ipairs(el.classes) do
-      if class ~= "value-box" then
-        extra_classes = extra_classes .. " " .. escape_attr(class)
-      end
-    end
-
-    -- Attributes that pass through onto the outer wrapper: the two
-    -- namespaces built for exactly this (data-*, aria-*), plus role/
-    -- tabindex/lang — the standard globals most likely to actually matter on
-    -- a value box (ARIA landmarks/labelling, keyboard reachability,
-    -- screen-reader pronunciation). Anything else is not part of value-box's
-    -- own vocabulary and is not passed through.
-    --
-    -- This is an allowlist rather than a denylist deliberately. An earlier
-    -- version listed every attribute the filter itself reads and passed
-    -- through anything absent from that list, prefixed with data- so the
-    -- output stayed valid HTML — which meant every new filter option (like
-    -- title, added later) had to be added to that second list too, or it
-    -- would silently leak through renamed to a data-* attribute instead of
-    -- doing its job. It also meant something like onclick="..." — which
-    -- would have worked on a plain Pandoc div — silently became the inert
-    -- data-onclick instead. The allowlist has neither failure mode: growing
-    -- the filter's own vocabulary needs no change here, and an attribute
-    -- outside these namespaces is simply left off rather than renamed into
-    -- something that looks like it survived but doesn't work.
-    local passthrough_names = {
-      ["role"] = true, ["tabindex"] = true, ["lang"] = true,
-    }
-    -- Keyed on the lowercased attribute name throughout — HTML attribute
-    -- names are case-insensitive, and Quarto's own HTML postprocessing
-    -- lowercases them regardless, so a mixed-case key like "Style" or
-    -- "Data-Id" must still be recognised as the thing it is.
-    local passthrough_attrs = ""
-    for key, val in pairs(el.attributes) do
-      local key_lower = key:lower()
-      if key_lower == "style" then
-        -- A literal style="..." would collide with the style attribute this
-        -- filter builds for the same element. Two style attributes on one
-        -- tag isn't undefined — HTML parsers keep the first and silently
-        -- drop the second — so without this, a user's own style would be
-        -- dropped with no warning at all.
-        io.stderr:write("value-box warning: a literal 'style' attribute is ignored to avoid clashing with the box's own style — use outer-extra-style instead\n")
-      elseif key_lower == "data-fragment-index" and index_attr then
-        -- Only a real collision when index is actually set — that's what
-        -- generates this filter's own data-fragment-index. Without an index,
-        -- a literal data-fragment-index is just an ordinary data-* attribute
-        -- and falls through to the passthrough case below instead.
-        io.stderr:write("value-box warning: a literal 'data-fragment-index' attribute is ignored to avoid clashing with the one generated from the index attribute\n")
-      elseif passthrough_names[key_lower] or key_lower:match("^data%-") or key_lower:match("^aria%-") then
-        passthrough_attrs = passthrough_attrs .. string.format(' %s="%s"', key_lower, escape_attr(val))
-      end
-    end
+    -- A literal data-fragment-index is only a real collision when index is
+    -- actually set — that's what generates this filter's own
+    -- data-fragment-index. Without an index, a literal data-fragment-index is
+    -- just an ordinary data-* attribute and passes through untouched.
+    local id_attr, extra_classes, passthrough_attrs = build_wrapper_attrs(el, "value-box", "outer-extra-style", {
+      name = "data-fragment-index",
+      active = index_attr ~= nil,
+      warning = "value-box warning: a literal 'data-fragment-index' attribute is ignored to avoid clashing with the one generated from the index attribute\n",
+    })
 
     -- icon-position controls the outer wrapper: icon vs. everything else
     if icon_pos == "left" then
@@ -528,6 +545,65 @@ function Div(el)
     local result = pandoc.List({pandoc.RawBlock("html", html_open)})
     result:extend(el.content)
     result:insert(pandoc.RawBlock("html", html_close))
+
+    quarto.doc.add_html_dependency({
+      name = "value-box-styles",
+      version = "1.0.0",
+      stylesheets = {"value-box.css"}
+    })
+
+    return result
+
+  elseif el.classes:includes("value-box-row") then
+
+    -- Lays child value boxes out with equal width and equal height — the
+    -- single most common value-box layout, and previously only achievable by
+    -- hand-rolling Quarto's own .columns/.column scaffolding and hand-setting
+    -- height on every box.
+    --
+    -- No columns attribute set: a single flex row, one column per child, no
+    -- wrapping. Pandoc filters traverse bottom-up, so by the time this runs,
+    -- any nested value-box divs have already been expanded into several
+    -- RawBlock("html") elements each (open tag/content/close tag) — #el.content
+    -- is therefore not a reliable box count and can't be used to default a
+    -- grid column count from the number of children. Flexbox sidesteps that
+    -- entirely: equal-width columns fall out of "one row, no wrap, every
+    -- child flexes equally" without needing to count anything.
+    --
+    -- columns="N" set: CSS Grid instead, so extra children beyond N wrap onto
+    -- further rows automatically (Grid's default auto-flow), with
+    -- grid-auto-rows:1fr keeping wrapped rows equal height too.
+    local columns_attr = el.attributes["columns"]
+    local layout_style
+    if columns_attr and columns_attr ~= "" then
+      local columns_n = tonumber(columns_attr)
+      if columns_n then
+        layout_style = string.format(
+          "display:grid; grid-template-columns:repeat(%d, 1fr); grid-auto-rows:1fr; ",
+          columns_n)
+      else
+        io.stderr:write(string.format(
+          "value-box warning: unrecognised columns value '%s' — expected a number; falling back to a single row\n",
+          columns_attr))
+        layout_style = "display:flex; flex-wrap:nowrap; "
+      end
+    else
+      layout_style = "display:flex; flex-wrap:nowrap; "
+    end
+
+    local gap = escape_attr(el.attributes["gap"] or "1.5rem")
+    local row_extra_style = escape_attr(el.attributes["extra-style"] or "")
+
+    local id_attr, extra_classes, passthrough_attrs = build_wrapper_attrs(el, "value-box-row", "extra-style", nil)
+
+    local html_open = string.format(
+      '<div%s class="value-box-row%s" style="%s%s%s"%s>',
+      id_attr, extra_classes, layout_style, css_decl("gap", gap), row_extra_style, passthrough_attrs
+    )
+
+    local result = pandoc.List({pandoc.RawBlock("html", html_open)})
+    result:extend(el.content)
+    result:insert(pandoc.RawBlock("html", "</div>"))
 
     quarto.doc.add_html_dependency({
       name = "value-box-styles",

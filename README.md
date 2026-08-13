@@ -84,6 +84,44 @@ Anything outside that list is left off rather than renamed to a `data-` attribut
 > [!WARNING]
 > Class-driven Quarto/revealjs features that work by a *filter* rewriting attributes on the div — `.absolute` positioning is the main example — do **not** work on a value box. The div is already replaced with raw HTML by the time those filters would run, so the class survives but the behaviour it triggers does not.
 
+### Row / grid layout
+
+Wrap a set of value boxes in `::: {.value-box-row}` to lay them out with equal width and equal height — the usual "KPI strip" you'd otherwise get by hand-rolling `.columns`/`.column` scaffolding and hand-setting `height` on every box.
+
+```md
+::: {.value-box-row}
+
+::: {.value-box value="128" color="bg-teal"}
+Signups this week
+:::
+
+::: {.value-box value="42" color="bg-amber"}
+Open tickets
+:::
+
+::: {.value-box value="99%" color="bg-green"}
+Uptime
+:::
+
+:::
+```
+
+With no `columns` set, boxes lay out in a single row that doesn't wrap — the common case. Set `columns` to switch to a grid that wraps extra boxes onto further rows once it's full, with every row (not just each individual row) kept the same height:
+
+```md
+::: {.value-box-row columns="3"}
+<!-- six boxes here wrap into two rows of three, each row equal height -->
+:::
+```
+
+Like `.value-box` itself, `.value-box-row` passes through its own `#id`, extra classes, and `data-*`/`aria-*`/`role`/`tabindex`/`lang` attributes; a literal `style` attribute is dropped (with a warning) — use `extra-style` instead.
+
+| Parameter    | Type    | Default    | Description                                                                                                                                    |
+| ------------ | ------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `columns`    | number  | `""`       | Number of columns in the grid. If omitted, boxes lay out in a single non-wrapping row instead — one column per box, no count needed.             |
+| `gap`        | string  | `1.5rem`   | Spacing between boxes, both between columns and (when `columns` wraps) between rows. Accepts any valid CSS size unit.                            |
+| `extra-style`| string  | `""`       | Additional CSS styles applied to the row wrapper itself. Useful for advanced customisation beyond the built-in options.                          |
+
 | Parameter             | Type                                | Default         | Description                                                                                                                                                                                                                                                                                                                                                                                       |
 | --------------------- | ----------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `value`               | string                              | `""`            | A prominent value or stat displayed above the main content.                                                                                                                                                                                                                                                                                                                                       |
@@ -182,4 +220,4 @@ We are happy to accept AI-supported contributions to the extension, but reserve 
 
 
 A note about AI usage from Sammi:
-> I've been coding for over ten years, love the act of coding, and have significant concerns about the ethics and environmental impact of AI. However, I can't deny its utility as a solo maintainer when it comes to making all the features I want to include in my projects a reality. I hope you find these projects useful enough to help offset some of the downsides of AI, and will use them to help do some good in the world, or at least use them to claw back some of your time so you can spend more of it enjoying being human. For my part, I will continue to use AI critically and carefully, and try to make environmentally-conscious choices in my personal life to try and balance the scales.
+> I've been coding for over ten years, love the act of coding, and have significant concerns about the ethics and environmental impact of AI. However, I can't deny its utility as a solo maintainer when it comes to making all the features I want to include in my projects a reality. I hope you find these projects useful enough to help offset some of the downsides of AI, and will use them to help do some good in the world, or at least use them to claw back some of your time so you can spend more of it enjoying being human. For my part, I will continue to use AI critically and carefully, and I will try to make environmentally-conscious choices in my personal life to help balance the scales.

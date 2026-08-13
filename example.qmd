@@ -198,6 +198,117 @@ Lower is better here, so a fall is shown in green
 ::::
 
 
+## Row layout
+
+::: {style='font-size: 75%;'}
+Wrap value boxes in `.value-box-row` for an equal-width, equal-height KPI strip — no more hand-rolling `.columns`/`.column` scaffolding or hand-setting `height` on every box to make them match. With no `columns` set, boxes lay out in a single non-wrapping row:
+:::
+
+::: {.value-box-row}
+
+::: {.value-box value="128" color="bg-teal"}
+Signups this week — a longer line of detail text here to show the other boxes stretch to match its height
+:::
+
+::: {.value-box value="42" color="bg-amber"}
+Open tickets
+:::
+
+::: {.value-box value="99%" color="bg-green"}
+Uptime
+:::
+
+:::
+
+::: {style='font-size: 80%;'}
+
+
+
+```md
+::: {.value-box-row}
+
+::: {.value-box value="128" color="bg-teal"}
+Signups this week
+:::
+
+::: {.value-box value="42" color="bg-amber"}
+Open tickets
+:::
+
+::: {.value-box value="99%" color="bg-green"}
+Uptime
+:::
+
+:::
+```
+
+:::
+
+## Grid layout
+
+Set `columns` to switch to a grid: extra boxes wrap onto further rows once it's full, with every row — not just each one individually — kept the same height.
+
+::: {.value-box-row columns="3"}
+
+::: {.value-box value="12" color="bg-blue" title="Team A"}
+Wins this season — a much longer line of detail text, to show every row in the grid stretches to match the tallest box anywhere in it
+:::
+
+::: {.value-box value="9" color="bg-purple" title="Team B"}
+Wins
+:::
+
+::: {.value-box value="15" color="bg-red" title="Team C"}
+Wins
+:::
+
+::: {.value-box value="7" color="bg-olive" title="Team D"}
+Wins
+:::
+
+::: {.value-box value="11" color="bg-slate" title="Team E"}
+Wins
+:::
+
+::: {.value-box value="4" color="bg-pink" title="Team F"}
+Wins
+:::
+
+:::
+
+## Grid Layout - Code
+
+```md
+::: {.value-box-row columns="3"}
+
+::: {.value-box value="12" color="bg-blue" title="Team A"}
+Wins this season
+:::
+
+::: {.value-box value="9" color="bg-purple" title="Team B"}
+Wins
+:::
+
+::: {.value-box value="15" color="bg-red" title="Team C"}
+Wins
+:::
+
+::: {.value-box value="7" color="bg-olive" title="Team D"}
+Wins
+:::
+
+::: {.value-box value="11" color="bg-slate" title="Team E"}
+Wins
+:::
+
+::: {.value-box value="4" color="bg-pink" title="Team F"}
+Wins
+:::
+
+:::
+```
+
+
 ## Fragment types
 
 :::: {.columns}

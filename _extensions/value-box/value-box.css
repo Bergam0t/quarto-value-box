@@ -48,6 +48,27 @@
     min-width: 0;
 }
 
+.value-box-row {
+    margin-bottom: 1.5rem;
+}
+
+/* flex:1 1 0 is a no-op under display:grid (columns="N"), so this one rule
+   gives equal-width children in both the default flex row and the grid
+   mode. min-width:0 stops a long value from forcing a child wider than its
+   share of the row. */
+.value-box-row > * {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+/* Each .value-box's own margin-bottom is meant for standalone use; inside a
+   row it would eat into the equal-height stretch as a dead strip at the
+   bottom of every cell instead of leaving the boxes flush. Spacing between
+   rows is handled by .value-box-row's own margin-bottom above instead. */
+.value-box-row > .value-box {
+    margin-bottom: 0;
+}
+
 .bg-blue    { background-color: #3d6a9e; color: white; }
 .bg-navy    { background-color: #2d4a6b; color: white; }
 .bg-teal    { background-color: #2e7873; color: white; }
