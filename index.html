@@ -845,21 +845,108 @@
 <style>
 /* Proves .highlight-box below actually landed on the box, rather than
    just being a class name mentioned in the slide text. */
-.highlight-box { outline: 3px dashed gold; outline-offset: 4px; }
+.highlight-box { outline: 7px dashed gold; outline-offset: 4px; }
 </style>
-<div style="font-size: 55%;">
 <p>Beyond the parameters this extension defines, an <code>#id</code> and extra <code>.classes</code> pass through onto the rendered box, along with <code>data-*</code>/<code>aria-*</code> attributes and <code>role</code>/<code>tabindex</code>/<code>lang</code>. Anything else is left off rather than renamed to a <code>data-</code> attribute.</p>
-</div>
-<div class="columns">
-<div class="column" style="width:40%;">
 <div id="kpi-example" class="value-box bg-blue highlight-box" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" role="group" aria-label="Sales this quarter" data-id="kpi-example"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-animate) all survive</p>
 </div></div></div>
-</div><div class="column" style="width:60%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb55-1"><a href="" aria-label="1"></a>::: {.value-box #kpi-example .highlight-box value="42" role="group" aria-label="Sales this quarter" data-id="kpi-example"}</span>
-<span id="cb55-2"><a href="" aria-label="2"></a>id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-animate) all survive</span>
-<span id="cb55-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb55-1"><a href="" aria-label="1"></a>&lt;style<span class="op">&gt;</span></span>
+<span id="cb55-2"><a href="" aria-label="2"></a><span class="fu">.highlight-box</span> { <span class="kw">outline</span><span class="ch">:</span> <span class="dv">7</span><span class="dt">px</span> <span class="dv">dashed</span> <span class="cn">gold</span><span class="op">;</span> <span class="kw">outline-offset</span><span class="ch">:</span> <span class="dv">4</span><span class="dt">px</span><span class="op">;</span> }</span>
+<span id="cb55-3"><a href="" aria-label="3"></a>&lt;/style<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><br></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb56-1"><a href="" aria-label="1"></a>::: {.value-box #kpi-example .highlight-box value="42" role="group" aria-label="Sales this quarter" data-id="kpi-example"}</span>
+<span id="cb56-2"><a href="" aria-label="2"></a>id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-animate) all survive</span>
+<span id="cb56-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="data-id-and-auto-animate" class="slide level2">
+<h2><code>data-id</code> and auto-animate</h2>
+<p><code>data-id</code> is what actually drives <a href="https://quarto.org/docs/presentations/revealjs/advanced.html#auto-animate">Reveal.js auto-animate</a>: give two <em>consecutive</em> slides <code>auto-animate="true"</code> in the heading, give a value box the same <code>data-id</code> on both, and Reveal.js treats it as the same element and smoothly morphs its position, size and colour between them as you advance. The next two slides are that pair — present the deck (not the static preview pane) to see it animate.</p>
+</section>
+<section id="growth" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Growth</h2>
+<div class="value-box bg-blue" style="width:30%; min-height:100px; padding:1.5rem; text-align:center;  display:flex; flex-direction:column; justify-content:center;" data-id="autoanimate-demo"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<p>New customers this quarter</p>
+</div></div></div>
+</section>
+<section id="growth-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Growth</h2>
+<div class="value-box bg-green" style="width:90%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" data-id="autoanimate-demo"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">1,284</div><div class="details" style="color:white; ">
+<p>New customers this quarter — up from 42 last quarter</p>
+</div></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode numberSource md number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode markdown hljs"><span id="cb57-1" class="hljs-ln-code"><a href="" aria-label="1"></a><span class="fu">## Growth {auto-animate="true"}</span></span>
+<span id="cb57-2" class="hljs-ln-code"><a href="" aria-label="2"></a></span>
+<span id="cb57-3" class="hljs-ln-code"><a href="" aria-label="3"></a>::: {.value-box data-id="autoanimate-demo" value="42" width="30%" color="bg-blue" align="center"}</span>
+<span id="cb57-4" class="hljs-ln-code"><a href="" aria-label="4"></a>New customers this quarter</span>
+<span id="cb57-5" class="hljs-ln-code"><a href="" aria-label="5"></a>:::</span>
+<span id="cb57-6" class="hljs-ln-code"><a href="" aria-label="6"></a></span>
+<span id="cb57-7" class="hljs-ln-code"><a href="" aria-label="7"></a><span class="fu">## Growth {auto-animate="true"}</span></span>
+<span id="cb57-8" class="hljs-ln-code"><a href="" aria-label="8"></a></span>
+<span id="cb57-9" class="hljs-ln-code"><a href="" aria-label="9"></a>::: {.value-box data-id="autoanimate-demo" value="1,284" width="90%" color="bg-green" align="left"}</span>
+<span id="cb57-10" class="hljs-ln-code"><a href="" aria-label="10"></a>New customers this quarter — up from 42 last quarter</span>
+<span id="cb57-11" class="hljs-ln-code"><a href="" aria-label="11"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The matching <code>data-id</code> is doing all the work here — everything else about the box (<code>value</code>, <code>width</code>, <code>color</code>, <code>align</code>) is free to differ between the two slides.</p>
+</section>
+<section id="more-auto-animate-examples" class="slide level2">
+<h2>More auto-animate examples</h2>
+<div style="font-size: 90%;">
+<p>The Growth pair changed several properties at once. Auto-animate isn’t limited to any fixed list of attributes — it interpolates whatever CSS the matched element ends up with, so anything on the box that becomes a CSS property can be animated:</p>
+<ul>
+<li><strong>Size</strong> — <code>width</code>, <code>height</code>, <code>padding</code>, <code>value-font-size</code>, <code>min-height</code>… a box can grow <em>or</em> shrink</li>
+<li><strong>Position</strong> — move a box anywhere on the slide via <code>outer-extra-style="margin-left:...;"</code> (or any other positioning CSS)</li>
+<li><strong>Colour</strong> — <code>color</code>, <code>font-color</code>, <code>value-color</code>, <code>icon-color</code>, <code>delta-color</code></li>
+<li><strong>Anything else expressible as CSS</strong> — opacity, rotation, border-radius — via the <code>*-extra-style</code> escape hatches from the previous section, since those pass straight through to the element’s <code>style=</code></li>
+</ul>
+<p>The next two pairs isolate shrink and movement on their own, so it’s clear which attribute is driving which part of the animation.</p>
+</div>
+</section>
+<section id="headline" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Headline</h2>
+<div class="value-box bg-purple" style="width:70%; min-height:100px; padding:1.5rem; text-align:center;  display:flex; flex-direction:column; justify-content:center;" data-id="shrink-demo"><div class="vb-content" style=""><div class="value" style="font-size:4rem; color:white; ">128%</div><div class="details" style="color:white; ">
+<p>Year-over-year growth</p>
+</div></div></div>
+</section>
+<section id="headline-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Headline</h2>
+<div class="value-box bg-purple" style="width:20%; min-height:40px; padding:0.5rem; text-align:center;  display:flex; flex-direction:column; justify-content:center;" data-id="shrink-demo"><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">128%</div><div class="details" style="color:white; ">
+<p>YoY growth</p>
+</div></div></div>
+<p>Only <code>value-font-size</code>, <code>width</code>, <code>padding</code> and <code>min-height</code> changed between those two slides — the same headline stat condenses into a small summary tile, e.g.&nbsp;to make room as supporting detail appears elsewhere on the next slide of a real deck.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode numberSource md number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode markdown hljs"><span id="cb58-1" class="hljs-ln-code"><a href="" aria-label="1"></a><span class="fu">## Headline {auto-animate="true"}</span></span>
+<span id="cb58-2" class="hljs-ln-code"><a href="" aria-label="2"></a></span>
+<span id="cb58-3" class="hljs-ln-code"><a href="" aria-label="3"></a>::: {.value-box data-id="shrink-demo" value="128%" value-font-size="4rem" width="70%" color="bg-purple" align="center"}</span>
+<span id="cb58-4" class="hljs-ln-code"><a href="" aria-label="4"></a>Year-over-year growth</span>
+<span id="cb58-5" class="hljs-ln-code"><a href="" aria-label="5"></a>:::</span>
+<span id="cb58-6" class="hljs-ln-code"><a href="" aria-label="6"></a></span>
+<span id="cb58-7" class="hljs-ln-code"><a href="" aria-label="7"></a><span class="fu">## Headline {auto-animate="true"}</span></span>
+<span id="cb58-8" class="hljs-ln-code"><a href="" aria-label="8"></a></span>
+<span id="cb58-9" class="hljs-ln-code"><a href="" aria-label="9"></a>::: {.value-box data-id="shrink-demo" value="128%" value-font-size="1.3rem" width="20%" padding="0.5rem" min-height="40px" color="bg-purple" align="center"}</span>
+<span id="cb58-10" class="hljs-ln-code"><a href="" aria-label="10"></a>YoY growth</span>
+<span id="cb58-11" class="hljs-ln-code"><a href="" aria-label="11"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="focus" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Focus</h2>
+<div class="value-box bg-amber" style="width:35%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;" data-id="movement-demo"><i class="icon fa-solid fa-clock" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
+<p>Days until launch</p>
+</div></div></div>
+</section>
+<section id="focus-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Focus</h2>
+<div class="value-box bg-amber" style="width:35%; min-height:100px; padding:1.5rem; text-align:left; margin-left:60%; display:flex; flex-direction:row; align-items:center; gap:1em;" data-id="movement-demo"><i class="icon fa-solid fa-rocket" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
+<p>Days until launch</p>
+</div></div></div>
+<p>Here only <code>outer-extra-style</code> and <code>icon</code> changed — same size, same colour, same value, just a different <code>margin-left</code> — so the box visibly slides across the slide with nothing else moving.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource md number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode markdown hljs"><span id="cb59-1" class="hljs-ln-code"><a href="" aria-label="1"></a><span class="fu">## Focus {auto-animate="true"}</span></span>
+<span id="cb59-2" class="hljs-ln-code"><a href="" aria-label="2"></a></span>
+<span id="cb59-3" class="hljs-ln-code"><a href="" aria-label="3"></a>::: {.value-box data-id="movement-demo" value="7" width="35%" color="bg-amber" icon="fa-solid fa-clock" icon-position="left"}</span>
+<span id="cb59-4" class="hljs-ln-code"><a href="" aria-label="4"></a>Days until launch</span>
+<span id="cb59-5" class="hljs-ln-code"><a href="" aria-label="5"></a>:::</span>
+<span id="cb59-6" class="hljs-ln-code"><a href="" aria-label="6"></a></span>
+<span id="cb59-7" class="hljs-ln-code"><a href="" aria-label="7"></a><span class="fu">## Focus {auto-animate="true"}</span></span>
+<span id="cb59-8" class="hljs-ln-code"><a href="" aria-label="8"></a></span>
+<span id="cb59-9" class="hljs-ln-code"><a href="" aria-label="9"></a>::: {.value-box data-id="movement-demo" outer-extra-style="margin-left:60%;" value="7" width="35%" color="bg-amber" icon="fa-solid fa-rocket" icon-position="left"}</span>
+<span id="cb59-10" class="hljs-ln-code"><a href="" aria-label="10"></a>Days until launch</span>
+<span id="cb59-11" class="hljs-ln-code"><a href="" aria-label="11"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </section>
     </div>

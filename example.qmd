@@ -1257,24 +1257,22 @@ Phosphor icons
 <style>
 /* Proves .highlight-box below actually landed on the box, rather than
    just being a class name mentioned in the slide text. */
-.highlight-box { outline: 3px dashed gold; outline-offset: 4px; }
+.highlight-box { outline: 7px dashed gold; outline-offset: 4px; }
 </style>
 
-::: {style='font-size: 55%;'}
 Beyond the parameters this extension defines, an `#id` and extra `.classes` pass through onto the rendered box, along with `data-*`/`aria-*` attributes and `role`/`tabindex`/`lang`. Anything else is left off rather than renamed to a `data-` attribute.
-:::
-
-:::: {.columns}
-
-::: {.column width='40%'}
 
 ::: {.value-box #kpi-example .highlight-box value="42" role="group" aria-label="Sales this quarter" data-id="kpi-example"}
 id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-animate) all survive
 :::
 
-:::
+```css
+<style>
+.highlight-box { outline: 7px dashed gold; outline-offset: 4px; }
+</style>
+```
 
-::: {.column width='60%'}
+<br>
 
 ```md
 ::: {.value-box #kpi-example .highlight-box value="42" role="group" aria-label="Sales this quarter" data-id="kpi-example"}
@@ -1282,6 +1280,108 @@ id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-anim
 :::
 ```
 
+
+
+## `data-id` and auto-animate
+
+`data-id` is what actually drives [Reveal.js auto-animate](https://quarto.org/docs/presentations/revealjs/advanced.html#auto-animate): give two *consecutive* slides `auto-animate="true"` in the heading, give a value box the same `data-id` on both, and Reveal.js treats it as the same element and smoothly morphs its position, size and colour between them as you advance. The next two slides are that pair — present the deck (not the static preview pane) to see it animate.
+
+## Growth {auto-animate="true"}
+
+::: {.value-box data-id="autoanimate-demo" value="42" width="30%" color="bg-blue" align="center"}
+New customers this quarter
 :::
 
-::::
+## Growth {auto-animate="true"}
+
+::: {.value-box data-id="autoanimate-demo" value="1,284" width="90%" color="bg-green" align="left"}
+New customers this quarter — up from 42 last quarter
+:::
+
+
+```md
+## Growth {auto-animate="true"}
+
+::: {.value-box data-id="autoanimate-demo" value="42" width="30%" color="bg-blue" align="center"}
+New customers this quarter
+:::
+
+## Growth {auto-animate="true"}
+
+::: {.value-box data-id="autoanimate-demo" value="1,284" width="90%" color="bg-green" align="left"}
+New customers this quarter — up from 42 last quarter
+:::
+```
+
+The matching `data-id` is doing all the work here — everything else about the box (`value`, `width`, `color`, `align`) is free to differ between the two slides.
+
+## More auto-animate examples
+
+::: {style='font-size: 90%;'}
+
+The Growth pair changed several properties at once. Auto-animate isn't limited to any fixed list of attributes — it interpolates whatever CSS the matched element ends up with, so anything on the box that becomes a CSS property can be animated:
+
+- **Size** — `width`, `height`, `padding`, `value-font-size`, `min-height`… a box can grow *or* shrink
+- **Position** — move a box anywhere on the slide via `outer-extra-style="margin-left:...;"` (or any other positioning CSS)
+- **Colour** — `color`, `font-color`, `value-color`, `icon-color`, `delta-color`
+- **Anything else expressible as CSS** — opacity, rotation, border-radius — via the `*-extra-style` escape hatches from the previous section, since those pass straight through to the element's `style=`
+
+The next two pairs isolate shrink and movement on their own, so it's clear which attribute is driving which part of the animation.
+
+:::
+
+## Headline {auto-animate="true"}
+
+::: {.value-box data-id="shrink-demo" value="128%" value-font-size="4rem" width="70%" color="bg-purple" align="center"}
+Year-over-year growth
+:::
+
+## Headline {auto-animate="true"}
+
+::: {.value-box data-id="shrink-demo" value="128%" value-font-size="1.3rem" width="20%" padding="0.5rem" min-height="40px" color="bg-purple" align="center"}
+YoY growth
+:::
+
+Only `value-font-size`, `width`, `padding` and `min-height` changed between those two slides — the same headline stat condenses into a small summary tile, e.g. to make room as supporting detail appears elsewhere on the next slide of a real deck.
+
+```md
+## Headline {auto-animate="true"}
+
+::: {.value-box data-id="shrink-demo" value="128%" value-font-size="4rem" width="70%" color="bg-purple" align="center"}
+Year-over-year growth
+:::
+
+## Headline {auto-animate="true"}
+
+::: {.value-box data-id="shrink-demo" value="128%" value-font-size="1.3rem" width="20%" padding="0.5rem" min-height="40px" color="bg-purple" align="center"}
+YoY growth
+:::
+```
+
+## Focus {auto-animate="true"}
+
+::: {.value-box data-id="movement-demo" value="7" width="35%" color="bg-amber" icon="fa-solid fa-clock" icon-position="left"}
+Days until launch
+:::
+
+## Focus {auto-animate="true"}
+
+::: {.value-box data-id="movement-demo" outer-extra-style="margin-left:60%;" value="7" width="35%" color="bg-amber" icon="fa-solid fa-rocket" icon-position="left"}
+Days until launch
+:::
+
+Here only `outer-extra-style` and `icon` changed — same size, same colour, same value, just a different `margin-left` — so the box visibly slides across the slide with nothing else moving.
+
+```md
+## Focus {auto-animate="true"}
+
+::: {.value-box data-id="movement-demo" value="7" width="35%" color="bg-amber" icon="fa-solid fa-clock" icon-position="left"}
+Days until launch
+:::
+
+## Focus {auto-animate="true"}
+
+::: {.value-box data-id="movement-demo" outer-extra-style="margin-left:60%;" value="7" width="35%" color="bg-amber" icon="fa-solid fa-rocket" icon-position="left"}
+Days until launch
+:::
+```
