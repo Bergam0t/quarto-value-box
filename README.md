@@ -176,6 +176,10 @@ Changes are checked by a test suite that renders a set of fixtures to every supp
 
 This filter has been written with the help of Claude Sonnet 4.6, Claude Sonnet 5.0, Claude Opus 5.0, and Gemini 3.1 Pro.
 
-All AI-generated code has been thoroughly reviewed and tested before inclusion.
+All AI-generated code will always be thoroughly reviewed and tested before inclusion.
 
 We are happy to accept AI-supported contributions to the extension, but reserve the right to reject wholly AI generated pull requests which are not felt to add value to the project.
+
+
+A note about AI usage from Sammi:
+> I've been coding for over ten years, love the act of coding, and have significant concerns about the ethics and environmental impact of AI. However, I can't deny its utility as a solo maintainer when it comes to making all the features I want to include in my projects a reality. I hope you find these projects useful enough to help offset some of the downsides of AI, and will use them to help do some good in the world, or at least use them to claw back some of your time so you can spend more of it enjoying being human. For my part, I will continue to use AI critically and carefully, and try to make environmentally-conscious choices in my personal life to try and balance the scales.
