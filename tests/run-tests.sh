@@ -291,6 +291,13 @@ for fmt in "${formats[@]}"; do
           assert_count 1 "justify-content:flex-end"    "$out" "$fixture/$fmt valign=bottom"
           assert_count 1 "margin-right:-0.12em"        "$out" "$fixture/$fmt align=right gets the right optical bearing"
           assert_present 'class="value-box bg-teal"'   "$out" "$fixture/$fmt colour class reaches the wrapper"
+          # A color value (as opposed to a bg-* class) must become an inline
+          # background-color, not get concatenated into class="..." where it
+          # would match no stylesheet rule and silently do nothing.
+          assert_absent '#c8102e"'                     "$out" "$fixture/$fmt hex colour value is not appended to the class attribute"
+          assert_present "background-color:#c8102e;"   "$out" "$fixture/$fmt hex colour value becomes an inline background-color"
+          assert_absent 'var(--brand-color)"'           "$out" "$fixture/$fmt var() colour value is not appended to the class attribute"
+          assert_present "background-color:var(--brand-color);" "$out" "$fixture/$fmt var() colour value becomes an inline background-color"
           assert_present 'data-fragment-index="2"'     "$out" "$fixture/$fmt fragment index passes through"
           assert_present "fragment fade-in-then-semi-out" "$out" "$fixture/$fmt fragment=true expands to the default effect"
           assert_present "fragment fade-in-then-out"   "$out" "$fixture/$fmt explicit fragment effect passes through"

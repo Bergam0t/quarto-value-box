@@ -183,7 +183,16 @@ function Div(el)
     else
       icon_type = "bi"
     end
-    local color     = escape_attr(el.attributes["color"] or "bg-blue")
+    local color_raw = el.attributes["color"] or "bg-blue"
+    -- A leading #, rgb(/rgba(, hsl(/hsla(, or var( means this is a literal CSS
+    -- colour value, not one of the prespecified bg-* classes, and must become
+    -- an inline background-color instead of a class name (see README "CSS
+    -- class or value" note on color) — a raw value dropped into class="..."
+    -- matches no stylesheet rule and silently does nothing.
+    local color_is_value = color_raw:lower():match("^#") or color_raw:lower():match("^rgba?%(")
+      or color_raw:lower():match("^hsla?%(") or color_raw:lower():match("^var%(")
+    local color       = escape_attr(color_raw)
+    local color_class = color_is_value and "" or color
     local value     = el.attributes["value"] or ""
     local width     = escape_attr(el.attributes["width"] or "80%")
     local height    = escape_attr(el.attributes["height"] or "")
@@ -361,7 +370,8 @@ function Div(el)
       css_decl("height", height) ..
       css_decl("min-height", min_height) ..
       css_decl("padding", padding) ..
-      css_decl("text-align", align)
+      css_decl("text-align", align) ..
+      (color_is_value and css_decl("background-color", color) or "")
 
     local html_open
     if href ~= "" then
@@ -371,12 +381,12 @@ function Div(el)
       local link_display = outer_extra_style:find("display:flex", 1, true) and "" or "display:block; "
       html_open = string.format(
         '<a%s href="%s" class="value-box %s%s%s" style="%s%stext-decoration:none; cursor:pointer;%s"%s%s>',
-        id_attr, href, color, fragment_class, extra_classes, base_style, link_display, outer_extra_style, index_data, passthrough_attrs
+        id_attr, href, color_class, fragment_class, extra_classes, base_style, link_display, outer_extra_style, index_data, passthrough_attrs
       )
     else
       html_open = string.format(
         '<div%s class="value-box %s%s%s" style="%s%s"%s%s>',
-        id_attr, color, fragment_class, extra_classes, base_style, outer_extra_style, index_data, passthrough_attrs
+        id_attr, color_class, fragment_class, extra_classes, base_style, outer_extra_style, index_data, passthrough_attrs
       )
     end
 

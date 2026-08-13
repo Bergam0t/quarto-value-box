@@ -132,7 +132,7 @@ Like `.value-box` itself, `.value-box-row` passes through its own `#id`, extra c
 | `icon-position`       | `top` | `bottom` | `left` | `right` | `top`           | Where the icon is rendered relative to the box's content (the value and details together). Independent of `value-position`.                                                                                                                                                                                                                                                                      |
 | `value-position`      | `top` | `bottom` | `left` | `right` | `top`           | Where the value is rendered relative to the details text. Independent of `icon-position`.                                                                                                                                                                                                                                                                                                        |
 | `icon-color`          | string                              | `white`         | Colour of Font Awesome, Bootstrap Icons, Tabler Icons, Phosphor Icons, or Material Symbols. Ignored for image-based icons (`svg`, `png`). Accepts any valid CSS colour value.                                                                                                                                                                                                                     |
-| `color`               | string                              | `bg-blue`       | CSS class or value controlling the box background colour. Prespecified options are `bg-blue`, `bg-navy`, `bg-teal`, `bg-green`, `bg-olive`, `bg-amber`, `bg-orange`, `bg-red`, `bg-pink`, `bg-purple`, `bg-slate`, `bg-grey`. For details on changing or adding colours, see the [advanced customisation](https://github.com/Bergam0t/quarto_value_box?tab=readme-ov-file#colours) section below. |
+| `color`               | string                              | `bg-blue`       | CSS class or value controlling the box background colour. Prespecified options are `bg-blue`, `bg-navy`, `bg-teal`, `bg-green`, `bg-olive`, `bg-amber`, `bg-orange`, `bg-red`, `bg-pink`, `bg-purple`, `bg-slate`, `bg-grey`. A value starting with `#`, `rgb(`/`rgba(`, `hsl(`/`hsla(`, or `var(` is applied directly as the box's `background-color` instead, e.g. `color="#c8102e"` — anything else (including bare colour keywords like `red`) is treated as a class name. For details on changing or adding `bg-*` classes, see the [advanced customisation](https://github.com/Bergam0t/quarto_value_box?tab=readme-ov-file#colours) section below. |
 | `width`               | string                              | `80%`           | Width of the box. Accepts any valid CSS size unit, e.g. `50%`, `300px`.                                                                                                                                                                                                                                                                                                                           |
 | `height`              | string                              | `""`            | Height of the box. If omitted the box sizes to its content. Accepts any valid CSS size unit, e.g. `200px`.                                                                                                                                                                                                                                                                                        |
 | `min-height`          | string                              | `100px`         | Minimum height of the box; the actual rendered height is `max(height, min-height)`, so a small `height` below this floor is otherwise clamped back up to it. Lower this (e.g. `40px`) alongside `padding` to let a box shrink to fit tighter content on busy slides. Accepts any valid CSS size unit.                                                                                          |
@@ -167,6 +167,14 @@ Like `.value-box` itself, `.value-box-row` passes through its own `#id`, extra c
 ### Colours
 
 A range of colours are supported.
+
+For a one-off colour that doesn't need a reusable class, pass a CSS value straight to `color` instead of defining a new `.bg-*` class:
+
+```md
+::: {.value-box value="42" color="#c8102e"}
+Uses #c8102e as the background colour directly, no SCSS needed
+:::
+```
 
 To override in your project, add your own SCSS file and include it after the extension in your _quarto.yml. Quarto loads styles in order, so yours will win:
 

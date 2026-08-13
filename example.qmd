@@ -886,7 +886,7 @@ Local png file
 
 You can also change the `color` parameter. A number of predefined colours are available: bg-blue, bg-navy, bg-teal, bg-green, bg-olive, bg-amber, bg-orange, bg-red, bg-pink, bg-purple, bg-slate, bg-grey
 
-For details on how to change or add colours, see the [advanced customisation](https://github.com/Bergam0t/quarto-value-box?tab=readme-ov-file#colours) section in the readme.
+For details on how to change or add named colours, see the [advanced customisation](https://github.com/Bergam0t/quarto-value-box?tab=readme-ov-file#colours) section in the readme.
 </div>
 
 
@@ -967,7 +967,31 @@ bg-grey
 ::::
 
 
+## Box colours - custom
 
+`color` also accepts a raw CSS colour value directly — no new class needed — for anything starting with `#`, `rgb(`/`rgba(`, `hsl(`/`hsla(`, or `var(`.
+
+
+::: {.value-box-row columns="3"}
+
+::: {.value-box color="#c8102e" height="100px"}
+color="#c8102e"
+:::
+
+::: {.value-box color="rgb(200, 16, 200)" height="100px"}
+color="rgb(200, 16, 200)"
+:::
+
+::: {.value-box color="rgba(200, 16, 46, 0.3)" height="100px" font-color="black"}
+color="rgba(200, 16, 46, 0.3)"
+:::
+
+::: {.value-box color="hsl(13 74.5% 52.4%)" height="100px"}
+color="hsl(13 74.5% 52.4%)"
+:::
+
+
+:::
 
 
 

@@ -680,7 +680,7 @@
 <h2>Box colours</h2>
 <div style="font-size:50%;">
 <p>You can also change the <code>color</code> parameter. A number of predefined colours are available: bg-blue, bg-navy, bg-teal, bg-green, bg-olive, bg-amber, bg-orange, bg-red, bg-pink, bg-purple, bg-slate, bg-grey</p>
-<p>For details on how to change or add colours, see the <a href="https://github.com/Bergam0t/quarto-value-box?tab=readme-ov-file#colours">advanced customisation</a> section in the readme.</p>
+<p>For details on how to change or add named colours, see the <a href="https://github.com/Bergam0t/quarto-value-box?tab=readme-ov-file#colours">advanced customisation</a> section in the readme.</p>
 </div>
 <div class="columns">
 <div class="column" style="width:25%;">
@@ -724,6 +724,24 @@
 <p>bg-grey</p>
 </div></div></div>
 </div></div>
+</section>
+<section id="box-colours---custom" class="slide level2">
+<h2>Box colours - custom</h2>
+<p><code>color</code> also accepts a raw CSS colour value directly — no new class needed — for anything starting with <code>#</code>, <code>rgb(</code>/<code>rgba(</code>, <code>hsl(</code>/<code>hsla(</code>, or <code>var(</code>.</p>
+<div class="value-box-row" style="display:grid; grid-template-columns:repeat(3, 1fr); grid-auto-rows:1fr; gap:1.5rem; ">
+<div class="value-box " style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left; background-color:#c8102e;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>color=“#c8102e”</p>
+</div></div></div>
+<div class="value-box " style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left; background-color:rgb(200, 16, 200);  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>color=“rgb(200, 16, 200)”</p>
+</div></div></div>
+<div class="value-box " style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left; background-color:rgba(200, 16, 46, 0.3);  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:black; ">
+<p>color=“rgba(200, 16, 46, 0.3)”</p>
+</div></div></div>
+<div class="value-box " style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left; background-color:hsl(13 74.5% 52.4%);  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>color=“hsl(13 74.5% 52.4%)”</p>
+</div></div></div>
+</div>
 </section>
 <section id="width" class="slide level2">
 <h2>Width</h2>

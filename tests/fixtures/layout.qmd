@@ -47,6 +47,14 @@ Right aligned text, bottom aligned
 Sizing options
 :::
 
+::: {.value-box color="#c8102e" value="13"}
+Hex colour value
+:::
+
+::: {.value-box color="var(--brand-color)" value="14"}
+CSS variable colour value
+:::
+
 ::: {.value-box font-size="150%" value-font-size="3rem" font-color="yellow" value-color="fuchsia" icon-color="lime" icon="bi-star" value="10"}
 Font and colour options
 :::

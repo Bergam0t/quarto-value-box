@@ -1,6 +1,7 @@
 # v1.6.0
 
 - Add `.value-box-row` container: wrap a set of value boxes in `::: {.value-box-row}` for an equal-width, equal-height KPI strip, instead of hand-rolling `.columns`/`.column` scaffolding and hand-setting `height` on every box. With no `columns` attribute set, boxes lay out in a single non-wrapping row; set `columns="N"` to switch to a grid where extra boxes wrap onto further rows, with every row (not just each one individually) kept the same height. `gap` controls spacing (default `1.5rem`, matching a standalone box's own margin), and `extra-style` is an escape hatch for the row wrapper itself. Like `.value-box`, the row passes through its own `#id`, extra classes, and `data-*`/`aria-*`/`role`/`tabindex`/`lang` attributes
+- Fix: `color` now accepts a raw CSS colour value (`#hex`, `rgb()`/`rgba()`, `hsl()`/`hsla()`, `var()`), applied as an inline `background-color`, matching what the README already documented. Previously any such value was concatenated straight into the `class` attribute and silently did nothing
 
 # v1.5.0
 
