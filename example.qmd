@@ -993,8 +993,8 @@ color="rgba(200, 16, 46, 0.3)"
 color="hsl(13 74.5% 52.4%)"
 :::
 
-::: {.value-box color="hsla(13 74.5% 52.4% / 0.7)" height="100px"}
-color="hsla(13 74.5% 52.4% / 0.7)"
+::: {.value-box color="hsla(13 74.5% 52.4% / 0.5)" height="100px" font-color="black"}
+color="hsla(13 74.5% 52.4% / 0.5)"
 :::
 
 
@@ -1004,6 +1004,32 @@ color="var(--demo-brand-color)"
 
 
 :::
+
+## Box colours - brand.yml
+
+Quarto compiles a project's `_brand.yml` palette into CSS custom properties automatically, so `color` can reference it with `var(...)` too — no manual `<style>` block needed. On `revealjs`, `color.primary` becomes `--r-link-color` (already live on this deck's own theme, with no `_brand.yml` added here):
+
+::: {.value-box-row columns="2"}
+
+::: {.value-box color="var(--r-link-color)" height="100px"}
+color="var(--r-link-color)"
+:::
+
+::: {.value-box color="bg-grey" icon="bi-star" icon-color="var(--r-link-color)" height="100px"}
+icon-color="var(--r-link-color)"
+:::
+
+:::
+
+`icon-color`/`font-color`/`value-color`/`title-color`/`delta-color` accept `var(...)` the same way — they always render into an inline `style`, so they were never affected by the class/value ambiguity `color` had.
+
+On Bootstrap-based formats (`html`, `dashboard`) the whole brand palette is exposed the same way, not just the primary colour:
+
+```md
+::: {.value-box color="var(--bs-primary)" value="42"}
+Uses the brand's primary colour on an html/dashboard render
+:::
+```
 
 
 

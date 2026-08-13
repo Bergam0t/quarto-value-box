@@ -211,6 +211,22 @@ $brand-neutral:   #4a4f57;
 .bg-brand-neutral   { background-color: $brand-neutral;   color: white; }
 ```
 
+### Brand colours (`_brand.yml`)
+
+Quarto compiles a project's [`_brand.yml`](https://quarto.org/docs/authoring/brand.html) palette into CSS custom properties, so `color` (and `icon-color`/`font-color`/`value-color`/`title-color`/`delta-color`) can reference it with `var(...)` directly — no SCSS file or `.bg-*` class needed. What's available depends on the output format:
+
+- **Bootstrap-based formats** (`html`, `dashboard`): the whole palette is exposed at `:root` as `--bs-primary`, `--bs-secondary`, `--bs-success`, `--bs-danger`, `--bs-warning`, `--bs-info`, `--bs-light`, `--bs-dark`.
+
+  ```md
+  ::: {.value-box color="var(--bs-primary)" value="42"}
+  Picks up the brand's primary colour automatically
+  :::
+  ```
+
+- **`revealjs`**: only `color.primary` (→ `--r-link-color`) and `color.background`/`color.foreground` (→ `--r-background-color`/`--r-main-color`, `--r-heading-color`) come through as variables — other palette entries aren't exposed by the compiled theme, so they'd need the manual `<style>` bridge shown above if you want to key off them.
+
+`icon-color`, `font-color`, `value-color`, `title-color` and `delta-color` already accept `var(...)` (or any CSS colour) regardless of this filter's version — unlike `color`, they were never concatenated into a `class` attribute, so they've always rendered straight into an inline `style`.
+
 ### Contributing
 
 Please take a look at our [contributor guidance](CONTRIBUTING) and [code of conduct](CODE_OF_CONDUCT)
