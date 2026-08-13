@@ -1,0 +1,4 @@
+# Python deps for rendering example.qmd's live {python} cell (the
+# "Driven by computed data" example). Not used by the filter itself.
+jupyter>=1.0
+matplotlib>=3.7
