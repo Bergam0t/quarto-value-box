@@ -1533,30 +1533,10 @@ Fades in while zooming from small
 Fades in with a strikethrough
 :::
 
-::: {.value-box fragment="highlight-red" value="highlight-red" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
-Text turns red on entry
 :::
 
-::: {.value-box fragment="highlight-green" value="highlight-green" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
-Text turns green on entry
-:::
-
-::: {.value-box fragment="highlight-blue" value="highlight-blue" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
-Text turns blue on entry
-:::
-
-::: {.value-box fragment="highlight-current-red" value="highlight-current-red" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
-Red only while current
-:::
-
-::: {.value-box fragment="highlight-current-green" value="highlight-current-green" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
-Green only while current
-:::
-
-::: {.value-box fragment="highlight-current-blue" value="highlight-current-blue" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
-Blue only while current
-:::
-
+::: {style='font-size: 60%;'}
+Not shown: `highlight-red`/`-green`/`-blue` and their `highlight-current-*` variants. Reveal.js applies these by recolouring the fragment element's own `color`, but value boxes set `color` inline on the value/details text for contrast against `color`/`bg-*`, which overrides it — so these six have no visible effect on a value box and are unsupported here.
 :::
 
 
