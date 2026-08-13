@@ -116,9 +116,12 @@ it properly — would add tooling and dependencies out of proportion to a
 
 Be aware of what it costs you. A substring check cannot tell the difference
 between markup and prose (a fixture that *mentions* `font-size:;` in its body
-text will trip a naive search for it — this has already happened here), and it
-will happily match Quarto's own boilerplate. Scope your patterns tightly enough
-that only your filter's output can satisfy them.
+text will trip a naive search for it — this has already happened here, twice:
+once for `font-size:;` itself, and again for the literal string `data-role`
+appearing in a fixture's own sentence explaining what *not* double-prefixing
+means), and it will happily match Quarto's own boilerplate. Scope your
+patterns tightly enough that only your filter's output can satisfy them — when
+in doubt, anchor to the exact generated tag rather than a bare keyword.
 
 ## The one rule: a test that cannot fail is worse than no test
 
@@ -171,6 +174,23 @@ from a staged fixture, re-render, and confirm your checks go red. If a check
 still passes with no filter running, it is not testing this extension. This is
 what exposed the five tautological checks above, and it is worth re-running after
 any change to the runner.
+
+**The one case where removing the filter is not enough.** When a check is about
+an internal *mechanism* — this filter's own HTML-attribute escaping, say —
+removing the filter can produce a coincidentally identical result through a
+completely different path, and you will wrongly conclude the check is fine.
+This actually happened: an assertion that a double-quote in a passthrough
+attribute value gets escaped (blocking attribute injection, e.g. an
+`onmouseover=` handler smuggled in) still passed with the filter deleted,
+because Pandoc's own native div-to-HTML writer *also* escapes quotes correctly
+— a different, equally-safe code path producing matching output by luck, not a
+tautology in the usual sense but just as capable of hiding a broken check.
+The fix was to falsify the actual mechanism directly: temporarily replace
+`escape_attr()` with a no-op that returns its input unchanged, re-render, and
+confirm the check goes red. It did — the injected `onmouseover` became a live
+HTML attribute. If a check is about a specific function or code path rather
+than "did the filter run at all", mutate that function, not just the
+`filters:` key.
 
 ## Worked example: testing a new attribute
 

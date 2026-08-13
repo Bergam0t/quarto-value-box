@@ -47,6 +47,14 @@ Right aligned text, bottom aligned
 Sizing options
 :::
 
+::: {.value-box color="#c8102e" value="13"}
+Hex colour value
+:::
+
+::: {.value-box color="var(--brand-color)" value="14"}
+CSS variable colour value
+:::
+
 ::: {.value-box font-size="150%" value-font-size="3rem" font-color="yellow" value-color="fuchsia" icon-color="lime" icon="bi-star" value="10"}
 Font and colour options
 :::
@@ -55,6 +63,10 @@ Font and colour options
 
 ::: {.value-box href="https://example.com" value="11"}
 Wrapped in a link
+:::
+
+::: {.value-box href="https://example.com" target="_blank" value="11"}
+Wrapped in a link, opened in a new tab
 :::
 
 ::: {.value-box fragment="true" index="2" value="12"}
@@ -94,6 +106,57 @@ deliberate choice rather than a fallout.
 
 ::: {.value-box title="Bottomed" value-position="bottom" value="64"}
 Title above, value below
+:::
+
+## Delta
+
+::: {.value-box delta="+12%" value="17"}
+Delta with an inferred up arrow, no colour override
+:::
+
+::: {.value-box delta="-8%" delta-color="#ff5252" value="18"}
+Delta with an inferred down arrow and an explicit colour
+:::
+
+::: {.value-box delta="steady" value="19"}
+No sign and no delta-direction means no arrow at all
+:::
+
+::: {.value-box delta="0%" delta-direction="flat" value="20"}
+Explicit delta-direction overrides sign inference
+:::
+
+::: {.value-box delta="+5%" delta-font-size="1.3rem" delta-extra-style="font-style:italic;" value="21"}
+Delta size and extra-style hooks
+:::
+
+A delta is escaped like any other text, not treated as raw HTML the way
+value/title are — this must not become a live tag.
+
+::: {.value-box delta="<img src=x onerror=alert(1)>" value="22"}
+Delta cannot inject markup
+:::
+
+delta-direction is matched case-insensitively and, when set, overrides sign
+inference — a mixed-case "Down" here must win over the "+" in the delta text.
+
+::: {.value-box delta="+3%" delta-direction="Down" value="23"}
+Mixed-case delta-direction overrides an inferred arrow
+:::
+
+An unrecognised delta-direction shows no arrow, with a warning, rather than
+failing silently or crashing.
+
+::: {.value-box delta="5%" delta-direction="sideways" value="24"}
+Unrecognised delta-direction
+:::
+
+value-position="left"/"right" gives the value+delta pair flex-shrink:0 so it
+holds its size next to details under space pressure, the same protection the
+value alone already gets without a delta.
+
+::: {.value-box icon="bi-star" icon-size="1.5rem" value-position="left" delta="+9%" value="25"}
+Delta combined with value-position=left
 :::
 
 ## Explicitly blanked attributes

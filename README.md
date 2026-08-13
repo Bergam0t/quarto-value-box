@@ -67,7 +67,60 @@ Here's a more advanced type of box with an icon and some formatting, but no valu
 ## [Customisation](#customisation)
 
 > [!NOTE]
-> `title` and `value` are inserted into the page as raw HTML. Inline tags work — `value="<b>42</b>"` renders bold — but **markdown is not processed**, so `title="**Q4** revenue"` renders the asterisks literally. This differs from Quarto's own callout `title=`, which does parse markdown. The main content of the box (everything between the `:::` fences) is ordinary markdown as usual.
+> `title` and `value` are inserted into the page as raw HTML. Inline tags work — `value="<b>42</b>"` renders bold — but **markdown is not processed**, so `title="**Q4** revenue"` renders the asterisks literally. This differs from Quarto's own callout `title=`, which does parse markdown. The main content of the box (everything between the `:::` fences) is ordinary markdown as usual. `delta` is plain text, not raw HTML — any markup in it is escaped and shown literally.
+>
+> A screen reader has no way to know a `delta` is a change *relative to* the `value` next to it beyond the order the two are read in — there's no automatic "increase of" or "compared to last quarter" narration. Write `delta` so it stands on its own, e.g. `delta="+12% vs last quarter"` rather than just `delta="+12%"`, if that context matters for your audience.
+
+Beyond the parameters below, an `#id` and any extra `.classes` on a value box pass through onto the rendered box, along with `data-*`/`aria-*` attributes and `role`/`tabindex`/`lang`.
+
+```md
+::: {#kpi-1 .value-box value="42" role="group" aria-label="Sales this quarter" data-id="kpi-1"}
+Useful for revealjs auto-animate (`data-id`), crossref targets (`#id`), your own CSS hooks (extra classes), and ARIA attributes.
+:::
+```
+
+Anything outside that list is left off rather than renamed to a `data-` attribute — an attribute that would have worked on a plain Pandoc div (`onclick`, say) is not silently turned into one that doesn't. A literal `style` attribute is dropped, with a warning, rather than colliding with the `style` the box itself generates — use `outer-extra-style` instead.
+
+> [!WARNING]
+> Class-driven Quarto/revealjs features that work by a *filter* rewriting attributes on the div — `.absolute` positioning is the main example — do **not** work on a value box. The div is already replaced with raw HTML by the time those filters would run, so the class survives but the behaviour it triggers does not.
+
+### Row / grid layout
+
+Wrap a set of value boxes in `::: {.value-box-row}` to lay them out with equal width and equal height — the usual "KPI strip" you'd otherwise get by hand-rolling `.columns`/`.column` scaffolding and hand-setting `height` on every box.
+
+```md
+::: {.value-box-row}
+
+::: {.value-box value="128" color="bg-teal"}
+Signups this week
+:::
+
+::: {.value-box value="42" color="bg-amber"}
+Open tickets
+:::
+
+::: {.value-box value="99%" color="bg-green"}
+Uptime
+:::
+
+:::
+```
+
+With no `columns` set, boxes lay out in a single row that doesn't wrap — the common case. Set `columns` to switch to a grid that wraps extra boxes onto further rows once it's full, with every row (not just each individual row) kept the same height:
+
+```md
+::: {.value-box-row columns="3"}
+<!-- six boxes here wrap into two rows of three, each row equal height -->
+:::
+```
+
+Like `.value-box` itself, `.value-box-row` passes through its own `#id`, extra classes, and `data-*`/`aria-*`/`role`/`tabindex`/`lang` attributes; a literal `style` attribute is dropped (with a warning) — use `extra-style` instead.
+
+| Parameter    | Type    | Default    | Description                                                                                                                                    |
+| ------------ | ------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `columns`    | number  | `""`       | Number of columns in the grid. If omitted, boxes lay out in a single non-wrapping row instead — one column per box, no count needed.             |
+| `gap`        | string  | `1.5rem`   | Spacing between boxes, both between columns and (when `columns` wraps) between rows. Accepts any valid CSS size unit.                            |
+| `extra-style`| string  | `""`       | Additional CSS styles applied to the row wrapper itself. Useful for advanced customisation beyond the built-in options.                          |
 
 | Parameter             | Type                                | Default         | Description                                                                                                                                                                                                                                                                                                                                                                                       |
 | --------------------- | ----------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -79,7 +132,7 @@ Here's a more advanced type of box with an icon and some formatting, but no valu
 | `icon-position`       | `top` | `bottom` | `left` | `right` | `top`           | Where the icon is rendered relative to the box's content (the value and details together). Independent of `value-position`.                                                                                                                                                                                                                                                                      |
 | `value-position`      | `top` | `bottom` | `left` | `right` | `top`           | Where the value is rendered relative to the details text. Independent of `icon-position`.                                                                                                                                                                                                                                                                                                        |
 | `icon-color`          | string                              | `white`         | Colour of Font Awesome, Bootstrap Icons, Tabler Icons, Phosphor Icons, or Material Symbols. Ignored for image-based icons (`svg`, `png`). Accepts any valid CSS colour value.                                                                                                                                                                                                                     |
-| `color`               | string                              | `bg-blue`       | CSS class or value controlling the box background colour. Prespecified options are `bg-blue`, `bg-navy`, `bg-teal`, `bg-green`, `bg-olive`, `bg-amber`, `bg-orange`, `bg-red`, `bg-pink`, `bg-purple`, `bg-slate`, `bg-grey`. For details on changing or adding colours, see the [advanced customisation](https://github.com/Bergam0t/quarto_value_box?tab=readme-ov-file#colours) section below. |
+| `color`               | string                              | `bg-blue`       | CSS class or value controlling the box background colour. Prespecified options are `bg-blue`, `bg-navy`, `bg-teal`, `bg-green`, `bg-olive`, `bg-amber`, `bg-orange`, `bg-red`, `bg-pink`, `bg-purple`, `bg-slate`, `bg-grey`. A value starting with `#`, `rgb(`/`rgba(`, `hsl(`/`hsla(`, or `var(` is applied directly as the box's `background-color` instead, e.g. `color="#c8102e"` — anything else (including bare colour keywords like `red`) is treated as a class name. For details on changing or adding `bg-*` classes, see the [advanced customisation](https://github.com/Bergam0t/quarto_value_box?tab=readme-ov-file#colours) section below. |
 | `width`               | string                              | `80%`           | Width of the box. Accepts any valid CSS size unit, e.g. `50%`, `300px`.                                                                                                                                                                                                                                                                                                                           |
 | `height`              | string                              | `""`            | Height of the box. If omitted the box sizes to its content. Accepts any valid CSS size unit, e.g. `200px`.                                                                                                                                                                                                                                                                                        |
 | `min-height`          | string                              | `100px`         | Minimum height of the box; the actual rendered height is `max(height, min-height)`, so a small `height` below this floor is otherwise clamped back up to it. Lower this (e.g. `40px`) alongside `padding` to let a box shrink to fit tighter content on busy slides. Accepts any valid CSS size unit.                                                                                          |
@@ -88,6 +141,12 @@ Here's a more advanced type of box with an icon and some formatting, but no valu
 | `value-font-size`     | string                              | `2.2rem`        | Font size used for the `value` displayed above the main content. Accepts any valid CSS size unit.                                                                                                                                                                                                                                                                                                 |
 | `font-color`          | string                              | `white`         | Text colour used for the main content. Accepts any valid CSS colour value.                                                                                                                                                                                                                                                                                                                        |
 | `value-color`         | string                              | `font-color`    | Text colour used for the `value`. Defaults to the same colour as `font-color`. Accepts any valid CSS colour value.                                                                                                                                                                                                                                                                                |
+| `delta`               | string                              | `""`            | A small trend indicator rendered next to the `value`, e.g. `delta="+12%"`. Plain text, not raw HTML (see the note above) — any markup is shown literally rather than rendered.                                                                                                                                                                                                                   |
+| `delta-direction`     | `up` \| `down` \| `flat`              | auto            | Which arrow glyph to show next to `delta`, matched case-insensitively. If omitted, it's inferred from a leading `+` (up) or `-` (down) in `delta`; anything else — including an ASCII `+`/`-` further into the string, a typographic minus, or a worded/parenthetical convention like `"12% decrease"` or `"(12%)"` — shows no arrow. An unrecognised `delta-direction` value also shows no arrow, with a warning. Colour is **not** inferred from direction — set `delta-color` yourself, since "up" isn't always good news (a falling cost, say).                                                                                                          |
+| `delta-color`         | string                              | inherited       | Text colour used for `delta`. Unset by default, so it inherits the surrounding text colour — set this explicitly for a semantic red/green treatment. Accepts any valid CSS colour value.                                                                                                                                                                                                        |
+| `delta-font-size`     | string                              | `1rem`          | Font size used for `delta`. The default comes from the extension's stylesheet rather than being set inline, so your own CSS can restyle it without needing `!important`. Accepts any valid CSS size unit.                                                                                                                                                                                        |
+| `delta-extra-style`   | string                              | `""`            | Additional CSS styles applied to the `delta` element. Useful for advanced customisation beyond the built-in options.                                                                                                                                                                                                                                                                              |
+| `value-row-extra-style` | string                            | `""`            | Additional CSS styles applied to the wrapper around `value` and `delta` — only present when `delta` is set. Useful for advanced customisation beyond the built-in options.                                                                                                                                                                                                                       |
 | `title-font-size`     | string                              | `0.9rem`        | Font size used for the `title`. The default comes from the extension's stylesheet rather than being set inline, so your own CSS can restyle titles without needing `!important`. Accepts any valid CSS size unit.                                                                                                                                                                                        |
 | `title-color`         | string                              | `font-color`    | Text colour used for the `title`. Defaults to the same colour as `font-color`. Accepts any valid CSS colour value.                                                                                                                                                                                                                                                                               |
 | `align`               | `left` \| `center` \| `right`         | `left`          | Horizontal text alignment within the box.                                                                                                                                                                                                                                                                                                                                                         |
@@ -98,7 +157,8 @@ Here's a more advanced type of box with an icon and some formatting, but no valu
 | `value-extra-style`   | string                              | `""`            | Additional CSS styles applied to the `value` element. Useful for advanced customisation beyond the built-in options.                                                                                                                                                                                                                                                                              |
 | `title-extra-style`   | string                              | `""`            | Additional CSS styles applied to the `title` element. Useful for advanced customisation beyond the built-in options.                                                                                                                                                                                                                                                                              |
 | `icon-extra-style`    | string                              | `""`            | Additional CSS styles applied to the icon element. Useful for advanced customisation beyond the built-in options.                                                                                                                                                                                                                                                                                 |
-| `href`                | string                              | `""`            | If provided, wraps the entire box in a link.                                                                                                                                                                                                                                                                                                                                                      |
+| `href`                | string                              | `""`            | If provided, wraps the entire box in a link, and gives it a subtle hover lift/shadow (static boxes with no `href` don't get it).                                                                                                                                                                                                                                                                 |
+| `target`              | string                              | `""`            | Sets the link's `target`, e.g. `target="_blank"` to open in a new tab. Only meaningful alongside `href`. Automatically also sets `data-preview-link="false"` so Reveal.js's `preview-links` option (if enabled) doesn't hijack the click and open the href in an in-slide iframe instead; `target="_blank"` additionally gets `rel="noopener noreferrer"`.                                     |
 | `fragment`            | string | `true`                     | Enables Reveal.js fragment animation. Set to `true` for the default `fade-in-then-semi-out` animation, or provide any valid Reveal.js fragment class (see [https://quarto.org/docs/presentations/revealjs/advanced.html#fragment-classes](https://quarto.org/docs/presentations/revealjs/advanced.html#fragment-classes)). If providing one of the Reveal.js fragment classes, format this argument like `fragment=".fade-in"`.                                                                        |
 | `index`               | string                              | `""`              | Sets the `data-fragment-index` for controlling Reveal.js fragment ordering. Ensure to pass as a string (e.g. "1", "2").                                                                                                                                                                                                                                                                                                                       |
 
@@ -108,6 +168,14 @@ Here's a more advanced type of box with an icon and some formatting, but no valu
 ### Colours
 
 A range of colours are supported.
+
+For a one-off colour that doesn't need a reusable class, pass a CSS value straight to `color` instead of defining a new `.bg-*` class:
+
+```md
+::: {.value-box value="42" color="#c8102e"}
+Uses #c8102e as the background colour directly, no SCSS needed
+:::
+```
 
 To override in your project, add your own SCSS file and include it after the extension in your _quarto.yml. Quarto loads styles in order, so yours will win:
 
@@ -144,6 +212,38 @@ $brand-neutral:   #4a4f57;
 .bg-brand-neutral   { background-color: $brand-neutral;   color: white; }
 ```
 
+### Brand colours (`_brand.yml`)
+
+Quarto compiles a project's [`_brand.yml`](https://quarto.org/docs/authoring/brand.html) palette into CSS custom properties, so `color` (and `icon-color`/`font-color`/`value-color`/`title-color`/`delta-color`) can reference it with `var(...)` directly — no SCSS file or `.bg-*` class needed.
+
+Every format exports every resolved theme/brand value as a `--quarto-scss-export-<name>` custom property, including one per palette entry under a `brand-` prefix — so a palette key maps onto a variable of the same name, in every format, without needing to know format-internal names like Bootstrap's `--bs-*` or reveal.js's own `--r-link-color`:
+
+```yaml
+# _brand.yml
+color:
+  palette:
+    accent: "#3d6a9e"
+  primary: accent
+```
+
+```md
+::: {.value-box color="var(--quarto-scss-export-brand-accent)" value="42"}
+Picks up the brand's "accent" palette colour by name, in every format
+:::
+```
+
+The semantic roles (`primary`, `secondary`, `success`, ...) are exported the same way, as `--quarto-scss-export-primary` etc. Bootstrap-based formats (`html`, `dashboard`) additionally expose those same roles under Bootstrap's own names (`--bs-primary`, `--bs-secondary`, ...), if you'd rather use those instead.
+
+To find the exact variable name for any brand or theme value without reading Quarto's SCSS source, render once and grep the compiled theme CSS for the `--quarto-scss-export-` prefix:
+
+```sh
+grep -o -- "--quarto-scss-export-[a-zA-Z0-9_-]*:[^;]*" path/to/theme.css
+```
+
+— for `revealjs` that file is under `<doc>_files/libs/revealjs/dist/theme/quarto-*.css`; for `html`/`dashboard` it's `<doc>_files/libs/bootstrap/bootstrap-*.min.css`.
+
+`icon-color`, `font-color`, `value-color`, `title-color` and `delta-color` already accept `var(...)` (or any CSS colour) regardless of this filter's version — unlike `color`, they were never concatenated into a `class` attribute, so they've always rendered straight into an inline `style`.
+
 ### Contributing
 
 Please take a look at our [contributor guidance](CONTRIBUTING) and [code of conduct](CODE_OF_CONDUCT)
@@ -155,6 +255,10 @@ Changes are checked by a test suite that renders a set of fixtures to every supp
 
 This filter has been written with the help of Claude Sonnet 4.6, Claude Sonnet 5.0, Claude Opus 5.0, and Gemini 3.1 Pro.
 
-All AI-generated code has been thoroughly reviewed and tested before inclusion.
+All AI-generated code will always be thoroughly reviewed and tested before inclusion.
 
 We are happy to accept AI-supported contributions to the extension, but reserve the right to reject wholly AI generated pull requests which are not felt to add value to the project.
+
+
+A note about AI usage from Sammi:
+> I've been coding for over ten years, love the act of coding, and have significant concerns about the ethics and environmental impact of AI. However, I can't deny its utility as a solo maintainer when it comes to making all the features I want to include in my projects a reality. I hope you find these projects useful enough to help offset some of the downsides of AI, and will use them to help do some good in the world, or at least use them to claw back some of your time so you can spend more of it enjoying being human. For my part, I will continue to use AI critically and carefully, and I will try to make environmentally-conscious choices in my personal life to help balance the scales.

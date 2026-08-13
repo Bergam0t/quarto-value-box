@@ -16,17 +16,31 @@ concurrency:
 
 jobs:
   render:
-    name: ${{ matrix.os }} / quarto ${{ matrix.quarto }}
+    name: ${{ matrix.os }} / quarto ${{ matrix.quarto }}${{ !matrix.tinytex && ' (no PDF)' || '' }}
     runs-on: ${{ matrix.os }}
-    # Four legs, each installing TinyTeX and compiling PDFs; Windows runners
-    # are slower and bill at 2x. Generous enough to absorb a slow CTAN mirror,
-    # tight enough to fail in minutes rather than hours.
+    # Three legs. TinyTeX/PDF-compile only runs on one of them: it is the only
+    # check that catches a corrupted LaTeX preamble (rendering to "latex"
+    # exits 0 even when the .tex will not compile), but that failure mode
+    # lives in the filter's Lua, not in the OS or Quarto channel, so one leg
+    # covers it. The other two skip it (--no-pdf) to stay fast — a Windows
+    # PDF-compile failure isn't a plausible bug class for a filter that emits
+    # no LaTeX. windows-latest/pre-release is dropped entirely: it would only
+    # add OS coverage already given by windows-latest/release and channel
+    # coverage already given by ubuntu-latest/pre-release.
     timeout-minutes: 40
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        quarto: [release, pre-release]
+        include:
+          - os: ubuntu-latest
+            quarto: release
+            tinytex: true
+          - os: ubuntu-latest
+            quarto: pre-release
+            tinytex: false
+          - os: windows-latest
+            quarto: release
+            tinytex: false
 
     steps:
       - uses: actions/checkout@v4
@@ -34,16 +48,13 @@ jobs:
       - uses: quarto-dev/quarto-actions/setup@v2
         with:
           version: ${{ matrix.quarto }}
-          # The PDF leg needs a LaTeX toolchain. It is the slowest part of the
-          # matrix and also the only check that catches a corrupted preamble:
-          # rendering to "latex" exits 0 even when the .tex will not compile.
-          tinytex: true
+          tinytex: ${{ matrix.tinytex }}
 
       # The runner also builds example.qmd, so this covers the project's
       # long-standing bar of "the demo deck renders".
       - name: Run the test matrix
         shell: bash
-        run: bash tests/run-tests.sh
+        run: bash tests/run-tests.sh${{ !matrix.tinytex && ' --no-pdf' || '' }}
 
       - name: Upload rendered output on failure
         if: failure()

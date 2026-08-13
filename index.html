@@ -107,7 +107,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="example_files/libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <link rel="stylesheet" href="example_files/libs/revealjs/dist/theme/quarto-e686783945f3be46170f3014cf112ac9.css">
   <link href="example_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="example_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="example_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -211,9 +211,14 @@
 </div>
 
 </section>
+<section>
+<section id="the-basics" class="title-slide slide level1 center">
+<h1>The Basics</h1>
+
+</section>
 <section id="simple-boxes" class="slide level2">
 <h2>Simple boxes</h2>
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p><strong>Value boxes</strong></p>
 <p>A simple value box can help make points stand out…</p>
 </div></div></div>
@@ -226,7 +231,7 @@
 <section id="values" class="slide level2">
 <h2>Values</h2>
 <p>Or display a metric</p>
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">60</div><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">60</div><div class="details" style="color:white; ">
 <p>Number of bibbles bobbled this week</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="" aria-label="1"></a>::: {.value-box value=60}</span>
@@ -236,7 +241,7 @@
 <section id="icons" class="slide level2">
 <h2>Icons</h2>
 <p>Or display a metric with an icon</p>
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-arrow-down-up" style="font-size:3rem; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">60</div><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left bi bi-arrow-down-up" style="font-size:3rem; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">60</div><div class="details" style="color:white; ">
 <p>Number of bibbles bobbled this week</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="" aria-label="1"></a>::: {.value-box value=60 icon="bi-arrow-down-up" icon-size="3rem"}</span>
@@ -245,7 +250,7 @@
 </section>
 <section id="center-alignment" class="slide level2">
 <h2>Center Alignment</h2>
-<div class="value-box bg-amber" style="width:60%; min-height:100px; padding:1.5rem; text-align:center;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-arrow-down-up" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-amber" style="--vb-width:60%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:center; --vb-justify-content:center; "><i class="icon bi bi-arrow-down-up" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>Here’s a more advanced type of box with an icon and some formatting, but no value</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-arrow-down-up" color="bg-amber" width="60%" align="center"}</span>
@@ -257,7 +262,7 @@
 <p>A <code>title</code> adds a small label above the value — useful when the value alone needs naming.</p>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-arrow-down-up" style="font-size:2em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="title" style="color:white; ">Bibbles bobbled</div><div class="value" style="font-size:2.2rem; color:white; ">60</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon bi bi-arrow-down-up" style="font-size:2em; color:white; "></i><div class="vb-content" style=""><div class="title" style="color:white; ">Bibbles bobbled</div><div class="value" style="font-size:2.2rem; color:white; ">60</div><div class="details" style="color:white; ">
 <p>This week</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
@@ -267,7 +272,7 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-purple" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="title" style="font-size:1.3rem; color:#ffd54f; ">Styled title</div><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box bg-purple" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="font-size:1.3rem; color:#ffd54f; ">Styled title</div><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p><strong>title-color</strong> and <strong>title-font-size</strong> work like their value equivalents</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
@@ -276,107 +281,267 @@
 <span id="cb6-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
-<section id="fragment-types" class="slide level2">
-<h2>Fragment types</h2>
+<section id="delta-trend-indicator" class="slide level2">
+<h2>Delta / trend indicator</h2>
+<p>A <code>delta</code> renders a small badge next to the value, e.g.&nbsp;a change since the last period. The arrow is inferred from a leading <code>+</code>/<code>-</code> in the text unless <code>delta-direction</code> is set explicitly.</p>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-olive fragment fade-in-then-semi-out" style="width:60%; min-height:100px; padding:1.5rem; text-align:center;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-arrow-down-up" style="font-size:2rem; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">Big text</div><div class="details" style="color:white; ">
-<p>We can use them with special named fragment types like ‘fade in, then semi out’ (this is also the default if you set fragment=“true”)</p>
+<div class="value-box bg-green" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Revenue</div><div class="vb-value-row" style=""><div class="value" style="font-size:2.2rem; color:white; ">$1.2M</div><div class="delta" style=""><span class="delta-arrow" aria-hidden="true">▲</span> +12%</div></div><div class="details" style="color:white; ">
+<p>This quarter</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="" aria-label="1"></a>::: {.value-box fragment="fade-in-then-semi-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}</span>
-<span id="cb7-2"><a href="" aria-label="2"></a>We can use them with special named fragment types like 'fade in, then semi out'</span>
-<span id="cb7-3"><a href="" aria-label="3"></a>(this is also the default if you set fragment="true")</span>
-<span id="cb7-4"><a href="" aria-label="4"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="" aria-label="1"></a>::: {.value-box title="Revenue" value="$1.2M" delta="+12%" color="bg-green"}</span>
+<span id="cb7-2"><a href="" aria-label="2"></a>This quarter</span>
+<span id="cb7-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
+<p><code>delta-color</code> is never inferred from direction, because “up” is not always good news — a rising cost and a falling cost are both “up” or “down” depending on which one you’re looking at. Set the colour explicitly for a semantic red/green treatment:</p>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-olive fragment fade-in-then-out" style="width:60%; min-height:100px; padding:1.5rem; text-align:center;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-arrow-down-up" style="font-size:2rem; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">Big text</div><div class="details" style="color:white; ">
-<p>Or standard fragments</p>
+<div class="value-box bg-navy" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Operating cost</div><div class="vb-value-row" style=""><div class="value" style="font-size:2.2rem; color:white; ">$430K</div><div class="delta" style="color:#8bc34a; "><span class="delta-arrow" aria-hidden="true">▼</span> -8%</div></div><div class="details" style="color:white; ">
+<p>Lower is better here, so a fall is shown in green</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="" aria-label="1"></a>::: {.value-box fragment="fade-in-then-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}</span>
-<span id="cb8-2"><a href="" aria-label="2"></a>Or standard fragments</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="" aria-label="1"></a>::: {.value-box title="Operating cost" value="$430K" delta="-8%" delta-color="#8bc34a" color="bg-navy"}</span>
+<span id="cb8-2"><a href="" aria-label="2"></a>Lower is better here, so a fall is shown in green</span>
 <span id="cb8-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
+</section>
+<section id="linked-boxes" class="slide level2">
+<h2>Linked boxes</h2>
+<p>Set <code>href</code> to wrap the whole box in a link — it gets a subtle hover lift/shadow (static boxes don’t wobble). Add <code>target="_blank"</code> to open it in a new tab; that automatically adds <code>rel="noopener noreferrer"</code> too.</p>
+<p>Hover over the box below to see it lift:</p>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="fragment">
-<p>Tada!</p>
-</div>
+<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" data-preview-link="false" rel="noopener noreferrer" class="value-box bg-slate" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:center; --vb-justify-content:center; "><i class="icon fa-solid fa-book" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="title" style="color:white; ">Documentation</div><div class="value" style="font-size:2.2rem; color:white; ">README</div><div class="details" style="color:white; ">
+<p>Opens in a new tab</p>
+</div></div></a>
 </div><div class="column" style="width:60%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="" aria-label="1"></a>:::{.fragment}</span>
-<span id="cb9-2"><a href="" aria-label="2"></a>Tada!</span>
-<span id="cb9-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="" aria-label="1"></a>::: {.value-box title="Documentation" value="README"</span>
+<span id="cb9-2"><a href="" aria-label="2"></a>  href="https://github.com/Bergam0t/quarto-value-box?tab=readme-ov-file"</span>
+<span id="cb9-3"><a href="" aria-label="3"></a>  target="_blank" icon="bi-box-arrow-up-right" color="bg-slate"}</span>
+<span id="cb9-4"><a href="" aria-label="4"></a>Opens in a new tab</span>
+<span id="cb9-5"><a href="" aria-label="5"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
+</section></section>
+<section>
+<section id="layout" class="title-slide slide level1 center">
+<h1>Layout</h1>
+
 </section>
-<section id="complex-icon-box-layouts-with-index-parameter" class="slide level2">
-<h2>Complex icon box layouts with index parameter</h2>
-<p>By using the ‘index’ parameter, we can determine the order that fragments appear by passing a number that indicates the order.</p>
+<section id="row-layout" class="slide level2">
+<h2>Row layout</h2>
+<div style="font-size: 75%;">
+<p>Wrap value boxes in <code>.value-box-row</code> for an equal-width, equal-height KPI strip — no more hand-rolling <code>.columns</code>/<code>.column</code> scaffolding or hand-setting <code>height</code> on every box to make them match. With no <code>columns</code> set, boxes lay out in a single non-wrapping row:</p>
+</div>
+<div class="value-box-row" style="--vb-row-gap:1.5rem; ">
+<div class="value-box bg-teal" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">128</div><div class="details" style="color:white; ">
+<p>Signups this week — a longer line of detail text here to show the other boxes stretch to match its height</p>
+</div></div></div>
+<div class="value-box bg-amber" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<p>Open tickets</p>
+</div></div></div>
+<div class="value-box bg-green" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">99%</div><div class="details" style="color:white; ">
+<p>Uptime</p>
+</div></div></div>
+</div>
+<div style="font-size: 80%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="" aria-label="1"></a>::: {.value-box-row}</span>
+<span id="cb10-2"><a href="" aria-label="2"></a></span>
+<span id="cb10-3"><a href="" aria-label="3"></a>::: {.value-box value="128" color="bg-teal"}</span>
+<span id="cb10-4"><a href="" aria-label="4"></a>Signups this week</span>
+<span id="cb10-5"><a href="" aria-label="5"></a>:::</span>
+<span id="cb10-6"><a href="" aria-label="6"></a></span>
+<span id="cb10-7"><a href="" aria-label="7"></a>::: {.value-box value="42" color="bg-amber"}</span>
+<span id="cb10-8"><a href="" aria-label="8"></a>Open tickets</span>
+<span id="cb10-9"><a href="" aria-label="9"></a>:::</span>
+<span id="cb10-10"><a href="" aria-label="10"></a></span>
+<span id="cb10-11"><a href="" aria-label="11"></a>::: {.value-box value="99%" color="bg-green"}</span>
+<span id="cb10-12"><a href="" aria-label="12"></a>Uptime</span>
+<span id="cb10-13"><a href="" aria-label="13"></a>:::</span>
+<span id="cb10-14"><a href="" aria-label="14"></a></span>
+<span id="cb10-15"><a href="" aria-label="15"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="grid-layout" class="slide level2">
+<h2>Grid layout</h2>
+<p>Set <code>columns</code> to switch to a grid: extra boxes wrap onto further rows once it’s full, with every row — not just each one individually — kept the same height.</p>
+<div class="value-box-row vb-row-grid" style="--vb-row-columns:3; --vb-row-gap:1.5rem; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Team A</div><div class="value" style="font-size:2.2rem; color:white; ">12</div><div class="details" style="color:white; ">
+<p>Wins this season — a much longer line of detail text, to show every row in the grid stretches to match the tallest box anywhere in it</p>
+</div></div></div>
+<div class="value-box bg-purple" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Team B</div><div class="value" style="font-size:2.2rem; color:white; ">9</div><div class="details" style="color:white; ">
+<p>Wins</p>
+</div></div></div>
+<div class="value-box bg-red" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Team C</div><div class="value" style="font-size:2.2rem; color:white; ">15</div><div class="details" style="color:white; ">
+<p>Wins</p>
+</div></div></div>
+<div class="value-box bg-olive" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Team D</div><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
+<p>Wins</p>
+</div></div></div>
+<div class="value-box bg-slate" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Team E</div><div class="value" style="font-size:2.2rem; color:white; ">11</div><div class="details" style="color:white; ">
+<p>Wins</p>
+</div></div></div>
+<div class="value-box bg-pink" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Team F</div><div class="value" style="font-size:2.2rem; color:white; ">4</div><div class="details" style="color:white; ">
+<p>Wins</p>
+</div></div></div>
+</div>
+</section>
+<section id="grid-layout---code" class="slide level2">
+<h2>Grid Layout - Code</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="" aria-label="1"></a>::: {.value-box-row columns="3"}</span>
+<span id="cb11-2"><a href="" aria-label="2"></a></span>
+<span id="cb11-3"><a href="" aria-label="3"></a>::: {.value-box value="12" color="bg-blue" title="Team A"}</span>
+<span id="cb11-4"><a href="" aria-label="4"></a>Wins this season</span>
+<span id="cb11-5"><a href="" aria-label="5"></a>:::</span>
+<span id="cb11-6"><a href="" aria-label="6"></a></span>
+<span id="cb11-7"><a href="" aria-label="7"></a>::: {.value-box value="9" color="bg-purple" title="Team B"}</span>
+<span id="cb11-8"><a href="" aria-label="8"></a>Wins</span>
+<span id="cb11-9"><a href="" aria-label="9"></a>:::</span>
+<span id="cb11-10"><a href="" aria-label="10"></a></span>
+<span id="cb11-11"><a href="" aria-label="11"></a>::: {.value-box value="15" color="bg-red" title="Team C"}</span>
+<span id="cb11-12"><a href="" aria-label="12"></a>Wins</span>
+<span id="cb11-13"><a href="" aria-label="13"></a>:::</span>
+<span id="cb11-14"><a href="" aria-label="14"></a></span>
+<span id="cb11-15"><a href="" aria-label="15"></a>::: {.value-box value="7" color="bg-olive" title="Team D"}</span>
+<span id="cb11-16"><a href="" aria-label="16"></a>Wins</span>
+<span id="cb11-17"><a href="" aria-label="17"></a>:::</span>
+<span id="cb11-18"><a href="" aria-label="18"></a></span>
+<span id="cb11-19"><a href="" aria-label="19"></a>::: {.value-box value="11" color="bg-slate" title="Team E"}</span>
+<span id="cb11-20"><a href="" aria-label="20"></a>Wins</span>
+<span id="cb11-21"><a href="" aria-label="21"></a>:::</span>
+<span id="cb11-22"><a href="" aria-label="22"></a></span>
+<span id="cb11-23"><a href="" aria-label="23"></a>::: {.value-box value="4" color="bg-pink" title="Team F"}</span>
+<span id="cb11-24"><a href="" aria-label="24"></a>Wins</span>
+<span id="cb11-25"><a href="" aria-label="25"></a>:::</span>
+<span id="cb11-26"><a href="" aria-label="26"></a></span>
+<span id="cb11-27"><a href="" aria-label="27"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="width" class="slide level2">
+<h2>Width</h2>
+<p>We can manually override the width.</p>
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-brands fa-python" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<p>No width specified - defaults to 80% of container</p>
+</div></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
+<span id="cb12-2"><a href="" aria-label="2"></a>No width specified - defaults to 80% of container</span>
+<span id="cb12-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:30%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-brands fa-python" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<p>Width of 30% specified.</p>
+</div></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" width="30%"}</span>
+<span id="cb13-2"><a href="" aria-label="2"></a>Width of 30% specified.</span>
+<span id="cb13-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="height" class="slide level2">
+<h2>Height</h2>
+<p>And we can manually override the height.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<h3 id="left-column">Left Column</h3>
-<div class="value-box bg-blue fragment fade-in-then-semi-out" style="width:70%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" data-fragment-index="2"><div class="vb-content" style=""><div class="details" style="color:white; ">
-<p>This appears SECOND (Index 2)</p>
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-brands fa-python" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<p>Example with no height specified - it will fit the contents</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="" aria-label="1"></a>::: {.value-box fragment="true" index="2" width="70%"}</span>
-<span id="cb10-2"><a href="" aria-label="2"></a>This appears SECOND (Index 2)</span>
-<span id="cb10-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
+<span id="cb14-2"><a href="" aria-label="2"></a>Example with no height specified - it will fit the contents</span>
+<span id="cb14-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<h3 id="right-column">Right Column</h3>
-<div class="value-box bg-blue fragment fade-in-then-semi-out" style="width:70%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" data-fragment-index="1"><div class="vb-content" style=""><div class="details" style="color:white; ">
-<p>This appears FIRST (Index 1)</p>
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-height:400px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-brands fa-python" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<p>Example with height of 400 pixels (400px) specified</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="" aria-label="1"></a>::: {.value-box fragment="true" index="1" width="70%"}</span>
-<span id="cb11-2"><a href="" aria-label="2"></a>This appears FIRST (Index 1)</span>
-<span id="cb11-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="" aria-label="1"></a>::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
+<span id="cb15-2"><a href="" aria-label="2"></a>Example with height of 400 pixels (400px) specified</span>
+<span id="cb15-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
+</section>
+<section id="vertical-alignment" class="slide level2">
+<h2>Vertical Alignment</h2>
+<p>And we can also add vertical alignment options.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-height:400px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left fa-brands fa-python" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<p>No valign specified</p>
+</div></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px"}</span>
+<span id="cb16-2"><a href="" aria-label="2"></a>No valign specified</span>
+<span id="cb16-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-height:400px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:flex-start; "><i class="icon vb-bearing-left fa-brands fa-python" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<p>Top alignment specified</p>
+</div></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px" valign="top"}</span>
+<span id="cb17-2"><a href="" aria-label="2"></a>Top alignment specified</span>
+<span id="cb17-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+</section>
+<section id="minimum-height-padding" class="slide level2">
+<h2>Minimum height &amp; padding</h2>
+<p>If a box’s content is short (or <code>height</code> is set below the default floor), <code>min-height</code> and <code>padding</code> can be lowered to reclaim space — handy on busy slides.</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left bi bi-star" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<p>Default min-height (100px) and padding (1.5rem)</p>
+</div></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" value="42"}</span>
+<span id="cb18-2"><a href="" aria-label="2"></a>Default min-height (100px) and padding (1.5rem)</span>
+<span id="cb18-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:60%;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:40px; --vb-padding:0.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left bi bi-star" style="font-size:1.5rem; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<p>Tightened min-height and padding</p>
+</div></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="" aria-label="1"></a>::: {.value-box min-height="40px" padding="0.5rem" icon="bi-star" icon-size="1.5rem" value="42" }</span>
+<span id="cb19-2"><a href="" aria-label="2"></a>Tightened min-height and padding</span>
+<span id="cb19-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+</section></section>
+<section>
+<section id="icons-1" class="title-slide slide level1 center">
+<h1>Icons</h1>
+
 </section>
 <section id="icon-position" class="slide level2">
 <h2>Icon position</h2>
 <p>Icons can be repositioned with the <code>icon-position</code> parameter. <code>top</code> is the default — the icon, value, and details all stay flush against the same edge for <code>left</code>/<code>right</code> alignment.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon fa-solid fa-clipboard" style="font-size:2em; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">Step 1</div><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left fa-solid fa-clipboard" style="font-size:2em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">Step 1</div><div class="details" style="color:white; ">
 <p>Add logging steps for arrivals, queues, resource use, and departures</p>
 </div></div></div>
 </div><div class="column" style="width:50%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-solid fa-clipboard" value="Step 1" icon-size="2em"}</span>
-<span id="cb12-2"><a href="" aria-label="2"></a>Add logging steps for arrivals, queues, resource use, and departures</span>
-<span id="cb12-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-solid fa-clipboard" value="Step 1" icon-size="2em"}</span>
+<span id="cb20-2"><a href="" aria-label="2"></a>Add logging steps for arrivals, queues, resource use, and departures</span>
+<span id="cb20-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:2em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon bi bi-star" style="font-size:2em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Left-aligned icon</p>
 </div></div></div>
 </div><div class="column" style="width:50%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="" aria-label="1"></a>::: {.value-box icon-position="left" icon="bi-star" value="42" icon-size="2em"}</span>
-<span id="cb13-2"><a href="" aria-label="2"></a>Left-aligned icon</span>
-<span id="cb13-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="" aria-label="1"></a>::: {.value-box icon-position="left" icon="bi-star" value="42" icon-size="2em"}</span>
+<span id="cb21-2"><a href="" aria-label="2"></a>Left-aligned icon</span>
+<span id="cb21-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="icon-position-continued" class="slide level2">
 <h2>Icon position (continued)</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row-reverse; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:2em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">99</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-right bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon bi bi-star" style="font-size:2em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">99</div><div class="details" style="color:white; ">
 <p>Right-aligned icon</p>
 </div></div></div>
 </div><div class="column" style="width:50%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="" aria-label="1"></a>::: {.value-box icon-position="right" icon="bi-star" value="99" icon-size="2em"}</span>
-<span id="cb14-2"><a href="" aria-label="2"></a>Right-aligned icon</span>
-<span id="cb14-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="" aria-label="1"></a>::: {.value-box icon-position="right" icon="bi-star" value="99" icon-size="2em"}</span>
+<span id="cb22-2"><a href="" aria-label="2"></a>Right-aligned icon</span>
+<span id="cb22-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
 <p>Icon below text</p>
-</div></div><i class="icon bi bi-star" style="font-size:1.5rem; color:white;  margin-left:-0.12em;"></i></div>
+</div></div><i class="icon vb-bearing-left bi bi-star" style="font-size:1.5rem; color:white; "></i></div>
 </div><div class="column" style="width:50%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="" aria-label="1"></a>::: {.value-box icon-position="bottom" icon="bi-star" icon-size="1.5rem" value="7"}</span>
-<span id="cb15-2"><a href="" aria-label="2"></a>Icon below text</span>
-<span id="cb15-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="" aria-label="1"></a>::: {.value-box icon-position="bottom" icon="bi-star" icon-size="1.5rem" value="7"}</span>
+<span id="cb23-2"><a href="" aria-label="2"></a>Icon below text</span>
+<span id="cb23-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="value-position" class="slide level2">
@@ -384,33 +549,33 @@
 <p>The value can be repositioned relative to the details text with the <code>value-position</code> parameter, completely independently of <code>icon-position</code>.</p>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:1.5rem; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=" display:flex; flex-direction:row; align-items:center; gap:0.75em;"><div class="value" style="font-size:2.2rem; color:white;  flex-shrink:0;">42</div><div class="details" style="color:white;  flex:1;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left bi bi-star" style="font-size:1.5rem; color:white; "></i><div class="vb-content vb-value-left" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Left-aligned value</p>
 </div></div></div>
 </div><div class="column" style="width:65%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="" aria-label="1"></a>::: {.value-box value-position="left" value="42" icon="bi-star" icon-size="1.5rem" }</span>
-<span id="cb16-2"><a href="" aria-label="2"></a>Left-aligned value</span>
-<span id="cb16-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="" aria-label="1"></a>::: {.value-box value-position="left" value="42" icon="bi-star" icon-size="1.5rem" }</span>
+<span id="cb24-2"><a href="" aria-label="2"></a>Left-aligned value</span>
+<span id="cb24-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:1.5rem; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=" display:flex; flex-direction:row-reverse; align-items:center; gap:0.75em;"><div class="value" style="font-size:2.2rem; color:white;  flex-shrink:0;">99</div><div class="details" style="color:white;  flex:1;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left bi bi-star" style="font-size:1.5rem; color:white; "></i><div class="vb-content vb-value-right" style=""><div class="value" style="font-size:2.2rem; color:white; ">99</div><div class="details" style="color:white; ">
 <p>Right-aligned value</p>
 </div></div></div>
 </div><div class="column" style="width:65%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="" aria-label="1"></a>::: {.value-box value-position="right" value="99" icon="bi-star" icon-size="1.5rem"}</span>
-<span id="cb17-2"><a href="" aria-label="2"></a>Right-aligned value</span>
-<span id="cb17-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb25-1"><a href="" aria-label="1"></a>::: {.value-box value-position="right" value="99" icon="bi-star" icon-size="1.5rem"}</span>
+<span id="cb25-2"><a href="" aria-label="2"></a>Right-aligned value</span>
+<span id="cb25-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:1.5rem; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left bi bi-star" style="font-size:1.5rem; color:white; "></i><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>Value below details</p>
 </div><div class="value" style="font-size:2.2rem; color:white; ">7</div></div></div>
 </div><div class="column" style="width:65%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="" aria-label="1"></a>::: {.value-box value-position="bottom" value="7" icon="bi-star" icon-size="1.5rem"}</span>
-<span id="cb18-2"><a href="" aria-label="2"></a>Value below details</span>
-<span id="cb18-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb26-1"><a href="" aria-label="1"></a>::: {.value-box value-position="bottom" value="7" icon="bi-star" icon-size="1.5rem"}</span>
+<span id="cb26-2"><a href="" aria-label="2"></a>Value below details</span>
+<span id="cb26-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="text-position" class="slide level2">
@@ -421,88 +586,88 @@
 </div>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:right;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:right; --vb-align-items:center; "><i class="icon bi bi-star" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Left-aligned icon with right-aligned text</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="" aria-label="1"></a>::: {.value-box icon-position="left" align="right" icon="bi-star" color="bg-blue" value="42"}</span>
-<span id="cb19-2"><a href="" aria-label="2"></a>Left-aligned icon with right-aligned text</span>
-<span id="cb19-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb27-1"><a href="" aria-label="1"></a>::: {.value-box icon-position="left" align="right" icon="bi-star" color="bg-blue" value="42"}</span>
+<span id="cb27-2"><a href="" aria-label="2"></a>Left-aligned icon with right-aligned text</span>
+<span id="cb27-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-teal" style="width:80%; min-height:100px; padding:1.5rem; text-align:right;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1; display:flex; flex-direction:row; align-items:center; gap:0.75em;"><div class="value" style="font-size:2.2rem; color:white;  flex-shrink:0;">42</div><div class="details" style="color:white;  flex:1;">
+<div class="value-box vb-icon-left bg-teal" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:right; --vb-align-items:center; "><i class="icon bi bi-star" style="font-size:3em; color:white; "></i><div class="vb-content vb-value-left" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Left-aligned icon AND left-aligned value, together</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="" aria-label="1"></a>::: {.value-box icon-position="left" value-position="left" align="right" icon="bi-star" color="bg-teal" value="42"}</span>
-<span id="cb20-2"><a href="" aria-label="2"></a>Left-aligned icon AND left-aligned value, together</span>
-<span id="cb20-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="" aria-label="1"></a>::: {.value-box icon-position="left" value-position="left" align="right" icon="bi-star" color="bg-teal" value="42"}</span>
+<span id="cb28-2"><a href="" aria-label="2"></a>Left-aligned icon AND left-aligned value, together</span>
+<span id="cb28-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-red" style="width:80%; min-height:100px; padding:1.5rem; text-align:center;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
+<div class="value-box bg-red" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:center; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
 <p>Icon below text, all centred</p>
 </div></div><i class="icon bi bi-star" style="font-size:1.5rem; color:white; "></i></div>
 </div><div class="column" style="width:60%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" color="bg-red" value="7" align="center"}</span>
-<span id="cb21-2"><a href="" aria-label="2"></a>Icon below text, all centred</span>
-<span id="cb21-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb29-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" icon-position="bottom" icon-size="1.5rem" color="bg-red" value="7" align="center"}</span>
+<span id="cb29-2"><a href="" aria-label="2"></a>Icon below text, all centred</span>
+<span id="cb29-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="and-we-can-use-different-icon-types" class="slide level2">
 <h2>And we can use different icon types</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon bi bi-star" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Bootstrap icons</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="" aria-label="1"></a></span>
-<span id="cb22-2"><a href="" aria-label="2"></a>::: {.value-box icon="bi-star" icon-position="left" color="bg-blue" value="42"}</span>
-<span id="cb22-3"><a href="" aria-label="3"></a>Bootstrap icons</span>
-<span id="cb22-4"><a href="" aria-label="4"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="" aria-label="1"></a></span>
+<span id="cb30-2"><a href="" aria-label="2"></a>::: {.value-box icon="bi-star" icon-position="left" color="bg-blue" value="42"}</span>
+<span id="cb30-3"><a href="" aria-label="3"></a>Bootstrap icons</span>
+<span id="cb30-4"><a href="" aria-label="4"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-brands fa-python" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Font awesome icons</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
-<span id="cb23-2"><a href="" aria-label="2"></a>Font awesome icons</span>
-<span id="cb23-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb31-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
+<span id="cb31-2"><a href="" aria-label="2"></a>Font awesome icons</span>
+<span id="cb31-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><span class="icon material-symbols-outlined" style="font-size:3em; color:white;  flex-shrink:0;">home</span><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><span class="icon material-symbols-outlined" style="font-size:3em; color:white; ">home</span><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Material Symbols icons</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="" aria-label="1"></a>::: {.value-box icon="home" icon-type="material" icon-position="left" color="bg-blue" value="42"}</span>
-<span id="cb24-2"><a href="" aria-label="2"></a>Material Symbols icons</span>
-<span id="cb24-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb32-1"><a href="" aria-label="1"></a>::: {.value-box icon="home" icon-type="material" icon-position="left" color="bg-blue" value="42"}</span>
+<span id="cb32-2"><a href="" aria-label="2"></a>Material Symbols icons</span>
+<span id="cb32-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><span class="icon material-symbols-rounded" style="font-size:3em; color:white;  flex-shrink:0;">home</span><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><span class="icon material-symbols-rounded" style="font-size:3em; color:white; ">home</span><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Material Symbols icons (rounded)</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb25-1"><a href="" aria-label="1"></a>::: {.value-box icon="home" icon-type="material-rounded" icon-position="left" color="bg-blue" value="42"}</span>
-<span id="cb25-2"><a href="" aria-label="2"></a>Material Symbols icons (rounded)</span>
-<span id="cb25-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb33-1"><a href="" aria-label="1"></a>::: {.value-box icon="home" icon-type="material-rounded" icon-position="left" color="bg-blue" value="42"}</span>
+<span id="cb33-2"><a href="" aria-label="2"></a>Material Symbols icons (rounded)</span>
+<span id="cb33-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="more-icon-types" class="slide level2">
 <h2>More icon types</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon ti ti-star" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon ti ti-star" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Tabler icons</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb26-1"><a href="" aria-label="1"></a>::: {.value-box icon="ti-star" icon-position="left" color="bg-blue" value="42"}</span>
-<span id="cb26-2"><a href="" aria-label="2"></a>Tabler icons</span>
-<span id="cb26-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb34-1"><a href="" aria-label="1"></a>::: {.value-box icon="ti-star" icon-position="left" color="bg-blue" value="42"}</span>
+<span id="cb34-2"><a href="" aria-label="2"></a>Tabler icons</span>
+<span id="cb34-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon ph ph-star" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon ph ph-star" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Phosphor icons</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb27-1"><a href="" aria-label="1"></a>::: {.value-box icon="ph ph-star" icon-position="left" color="bg-blue" value="42"}</span>
-<span id="cb27-2"><a href="" aria-label="2"></a>Phosphor icons</span>
-<span id="cb27-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb35-1"><a href="" aria-label="1"></a>::: {.value-box icon="ph ph-star" icon-position="left" color="bg-blue" value="42"}</span>
+<span id="cb35-2"><a href="" aria-label="2"></a>Phosphor icons</span>
+<span id="cb35-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="font-awesome-icon-sets" class="slide level2">
@@ -512,33 +677,33 @@
 </div>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-amber" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-solid fa-star" style="font-size:2em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:80%; color:white; ">Solid</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-amber" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-solid fa-star" style="font-size:2em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:80%; color:white; ">Solid</div><div class="details" style="color:white; ">
 <p>Filled-in icons</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-solid fa-star" icon-position="left" color="bg-amber" value="Solid (fa-solid)" value-font-size="80%" icon-size="2em"}</span>
-<span id="cb28-2"><a href="" aria-label="2"></a>Filled-in icons</span>
-<span id="cb28-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb36-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-solid fa-star" icon-position="left" color="bg-amber" value="Solid (fa-solid)" value-font-size="80%" icon-size="2em"}</span>
+<span id="cb36-2"><a href="" aria-label="2"></a>Filled-in icons</span>
+<span id="cb36-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-teal" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-regular fa-star" style="font-size:2em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:80%; color:white; ">Regular (fa-regular)</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-teal" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-regular fa-star" style="font-size:2em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:80%; color:white; ">Regular (fa-regular)</div><div class="details" style="color:white; ">
 <p>Outlined icons</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb29-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-regular fa-star" icon-position="left" color="bg-teal" value="Regular" value-font-size="80%" icon-size="2em"}</span>
-<span id="cb29-2"><a href="" aria-label="2"></a>Outlined icons</span>
-<span id="cb29-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb37-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-regular fa-star" icon-position="left" color="bg-teal" value="Regular" value-font-size="80%" icon-size="2em"}</span>
+<span id="cb37-2"><a href="" aria-label="2"></a>Outlined icons</span>
+<span id="cb37-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:2em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:80%; color:white; ">Brands (fa-brands)</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-brands fa-python" style="font-size:2em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:80%; color:white; ">Brands (fa-brands)</div><div class="details" style="color:white; ">
 <p>Logos, only available in this one style</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="Brands" value-font-size="80%" icon-size="2em"}</span>
-<span id="cb30-2"><a href="" aria-label="2"></a>Logos, only available in this one style</span>
-<span id="cb30-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb38-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="Brands" value-font-size="80%" icon-size="2em"}</span>
+<span id="cb38-2"><a href="" aria-label="2"></a>Logos, only available in this one style</span>
+<span id="cb38-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div style="font-size:50%;">
 <p>Font Awesome also has Pro-only styles — <code>fa-light</code>, <code>fa-thin</code>, and <code>fa-duotone</code> — which aren’t demoed here, as they require a paid Font Awesome Pro kit and this extension only loads the free CDN build.</p>
@@ -548,274 +713,498 @@
 <h2>Including local files</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-grey" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><span class="icon" style="width:128px; height:128px; display:inline-flex; align-items:center; justify-content:center; font-size:inherit; flex-shrink:0;"><!--?xml version="1.0" encoding="utf-8"?--><svg style="width:128px; height:128px; " version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="110px" height="110px" viewbox="0.21 -0.077 110 110" enable-background="new 0.21 -0.077 110 110" space="preserve"><lineargradient id="SVGID_1_" gradientunits="userSpaceOnUse" x1="63.8159" y1="56.6829" x2="118.4934" y2="1.8225" gradienttransform="matrix(1 0 0 -1 -53.2974 66.4321)"> <stop offset="0" style="stop-color:#387EB8"></stop> <stop offset="1" style="stop-color:#366994"></stop></lineargradient><path fill="url(#SVGID_1_)" d="M55.023-0.077c-25.971,0-26.25,10.081-26.25,12.156c0,3.148,0,12.594,0,12.594h26.75v3.781 c0,0-27.852,0-37.375,0c-7.949,0-17.938,4.833-17.938,26.25c0,19.673,7.792,27.281,15.656,27.281c2.335,0,9.344,0,9.344,0 s0-9.765,0-13.125c0-5.491,2.721-15.656,15.406-15.656c15.91,0,19.971,0,26.531,0c3.902,0,14.906-1.696,14.906-14.406 c0-13.452,0-17.89,0-24.219C82.054,11.426,81.515-0.077,55.023-0.077z M40.273,8.392c2.662,0,4.813,2.15,4.813,4.813 c0,2.661-2.151,4.813-4.813,4.813s-4.813-2.151-4.813-4.813C35.46,10.542,37.611,8.392,40.273,8.392z"></path><lineargradient id="SVGID_2_" gradientunits="userSpaceOnUse" x1="97.0444" y1="21.6321" x2="155.6665" y2="-34.5308" gradienttransform="matrix(1 0 0 -1 -53.2974 66.4321)"> <stop offset="0" style="stop-color:#FFE052"></stop> <stop offset="1" style="stop-color:#FFC331"></stop></lineargradient><path fill="url(#SVGID_2_)" d="M55.397,109.923c25.959,0,26.282-10.271,26.282-12.156c0-3.148,0-12.594,0-12.594H54.897v-3.781 c0,0,28.032,0,37.375,0c8.009,0,17.938-4.954,17.938-26.25c0-23.322-10.538-27.281-15.656-27.281c-2.336,0-9.344,0-9.344,0 s0,10.216,0,13.125c0,5.491-2.631,15.656-15.406,15.656c-15.91,0-19.476,0-26.532,0c-3.892,0-14.906,1.896-14.906,14.406 c0,14.475,0,18.265,0,24.219C28.366,100.497,31.562,109.923,55.397,109.923z M70.148,101.454c-2.662,0-4.813-2.151-4.813-4.813 s2.15-4.813,4.813-4.813c2.661,0,4.813,2.151,4.813,4.813S72.809,101.454,70.148,101.454z"></path></svg></span><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-grey" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><span class="icon" style="width:128px; height:128px; display:inline-flex; align-items:center; justify-content:center; font-size:inherit;"><!--?xml version="1.0" encoding="utf-8"?--><svg style="width:128px; height:128px; " version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="110px" height="110px" viewbox="0.21 -0.077 110 110" enable-background="new 0.21 -0.077 110 110" space="preserve"><lineargradient id="SVGID_1_" gradientunits="userSpaceOnUse" x1="63.8159" y1="56.6829" x2="118.4934" y2="1.8225" gradienttransform="matrix(1 0 0 -1 -53.2974 66.4321)"> <stop offset="0" style="stop-color:#387EB8"></stop> <stop offset="1" style="stop-color:#366994"></stop></lineargradient><path fill="url(#SVGID_1_)" d="M55.023-0.077c-25.971,0-26.25,10.081-26.25,12.156c0,3.148,0,12.594,0,12.594h26.75v3.781 c0,0-27.852,0-37.375,0c-7.949,0-17.938,4.833-17.938,26.25c0,19.673,7.792,27.281,15.656,27.281c2.335,0,9.344,0,9.344,0 s0-9.765,0-13.125c0-5.491,2.721-15.656,15.406-15.656c15.91,0,19.971,0,26.531,0c3.902,0,14.906-1.696,14.906-14.406 c0-13.452,0-17.89,0-24.219C82.054,11.426,81.515-0.077,55.023-0.077z M40.273,8.392c2.662,0,4.813,2.15,4.813,4.813 c0,2.661-2.151,4.813-4.813,4.813s-4.813-2.151-4.813-4.813C35.46,10.542,37.611,8.392,40.273,8.392z"></path><lineargradient id="SVGID_2_" gradientunits="userSpaceOnUse" x1="97.0444" y1="21.6321" x2="155.6665" y2="-34.5308" gradienttransform="matrix(1 0 0 -1 -53.2974 66.4321)"> <stop offset="0" style="stop-color:#FFE052"></stop> <stop offset="1" style="stop-color:#FFC331"></stop></lineargradient><path fill="url(#SVGID_2_)" d="M55.397,109.923c25.959,0,26.282-10.271,26.282-12.156c0-3.148,0-12.594,0-12.594H54.897v-3.781 c0,0,28.032,0,37.375,0c8.009,0,17.938-4.954,17.938-26.25c0-23.322-10.538-27.281-15.656-27.281c-2.336,0-9.344,0-9.344,0 s0,10.216,0,13.125c0,5.491-2.631,15.656-15.406,15.656c-15.91,0-19.476,0-26.532,0c-3.892,0-14.906,1.896-14.906,14.406 c0,14.475,0,18.265,0,24.219C28.366,100.497,31.562,109.923,55.397,109.923z M70.148,101.454c-2.662,0-4.813-2.151-4.813-4.813 s2.15-4.813,4.813-4.813c2.661,0,4.813,2.151,4.813,4.813S72.809,101.454,70.148,101.454z"></path></svg></span><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Local svg file</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb31-1"><a href="" aria-label="1"></a>::: {.value-box icon="example-icon.svg" icon-position="left" color="bg-grey" value="42"}</span>
-<span id="cb31-2"><a href="" aria-label="2"></a>Local svg file</span>
-<span id="cb31-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb39-1"><a href="" aria-label="1"></a>::: {.value-box icon="example-icon.svg" icon-position="left" color="bg-grey" value="42"}</span>
+<span id="cb39-2"><a href="" aria-label="2"></a>Local svg file</span>
+<span id="cb39-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><img class="icon" src="example-icon.png" style="width:256px; height:256px; object-fit:contain; display:block; margin:0 auto; flex-shrink:0;" alt=""><div class="vb-content" style=" flex:1;"><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><img class="icon" src="example-icon.png" style="width:256px; height:256px; object-fit:contain; display:block; margin:0 auto;" alt=""><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>Local png file</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb32-1"><a href="" aria-label="1"></a>::: {.value-box icon="example-icon.png" icon-size="256px" icon-position="left" color="bg-blue"}</span>
-<span id="cb32-2"><a href="" aria-label="2"></a>Local png file</span>
-<span id="cb32-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></div>
-</section>
-<section id="box-colours" class="slide level2">
-<h2>Box colours</h2>
-<div style="font-size:50%;">
-<p>You can also change the <code>color</code> parameter. A number of predefined colours are available: bg-blue, bg-navy, bg-teal, bg-green, bg-olive, bg-amber, bg-orange, bg-red, bg-pink, bg-purple, bg-slate, bg-grey</p>
-<p>For details on how to change or add colours, see the <a href="https://github.com/Bergam0t/quarto-value-box?tab=readme-ov-file#colours">advanced customisation</a> section in the readme.</p>
-</div>
-<div class="columns">
-<div class="column" style="width:25%;">
-<div class="value-box bg-blue" style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
-<p>bg-blue</p>
-</div></div></div>
-<div class="value-box bg-navy" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
-<p>bg-navy</p>
-</div></div></div>
-<div class="value-box bg-teal" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
-<p>bg-teal</p>
-</div></div></div>
-</div><div class="column" style="width:25%;">
-<div class="value-box bg-green" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
-<p>bg-green</p>
-</div></div></div>
-<div class="value-box bg-olive" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
-<p>bg-olive</p>
-</div></div></div>
-<div class="value-box bg-slate" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
-<p>bg-slate</p>
-</div></div></div>
-</div><div class="column" style="width:25%;">
-<div class="value-box bg-red" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
-<p>bg-red</p>
-</div></div></div>
-<div class="value-box bg-orange" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
-<p>bg-orange</p>
-</div></div></div>
-<div class="value-box bg-amber" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
-<p>bg-amber</p>
-</div></div></div>
-</div><div class="column" style="width:25%;">
-<div class="value-box bg-purple" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
-<p>bg-purple</p>
-</div></div></div>
-<div class="value-box bg-pink" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
-<p>bg-pink</p>
-</div></div></div>
-<div class="value-box bg-grey" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
-<p>bg-grey</p>
-</div></div></div>
-</div></div>
-</section>
-<section id="width" class="slide level2">
-<h2>Width</h2>
-<p>We can manually override the width.</p>
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
-<p>No width specified - defaults to 80% of container</p>
-</div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb33-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
-<span id="cb33-2"><a href="" aria-label="2"></a>No width specified - defaults to 80% of container</span>
-<span id="cb33-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="value-box bg-blue" style="width:30%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
-<p>Width of 30% specified.</p>
-</div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb34-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" width="30%"}</span>
-<span id="cb34-2"><a href="" aria-label="2"></a>Width of 30% specified.</span>
-<span id="cb34-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="height" class="slide level2">
-<h2>Height</h2>
-<p>And we can manually override the height.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
-<p>Example with no height specified - it will fit the contents</p>
-</div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb35-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
-<span id="cb35-2"><a href="" aria-label="2"></a>Example with no height specified - it will fit the contents</span>
-<span id="cb35-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; height:400px; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
-<p>Example with height of 400 pixels (400px) specified</p>
-</div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb36-1"><a href="" aria-label="1"></a>::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
-<span id="cb36-2"><a href="" aria-label="2"></a>Example with height of 400 pixels (400px) specified</span>
-<span id="cb36-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></div>
-</section>
-<section id="vertical-alignment" class="slide level2">
-<h2>Vertical Alignment</h2>
-<p>And we can also add vertical alignment options.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; height:400px; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
-<p>No valign specified</p>
-</div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb37-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px"}</span>
-<span id="cb37-2"><a href="" aria-label="2"></a>No valign specified</span>
-<span id="cb37-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; height:400px; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:flex-start;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
-<p>Top alignment specified</p>
-</div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb38-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px" valign="top"}</span>
-<span id="cb38-2"><a href="" aria-label="2"></a>Top alignment specified</span>
-<span id="cb38-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></div>
-</section>
-<section id="minimum-height-padding" class="slide level2">
-<h2>Minimum height &amp; padding</h2>
-<p>If a box’s content is short (or <code>height</code> is set below the default floor), <code>min-height</code> and <code>padding</code> can be lowered to reclaim space — handy on busy slides.</p>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:3em; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
-<p>Default min-height (100px) and padding (1.5rem)</p>
-</div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb39-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" value="42"}</span>
-<span id="cb39-2"><a href="" aria-label="2"></a>Default min-height (100px) and padding (1.5rem)</span>
-<span id="cb39-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column" style="width:60%;">
-<div class="value-box bg-blue" style="width:80%; min-height:40px; padding:0.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:1.5rem; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
-<p>Tightened min-height and padding</p>
-</div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb40-1"><a href="" aria-label="1"></a>::: {.value-box min-height="40px" padding="0.5rem" icon="bi-star" icon-size="1.5rem" value="42" }</span>
-<span id="cb40-2"><a href="" aria-label="2"></a>Tightened min-height and padding</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb40-1"><a href="" aria-label="1"></a>::: {.value-box icon="example-icon.png" icon-size="256px" icon-position="left" color="bg-blue"}</span>
+<span id="cb40-2"><a href="" aria-label="2"></a>Local png file</span>
 <span id="cb40-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
-</section>
-<section id="font-sizing" class="slide level2">
-<h2>Font Sizing</h2>
-<p>The font for the general text can be tweaked with the font-size parameter</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
-<p>Standard</p>
-</div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb41-1"><a href="" aria-label="1"></a>::: {.value-box}</span>
-<span id="cb41-2"><a href="" aria-label="2"></a>Standard</span>
-<span id="cb41-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="font-size:150%; color:white; ">
-<p>150% Font Size</p>
-</div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb42-1"><a href="" aria-label="1"></a>::: {.value-box font-size="150%"}</span>
-<span id="cb42-2"><a href="" aria-label="2"></a>150% Font Size</span>
-<span id="cb42-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></div>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="font-size:2rem; color:white; ">
-<p>REM units</p>
-</div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb43-1"><a href="" aria-label="1"></a>::: {.value-box font-size="2rem"}</span>
-<span id="cb43-2"><a href="" aria-label="2"></a>REM units</span>
-<span id="cb43-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="font-size:2em; color:white; ">
-<p>EM units</p>
-</div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb44-1"><a href="" aria-label="1"></a>::: {.value-box font-size="2em"}</span>
-<span id="cb44-2"><a href="" aria-label="2"></a>EM units</span>
-<span id="cb44-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></div>
-</section>
-<section id="font-color" class="slide level2">
-<h2>Font Color</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:yellow; ">
-<p>Yellow Font</p>
-</div></div></div>
-</div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb45-1"><a href="" aria-label="1"></a>::: {.value-box font-color="yellow"}</span>
-<span id="cb45-2"><a href="" aria-label="2"></a>Yellow Font</span>
-<span id="cb45-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></div>
-<div class="columns">
-<div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:yellow; ">Value</div><div class="details" style="color:yellow; ">
-<p>Value font follows icon font by default</p>
-</div></div></div>
-</div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb46-1"><a href="" aria-label="1"></a>::: {.value-box font-color="yellow"}</span>
-<span id="cb46-2"><a href="" aria-label="2"></a>Yellow Font</span>
-<span id="cb46-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></div>
-<div class="columns">
-<div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:fuchsia; ">Value</div><div class="details" style="color:yellow; ">
-<p>But they can differ</p>
-</div></div></div>
-</div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb47-1"><a href="" aria-label="1"></a>::: {.value-box font-color="yellow" value="Value" value-color="fuchsia"}</span>
-<span id="cb47-2"><a href="" aria-label="2"></a>But they can differ</span>
-<span id="cb47-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></div>
+</section></section>
+<section>
+<section id="colour-typography" class="title-slide slide level1 center">
+<h1>Colour &amp; Typography</h1>
+
 </section>
 <section id="icon-color" class="slide level2">
 <h2>Icon Color</h2>
 <p>Font awesome, bootstrap icons, tabler icons, phosphor icons, and material symbols support recoloring</p>
 <div class="columns">
 <div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:3em; color:red;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon bi bi-star" style="font-size:3em; color:red; "></i><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>Bootstrap icons</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb48-1"><a href="" aria-label="1"></a></span>
-<span id="cb48-2"><a href="" aria-label="2"></a>::: {.value-box icon-color="red" icon="bi-star" icon-position="left" }</span>
-<span id="cb48-3"><a href="" aria-label="3"></a>Bootstrap icons</span>
-<span id="cb48-4"><a href="" aria-label="4"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb41-1"><a href="" aria-label="1"></a></span>
+<span id="cb41-2"><a href="" aria-label="2"></a>::: {.value-box icon-color="red" icon="bi-star" icon-position="left" }</span>
+<span id="cb41-3"><a href="" aria-label="3"></a>Bootstrap icons</span>
+<span id="cb41-4"><a href="" aria-label="4"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:fuchsia;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-brands fa-python" style="font-size:3em; color:fuchsia; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Font awesome icons</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb49-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="fuchsia" icon="fa-brands fa-python" icon-position="left" }</span>
-<span id="cb49-2"><a href="" aria-label="2"></a>Font awesome icons</span>
-<span id="cb49-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb42-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="fuchsia" icon="fa-brands fa-python" icon-position="left" }</span>
+<span id="cb42-2"><a href="" aria-label="2"></a>Font awesome icons</span>
+<span id="cb42-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><span class="icon material-symbols-outlined" style="font-size:3em; color:lime;  flex-shrink:0;">home</span><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><span class="icon material-symbols-outlined" style="font-size:3em; color:lime; ">home</span><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Material Symbols icons</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb50-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="lime" icon="home" icon-type="material" icon-position="left" }</span>
-<span id="cb50-2"><a href="" aria-label="2"></a>Material Symbols icons</span>
-<span id="cb50-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb43-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="lime" icon="home" icon-type="material" icon-position="left" }</span>
+<span id="cb43-2"><a href="" aria-label="2"></a>Material Symbols icons</span>
+<span id="cb43-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="icon-color-continued" class="slide level2">
 <h2>Icon Color (continued)</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon ti ti-star" style="font-size:3em; color:cyan;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon ti ti-star" style="font-size:3em; color:cyan; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Tabler icons</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb51-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="cyan" icon="ti-star" icon-position="left" }</span>
-<span id="cb51-2"><a href="" aria-label="2"></a>Tabler icons</span>
-<span id="cb51-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb44-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="cyan" icon="ti-star" icon-position="left" }</span>
+<span id="cb44-2"><a href="" aria-label="2"></a>Tabler icons</span>
+<span id="cb44-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon ph ph-star" style="font-size:3em; color:orange;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon ph ph-star" style="font-size:3em; color:orange; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Phosphor icons</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb52-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="orange" icon="ph ph-star" icon-position="left" }</span>
-<span id="cb52-2"><a href="" aria-label="2"></a>Phosphor icons</span>
-<span id="cb52-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb45-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="orange" icon="ph ph-star" icon-position="left" }</span>
+<span id="cb45-2"><a href="" aria-label="2"></a>Phosphor icons</span>
+<span id="cb45-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
+</section>
+<section id="box-colours" class="slide level2">
+<h2>Box colours</h2>
+<div style="font-size:50%;">
+<p>You can also change the <code>color</code> parameter. A number of predefined colours are available: bg-blue, bg-navy, bg-teal, bg-green, bg-olive, bg-amber, bg-orange, bg-red, bg-pink, bg-purple, bg-slate, bg-grey</p>
+<p>For details on how to change or add named colours, see the <a href="https://github.com/Bergam0t/quarto-value-box?tab=readme-ov-file#colours">advanced customisation</a> section in the readme.</p>
+</div>
+<div class="columns">
+<div class="column" style="width:25%;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-height:100px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>bg-blue</p>
+</div></div></div>
+<div class="value-box bg-navy" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>bg-navy</p>
+</div></div></div>
+<div class="value-box bg-teal" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>bg-teal</p>
+</div></div></div>
+</div><div class="column" style="width:25%;">
+<div class="value-box bg-green" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>bg-green</p>
+</div></div></div>
+<div class="value-box bg-olive" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>bg-olive</p>
+</div></div></div>
+<div class="value-box bg-slate" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>bg-slate</p>
+</div></div></div>
+</div><div class="column" style="width:25%;">
+<div class="value-box bg-red" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>bg-red</p>
+</div></div></div>
+<div class="value-box bg-orange" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>bg-orange</p>
+</div></div></div>
+<div class="value-box bg-amber" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>bg-amber</p>
+</div></div></div>
+</div><div class="column" style="width:25%;">
+<div class="value-box bg-purple" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>bg-purple</p>
+</div></div></div>
+<div class="value-box bg-pink" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>bg-pink</p>
+</div></div></div>
+<div class="value-box bg-grey" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>bg-grey</p>
+</div></div></div>
+</div></div>
+</section>
+<section id="box-colours---custom" class="slide level2">
+<h2>Box colours - custom</h2>
+<p><code>color</code> also accepts a raw CSS colour value directly — no new class needed — for anything starting with <code>#</code>, <code>rgb(</code>/<code>rgba(</code>, <code>hsl(</code>/<code>hsla(</code>, or <code>var(</code>.</p>
+<div class="value-box-row vb-row-grid" style="--vb-row-columns:3; --vb-row-gap:1.5rem; ">
+<div class="value-box " style="--vb-width:80%; --vb-height:100px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-bg:#c8102e; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>color=“#c8102e”</p>
+</div></div></div>
+<div class="value-box " style="--vb-width:80%; --vb-height:100px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-bg:rgb(200, 16, 200); --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>color=“rgb(200, 16, 200)”</p>
+</div></div></div>
+<div class="value-box " style="--vb-width:80%; --vb-height:100px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-bg:rgba(200, 16, 46, 0.3); --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:black; ">
+<p>color=“rgba(200, 16, 46, 0.3)”</p>
+</div></div></div>
+<div class="value-box " style="--vb-width:80%; --vb-height:100px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-bg:hsl(13 74.5% 52.4%); --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>color=“hsl(13 74.5% 52.4%)”</p>
+</div></div></div>
+<div class="value-box " style="--vb-width:80%; --vb-height:100px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-bg:hsla(13 74.5% 52.4% / 0.5); --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:black; ">
+<p>color=“hsla(13 74.5% 52.4% / 0.5)”</p>
+</div></div></div>
+<style>
+:root { --demo-brand-color: #2BAC9A; }
+</style>
+</div>
+<hr>
+<p><br></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb46-1"><a href="" aria-label="1"></a>&lt;style<span class="op">&gt;</span></span>
+<span id="cb46-2"><a href="" aria-label="2"></a><span class="in">:root</span> { <span class="va">--demo-brand-color</span><span class="ch">:</span> <span class="cn">#2BAC9A</span><span class="op">;</span> }</span>
+<span id="cb46-3"><a href="" aria-label="3"></a>&lt;/style<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<div class="value-box " style="--vb-width:80%; --vb-height:100px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-bg:var(--demo-brand-color); --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>color=“var(–demo-brand-color)”</p>
+</div></div></div>
+</div></div>
+</section>
+<section id="box-colours---_brand.yml" class="slide level2">
+<h2>Box colours - _brand.yml</h2>
+<div style="font-size: 75%;">
+<p>Quarto compiles a project’s <code>_brand.yml</code> palette into CSS custom properties automatically, so <code>color</code> can reference it with <code>var(...)</code> too — no manual <code>&lt;style&gt;</code> block needed. This deck ships its own <code>_brand.yml</code>:</p>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb47-1"><a href="" aria-label="1"></a><span class="co"># _brand.yml</span></span>
+<span id="cb47-2"><a href="" aria-label="2"></a><span class="fu">color</span><span class="kw">:</span></span>
+<span id="cb47-3"><a href="" aria-label="3"></a><span class="at">  </span><span class="fu">palette</span><span class="kw">:</span></span>
+<span id="cb47-4"><a href="" aria-label="4"></a><span class="at">    </span><span class="fu">accent</span><span class="kw">:</span><span class="at"> </span><span class="st">"#6F3D9E"</span></span>
+<span id="cb47-5"><a href="" aria-label="5"></a><span class="at">  </span><span class="fu">primary</span><span class="kw">:</span><span class="at"> accent</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="value-box-row vb-row-grid" style="--vb-row-columns:2; --vb-row-gap:1.5rem; ">
+<div class="value-box " style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-bg:var(--quarto-scss-export-brand-accent); --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>color=“var(–quarto-scss-export-brand-accent)”</p>
+</div></div></div>
+<div class="value-box vb-icon-left bg-amber" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon bi bi-star" style="font-size:2em; color:var(--quarto-scss-export-brand-accent); "></i><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>icon-color=“var(–quarto-scss-export-brand-accent)”</p>
+</div></div></div>
+</div>
+<div style="font-size: 75%;">
+<p><code>--quarto-scss-export-brand-accent</code> names the <code>accent</code> palette entry directly — Quarto exports every resolved theme/brand value this way, in every format, so there’s no need to know format-internal names like reveal.js’s <code>--r-link-color</code> or Bootstrap’s <code>--bs-primary</code>.</p>
+<p><code>icon-color</code>/<code>font-color</code>/<code>value-color</code>/<code>title-color</code>/<code>delta-color</code> accept <code>var(...)</code> the same way.</p>
+</div>
+</section>
+<section id="box-colours---finding-variable-names" class="slide level2">
+<h2>Box colours - finding variable names</h2>
+<div style="font-size: 80%;">
+<p>Render once, then grep the compiled theme CSS for the <code>--quarto-scss-export-</code> prefix to see every brand/theme value Quarto resolved, under its own name — no need to read Quarto’s SCSS source:</p>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="" aria-label="1"></a><span class="fu">grep</span> <span class="at">-o</span> <span class="at">--</span> <span class="st">"--quarto-scss-export-[a-zA-Z0-9_-]*:[^;]*"</span> path/to/theme.css</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div style="font-size: 80%;">
+<ul>
+<li><code>revealjs</code>: <code>&lt;doc&gt;_files/libs/revealjs/dist/theme/quarto-*.css</code></li>
+<li><code>html</code>/<code>dashboard</code>: <code>&lt;doc&gt;_files/libs/bootstrap/bootstrap-*.min.css</code></li>
+</ul>
+<p>The semantic roles (<code>primary</code>, <code>secondary</code>, <code>success</code>, …) are exported the same way, as <code>--quarto-scss-export-primary</code> etc. Bootstrap-based formats additionally expose those same roles under Bootstrap’s own names too (<code>--bs-primary</code>, <code>--bs-secondary</code>, …), if you’d rather use those instead:</p>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb49-1"><a href="" aria-label="1"></a>::: {.value-box color="var(--bs-primary)" value="42"}</span>
+<span id="cb49-2"><a href="" aria-label="2"></a>Uses the brand's primary colour on an html/dashboard render</span>
+<span id="cb49-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="font-sizing" class="slide level2">
+<h2>Font Sizing</h2>
+<p>The font for the general text can be tweaked with the font-size parameter</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>Standard</p>
+</div></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb50-1"><a href="" aria-label="1"></a>::: {.value-box}</span>
+<span id="cb50-2"><a href="" aria-label="2"></a>Standard</span>
+<span id="cb50-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="font-size:150%; color:white; ">
+<p>150% Font Size</p>
+</div></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb51-1"><a href="" aria-label="1"></a>::: {.value-box font-size="150%"}</span>
+<span id="cb51-2"><a href="" aria-label="2"></a>150% Font Size</span>
+<span id="cb51-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="font-size:2rem; color:white; ">
+<p>REM units</p>
+</div></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb52-1"><a href="" aria-label="1"></a>::: {.value-box font-size="2rem"}</span>
+<span id="cb52-2"><a href="" aria-label="2"></a>REM units</span>
+<span id="cb52-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="font-size:2em; color:white; ">
+<p>EM units</p>
+</div></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb53-1"><a href="" aria-label="1"></a>::: {.value-box font-size="2em"}</span>
+<span id="cb53-2"><a href="" aria-label="2"></a>EM units</span>
+<span id="cb53-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+</section>
+<section id="font-color" class="slide level2">
+<h2>Font Color</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:yellow; ">
+<p>Yellow Font</p>
+</div></div></div>
+</div><div class="column" style="width:70%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb54-1"><a href="" aria-label="1"></a>::: {.value-box font-color="yellow"}</span>
+<span id="cb54-2"><a href="" aria-label="2"></a>Yellow Font</span>
+<span id="cb54-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:yellow; ">Value</div><div class="details" style="color:yellow; ">
+<p>Value font follows icon font by default</p>
+</div></div></div>
+</div><div class="column" style="width:70%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb55-1"><a href="" aria-label="1"></a>::: {.value-box font-color="yellow"}</span>
+<span id="cb55-2"><a href="" aria-label="2"></a>Yellow Font</span>
+<span id="cb55-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:fuchsia; ">Value</div><div class="details" style="color:yellow; ">
+<p>But they can differ</p>
+</div></div></div>
+</div><div class="column" style="width:70%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb56-1"><a href="" aria-label="1"></a>::: {.value-box font-color="yellow" value="Value" value-color="fuchsia"}</span>
+<span id="cb56-2"><a href="" aria-label="2"></a>But they can differ</span>
+<span id="cb56-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+</section></section>
+<section>
+<section id="advanced" class="title-slide slide level1 center">
+<h1>Advanced</h1>
 
 </section>
+<section id="fragment-types" class="slide level2">
+<h2>Fragment types</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="value-box bg-olive fragment fade-in-then-semi-out" style="--vb-width:60%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:center; --vb-justify-content:center; "><i class="icon bi bi-arrow-down-up" style="font-size:2rem; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">Big text</div><div class="details" style="color:white; ">
+<p>We can use them with special named fragment types like ‘fade in, then semi out’ (this is also the default if you set fragment=“true”)</p>
+</div></div></div>
+</div><div class="column" style="width:60%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb57-1"><a href="" aria-label="1"></a>::: {.value-box fragment="fade-in-then-semi-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}</span>
+<span id="cb57-2"><a href="" aria-label="2"></a>We can use them with special named fragment types like 'fade in, then semi out'</span>
+<span id="cb57-3"><a href="" aria-label="3"></a>(this is also the default if you set fragment="true")</span>
+<span id="cb57-4"><a href="" aria-label="4"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="value-box bg-olive fragment fade-in-then-out" style="--vb-width:60%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:center; --vb-justify-content:center; "><i class="icon bi bi-arrow-down-up" style="font-size:2rem; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">Big text</div><div class="details" style="color:white; ">
+<p>Or standard fragments</p>
+</div></div></div>
+</div><div class="column" style="width:60%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb58-1"><a href="" aria-label="1"></a>::: {.value-box fragment="fade-in-then-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}</span>
+<span id="cb58-2"><a href="" aria-label="2"></a>Or standard fragments</span>
+<span id="cb58-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="fragment">
+<p>Tada!</p>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb59-1"><a href="" aria-label="1"></a>:::{.fragment}</span>
+<span id="cb59-2"><a href="" aria-label="2"></a>Tada!</span>
+<span id="cb59-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+</section>
+<section id="all-fragment-types" class="slide level2">
+<h2>All fragment types</h2>
+<div style="font-size: 65%;">
+<p>Every fragment style shipped with this version of Reveal.js, one per box — advance through the slide to see each one in turn. All of them fade in on entry; the class name controls what (if anything) happens after that. See the <a href="https://quarto.org/docs/presentations/revealjs/advanced.html#fragment-classes">Reveal.js docs</a> for the full reference.</p>
+</div>
+<div class="value-box-row vb-row-grid" style="--vb-row-columns:5; --vb-row-gap:1.5rem; ">
+<div class="value-box bg-blue fragment fade-in" style="--vb-width:80%; --vb-min-height:70px; --vb-padding:0.6rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">fade-in</div><div class="details" style="color:white; ">
+<p>Fades in, stays visible</p>
+</div></div></div>
+<div class="value-box bg-blue fragment fade-out" style="--vb-width:80%; --vb-min-height:70px; --vb-padding:0.6rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">fade-out</div><div class="details" style="color:white; ">
+<p>Starts visible, fades out</p>
+</div></div></div>
+<div class="value-box bg-blue fragment fade-up" style="--vb-width:80%; --vb-min-height:70px; --vb-padding:0.6rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">fade-up</div><div class="details" style="color:white; ">
+<p>Fades in while sliding up</p>
+</div></div></div>
+<div class="value-box bg-blue fragment fade-down" style="--vb-width:80%; --vb-min-height:70px; --vb-padding:0.6rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">fade-down</div><div class="details" style="color:white; ">
+<p>Fades in while sliding down</p>
+</div></div></div>
+<div class="value-box bg-blue fragment fade-left" style="--vb-width:80%; --vb-min-height:70px; --vb-padding:0.6rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">fade-left</div><div class="details" style="color:white; ">
+<p>Fades in while sliding left</p>
+</div></div></div>
+<div class="value-box bg-blue fragment fade-right" style="--vb-width:80%; --vb-min-height:70px; --vb-padding:0.6rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">fade-right</div><div class="details" style="color:white; ">
+<p>Fades in while sliding right</p>
+</div></div></div>
+<div class="value-box bg-blue fragment fade-in-then-out" style="--vb-width:80%; --vb-min-height:70px; --vb-padding:0.6rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">fade-in-then-out</div><div class="details" style="color:white; ">
+<p>Fades in, fades out next step</p>
+</div></div></div>
+<div class="value-box bg-blue fragment fade-in-then-semi-out" style="--vb-width:80%; --vb-min-height:70px; --vb-padding:0.6rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">fade-in-then-semi-out</div><div class="details" style="color:white; ">
+<p>Fades in, dims next step (this extension’s default)</p>
+</div></div></div>
+<div class="value-box bg-blue fragment semi-fade-out" style="--vb-width:80%; --vb-min-height:70px; --vb-padding:0.6rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">semi-fade-out</div><div class="details" style="color:white; ">
+<p>Starts visible, dims out</p>
+</div></div></div>
+<div class="value-box bg-blue fragment grow" style="--vb-width:80%; --vb-min-height:70px; --vb-padding:0.6rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">grow</div><div class="details" style="color:white; ">
+<p>Fades in while growing larger</p>
+</div></div></div>
+<div class="value-box bg-blue fragment shrink" style="--vb-width:80%; --vb-min-height:70px; --vb-padding:0.6rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">shrink</div><div class="details" style="color:white; ">
+<p>Fades in while shrinking</p>
+</div></div></div>
+<div class="value-box bg-blue fragment zoom-in" style="--vb-width:80%; --vb-min-height:70px; --vb-padding:0.6rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">zoom-in</div><div class="details" style="color:white; ">
+<p>Fades in while zooming from small</p>
+</div></div></div>
+<div class="value-box bg-blue fragment strike" style="--vb-width:80%; --vb-min-height:70px; --vb-padding:0.6rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">strike</div><div class="details" style="color:white; ">
+<p>Fades in with a strikethrough</p>
+</div></div></div>
+</div>
+<div style="font-size: 60%;">
+<p>Not shown: <code>highlight-red</code>/<code>-green</code>/<code>-blue</code> and their <code>highlight-current-*</code> variants. Reveal.js applies these by recolouring the fragment element’s own <code>color</code>, but value boxes set <code>color</code> inline on the value/details text for contrast against <code>color</code>/<code>bg-*</code>, which overrides it — so these six have no visible effect on a value box and are unsupported here.</p>
+</div>
+</section>
+<section id="complex-icon-box-layouts-with-index-parameter" class="slide level2">
+<h2>Complex icon box layouts with index parameter</h2>
+<p>By using the ‘index’ parameter, we can determine the order that fragments appear by passing a number that indicates the order.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="left-column">Left Column</h3>
+<div class="value-box bg-blue fragment fade-in-then-semi-out" style="--vb-width:70%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; " data-fragment-index="2"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>This appears SECOND (Index 2)</p>
+</div></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb60-1"><a href="" aria-label="1"></a>::: {.value-box fragment="true" index="2" width="70%"}</span>
+<span id="cb60-2"><a href="" aria-label="2"></a>This appears SECOND (Index 2)</span>
+<span id="cb60-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<h3 id="right-column">Right Column</h3>
+<div class="value-box bg-blue fragment fade-in-then-semi-out" style="--vb-width:70%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; " data-fragment-index="1"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>This appears FIRST (Index 1)</p>
+</div></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb61-1"><a href="" aria-label="1"></a>::: {.value-box fragment="true" index="1" width="70%"}</span>
+<span id="cb61-2"><a href="" aria-label="2"></a>This appears FIRST (Index 1)</span>
+<span id="cb61-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+</section>
+<section id="escape-hatch-id-extra-classes-and-attributes" class="slide level2">
+<h2>Escape hatch: id, extra classes and attributes</h2>
+<style>
+/* Proves .highlight-box below actually landed on the box, rather than
+   just being a class name mentioned in the slide text. */
+.highlight-box { outline: 7px dashed gold; outline-offset: 4px; }
+</style>
+<p>Beyond the parameters this extension defines, an <code>#id</code> and extra <code>.classes</code> pass through onto the rendered box, along with <code>data-*</code>/<code>aria-*</code> attributes and <code>role</code>/<code>tabindex</code>/<code>lang</code>. Anything else is left off rather than renamed to a <code>data-</code> attribute.</p>
+<div id="kpi-example" class="value-box bg-blue highlight-box" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; " role="group" aria-label="Sales this quarter" data-id="kpi-example"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<p>id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-animate) all survive</p>
+</div></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb62-1"><a href="" aria-label="1"></a>&lt;style<span class="op">&gt;</span></span>
+<span id="cb62-2"><a href="" aria-label="2"></a><span class="fu">.highlight-box</span> { <span class="kw">outline</span><span class="ch">:</span> <span class="dv">7</span><span class="dt">px</span> <span class="dv">dashed</span> <span class="cn">gold</span><span class="op">;</span> <span class="kw">outline-offset</span><span class="ch">:</span> <span class="dv">4</span><span class="dt">px</span><span class="op">;</span> }</span>
+<span id="cb62-3"><a href="" aria-label="3"></a>&lt;/style<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><br></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb63-1"><a href="" aria-label="1"></a>::: {.value-box #kpi-example .highlight-box value="42" role="group" aria-label="Sales this quarter" data-id="kpi-example"}</span>
+<span id="cb63-2"><a href="" aria-label="2"></a>id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-animate) all survive</span>
+<span id="cb63-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="data-id-and-auto-animate" class="slide level2">
+<h2><code>data-id</code> and auto-animate</h2>
+<p><code>data-id</code> is what actually drives <a href="https://quarto.org/docs/presentations/revealjs/advanced.html#auto-animate">Reveal.js auto-animate</a>: give two <em>consecutive</em> slides <code>auto-animate="true"</code> in the heading, give a value box the same <code>data-id</code> on both, and Reveal.js treats it as the same element and smoothly morphs its position, size and colour between them as you advance. The next two slides are that pair — present the deck (not the static preview pane) to see it animate.</p>
+</section>
+<section id="auto-animate-growth" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Auto-animate: Growth</h2>
+<div class="value-box bg-blue" style="--vb-width:30%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:center; --vb-justify-content:center; " data-id="autoanimate-demo"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<p>New customers this quarter</p>
+</div></div></div>
+</section>
+<section id="auto-animate-growth-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Auto-animate: Growth</h2>
+<div class="value-box bg-green" style="--vb-width:90%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; " data-id="autoanimate-demo"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">1,284</div><div class="details" style="color:white; ">
+<p>New customers this quarter — up from 42 last quarter</p>
+</div></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode numberSource md number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode markdown hljs"><span id="cb64-1" class="hljs-ln-code"><a href="" aria-label="1"></a><span class="fu">## Auto-animate: Growth {auto-animate="true"}</span></span>
+<span id="cb64-2" class="hljs-ln-code"><a href="" aria-label="2"></a></span>
+<span id="cb64-3" class="hljs-ln-code"><a href="" aria-label="3"></a>::: {.value-box data-id="autoanimate-demo" value="42" width="30%" color="bg-blue" align="center"}</span>
+<span id="cb64-4" class="hljs-ln-code"><a href="" aria-label="4"></a>New customers this quarter</span>
+<span id="cb64-5" class="hljs-ln-code"><a href="" aria-label="5"></a>:::</span>
+<span id="cb64-6" class="hljs-ln-code"><a href="" aria-label="6"></a></span>
+<span id="cb64-7" class="hljs-ln-code"><a href="" aria-label="7"></a><span class="fu">## Auto-animate: Growth {auto-animate="true"}</span></span>
+<span id="cb64-8" class="hljs-ln-code"><a href="" aria-label="8"></a></span>
+<span id="cb64-9" class="hljs-ln-code"><a href="" aria-label="9"></a>::: {.value-box data-id="autoanimate-demo" value="1,284" width="90%" color="bg-green" align="left"}</span>
+<span id="cb64-10" class="hljs-ln-code"><a href="" aria-label="10"></a>New customers this quarter — up from 42 last quarter</span>
+<span id="cb64-11" class="hljs-ln-code"><a href="" aria-label="11"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The matching <code>data-id</code> is doing all the work here — everything else about the box (<code>value</code>, <code>width</code>, <code>color</code>, <code>align</code>) is free to differ between the two slides.</p>
+</section>
+<section id="more-auto-animate-examples" class="slide level2">
+<h2>More auto-animate examples</h2>
+<div style="font-size: 90%;">
+<p>The Growth pair changed several properties at once. Auto-animate isn’t limited to any fixed list of attributes — it interpolates whatever CSS the matched element ends up with, so anything on the box that becomes a CSS property can be animated:</p>
+<ul>
+<li><strong>Size</strong> — <code>width</code>, <code>height</code>, <code>padding</code>, <code>value-font-size</code>, <code>min-height</code>… a box can grow <em>or</em> shrink</li>
+<li><strong>Position</strong> — move a box anywhere on the slide via <code>outer-extra-style="margin-left:...;"</code> (or any other positioning CSS)</li>
+<li><strong>Colour</strong> — <code>color</code>, <code>font-color</code>, <code>value-color</code>, <code>icon-color</code>, <code>delta-color</code></li>
+<li><strong>Anything else expressible as CSS</strong> — opacity, rotation, border-radius — via the <code>*-extra-style</code> escape hatches from the previous section, since those pass straight through to the element’s <code>style=</code></li>
+</ul>
+<p>The next two pairs isolate shrink and movement on their own, so it’s clear which attribute is driving which part of the animation.</p>
+</div>
+</section>
+<section id="auto-animate-headline" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Auto-animate: Headline</h2>
+<div class="value-box bg-purple" style="--vb-width:70%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:center; --vb-justify-content:center; " data-id="shrink-demo"><div class="vb-content" style=""><div class="value" style="font-size:4rem; color:white; ">128%</div><div class="details" style="color:white; ">
+<p>Year-over-year growth</p>
+</div></div></div>
+</section>
+<section id="auto-animate-headline-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Auto-animate: Headline</h2>
+<div class="value-box bg-purple" style="--vb-width:20%; --vb-min-height:40px; --vb-padding:0.5rem; --vb-text-align:center; --vb-justify-content:center; " data-id="shrink-demo"><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">128%</div><div class="details" style="color:white; ">
+<p>YoY growth</p>
+</div></div></div>
+<p>Only <code>value-font-size</code>, <code>width</code>, <code>padding</code> and <code>min-height</code> changed between those two slides — the same headline stat condenses into a small summary tile, e.g.&nbsp;to make room as supporting detail appears elsewhere on the next slide of a real deck.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode numberSource md number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode markdown hljs"><span id="cb65-1" class="hljs-ln-code"><a href="" aria-label="1"></a><span class="fu">## Auto-animate: Headline {auto-animate="true"}</span></span>
+<span id="cb65-2" class="hljs-ln-code"><a href="" aria-label="2"></a></span>
+<span id="cb65-3" class="hljs-ln-code"><a href="" aria-label="3"></a>::: {.value-box data-id="shrink-demo" value="128%" value-font-size="4rem" width="70%" color="bg-purple" align="center"}</span>
+<span id="cb65-4" class="hljs-ln-code"><a href="" aria-label="4"></a>Year-over-year growth</span>
+<span id="cb65-5" class="hljs-ln-code"><a href="" aria-label="5"></a>:::</span>
+<span id="cb65-6" class="hljs-ln-code"><a href="" aria-label="6"></a></span>
+<span id="cb65-7" class="hljs-ln-code"><a href="" aria-label="7"></a><span class="fu">## Auto-animate: Headline {auto-animate="true"}</span></span>
+<span id="cb65-8" class="hljs-ln-code"><a href="" aria-label="8"></a></span>
+<span id="cb65-9" class="hljs-ln-code"><a href="" aria-label="9"></a>::: {.value-box data-id="shrink-demo" value="128%" value-font-size="1.3rem" width="20%" padding="0.5rem" min-height="40px" color="bg-purple" align="center"}</span>
+<span id="cb65-10" class="hljs-ln-code"><a href="" aria-label="10"></a>YoY growth</span>
+<span id="cb65-11" class="hljs-ln-code"><a href="" aria-label="11"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="auto-animate-focus" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Auto-animate: Focus</h2>
+<div class="value-box vb-icon-left bg-amber" style="--vb-width:35%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; " data-id="movement-demo"><i class="icon fa-solid fa-clock" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
+<p>Days until launch</p>
+</div></div></div>
+</section>
+<section id="auto-animate-focus-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Auto-animate: Focus</h2>
+<div class="value-box vb-icon-left bg-amber" style="--vb-width:35%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; margin-left:60%;" data-id="movement-demo"><i class="icon fa-solid fa-rocket" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
+<p>Days until launch</p>
+</div></div></div>
+<p>Here only <code>outer-extra-style</code> and <code>icon</code> changed — same size, same colour, same value, just a different <code>margin-left</code> — so the box visibly slides across the slide with nothing else moving.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode numberSource md number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode markdown hljs"><span id="cb66-1" class="hljs-ln-code"><a href="" aria-label="1"></a><span class="fu">## Auto-animate: Focus {auto-animate="true"}</span></span>
+<span id="cb66-2" class="hljs-ln-code"><a href="" aria-label="2"></a></span>
+<span id="cb66-3" class="hljs-ln-code"><a href="" aria-label="3"></a>::: {.value-box data-id="movement-demo" value="7" width="35%" color="bg-amber" icon="fa-solid fa-clock" icon-position="left"}</span>
+<span id="cb66-4" class="hljs-ln-code"><a href="" aria-label="4"></a>Days until launch</span>
+<span id="cb66-5" class="hljs-ln-code"><a href="" aria-label="5"></a>:::</span>
+<span id="cb66-6" class="hljs-ln-code"><a href="" aria-label="6"></a></span>
+<span id="cb66-7" class="hljs-ln-code"><a href="" aria-label="7"></a><span class="fu">## Auto-animate: Focus {auto-animate="true"}</span></span>
+<span id="cb66-8" class="hljs-ln-code"><a href="" aria-label="8"></a></span>
+<span id="cb66-9" class="hljs-ln-code"><a href="" aria-label="9"></a>::: {.value-box data-id="movement-demo" outer-extra-style="margin-left:60%;" value="7" width="35%" color="bg-amber" icon="fa-solid fa-rocket" icon-position="left"}</span>
+<span id="cb66-10" class="hljs-ln-code"><a href="" aria-label="10"></a>Days until launch</span>
+<span id="cb66-11" class="hljs-ln-code"><a href="" aria-label="11"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

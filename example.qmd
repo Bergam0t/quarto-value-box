@@ -35,6 +35,8 @@ filters:
 ---
 
 
+# The Basics
+
 ## Simple boxes
 
 ::: {.value-box}
@@ -147,15 +149,16 @@ This week
 ::::
 
 
-## Fragment types
+## Delta / trend indicator
+
+A `delta` renders a small badge next to the value, e.g. a change since the last period. The arrow is inferred from a leading `+`/`-` in the text unless `delta-direction` is set explicitly.
 
 :::: {.columns}
 
 ::: {.column width='40%'}
 
-::: {.value-box fragment="fade-in-then-semi-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" }
-We can use them with special named fragment types like 'fade in, then semi out'
-(this is also the default if you set fragment="true")
+::: {.value-box title="Revenue" value="$1.2M" delta="+12%" color="bg-green"}
+This quarter
 :::
 
 :::
@@ -163,9 +166,8 @@ We can use them with special named fragment types like 'fade in, then semi out'
 ::: {.column width='60%'}
 
 ```md
-::: {.value-box fragment="fade-in-then-semi-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}
-We can use them with special named fragment types like 'fade in, then semi out'
-(this is also the default if you set fragment="true")
+::: {.value-box title="Revenue" value="$1.2M" delta="+12%" color="bg-green"}
+This quarter
 :::
 ```
 
@@ -173,13 +175,14 @@ We can use them with special named fragment types like 'fade in, then semi out'
 
 ::::
 
+`delta-color` is never inferred from direction, because "up" is not always good news — a rising cost and a falling cost are both "up" or "down" depending on which one you're looking at. Set the colour explicitly for a semantic red/green treatment:
 
 :::: {.columns}
 
 ::: {.column width='40%'}
 
-::: {.value-box fragment="fade-in-then-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" }
-Or standard fragments
+::: {.value-box title="Operating cost" value="$430K" delta="-8%" delta-color="#8bc34a" color="bg-navy"}
+Lower is better here, so a fall is shown in green
 :::
 
 :::
@@ -187,8 +190,8 @@ Or standard fragments
 ::: {.column width='60%'}
 
 ```md
-::: {.value-box fragment="fade-in-then-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}
-Or standard fragments
+::: {.value-box title="Operating cost" value="$430K" delta="-8%" delta-color="#8bc34a" color="bg-navy"}
+Lower is better here, so a fall is shown in green
 :::
 ```
 
@@ -197,22 +200,29 @@ Or standard fragments
 ::::
 
 
+## Linked boxes
+
+Set `href` to wrap the whole box in a link — it gets a subtle hover lift/shadow (static boxes don't wobble). Add `target="_blank"` to open it in a new tab; that automatically adds `rel="noopener noreferrer"` too.
+
+Hover over the box below to see it lift:
+
 :::: {.columns}
 
 ::: {.column width='40%'}
 
-:::{.fragment}
-Tada!
+::: {.value-box title="Documentation" value="README" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" icon="fa-solid fa-book" color="bg-slate" align="center"}
+Opens in a new tab
 :::
-
 
 :::
 
 ::: {.column width='60%'}
 
 ```md
-:::{.fragment}
-Tada!
+::: {.value-box title="Documentation" value="README"
+  href="https://github.com/Bergam0t/quarto-value-box?tab=readme-ov-file"
+  target="_blank" icon="bi-box-arrow-up-right" color="bg-slate"}
+Opens in a new tab
 :::
 ```
 
@@ -221,39 +231,213 @@ Tada!
 ::::
 
 
+# Layout
+
+## Row layout
+
+::: {style='font-size: 75%;'}
+Wrap value boxes in `.value-box-row` for an equal-width, equal-height KPI strip — no more hand-rolling `.columns`/`.column` scaffolding or hand-setting `height` on every box to make them match. With no `columns` set, boxes lay out in a single non-wrapping row:
+:::
+
+::: {.value-box-row}
+
+::: {.value-box value="128" color="bg-teal"}
+Signups this week — a longer line of detail text here to show the other boxes stretch to match its height
+:::
+
+::: {.value-box value="42" color="bg-amber"}
+Open tickets
+:::
+
+::: {.value-box value="99%" color="bg-green"}
+Uptime
+:::
+
+:::
+
+::: {style='font-size: 80%;'}
 
 
 
+```md
+::: {.value-box-row}
 
-## Complex icon box layouts with index parameter
+::: {.value-box value="128" color="bg-teal"}
+Signups this week
+:::
 
-By using the 'index' parameter, we can determine the order that fragments appear by passing a number that indicates the order.
+::: {.value-box value="42" color="bg-amber"}
+Open tickets
+:::
+
+::: {.value-box value="99%" color="bg-green"}
+Uptime
+:::
+
+:::
+```
+
+:::
+
+## Grid layout
+
+Set `columns` to switch to a grid: extra boxes wrap onto further rows once it's full, with every row — not just each one individually — kept the same height.
+
+::: {.value-box-row columns="3"}
+
+::: {.value-box value="12" color="bg-blue" title="Team A"}
+Wins this season — a much longer line of detail text, to show every row in the grid stretches to match the tallest box anywhere in it
+:::
+
+::: {.value-box value="9" color="bg-purple" title="Team B"}
+Wins
+:::
+
+::: {.value-box value="15" color="bg-red" title="Team C"}
+Wins
+:::
+
+::: {.value-box value="7" color="bg-olive" title="Team D"}
+Wins
+:::
+
+::: {.value-box value="11" color="bg-slate" title="Team E"}
+Wins
+:::
+
+::: {.value-box value="4" color="bg-pink" title="Team F"}
+Wins
+:::
+
+:::
+
+## Grid Layout - Code
+
+```md
+::: {.value-box-row columns="3"}
+
+::: {.value-box value="12" color="bg-blue" title="Team A"}
+Wins this season
+:::
+
+::: {.value-box value="9" color="bg-purple" title="Team B"}
+Wins
+:::
+
+::: {.value-box value="15" color="bg-red" title="Team C"}
+Wins
+:::
+
+::: {.value-box value="7" color="bg-olive" title="Team D"}
+Wins
+:::
+
+::: {.value-box value="11" color="bg-slate" title="Team E"}
+Wins
+:::
+
+::: {.value-box value="4" color="bg-pink" title="Team F"}
+Wins
+:::
+
+:::
+```
+
+
+## Width
+
+We can manually override the width.
+
+
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
+No width specified - defaults to 80% of container
+:::
+
+```md
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
+No width specified - defaults to 80% of container
+:::
+```
+
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" width="30%"}
+Width of 30% specified.
+:::
+
+```md
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" width="30%"}
+Width of 30% specified.
+:::
+```
+
+
+
+## Height
+
+And we can manually override the height.
 
 :::: {.columns}
 
-::: {.column width="50%"}
-### Left Column
-::: {.value-box fragment="true" index="2" width="70%"}
-This appears SECOND (Index 2)
+::: {.column width='50%'}
+
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
+Example with no height specified - it will fit the contents
 :::
 
 ```md
-::: {.value-box fragment="true" index="2" width="70%"}
-This appears SECOND (Index 2)
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
+Example with no height specified - it will fit the contents
 :::
 ```
 
 :::
 
-::: {.column width="50%"}
-### Right Column
-::: {.value-box fragment="true" index="1" width="70%"}
-This appears FIRST (Index 1)
+::: {.column width='50%'}
+
+::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
+Example with height of 400 pixels (400px) specified
 :::
 
 ```md
-::: {.value-box fragment="true" index="1" width="70%"}
-This appears FIRST (Index 1)
+::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
+Example with height of 400 pixels (400px) specified
+:::
+
+```
+
+:::
+
+::::
+
+## Vertical Alignment
+
+And we can also add vertical alignment options.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px"}
+No valign specified
+:::
+
+```md
+::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px"}
+No valign specified
+:::
+
+```
+
+:::
+
+::: {.column width='50%'}
+
+::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px" valign="top"}
+Top alignment specified
+:::
+
+```md
+::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px" valign="top"}
+Top alignment specified
 :::
 ```
 
@@ -261,6 +445,43 @@ This appears FIRST (Index 1)
 
 ::::
 
+## Minimum height & padding
+
+If a box's content is short (or `height` is set below the default floor), `min-height` and `padding` can be lowered to reclaim space — handy on busy slides.
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box icon="bi-star" value="42"}
+Default min-height (100px) and padding (1.5rem)
+:::
+
+```md
+::: {.value-box icon="bi-star" value="42"}
+Default min-height (100px) and padding (1.5rem)
+:::
+```
+
+:::
+
+::: {.column width='60%'}
+
+::: {.value-box icon="bi-star" icon-size="1.5rem" value="42" min-height="40px" padding="0.5rem"}
+Tightened min-height and padding
+:::
+
+```md
+::: {.value-box min-height="40px" padding="0.5rem" icon="bi-star" icon-size="1.5rem" value="42" }
+Tightened min-height and padding
+:::
+```
+
+:::
+
+::::
+
+# Icons
 
 ## Icon position
 
@@ -717,6 +938,122 @@ Local png file
 ::::
 
 
+# Colour & Typography
+
+## Icon Color
+
+Font awesome, bootstrap icons, tabler icons, phosphor icons, and material symbols support recoloring
+
+:::: {.columns}
+
+::: {.column width='30%'}
+
+::: {.value-box icon="bi-star" icon-position="left" icon-color="red"}
+Bootstrap icons
+:::
+
+
+
+:::
+
+::: {.column width='70%'}
+
+```md
+
+::: {.value-box icon-color="red" icon="bi-star" icon-position="left" }
+Bootstrap icons
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {.value-box icon="fa-brands fa-python" icon-position="left" value="42" icon-color="fuchsia"}
+Font awesome icons
+:::
+
+
+
+:::
+
+::: {.column width='70%'}
+```md
+::: {.value-box icon-color="fuchsia" icon="fa-brands fa-python" icon-position="left" }
+Font awesome icons
+:::
+```
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {.value-box icon="home" icon-type="material" icon-position="left" value="42" icon-color="lime"}
+Material Symbols icons
+:::
+
+
+
+:::
+
+::: {.column width='70%'}
+```md
+::: {.value-box icon-color="lime" icon="home" icon-type="material" icon-position="left" }
+Material Symbols icons
+:::
+```
+:::
+
+::::
+
+## Icon Color (continued)
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {.value-box icon="ti-star" icon-position="left" value="42" icon-color="cyan"}
+Tabler icons
+:::
+
+
+
+:::
+
+::: {.column width='70%'}
+```md
+::: {.value-box icon-color="cyan" icon="ti-star" icon-position="left" }
+Tabler icons
+:::
+```
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {.value-box icon="ph ph-star" icon-position="left" value="42" icon-color="orange"}
+Phosphor icons
+:::
+
+
+
+:::
+
+::: {.column width='70%'}
+```md
+::: {.value-box icon-color="orange" icon="ph ph-star" icon-position="left" }
+Phosphor icons
+:::
+```
+:::
+
+::::
 
 ## Box colours
 
@@ -724,7 +1061,7 @@ Local png file
 
 You can also change the `color` parameter. A number of predefined colours are available: bg-blue, bg-navy, bg-teal, bg-green, bg-olive, bg-amber, bg-orange, bg-red, bg-pink, bg-purple, bg-slate, bg-grey
 
-For details on how to change or add colours, see the [advanced customisation](https://github.com/Bergam0t/quarto-value-box?tab=readme-ov-file#colours) section in the readme.
+For details on how to change or add named colours, see the [advanced customisation](https://github.com/Bergam0t/quarto-value-box?tab=readme-ov-file#colours) section in the readme.
 </div>
 
 
@@ -805,146 +1142,120 @@ bg-grey
 ::::
 
 
+## Box colours - custom
 
+`color` also accepts a raw CSS colour value directly — no new class needed — for anything starting with `#`, `rgb(`/`rgba(`, `hsl(`/`hsla(`, or `var(`.
 
+::: {.value-box-row columns="3"}
 
-
-## Width
-
-We can manually override the width.
-
-
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
-No width specified - defaults to 80% of container
+::: {.value-box color="#c8102e" height="100px"}
+color="#c8102e"
 :::
 
-```md
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
-No width specified - defaults to 80% of container
-:::
-```
-
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" width="30%"}
-Width of 30% specified.
+::: {.value-box color="rgb(200, 16, 200)" height="100px"}
+color="rgb(200, 16, 200)"
 :::
 
-```md
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" width="30%"}
-Width of 30% specified.
+::: {.value-box color="rgba(200, 16, 46, 0.3)" height="100px" font-color="black"}
+color="rgba(200, 16, 46, 0.3)"
 :::
-```
+
+::: {.value-box color="hsl(13 74.5% 52.4%)" height="100px"}
+color="hsl(13 74.5% 52.4%)"
+:::
+
+::: {.value-box color="hsla(13 74.5% 52.4% / 0.5)" height="100px" font-color="black"}
+color="hsla(13 74.5% 52.4% / 0.5)"
+:::
 
 
+<style>
+:root { --demo-brand-color: #2BAC9A; }
+</style>
 
-## Height
+:::
 
-And we can manually override the height.
+<hr>
+<br>
 
 :::: {.columns}
 
 ::: {.column width='50%'}
-
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
-Example with no height specified - it will fit the contents
-:::
-
-```md
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
-Example with no height specified - it will fit the contents
-:::
+```css
+<style>
+:root { --demo-brand-color: #2BAC9A; }
+</style>
 ```
-
 :::
 
 ::: {.column width='50%'}
 
-::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
-Example with height of 400 pixels (400px) specified
+::: {.value-box color="var(--demo-brand-color)" height="100px"}
+color="var(--demo-brand-color)"
 :::
-
-```md
-::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
-Example with height of 400 pixels (400px) specified
-:::
-
-```
-
 :::
 
 ::::
 
-## Vertical Alignment
 
-And we can also add vertical alignment options.
 
-:::: {.columns}
 
-::: {.column width='50%'}
+## Box colours - _brand.yml
 
-::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px"}
-No valign specified
+::: {style='font-size: 75%;'}
+Quarto compiles a project's `_brand.yml` palette into CSS custom properties automatically, so `color` can reference it with `var(...)` too — no manual `<style>` block needed. This deck ships its own `_brand.yml`:
+:::
+
+```yaml
+# _brand.yml
+color:
+  palette:
+    accent: "#6F3D9E"
+  primary: accent
+```
+
+::: {.value-box-row columns="2"}
+
+::: {.value-box color="var(--quarto-scss-export-brand-accent)"}
+color="var(--quarto-scss-export-brand-accent)"
+:::
+
+::: {.value-box color="bg-amber" icon="bi-star" icon-color="var(--quarto-scss-export-brand-accent)" icon-position="left" icon-size="2em"}
+icon-color="var(--quarto-scss-export-brand-accent)"
+:::
+
+:::
+
+::: {style='font-size: 75%;'}
+`--quarto-scss-export-brand-accent` names the `accent` palette entry directly — Quarto exports every resolved theme/brand value this way, in every format, so there's no need to know format-internal names like reveal.js's `--r-link-color` or Bootstrap's `--bs-primary`.
+
+`icon-color`/`font-color`/`value-color`/`title-color`/`delta-color` accept `var(...)` the same way.
+:::
+
+## Box colours - finding variable names
+
+::: {style='font-size: 80%;'}
+Render once, then grep the compiled theme CSS for the `--quarto-scss-export-` prefix to see every brand/theme value Quarto resolved, under its own name — no need to read Quarto's SCSS source:
+:::
+
+```sh
+grep -o -- "--quarto-scss-export-[a-zA-Z0-9_-]*:[^;]*" path/to/theme.css
+```
+
+::: {style='font-size: 80%;'}
+- `revealjs`: `<doc>_files/libs/revealjs/dist/theme/quarto-*.css`
+- `html`/`dashboard`: `<doc>_files/libs/bootstrap/bootstrap-*.min.css`
+
+The semantic roles (`primary`, `secondary`, `success`, ...) are exported the same way, as `--quarto-scss-export-primary` etc. Bootstrap-based formats additionally expose those same roles under Bootstrap's own names too (`--bs-primary`, `--bs-secondary`, ...), if you'd rather use those instead:
 :::
 
 ```md
-::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px"}
-No valign specified
-:::
-
-```
-
-:::
-
-::: {.column width='50%'}
-
-::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px" valign="top"}
-Top alignment specified
-:::
-
-```md
-::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px" valign="top"}
-Top alignment specified
+::: {.value-box color="var(--bs-primary)" value="42"}
+Uses the brand's primary colour on an html/dashboard render
 :::
 ```
 
-:::
 
-::::
-
-## Minimum height & padding
-
-If a box's content is short (or `height` is set below the default floor), `min-height` and `padding` can be lowered to reclaim space — handy on busy slides.
-
-:::: {.columns}
-
-::: {.column width='40%'}
-
-::: {.value-box icon="bi-star" value="42"}
-Default min-height (100px) and padding (1.5rem)
-:::
-
-```md
-::: {.value-box icon="bi-star" value="42"}
-Default min-height (100px) and padding (1.5rem)
-:::
-```
-
-:::
-
-::: {.column width='60%'}
-
-::: {.value-box icon="bi-star" icon-size="1.5rem" value="42" min-height="40px" padding="0.5rem"}
-Tightened min-height and padding
-:::
-
-```md
-::: {.value-box min-height="40px" padding="0.5rem" icon="bi-star" icon-size="1.5rem" value="42" }
-Tightened min-height and padding
-:::
-```
-
-:::
-
-::::
 
 ## Font Sizing
 
@@ -1086,28 +1397,27 @@ But they can differ
 
 ::::
 
-## Icon Color
+# Advanced
 
-Font awesome, bootstrap icons, tabler icons, phosphor icons, and material symbols support recoloring
+## Fragment types
 
 :::: {.columns}
 
-::: {.column width='30%'}
+::: {.column width='40%'}
 
-::: {.value-box icon="bi-star" icon-position="left" icon-color="red"}
-Bootstrap icons
+::: {.value-box fragment="fade-in-then-semi-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" }
+We can use them with special named fragment types like 'fade in, then semi out'
+(this is also the default if you set fragment="true")
 :::
 
-
-
 :::
 
-::: {.column width='70%'}
+::: {.column width='60%'}
 
 ```md
-
-::: {.value-box icon-color="red" icon="bi-star" icon-position="left" }
-Bootstrap icons
+::: {.value-box fragment="fade-in-then-semi-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}
+We can use them with special named fragment types like 'fade in, then semi out'
+(this is also the default if you set fragment="true")
 :::
 ```
 
@@ -1115,88 +1425,292 @@ Bootstrap icons
 
 ::::
 
+
 :::: {.columns}
 
-::: {.column width='30%'}
-::: {.value-box icon="fa-brands fa-python" icon-position="left" value="42" icon-color="fuchsia"}
-Font awesome icons
+::: {.column width='40%'}
+
+::: {.value-box fragment="fade-in-then-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" }
+Or standard fragments
 :::
 
-
-
 :::
 
-::: {.column width='70%'}
+::: {.column width='60%'}
+
 ```md
-::: {.value-box icon-color="fuchsia" icon="fa-brands fa-python" icon-position="left" }
-Font awesome icons
+::: {.value-box fragment="fade-in-then-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}
+Or standard fragments
 :::
 ```
+
 :::
 
 ::::
 
+
 :::: {.columns}
 
-::: {.column width='30%'}
-::: {.value-box icon="home" icon-type="material" icon-position="left" value="42" icon-color="lime"}
-Material Symbols icons
+::: {.column width='40%'}
+
+:::{.fragment}
+Tada!
 :::
 
 
-
 :::
 
-::: {.column width='70%'}
+::: {.column width='60%'}
+
 ```md
-::: {.value-box icon-color="lime" icon="home" icon-type="material" icon-position="left" }
-Material Symbols icons
+:::{.fragment}
+Tada!
 :::
 ```
+
 :::
 
 ::::
 
-## Icon Color (continued)
+
+## All fragment types
+
+::: {style='font-size: 65%;'}
+Every fragment style shipped with this version of Reveal.js, one per box — advance through the slide to see each one in turn. All of them fade in on entry; the class name controls what (if anything) happens after that. See the [Reveal.js docs](https://quarto.org/docs/presentations/revealjs/advanced.html#fragment-classes) for the full reference.
+:::
+
+::: {.value-box-row columns="5"}
+
+::: {.value-box fragment="fade-in" value="fade-in" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in, stays visible
+:::
+
+::: {.value-box fragment="fade-out" value="fade-out" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Starts visible, fades out
+:::
+
+::: {.value-box fragment="fade-up" value="fade-up" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in while sliding up
+:::
+
+::: {.value-box fragment="fade-down" value="fade-down" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in while sliding down
+:::
+
+::: {.value-box fragment="fade-left" value="fade-left" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in while sliding left
+:::
+
+::: {.value-box fragment="fade-right" value="fade-right" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in while sliding right
+:::
+
+::: {.value-box fragment="fade-in-then-out" value="fade-in-then-out" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in, fades out next step
+:::
+
+::: {.value-box fragment="fade-in-then-semi-out" value="fade-in-then-semi-out" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in, dims next step (this extension's default)
+:::
+
+::: {.value-box fragment="semi-fade-out" value="semi-fade-out" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Starts visible, dims out
+:::
+
+::: {.value-box fragment="grow" value="grow" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in while growing larger
+:::
+
+::: {.value-box fragment="shrink" value="shrink" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in while shrinking
+:::
+
+::: {.value-box fragment="zoom-in" value="zoom-in" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in while zooming from small
+:::
+
+::: {.value-box fragment="strike" value="strike" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in with a strikethrough
+:::
+
+:::
+
+::: {style='font-size: 60%;'}
+Not shown: `highlight-red`/`-green`/`-blue` and their `highlight-current-*` variants. Reveal.js applies these by recolouring the fragment element's own `color`, but value boxes set `color` inline on the value/details text for contrast against `color`/`bg-*`, which overrides it — so these six have no visible effect on a value box and are unsupported here.
+:::
+
+
+
+
+
+
+## Complex icon box layouts with index parameter
+
+By using the 'index' parameter, we can determine the order that fragments appear by passing a number that indicates the order.
 
 :::: {.columns}
 
-::: {.column width='30%'}
-::: {.value-box icon="ti-star" icon-position="left" value="42" icon-color="cyan"}
-Tabler icons
+::: {.column width="50%"}
+### Left Column
+::: {.value-box fragment="true" index="2" width="70%"}
+This appears SECOND (Index 2)
 :::
 
-
-
-:::
-
-::: {.column width='70%'}
 ```md
-::: {.value-box icon-color="cyan" icon="ti-star" icon-position="left" }
-Tabler icons
+::: {.value-box fragment="true" index="2" width="70%"}
+This appears SECOND (Index 2)
 :::
 ```
+
+:::
+
+::: {.column width="50%"}
+### Right Column
+::: {.value-box fragment="true" index="1" width="70%"}
+This appears FIRST (Index 1)
+:::
+
+```md
+::: {.value-box fragment="true" index="1" width="70%"}
+This appears FIRST (Index 1)
+:::
+```
+
 :::
 
 ::::
 
-:::: {.columns}
 
-::: {.column width='30%'}
-::: {.value-box icon="ph ph-star" icon-position="left" value="42" icon-color="orange"}
-Phosphor icons
+## Escape hatch: id, extra classes and attributes
+
+<style>
+/* Proves .highlight-box below actually landed on the box, rather than
+   just being a class name mentioned in the slide text. */
+.highlight-box { outline: 7px dashed gold; outline-offset: 4px; }
+</style>
+
+Beyond the parameters this extension defines, an `#id` and extra `.classes` pass through onto the rendered box, along with `data-*`/`aria-*` attributes and `role`/`tabindex`/`lang`. Anything else is left off rather than renamed to a `data-` attribute.
+
+::: {.value-box #kpi-example .highlight-box value="42" role="group" aria-label="Sales this quarter" data-id="kpi-example"}
+id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-animate) all survive
 :::
 
+```css
+<style>
+.highlight-box { outline: 7px dashed gold; outline-offset: 4px; }
+</style>
+```
 
+<br>
 
-:::
-
-::: {.column width='70%'}
 ```md
-::: {.value-box icon-color="orange" icon="ph ph-star" icon-position="left" }
-Phosphor icons
+::: {.value-box #kpi-example .highlight-box value="42" role="group" aria-label="Sales this quarter" data-id="kpi-example"}
+id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-animate) all survive
 :::
 ```
+
+
+
+## `data-id` and auto-animate
+
+`data-id` is what actually drives [Reveal.js auto-animate](https://quarto.org/docs/presentations/revealjs/advanced.html#auto-animate): give two *consecutive* slides `auto-animate="true"` in the heading, give a value box the same `data-id` on both, and Reveal.js treats it as the same element and smoothly morphs its position, size and colour between them as you advance. The next two slides are that pair — present the deck (not the static preview pane) to see it animate.
+
+## Auto-animate: Growth {auto-animate="true"}
+
+::: {.value-box data-id="autoanimate-demo" value="42" width="30%" color="bg-blue" align="center"}
+New customers this quarter
 :::
 
-::::
+## Auto-animate: Growth {auto-animate="true"}
+
+::: {.value-box data-id="autoanimate-demo" value="1,284" width="90%" color="bg-green" align="left"}
+New customers this quarter — up from 42 last quarter
+:::
+
+
+```md
+## Auto-animate: Growth {auto-animate="true"}
+
+::: {.value-box data-id="autoanimate-demo" value="42" width="30%" color="bg-blue" align="center"}
+New customers this quarter
+:::
+
+## Auto-animate: Growth {auto-animate="true"}
+
+::: {.value-box data-id="autoanimate-demo" value="1,284" width="90%" color="bg-green" align="left"}
+New customers this quarter — up from 42 last quarter
+:::
+```
+
+The matching `data-id` is doing all the work here — everything else about the box (`value`, `width`, `color`, `align`) is free to differ between the two slides.
+
+## More auto-animate examples
+
+::: {style='font-size: 90%;'}
+
+The Growth pair changed several properties at once. Auto-animate isn't limited to any fixed list of attributes — it interpolates whatever CSS the matched element ends up with, so anything on the box that becomes a CSS property can be animated:
+
+- **Size** — `width`, `height`, `padding`, `value-font-size`, `min-height`… a box can grow *or* shrink
+- **Position** — move a box anywhere on the slide via `outer-extra-style="margin-left:...;"` (or any other positioning CSS)
+- **Colour** — `color`, `font-color`, `value-color`, `icon-color`, `delta-color`
+- **Anything else expressible as CSS** — opacity, rotation, border-radius — via the `*-extra-style` escape hatches from the previous section, since those pass straight through to the element's `style=`
+
+The next two pairs isolate shrink and movement on their own, so it's clear which attribute is driving which part of the animation.
+
+:::
+
+## Auto-animate: Headline {auto-animate="true"}
+
+::: {.value-box data-id="shrink-demo" value="128%" value-font-size="4rem" width="70%" color="bg-purple" align="center"}
+Year-over-year growth
+:::
+
+## Auto-animate: Headline {auto-animate="true"}
+
+::: {.value-box data-id="shrink-demo" value="128%" value-font-size="1.3rem" width="20%" padding="0.5rem" min-height="40px" color="bg-purple" align="center"}
+YoY growth
+:::
+
+Only `value-font-size`, `width`, `padding` and `min-height` changed between those two slides — the same headline stat condenses into a small summary tile, e.g. to make room as supporting detail appears elsewhere on the next slide of a real deck.
+
+```md
+## Auto-animate: Headline {auto-animate="true"}
+
+::: {.value-box data-id="shrink-demo" value="128%" value-font-size="4rem" width="70%" color="bg-purple" align="center"}
+Year-over-year growth
+:::
+
+## Auto-animate: Headline {auto-animate="true"}
+
+::: {.value-box data-id="shrink-demo" value="128%" value-font-size="1.3rem" width="20%" padding="0.5rem" min-height="40px" color="bg-purple" align="center"}
+YoY growth
+:::
+```
+
+## Auto-animate: Focus {auto-animate="true"}
+
+::: {.value-box data-id="movement-demo" value="7" width="35%" color="bg-amber" icon="fa-solid fa-clock" icon-position="left"}
+Days until launch
+:::
+
+## Auto-animate: Focus {auto-animate="true"}
+
+::: {.value-box data-id="movement-demo" outer-extra-style="margin-left:60%;" value="7" width="35%" color="bg-amber" icon="fa-solid fa-rocket" icon-position="left"}
+Days until launch
+:::
+
+Here only `outer-extra-style` and `icon` changed — same size, same colour, same value, just a different `margin-left` — so the box visibly slides across the slide with nothing else moving.
+
+```md
+## Auto-animate: Focus {auto-animate="true"}
+
+::: {.value-box data-id="movement-demo" value="7" width="35%" color="bg-amber" icon="fa-solid fa-clock" icon-position="left"}
+Days until launch
+:::
+
+## Auto-animate: Focus {auto-animate="true"}
+
+::: {.value-box data-id="movement-demo" outer-extra-style="margin-left:60%;" value="7" width="35%" color="bg-amber" icon="fa-solid fa-rocket" icon-position="left"}
+Days until launch
+:::
+```

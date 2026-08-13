@@ -228,7 +228,23 @@ for fmt in "${formats[@]}"; do
     fi
 
     log="$work/$fmt/$fixture.$fmt.log"
-    assert_absent "value-box warning" "$log" "$fixture/$fmt emits no filter warnings"
+    if [ "$fixture" = "passthrough" ]; then
+      # Deliberately triggers three collision warnings — a literal style, a
+      # literal data-fragment-index that collides with a generated one, and a
+      # mixed-case Style that must still be recognised as the same collision
+      # — in every format, since the Lua that emits them isn't gated on
+      # output format.
+      assert_count 3 "value-box warning" "$log" "$fixture/$fmt warns about every dropped colliding attribute"
+    elif [ "$fixture" = "layout" ]; then
+      # Deliberately triggers one warning: an unrecognised delta-direction.
+      assert_count 1 "value-box warning" "$log" "$fixture/$fmt warns about the one unrecognised delta-direction"
+    elif [ "$fixture" = "row" ]; then
+      # Deliberately triggers two warnings: a literal style collision and an
+      # unrecognised (non-numeric) columns value.
+      assert_count 2 "value-box warning" "$log" "$fixture/$fmt warns about the dropped style and the unrecognised columns value"
+    else
+      assert_absent "value-box warning" "$log" "$fixture/$fmt emits no filter warnings"
+    fi
 
     case "$fmt" in
       html|revealjs)
@@ -270,29 +286,51 @@ for fmt in "${formats[@]}"; do
         # the checks that make a refactor of the style-building code reviewable
         # rather than a leap of faith.
         if [ "$fixture" = "layout" ]; then
-          assert_count 1 "flex-direction:row-reverse"  "$out" "$fixture/$fmt icon-position=right reverses the row"
-          assert_count 1 "justify-content:flex-start"  "$out" "$fixture/$fmt valign=top"
-          assert_count 1 "justify-content:flex-end"    "$out" "$fixture/$fmt valign=bottom"
-          assert_count 1 "margin-right:-0.12em"        "$out" "$fixture/$fmt align=right gets the right optical bearing"
+          # Layout is expressed as a class switch plus a --vb-* custom
+          # property, not a hand-built inline declaration — see the
+          # "Move layout from inline styles to CSS custom properties" refactor.
+          # The class/property names are only ever emitted by this filter, so
+          # they anchor just as tightly as the inline declarations they replace.
+          assert_count 1 'class="value-box vb-icon-right bg-blue"' "$out" "$fixture/$fmt icon-position=right gets the vb-icon-right layout class"
+          assert_count 1 "--vb-justify-content:flex-start;" "$out" "$fixture/$fmt valign=top"
+          assert_count 1 "--vb-justify-content:flex-end;"   "$out" "$fixture/$fmt valign=bottom"
+          assert_count 1 'class="icon vb-bearing-right bi bi-star"' "$out" "$fixture/$fmt align=right gets the right optical bearing class"
           assert_present 'class="value-box bg-teal"'   "$out" "$fixture/$fmt colour class reaches the wrapper"
+          # A color value (as opposed to a bg-* class) must become a
+          # background-color custom property, not get concatenated into
+          # class="..." where it would match no stylesheet rule and silently
+          # do nothing.
+          assert_absent '#c8102e"'                     "$out" "$fixture/$fmt hex colour value is not appended to the class attribute"
+          assert_present "--vb-bg:#c8102e;"             "$out" "$fixture/$fmt hex colour value becomes a --vb-bg custom property"
+          assert_absent 'var(--brand-color)"'           "$out" "$fixture/$fmt var() colour value is not appended to the class attribute"
+          assert_present "--vb-bg:var(--brand-color);"  "$out" "$fixture/$fmt var() colour value becomes a --vb-bg custom property"
           assert_present 'data-fragment-index="2"'     "$out" "$fixture/$fmt fragment index passes through"
           assert_present "fragment fade-in-then-semi-out" "$out" "$fixture/$fmt fragment=true expands to the default effect"
           assert_present "fragment fade-in-then-out"   "$out" "$fixture/$fmt explicit fragment effect passes through"
           assert_present '<a href="https://example.com"' "$out" "$fixture/$fmt href wraps the box in an anchor"
+          # target="_blank" must also get rel="noopener noreferrer" — an
+          # opener-less new tab is the whole point of _blank, and leaving
+          # window.opener reachable is a known phishing vector (reverse
+          # tabnabbing) other target values don't share. It must also get
+          # data-preview-link="false", or reveal.js's previewLinks option
+          # hijacks the click and opens the href in an in-slide iframe
+          # instead of a real new tab, regardless of target.
+          assert_present '<a href="https://example.com" target="_blank" data-preview-link="false" rel="noopener noreferrer" class="value-box bg-blue"' \
+            "$out" "$fixture/$fmt target=_blank adds rel=noopener noreferrer and opts out of reveal.js preview-link hijacking"
           # These five must be anchored to filter-generated markup. Pandoc
           # echoes unrecognised div attributes back out as data-* attributes,
           # so asserting on the bare user string (e.g. "opacity:0.5") passes
           # even with the filter removed entirely — it tests Pandoc, not us.
           # Each pattern below spans the boundary between something the filter
           # generated and the user's string.
-          assert_present "text-align:left; border:2px solid red;" "$out" "$fixture/$fmt outer-extra-style merges into the wrapper style"
+          assert_present "--vb-justify-content:center; border:2px solid red;" "$out" "$fixture/$fmt outer-extra-style merges into the wrapper style"
           assert_present "font-size:3em; color:white; opacity:0.5;" "$out" "$fixture/$fmt icon-extra-style merges into the icon style"
           assert_present '<div class="vb-content" style="letter-spacing:1px;"' "$out" "$fixture/$fmt content-extra-style merges into the content style"
           assert_present '<div class="details" style="color:white; font-style:italic;"' "$out" "$fixture/$fmt details-extra-style merges into the details style"
           assert_present '<div class="value" style="font-size:2.2rem; color:white; text-decoration:underline;"' "$out" "$fixture/$fmt value-extra-style merges into the value style"
 
           # Blanked attributes must not suppress a default into "font-size:;".
-          assert_present 'style="font-size:3em;  margin-left:-0.12em;"' "$out" "$fixture/$fmt blank icon-color omits the declaration"
+          assert_present 'class="icon vb-bearing-left bi bi-star" style="font-size:3em; "' "$out" "$fixture/$fmt blank icon-color omits the declaration"
 
           # title. No font-size is emitted by default, on purpose: the
           # stylesheet's .value-box .title rule supplies it unless overridden.
@@ -301,11 +339,11 @@ for fmt in "${formats[@]}"; do
 
           # A title above a left/right value row needs an extra wrapper, so the
           # title spans the width instead of becoming a third item in the row.
-          assert_present '<div class="title" style="color:white; ">Rowed</div><div class="vb-row" style=" display:flex; flex-direction:row;' "$out" "$fixture/$fmt title sits above the value row, not inside it"
-          # ...and must not appear otherwise: without a title the row styles
-          # stay on .vb-content exactly as they did before the feature existed.
-          assert_present '<div class="vb-content" style=" display:flex; flex-direction:row; align-items:center; gap:0.75em;"><div class="value"' "$out" "$fixture/$fmt value-position row is unwrapped when there is no title"
-          assert_count 1 'class="vb-row"' "$out" "$fixture/$fmt emits the row wrapper only where it is needed"
+          assert_present '<div class="title" style="color:white; ">Rowed</div><div class="vb-row vb-value-left">' "$out" "$fixture/$fmt title sits above the value row, not inside it"
+          # ...and must not appear otherwise: without a title the row class
+          # stays on .vb-content exactly as it did before the feature existed.
+          assert_present '<div class="vb-content vb-value-left" style=""><div class="value"' "$out" "$fixture/$fmt value-position row is unwrapped when there is no title"
+          assert_count 1 'class="vb-row vb-value-left"' "$out" "$fixture/$fmt emits the row wrapper only where it is needed"
 
           # Title placement is fixed at the top of the content, so a bottom
           # value gives title, details, value. A deliberate choice, pinned here.
@@ -317,6 +355,145 @@ for fmt in "${formats[@]}"; do
           # follows into the broken box. The only visible trace is the depth of
           # this close-tag run, which only the wrapped box produces.
           assert_count 1 '</div></div></div></div>' "$out" "$fixture/$fmt closes the row wrapper"
+
+          # Delta: arrow inference from a leading +/-, an explicit delta-color
+          # override, no arrow when there is neither a sign nor an explicit
+          # delta-direction, an explicit delta-direction overriding inference,
+          # the size/style hooks, and escaping. Each is anchored to the
+          # "vb-value-row" wrapper the filter builds around value+delta (not
+          # just the delta div), so a change that drops that wrapper — the
+          # thing that keeps the two side by side — fails these too. Without
+          # the filter, Pandoc echoes delta as a bare data-delta="..."
+          # attribute with no escaping of its own, so these do not pass by
+          # coincidence the way an escaped-quote check can (see tests/README.md).
+          assert_present '<div class="vb-value-row" style=""><div class="value" style="font-size:2.2rem; color:white; ">17</div><div class="delta" style=""><span class="delta-arrow" aria-hidden="true">▲</span> +12%</div></div>' "$out" "$fixture/$fmt delta infers an up arrow from a leading + and sits beside the value"
+          assert_present '<div class="delta" style="color:#ff5252; "><span class="delta-arrow" aria-hidden="true">▼</span> -8%</div>' "$out" "$fixture/$fmt delta infers a down arrow and applies delta-color"
+          assert_present '<div class="delta" style="">steady</div>' "$out" "$fixture/$fmt delta with no sign and no delta-direction gets no arrow"
+          assert_present '<span class="delta-arrow" aria-hidden="true">→</span> 0%' "$out" "$fixture/$fmt delta-direction=flat overrides sign inference"
+          assert_present '<div class="delta" style="font-size:1.3rem; font-style:italic;">' "$out" "$fixture/$fmt delta-font-size and delta-extra-style apply"
+          assert_present '<div class="delta" style="">&lt;img src=x onerror=alert(1)&gt;</div>' "$out" "$fixture/$fmt delta is escaped, not raw HTML like value/title"
+          assert_absent '<img src=x onerror=alert(1)>' "$out" "$fixture/$fmt escaped delta cannot inject a live tag"
+
+          # delta-direction is matched case-insensitively and, when set,
+          # overrides sign inference — "Down" must win over the "+" in "+3%".
+          assert_present '<span class="delta-arrow" aria-hidden="true">▼</span> +3%' "$out" "$fixture/$fmt mixed-case delta-direction overrides an inferred arrow"
+
+          # An unrecognised delta-direction shows no arrow rather than
+          # crashing or falling back to a guess (the accompanying warning is
+          # checked by the value-box-warning count above).
+          assert_present '<div class="delta" style="">5%</div>' "$out" "$fixture/$fmt unrecognised delta-direction shows no arrow"
+
+          # value-position=left makes .vb-value-row the flex item next to
+          # .details, so the CSS scoped under .vb-value-left/.vb-value-right
+          # gives it flex-shrink:0 to hold its size under pressure (see
+          # value-box.css) — pinned here via the wrapper that carries that
+          # class actually containing the value+delta row.
+          assert_present '<div class="vb-content vb-value-left" style=""><div class="vb-value-row" style="">' "$out" "$fixture/$fmt delta with value-position=left protects the wrapper from shrinking"
+        fi
+
+        if [ "$fixture" = "passthrough" ]; then
+          # Regression guard: a box using none of these attributes must render
+          # identically to how every other box in this suite already does.
+          assert_present '<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">1<' \
+            "$out" "$fixture/$fmt a box with no extra attributes is unchanged"
+
+          # id, an extra class alongside value-box, role/aria-label and an
+          # already-namespaced data-id all pass through — but an arbitrary
+          # attribute (top) that isn't data-*/aria-*/role/tabindex/lang is
+          # left off entirely, not renamed into a data-* attribute that looks
+          # like it survived but is actually inert.
+          assert_present '<div id="kpi-1" class="value-box bg-blue custom-hook" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; " role="group" aria-label="Sales this quarter" data-id="box1">' \
+            "$out" "$fixture/$fmt passes through id, extra class, role/aria-label, data-id and drops an unrecognised attribute"
+          assert_absent 'data-top' "$out" "$fixture/$fmt does not rename an unrecognised attribute into a data- attribute"
+
+          # A literal style attribute is dropped, not emitted as a second
+          # style attribute alongside the box's own — the warning assertion
+          # for this lives outside this format-scoped block, see above.
+          assert_absent 'style="color:red"' "$out" "$fixture/$fmt drops a literal style attribute"
+
+          # The href branch (an anchor, not a div) gets passthrough too. The
+          # anchor's text-decoration/cursor styling now lives in value-box.css
+          # (see the a.value-box rule) rather than being rebuilt inline here.
+          assert_present '<a href="https://example.com" class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; " data-tracking="promo">' \
+            "$out" "$fixture/$fmt passes through a data attribute on the href branch"
+
+          # A double-quote in a passthrough value must not be able to close
+          # the attribute early and inject a new one (e.g. onmouseover=...).
+          # Note: deleting the filters: key does NOT falsify this pair, unlike
+          # every other check in this fixture — Pandoc's own native div writer
+          # independently escapes quotes too, so a filter-less render produces
+          # the same escaped string by coincidence. Verified instead by
+          # mutating escape_attr() directly to a no-op: the injected
+          # onmouseover became a live attribute, confirming this protection is
+          # this filter's own and not something Quarto's HTML postprocessing
+          # would supply for free. See tests/README.md.
+          assert_present 'data-note="payload&quot; onmouseover=&quot;alert(1)"' "$out" "$fixture/$fmt escapes a quote in a passthrough value"
+          assert_absent 'onmouseover="alert' "$out" "$fixture/$fmt passthrough value cannot break out of its attribute"
+
+          # A literal data-fragment-index would silently collide with the one
+          # generated from index — dropped instead (warning asserted above,
+          # outside this format-scoped block).
+          assert_present 'data-fragment-index="1"' "$out" "$fixture/$fmt keeps the generated data-fragment-index"
+          assert_absent 'data-fragment-index="9"' "$out" "$fixture/$fmt drops a literal data-fragment-index"
+
+          # Regression guard for a real bug: the drop above must only fire
+          # when index is actually set. Earlier this attribute was reserved
+          # unconditionally, so it was dropped (and warned about) even with
+          # nothing to collide with.
+          assert_present '<div class="value-box bg-blue fragment fade-in-then-semi-out" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; " data-fragment-index="3">' \
+            "$out" "$fixture/$fmt keeps a literal data-fragment-index when there is no index to collide with"
+
+          # HTML attribute names are case-insensitive, and Quarto's own
+          # postprocessing lowercases them regardless, so matching case-
+          # sensitively would turn a mixed-case Role into data-role instead
+          # of role. Asserted on the exact tag rather than a bare 'role='
+          # search: this fixture's own explanatory prose contains the literal
+          # string "data-role", which a document-wide search would also match
+          # — the tautology trap tests/README.md warns about, hit here while
+          # writing this very assertion.
+          assert_present '<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; " role="group">' \
+            "$out" "$fixture/$fmt matches a mixed-case attribute name case-insensitively, without double-prefixing it"
+
+          # Regression guard for a real bug: collision detection (not just the
+          # data- prefix decision) must also be case-insensitive. A mixed-case
+          # Style previously slipped past the exact-case "style" check and
+          # leaked through as an inert data-style attribute instead of being
+          # recognised as the same collision a lowercase style triggers.
+          # Anchored through to the value text (">9<"), not just the tag: the
+          # tag alone is byte-identical to earlier boxes in this same fixture
+          # (the "no extras" and "style dropped" cases), so a bare tag match
+          # would be tautological — always present regardless of whether this
+          # specific box's handling is correct. Also not a bare 'data-style'
+          # search — this fixture's own prose explaining the fix contains
+          # that literal string, the same trap that caught the Role assertion
+          # above.
+          assert_present '<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">9<' \
+            "$out" "$fixture/$fmt does not leak a mixed-case Style as data-style"
+        fi
+
+        if [ "$fixture" = "row" ]; then
+          # display:flex is the .value-box-row default (see value-box.css);
+          # display:grid only turns on via the vb-row-grid class, which only
+          # this filter ever emits — a plain Pandoc div never turns a
+          # columns/gap attribute into a class or custom property — so these
+          # anchor to filter-generated markup, not an echoed attribute.
+          assert_present 'class="value-box-row" style="--vb-row-gap:1.5rem; ">' \
+            "$out" "$fixture/$fmt no columns attribute lays out a non-wrapping flex row"
+          assert_present 'class="value-box-row vb-row-grid" style="--vb-row-columns:3; --vb-row-gap:1.5rem; ">' \
+            "$out" "$fixture/$fmt columns=3 switches to a grid with equal-height wrapped rows"
+          assert_present 'class="value-box-row" style="--vb-row-gap:3rem; border:1px dashed red;">' \
+            "$out" "$fixture/$fmt gap and extra-style apply to the row wrapper"
+
+          # id, an extra class, and role/aria-label/data-id all pass through,
+          # but top is outside the recognised set and must be left off
+          # entirely rather than renamed into a data- attribute.
+          assert_present '<div id="kpi-row" class="value-box-row custom-hook" style="--vb-row-gap:1.5rem; " role="group" aria-label="Key metrics" data-id="row1">' \
+            "$out" "$fixture/$fmt passes through id, extra class, role/aria-label and data-id"
+          assert_absent 'data-top' "$out" "$fixture/$fmt does not rename an unrecognised attribute into a data- attribute"
+
+          # A literal style attribute must not survive as a second style
+          # attribute alongside the row's own generated one.
+          assert_absent 'style="color:red"' "$out" "$fixture/$fmt drops a literal style attribute on the row wrapper"
         fi
         ;;
 
@@ -361,6 +538,19 @@ if stage "$work/demo"; then
   if render "$work/demo" revealjs example; then
     ok "example.qmd renders to revealjs"
     assert_absent "value-box warning" "$work/demo/example.revealjs.log" "example.qmd emits no filter warnings"
+    # Regression guard for a real bug: Quarto's Reveal.js theme ships
+    # `.reveal a { background-color: rgba(0,0,0,0); ... }`, a class+tag
+    # selector more specific than a plain `.value-box`/`.bg-*` class rule and
+    # loaded after value-box.css, so a linked (href) box on a revealjs slide
+    # silently lost its background/text colour back to the theme's plain-link
+    # defaults. The fix restates those properties at doubled-class
+    # specificity (a.value-box.value-box, a.value-box.bg-*) so they win
+    # regardless of load order — assert both are still present in the CSS
+    # this stylesheet.
+    assert_present "a.value-box.value-box" "$work/demo/_extensions/value-box/value-box.css" \
+      "value-box.css keeps the doubled-specificity override for a linked box's base colour/background"
+    assert_present "a.value-box.bg-slate" "$work/demo/_extensions/value-box/value-box.css" \
+      "value-box.css keeps the doubled-specificity override for a linked box's named background colour"
   else
     fail "example.qmd renders to revealjs" "see tests/_work/demo/example.revealjs.log"
   fi
