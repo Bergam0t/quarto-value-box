@@ -971,6 +971,9 @@ bg-grey
 
 `color` also accepts a raw CSS colour value directly — no new class needed — for anything starting with `#`, `rgb(`/`rgba(`, `hsl(`/`hsla(`, or `var(`.
 
+<style>
+:root { --demo-brand-color: #6f42c1; }
+</style>
 
 ::: {.value-box-row columns="3"}
 
@@ -988,6 +991,10 @@ color="rgba(200, 16, 46, 0.3)"
 
 ::: {.value-box color="hsl(13 74.5% 52.4%)" height="100px"}
 color="hsl(13 74.5% 52.4%)"
+:::
+
+::: {.value-box color="var(--demo-brand-color)" height="100px"}
+color="var(--demo-brand-color)"
 :::
 
 

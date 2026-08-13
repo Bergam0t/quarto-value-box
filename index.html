@@ -728,6 +728,9 @@
 <section id="box-colours---custom" class="slide level2">
 <h2>Box colours - custom</h2>
 <p><code>color</code> also accepts a raw CSS colour value directly — no new class needed — for anything starting with <code>#</code>, <code>rgb(</code>/<code>rgba(</code>, <code>hsl(</code>/<code>hsla(</code>, or <code>var(</code>.</p>
+<style>
+:root { --demo-brand-color: #6f42c1; }
+</style>
 <div class="value-box-row" style="display:grid; grid-template-columns:repeat(3, 1fr); grid-auto-rows:1fr; gap:1.5rem; ">
 <div class="value-box " style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left; background-color:#c8102e;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>color=“#c8102e”</p>
@@ -740,6 +743,9 @@
 </div></div></div>
 <div class="value-box " style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left; background-color:hsl(13 74.5% 52.4%);  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>color=“hsl(13 74.5% 52.4%)”</p>
+</div></div></div>
+<div class="value-box " style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left; background-color:var(--demo-brand-color);  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<p>color=“var(–demo-brand-color)”</p>
 </div></div></div>
 </div>
 </section>
