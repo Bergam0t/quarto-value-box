@@ -1007,23 +1007,35 @@ color="var(--demo-brand-color)"
 
 ## Box colours - brand.yml
 
-Quarto compiles a project's `_brand.yml` palette into CSS custom properties automatically, so `color` can reference it with `var(...)` too — no manual `<style>` block needed. On `revealjs`, `color.primary` becomes `--r-link-color` (already live on this deck's own theme, with no `_brand.yml` added here):
+::: {style='font-size: 75%;'}
+Quarto compiles a project's `_brand.yml` palette into CSS custom properties automatically, so `color` can reference it with `var(...)` too — no manual `<style>` block needed. This deck ships its own `_brand.yml`, setting `color.primary` to `#3d6a9e` (the same blue as `bg-blue` and the footer link, kept consistent on purpose) — on `revealjs` that becomes `--r-link-color`:
+:::
+
+```yaml
+# _brand.yml
+color:
+  palette:
+    accent: "#3d6a9e"
+  primary: accent
+```
 
 ::: {.value-box-row columns="2"}
 
-::: {.value-box color="var(--r-link-color)" height="100px"}
+::: {.value-box color="var(--r-link-color)"}
 color="var(--r-link-color)"
 :::
 
-::: {.value-box color="bg-grey" icon="bi-star" icon-color="var(--r-link-color)" height="100px"}
+::: {.value-box color="bg-grey" icon="bi-star" icon-color="var(--r-link-color)"}
 icon-color="var(--r-link-color)"
 :::
 
 :::
 
+::: {style='font-size: 75%;'}
 `icon-color`/`font-color`/`value-color`/`title-color`/`delta-color` accept `var(...)` the same way — they always render into an inline `style`, so they were never affected by the class/value ambiguity `color` had.
 
 On Bootstrap-based formats (`html`, `dashboard`) the whole brand palette is exposed the same way, not just the primary colour:
+:::
 
 ```md
 ::: {.value-box color="var(--bs-primary)" value="42"}

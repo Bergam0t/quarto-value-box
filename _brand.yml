@@ -1,0 +1,7 @@
+meta:
+  name: Quarto Value Box
+
+color:
+  palette:
+    accent: "#3d6a9e"
+  primary: accent

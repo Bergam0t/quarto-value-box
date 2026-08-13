@@ -107,7 +107,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="example_files/libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <link rel="stylesheet" href="example_files/libs/revealjs/dist/theme/quarto-e718d3f6e869cb9c25829ce709147367.css">
   <link href="example_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="example_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="example_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -754,20 +754,29 @@
 </section>
 <section id="box-colours---brand.yml" class="slide level2">
 <h2>Box colours - brand.yml</h2>
-<p>Quarto compiles a project’s <code>_brand.yml</code> palette into CSS custom properties automatically, so <code>color</code> can reference it with <code>var(...)</code> too — no manual <code>&lt;style&gt;</code> block needed. On <code>revealjs</code>, <code>color.primary</code> becomes <code>--r-link-color</code> (already live on this deck’s own theme, with no <code>_brand.yml</code> added here):</p>
+<div style="font-size: 75%;">
+<p>Quarto compiles a project’s <code>_brand.yml</code> palette into CSS custom properties automatically, so <code>color</code> can reference it with <code>var(...)</code> too — no manual <code>&lt;style&gt;</code> block needed. This deck ships its own <code>_brand.yml</code>, setting <code>color.primary</code> to <code>#3d6a9e</code> (the same blue as <code>bg-blue</code> and the footer link, kept consistent on purpose) — on <code>revealjs</code> that becomes <code>--r-link-color</code>:</p>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb37-1"><a href="" aria-label="1"></a><span class="co"># _brand.yml</span></span>
+<span id="cb37-2"><a href="" aria-label="2"></a><span class="fu">color</span><span class="kw">:</span></span>
+<span id="cb37-3"><a href="" aria-label="3"></a><span class="at">  </span><span class="fu">palette</span><span class="kw">:</span></span>
+<span id="cb37-4"><a href="" aria-label="4"></a><span class="at">    </span><span class="fu">accent</span><span class="kw">:</span><span class="at"> </span><span class="st">"#3d6a9e"</span></span>
+<span id="cb37-5"><a href="" aria-label="5"></a><span class="at">  </span><span class="fu">primary</span><span class="kw">:</span><span class="at"> accent</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="value-box-row" style="display:grid; grid-template-columns:repeat(2, 1fr); grid-auto-rows:1fr; gap:1.5rem; ">
-<div class="value-box " style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left; background-color:var(--r-link-color);  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box " style="width:80%; min-height:100px; padding:1.5rem; text-align:left; background-color:var(--r-link-color);  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>color=“var(–r-link-color)”</p>
 </div></div></div>
-<div class="value-box bg-grey" style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:3em; color:var(--r-link-color);  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-grey" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:3em; color:var(--r-link-color);  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>icon-color=“var(–r-link-color)”</p>
 </div></div></div>
 </div>
+<div style="font-size: 75%;">
 <p><code>icon-color</code>/<code>font-color</code>/<code>value-color</code>/<code>title-color</code>/<code>delta-color</code> accept <code>var(...)</code> the same way — they always render into an inline <code>style</code>, so they were never affected by the class/value ambiguity <code>color</code> had.</p>
 <p>On Bootstrap-based formats (<code>html</code>, <code>dashboard</code>) the whole brand palette is exposed the same way, not just the primary colour:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb37-1"><a href="" aria-label="1"></a>::: {.value-box color="var(--bs-primary)" value="42"}</span>
-<span id="cb37-2"><a href="" aria-label="2"></a>Uses the brand's primary colour on an html/dashboard render</span>
-<span id="cb37-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb38-1"><a href="" aria-label="1"></a>::: {.value-box color="var(--bs-primary)" value="42"}</span>
+<span id="cb38-2"><a href="" aria-label="2"></a>Uses the brand's primary colour on an html/dashboard render</span>
+<span id="cb38-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="width" class="slide level2">
 <h2>Width</h2>
@@ -775,15 +784,15 @@
 <div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>No width specified - defaults to 80% of container</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb38-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
-<span id="cb38-2"><a href="" aria-label="2"></a>No width specified - defaults to 80% of container</span>
-<span id="cb38-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb39-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
+<span id="cb39-2"><a href="" aria-label="2"></a>No width specified - defaults to 80% of container</span>
+<span id="cb39-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="value-box bg-blue" style="width:30%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Width of 30% specified.</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb39-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" width="30%"}</span>
-<span id="cb39-2"><a href="" aria-label="2"></a>Width of 30% specified.</span>
-<span id="cb39-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb40-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" width="30%"}</span>
+<span id="cb40-2"><a href="" aria-label="2"></a>Width of 30% specified.</span>
+<span id="cb40-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="height" class="slide level2">
 <h2>Height</h2>
@@ -793,16 +802,16 @@
 <div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Example with no height specified - it will fit the contents</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb40-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
-<span id="cb40-2"><a href="" aria-label="2"></a>Example with no height specified - it will fit the contents</span>
-<span id="cb40-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb41-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
+<span id="cb41-2"><a href="" aria-label="2"></a>Example with no height specified - it will fit the contents</span>
+<span id="cb41-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
 <div class="value-box bg-blue" style="width:80%; height:400px; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Example with height of 400 pixels (400px) specified</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb41-1"><a href="" aria-label="1"></a>::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
-<span id="cb41-2"><a href="" aria-label="2"></a>Example with height of 400 pixels (400px) specified</span>
-<span id="cb41-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb42-1"><a href="" aria-label="1"></a>::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
+<span id="cb42-2"><a href="" aria-label="2"></a>Example with height of 400 pixels (400px) specified</span>
+<span id="cb42-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="vertical-alignment" class="slide level2">
@@ -813,16 +822,16 @@
 <div class="value-box bg-blue" style="width:80%; height:400px; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>No valign specified</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb42-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px"}</span>
-<span id="cb42-2"><a href="" aria-label="2"></a>No valign specified</span>
-<span id="cb42-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb43-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px"}</span>
+<span id="cb43-2"><a href="" aria-label="2"></a>No valign specified</span>
+<span id="cb43-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
 <div class="value-box bg-blue" style="width:80%; height:400px; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:flex-start;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Top alignment specified</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb43-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px" valign="top"}</span>
-<span id="cb43-2"><a href="" aria-label="2"></a>Top alignment specified</span>
-<span id="cb43-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb44-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px" valign="top"}</span>
+<span id="cb44-2"><a href="" aria-label="2"></a>Top alignment specified</span>
+<span id="cb44-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="minimum-height-padding" class="slide level2">
@@ -833,16 +842,16 @@
 <div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:3em; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Default min-height (100px) and padding (1.5rem)</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb44-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" value="42"}</span>
-<span id="cb44-2"><a href="" aria-label="2"></a>Default min-height (100px) and padding (1.5rem)</span>
-<span id="cb44-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb45-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" value="42"}</span>
+<span id="cb45-2"><a href="" aria-label="2"></a>Default min-height (100px) and padding (1.5rem)</span>
+<span id="cb45-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:60%;">
 <div class="value-box bg-blue" style="width:80%; min-height:40px; padding:0.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:1.5rem; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Tightened min-height and padding</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb45-1"><a href="" aria-label="1"></a>::: {.value-box min-height="40px" padding="0.5rem" icon="bi-star" icon-size="1.5rem" value="42" }</span>
-<span id="cb45-2"><a href="" aria-label="2"></a>Tightened min-height and padding</span>
-<span id="cb45-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb46-1"><a href="" aria-label="1"></a>::: {.value-box min-height="40px" padding="0.5rem" icon="bi-star" icon-size="1.5rem" value="42" }</span>
+<span id="cb46-2"><a href="" aria-label="2"></a>Tightened min-height and padding</span>
+<span id="cb46-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="font-sizing" class="slide level2">
@@ -853,32 +862,32 @@
 <div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>Standard</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb46-1"><a href="" aria-label="1"></a>::: {.value-box}</span>
-<span id="cb46-2"><a href="" aria-label="2"></a>Standard</span>
-<span id="cb46-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb47-1"><a href="" aria-label="1"></a>::: {.value-box}</span>
+<span id="cb47-2"><a href="" aria-label="2"></a>Standard</span>
+<span id="cb47-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
 <div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="font-size:150%; color:white; ">
 <p>150% Font Size</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb47-1"><a href="" aria-label="1"></a>::: {.value-box font-size="150%"}</span>
-<span id="cb47-2"><a href="" aria-label="2"></a>150% Font Size</span>
-<span id="cb47-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb48-1"><a href="" aria-label="1"></a>::: {.value-box font-size="150%"}</span>
+<span id="cb48-2"><a href="" aria-label="2"></a>150% Font Size</span>
+<span id="cb48-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="font-size:2rem; color:white; ">
 <p>REM units</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb48-1"><a href="" aria-label="1"></a>::: {.value-box font-size="2rem"}</span>
-<span id="cb48-2"><a href="" aria-label="2"></a>REM units</span>
-<span id="cb48-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb49-1"><a href="" aria-label="1"></a>::: {.value-box font-size="2rem"}</span>
+<span id="cb49-2"><a href="" aria-label="2"></a>REM units</span>
+<span id="cb49-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
 <div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="font-size:2em; color:white; ">
 <p>EM units</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb49-1"><a href="" aria-label="1"></a>::: {.value-box font-size="2em"}</span>
-<span id="cb49-2"><a href="" aria-label="2"></a>EM units</span>
-<span id="cb49-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb50-1"><a href="" aria-label="1"></a>::: {.value-box font-size="2em"}</span>
+<span id="cb50-2"><a href="" aria-label="2"></a>EM units</span>
+<span id="cb50-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="font-color" class="slide level2">
@@ -889,9 +898,9 @@
 <p>Yellow Font</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb50-1"><a href="" aria-label="1"></a>::: {.value-box font-color="yellow"}</span>
-<span id="cb50-2"><a href="" aria-label="2"></a>Yellow Font</span>
-<span id="cb50-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb51-1"><a href="" aria-label="1"></a>::: {.value-box font-color="yellow"}</span>
+<span id="cb51-2"><a href="" aria-label="2"></a>Yellow Font</span>
+<span id="cb51-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:30%;">
@@ -899,9 +908,9 @@
 <p>Value font follows icon font by default</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb51-1"><a href="" aria-label="1"></a>::: {.value-box font-color="yellow"}</span>
-<span id="cb51-2"><a href="" aria-label="2"></a>Yellow Font</span>
-<span id="cb51-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb52-1"><a href="" aria-label="1"></a>::: {.value-box font-color="yellow"}</span>
+<span id="cb52-2"><a href="" aria-label="2"></a>Yellow Font</span>
+<span id="cb52-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:30%;">
@@ -909,9 +918,9 @@
 <p>But they can differ</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb52-1"><a href="" aria-label="1"></a>::: {.value-box font-color="yellow" value="Value" value-color="fuchsia"}</span>
-<span id="cb52-2"><a href="" aria-label="2"></a>But they can differ</span>
-<span id="cb52-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb53-1"><a href="" aria-label="1"></a>::: {.value-box font-color="yellow" value="Value" value-color="fuchsia"}</span>
+<span id="cb53-2"><a href="" aria-label="2"></a>But they can differ</span>
+<span id="cb53-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="icon-color" class="slide level2">
@@ -923,10 +932,10 @@
 <p>Bootstrap icons</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb53-1"><a href="" aria-label="1"></a></span>
-<span id="cb53-2"><a href="" aria-label="2"></a>::: {.value-box icon-color="red" icon="bi-star" icon-position="left" }</span>
-<span id="cb53-3"><a href="" aria-label="3"></a>Bootstrap icons</span>
-<span id="cb53-4"><a href="" aria-label="4"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb54-1"><a href="" aria-label="1"></a></span>
+<span id="cb54-2"><a href="" aria-label="2"></a>::: {.value-box icon-color="red" icon="bi-star" icon-position="left" }</span>
+<span id="cb54-3"><a href="" aria-label="3"></a>Bootstrap icons</span>
+<span id="cb54-4"><a href="" aria-label="4"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:30%;">
@@ -934,9 +943,9 @@
 <p>Font awesome icons</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb54-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="fuchsia" icon="fa-brands fa-python" icon-position="left" }</span>
-<span id="cb54-2"><a href="" aria-label="2"></a>Font awesome icons</span>
-<span id="cb54-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb55-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="fuchsia" icon="fa-brands fa-python" icon-position="left" }</span>
+<span id="cb55-2"><a href="" aria-label="2"></a>Font awesome icons</span>
+<span id="cb55-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:30%;">
@@ -944,9 +953,9 @@
 <p>Material Symbols icons</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb55-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="lime" icon="home" icon-type="material" icon-position="left" }</span>
-<span id="cb55-2"><a href="" aria-label="2"></a>Material Symbols icons</span>
-<span id="cb55-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb56-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="lime" icon="home" icon-type="material" icon-position="left" }</span>
+<span id="cb56-2"><a href="" aria-label="2"></a>Material Symbols icons</span>
+<span id="cb56-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="icon-color-continued" class="slide level2">
@@ -957,9 +966,9 @@
 <p>Tabler icons</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb56-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="cyan" icon="ti-star" icon-position="left" }</span>
-<span id="cb56-2"><a href="" aria-label="2"></a>Tabler icons</span>
-<span id="cb56-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb57-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="cyan" icon="ti-star" icon-position="left" }</span>
+<span id="cb57-2"><a href="" aria-label="2"></a>Tabler icons</span>
+<span id="cb57-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="columns">
 <div class="column" style="width:30%;">
@@ -967,9 +976,9 @@
 <p>Phosphor icons</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb57-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="orange" icon="ph ph-star" icon-position="left" }</span>
-<span id="cb57-2"><a href="" aria-label="2"></a>Phosphor icons</span>
-<span id="cb57-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb58-1"><a href="" aria-label="1"></a>::: {.value-box icon-color="orange" icon="ph ph-star" icon-position="left" }</span>
+<span id="cb58-2"><a href="" aria-label="2"></a>Phosphor icons</span>
+<span id="cb58-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="escape-hatch-id-extra-classes-and-attributes" class="slide level2">
@@ -983,13 +992,13 @@
 <div id="kpi-example" class="value-box bg-blue highlight-box" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" role="group" aria-label="Sales this quarter" data-id="kpi-example"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-animate) all survive</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb58-1"><a href="" aria-label="1"></a>&lt;style<span class="op">&gt;</span></span>
-<span id="cb58-2"><a href="" aria-label="2"></a><span class="fu">.highlight-box</span> { <span class="kw">outline</span><span class="ch">:</span> <span class="dv">7</span><span class="dt">px</span> <span class="dv">dashed</span> <span class="cn">gold</span><span class="op">;</span> <span class="kw">outline-offset</span><span class="ch">:</span> <span class="dv">4</span><span class="dt">px</span><span class="op">;</span> }</span>
-<span id="cb58-3"><a href="" aria-label="3"></a>&lt;/style<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb59-1"><a href="" aria-label="1"></a>&lt;style<span class="op">&gt;</span></span>
+<span id="cb59-2"><a href="" aria-label="2"></a><span class="fu">.highlight-box</span> { <span class="kw">outline</span><span class="ch">:</span> <span class="dv">7</span><span class="dt">px</span> <span class="dv">dashed</span> <span class="cn">gold</span><span class="op">;</span> <span class="kw">outline-offset</span><span class="ch">:</span> <span class="dv">4</span><span class="dt">px</span><span class="op">;</span> }</span>
+<span id="cb59-3"><a href="" aria-label="3"></a>&lt;/style<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><br></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb59-1"><a href="" aria-label="1"></a>::: {.value-box #kpi-example .highlight-box value="42" role="group" aria-label="Sales this quarter" data-id="kpi-example"}</span>
-<span id="cb59-2"><a href="" aria-label="2"></a>id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-animate) all survive</span>
-<span id="cb59-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb60-1"><a href="" aria-label="1"></a>::: {.value-box #kpi-example .highlight-box value="42" role="group" aria-label="Sales this quarter" data-id="kpi-example"}</span>
+<span id="cb60-2"><a href="" aria-label="2"></a>id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-animate) all survive</span>
+<span id="cb60-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="data-id-and-auto-animate" class="slide level2">
 <h2><code>data-id</code> and auto-animate</h2>
@@ -1006,17 +1015,17 @@
 <div class="value-box bg-green" style="width:90%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" data-id="autoanimate-demo"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">1,284</div><div class="details" style="color:white; ">
 <p>New customers this quarter — up from 42 last quarter</p>
 </div></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode numberSource md number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode markdown hljs"><span id="cb60-1" class="hljs-ln-code"><a href="" aria-label="1"></a><span class="fu">## Growth {auto-animate="true"}</span></span>
-<span id="cb60-2" class="hljs-ln-code"><a href="" aria-label="2"></a></span>
-<span id="cb60-3" class="hljs-ln-code"><a href="" aria-label="3"></a>::: {.value-box data-id="autoanimate-demo" value="42" width="30%" color="bg-blue" align="center"}</span>
-<span id="cb60-4" class="hljs-ln-code"><a href="" aria-label="4"></a>New customers this quarter</span>
-<span id="cb60-5" class="hljs-ln-code"><a href="" aria-label="5"></a>:::</span>
-<span id="cb60-6" class="hljs-ln-code"><a href="" aria-label="6"></a></span>
-<span id="cb60-7" class="hljs-ln-code"><a href="" aria-label="7"></a><span class="fu">## Growth {auto-animate="true"}</span></span>
-<span id="cb60-8" class="hljs-ln-code"><a href="" aria-label="8"></a></span>
-<span id="cb60-9" class="hljs-ln-code"><a href="" aria-label="9"></a>::: {.value-box data-id="autoanimate-demo" value="1,284" width="90%" color="bg-green" align="left"}</span>
-<span id="cb60-10" class="hljs-ln-code"><a href="" aria-label="10"></a>New customers this quarter — up from 42 last quarter</span>
-<span id="cb60-11" class="hljs-ln-code"><a href="" aria-label="11"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode numberSource md number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode markdown hljs"><span id="cb61-1" class="hljs-ln-code"><a href="" aria-label="1"></a><span class="fu">## Growth {auto-animate="true"}</span></span>
+<span id="cb61-2" class="hljs-ln-code"><a href="" aria-label="2"></a></span>
+<span id="cb61-3" class="hljs-ln-code"><a href="" aria-label="3"></a>::: {.value-box data-id="autoanimate-demo" value="42" width="30%" color="bg-blue" align="center"}</span>
+<span id="cb61-4" class="hljs-ln-code"><a href="" aria-label="4"></a>New customers this quarter</span>
+<span id="cb61-5" class="hljs-ln-code"><a href="" aria-label="5"></a>:::</span>
+<span id="cb61-6" class="hljs-ln-code"><a href="" aria-label="6"></a></span>
+<span id="cb61-7" class="hljs-ln-code"><a href="" aria-label="7"></a><span class="fu">## Growth {auto-animate="true"}</span></span>
+<span id="cb61-8" class="hljs-ln-code"><a href="" aria-label="8"></a></span>
+<span id="cb61-9" class="hljs-ln-code"><a href="" aria-label="9"></a>::: {.value-box data-id="autoanimate-demo" value="1,284" width="90%" color="bg-green" align="left"}</span>
+<span id="cb61-10" class="hljs-ln-code"><a href="" aria-label="10"></a>New customers this quarter — up from 42 last quarter</span>
+<span id="cb61-11" class="hljs-ln-code"><a href="" aria-label="11"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The matching <code>data-id</code> is doing all the work here — everything else about the box (<code>value</code>, <code>width</code>, <code>color</code>, <code>align</code>) is free to differ between the two slides.</p>
 </section>
 <section id="more-auto-animate-examples" class="slide level2">
@@ -1044,17 +1053,17 @@
 <p>YoY growth</p>
 </div></div></div>
 <p>Only <code>value-font-size</code>, <code>width</code>, <code>padding</code> and <code>min-height</code> changed between those two slides — the same headline stat condenses into a small summary tile, e.g.&nbsp;to make room as supporting detail appears elsewhere on the next slide of a real deck.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode numberSource md number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode markdown hljs"><span id="cb61-1" class="hljs-ln-code"><a href="" aria-label="1"></a><span class="fu">## Headline {auto-animate="true"}</span></span>
-<span id="cb61-2" class="hljs-ln-code"><a href="" aria-label="2"></a></span>
-<span id="cb61-3" class="hljs-ln-code"><a href="" aria-label="3"></a>::: {.value-box data-id="shrink-demo" value="128%" value-font-size="4rem" width="70%" color="bg-purple" align="center"}</span>
-<span id="cb61-4" class="hljs-ln-code"><a href="" aria-label="4"></a>Year-over-year growth</span>
-<span id="cb61-5" class="hljs-ln-code"><a href="" aria-label="5"></a>:::</span>
-<span id="cb61-6" class="hljs-ln-code"><a href="" aria-label="6"></a></span>
-<span id="cb61-7" class="hljs-ln-code"><a href="" aria-label="7"></a><span class="fu">## Headline {auto-animate="true"}</span></span>
-<span id="cb61-8" class="hljs-ln-code"><a href="" aria-label="8"></a></span>
-<span id="cb61-9" class="hljs-ln-code"><a href="" aria-label="9"></a>::: {.value-box data-id="shrink-demo" value="128%" value-font-size="1.3rem" width="20%" padding="0.5rem" min-height="40px" color="bg-purple" align="center"}</span>
-<span id="cb61-10" class="hljs-ln-code"><a href="" aria-label="10"></a>YoY growth</span>
-<span id="cb61-11" class="hljs-ln-code"><a href="" aria-label="11"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode numberSource md number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode markdown hljs"><span id="cb62-1" class="hljs-ln-code"><a href="" aria-label="1"></a><span class="fu">## Headline {auto-animate="true"}</span></span>
+<span id="cb62-2" class="hljs-ln-code"><a href="" aria-label="2"></a></span>
+<span id="cb62-3" class="hljs-ln-code"><a href="" aria-label="3"></a>::: {.value-box data-id="shrink-demo" value="128%" value-font-size="4rem" width="70%" color="bg-purple" align="center"}</span>
+<span id="cb62-4" class="hljs-ln-code"><a href="" aria-label="4"></a>Year-over-year growth</span>
+<span id="cb62-5" class="hljs-ln-code"><a href="" aria-label="5"></a>:::</span>
+<span id="cb62-6" class="hljs-ln-code"><a href="" aria-label="6"></a></span>
+<span id="cb62-7" class="hljs-ln-code"><a href="" aria-label="7"></a><span class="fu">## Headline {auto-animate="true"}</span></span>
+<span id="cb62-8" class="hljs-ln-code"><a href="" aria-label="8"></a></span>
+<span id="cb62-9" class="hljs-ln-code"><a href="" aria-label="9"></a>::: {.value-box data-id="shrink-demo" value="128%" value-font-size="1.3rem" width="20%" padding="0.5rem" min-height="40px" color="bg-purple" align="center"}</span>
+<span id="cb62-10" class="hljs-ln-code"><a href="" aria-label="10"></a>YoY growth</span>
+<span id="cb62-11" class="hljs-ln-code"><a href="" aria-label="11"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="focus" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Focus</h2>
@@ -1068,17 +1077,17 @@
 <p>Days until launch</p>
 </div></div></div>
 <p>Here only <code>outer-extra-style</code> and <code>icon</code> changed — same size, same colour, same value, just a different <code>margin-left</code> — so the box visibly slides across the slide with nothing else moving.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode numberSource md number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode markdown hljs"><span id="cb62-1" class="hljs-ln-code"><a href="" aria-label="1"></a><span class="fu">## Focus {auto-animate="true"}</span></span>
-<span id="cb62-2" class="hljs-ln-code"><a href="" aria-label="2"></a></span>
-<span id="cb62-3" class="hljs-ln-code"><a href="" aria-label="3"></a>::: {.value-box data-id="movement-demo" value="7" width="35%" color="bg-amber" icon="fa-solid fa-clock" icon-position="left"}</span>
-<span id="cb62-4" class="hljs-ln-code"><a href="" aria-label="4"></a>Days until launch</span>
-<span id="cb62-5" class="hljs-ln-code"><a href="" aria-label="5"></a>:::</span>
-<span id="cb62-6" class="hljs-ln-code"><a href="" aria-label="6"></a></span>
-<span id="cb62-7" class="hljs-ln-code"><a href="" aria-label="7"></a><span class="fu">## Focus {auto-animate="true"}</span></span>
-<span id="cb62-8" class="hljs-ln-code"><a href="" aria-label="8"></a></span>
-<span id="cb62-9" class="hljs-ln-code"><a href="" aria-label="9"></a>::: {.value-box data-id="movement-demo" outer-extra-style="margin-left:60%;" value="7" width="35%" color="bg-amber" icon="fa-solid fa-rocket" icon-position="left"}</span>
-<span id="cb62-10" class="hljs-ln-code"><a href="" aria-label="10"></a>Days until launch</span>
-<span id="cb62-11" class="hljs-ln-code"><a href="" aria-label="11"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode numberSource md number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode markdown hljs"><span id="cb63-1" class="hljs-ln-code"><a href="" aria-label="1"></a><span class="fu">## Focus {auto-animate="true"}</span></span>
+<span id="cb63-2" class="hljs-ln-code"><a href="" aria-label="2"></a></span>
+<span id="cb63-3" class="hljs-ln-code"><a href="" aria-label="3"></a>::: {.value-box data-id="movement-demo" value="7" width="35%" color="bg-amber" icon="fa-solid fa-clock" icon-position="left"}</span>
+<span id="cb63-4" class="hljs-ln-code"><a href="" aria-label="4"></a>Days until launch</span>
+<span id="cb63-5" class="hljs-ln-code"><a href="" aria-label="5"></a>:::</span>
+<span id="cb63-6" class="hljs-ln-code"><a href="" aria-label="6"></a></span>
+<span id="cb63-7" class="hljs-ln-code"><a href="" aria-label="7"></a><span class="fu">## Focus {auto-animate="true"}</span></span>
+<span id="cb63-8" class="hljs-ln-code"><a href="" aria-label="8"></a></span>
+<span id="cb63-9" class="hljs-ln-code"><a href="" aria-label="9"></a>::: {.value-box data-id="movement-demo" outer-extra-style="margin-left:60%;" value="7" width="35%" color="bg-amber" icon="fa-solid fa-rocket" icon-position="left"}</span>
+<span id="cb63-10" class="hljs-ln-code"><a href="" aria-label="10"></a>Days until launch</span>
+<span id="cb63-11" class="hljs-ln-code"><a href="" aria-label="11"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </section>
     </div>
