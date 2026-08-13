@@ -993,6 +993,11 @@ color="rgba(200, 16, 46, 0.3)"
 color="hsl(13 74.5% 52.4%)"
 :::
 
+::: {.value-box color="hsla(13 74.5% 52.4% / 0.7)" height="100px"}
+color="hsla(13 74.5% 52.4% / 0.7)"
+:::
+
+
 ::: {.value-box color="var(--demo-brand-color)" height="100px"}
 color="var(--demo-brand-color)"
 :::
