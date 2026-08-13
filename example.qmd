@@ -207,13 +207,17 @@ Lower is better here, so a fall is shown in green
 ## Driven by computed data
 
 ::: {style='font-size: 80%;'}
-`color` and `delta` don't have to be typed in by hand — since a value box is just a fenced div, a code cell can compute them and print the div's markdown straight into the document with `output: asis`. Here Python looks at a week-over-week change, picks red or green depending on its sign, formats the delta string, and plots a matching sparkline — all from the same numbers:
+`color` and `delta` don't have to be typed in by hand — since a value box is just a fenced div, a code cell can compute them and print the div's markdown straight into the document with `output: asis`. The box's body is ordinary content too, so a chart can go right inside it rather than sitting next to it: Python looks at a week-over-week change here, picks red or green depending on its sign, formats the delta string, and renders a matching sparkline as a small transparent PNG, base64-encoded so it can be embedded directly with no separate image file to manage:
 :::
 
+:::: {.columns}
 
-
+::: {.column width='42%'}
+::: {style='font-size: 75%;'}
 ```{python}
 #| echo: true
+import base64
+import io
 import matplotlib.pyplot as plt
 
 weekly_sales = [82, 88, 91, 87, 95, 101, 108]
@@ -223,37 +227,72 @@ change_pct = (current - previous) / previous * 100
 color = "bg-green" if change_pct >= 0 else "bg-red"
 delta = f"{change_pct:+.1f}%"
 
-fig, ax = plt.subplots(figsize=(4, 1.2))
-ax.plot(weekly_sales, marker="o", color="#2e7d32" if change_pct >= 0 else "#c62828")
-ax.axis("off")
-plt.tight_layout()
-plt.show()
+fig, ax = plt.subplots(figsize=(10, 0.6))
 ```
+:::
+:::
+
+::: {.column width='58%'}
+::: {style='font-size: 75%;'}
+```{python}
+#| echo: true
+# White, not red/green: the box's own `color` already signals direction, and
+# a red/green line risks near-zero contrast against a same-hue bg-* (as
+# white does against every box colour, matching the value/delta/details text).
+ax.plot(weekly_sales, marker="o", linewidth=2, color="white")
+ax.axis("off")
+fig.patch.set_alpha(0)  # transparent, so it blends into the box's own colour
+plt.tight_layout(pad=0)
+
+buffer = io.BytesIO()
+fig.savefig(buffer, format="png", dpi=150, transparent=True)
+plt.close(fig)
+sparkline_b64 = base64.b64encode(buffer.getvalue()).decode("ascii")
+```
+:::
+:::
+
+::::
+
+
 
 
 ## Driven by computed data - the output
 
+::: {style='font-size: 75%;'}
+
 ```{.python}
 #| output: asis
 print(f'::: {{.value-box title="Weekly sales" value="{current}" delta="{delta}" color="{color}"}}')
-print("Colour and delta both follow the sign of `change_pct`, computed above")
+print(f'<img src="data:image/png;base64,{sparkline_b64}" alt="weekly sales trend" style="width:100%; height:auto; display:block; margin:0.4rem 0;">')
+print("Colour, delta and sparkline all follow the sign of `change_pct`, computed above")
 print(":::")
 ```
+:::
 
+::: {style='font-size: 25%;'}
 <br>
+:::
 
 ```{python}
 #| echo: false
 #| output: asis
 print(f'::: {{.value-box title="Weekly sales" value="{current}" delta="{delta}" color="{color}"}}')
-print("Colour and delta both follow the sign of 'change_pct', computed on the previous slide")
+print(f'<img src="data:image/png;base64,{sparkline_b64}" alt="weekly sales trend" style="width:100%; height:auto; display:block; margin:0.4rem 0;">')
+print("Colour, delta and sparkline all follow the sign of 'change_pct', computed on the previous slide")
 print(":::")
 ```
 
+::: {style='font-size: 15%;'}
 <br>
+:::
 
-::: {style='font-size: 75%;'}
-`output: asis` tells Quarto to drop the cell's printed text straight into the document as markdown, so the `f-string`-built `::: {.value-box ...}` line above is parsed exactly as if it had been typed by hand. Flip `weekly_sales[-1]` below `weekly_sales[-2]` and both the box and the chart switch to red together, since they're reading the same `change_pct`.
+::: {style='font-size: 65%;'}
+`output: asis` tells Quarto to drop the cell's printed text straight into the document as markdown, so the `f-string`-built `::: {.value-box ...}` block above is parsed exactly as if it had been typed by hand — `<img>` tag included, since the box's body accepts any content placed inside the fence, not just plain text.
+
+Encoding the chart as a base64 `data:` URI rather than saving a separate PNG keeps the whole box self-contained in the rendered page, with no extra file to stage or deploy alongside it.
+
+Flip `weekly_sales[-1]` below `weekly_sales[-2]` and the box's colour, its delta, and the sparkline all switch together, since they're reading the same `change_pct`.
 :::
 
 
@@ -265,7 +304,7 @@ Hover over the box below to see it lift:
 
 :::: {.columns}
 
-::: {.column width='40%'}
+::: {.column width='30%'}
 
 ::: {.value-box title="Documentation" value="README" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" icon="fa-solid fa-book" color="bg-slate" align="center"}
 Opens in a new tab
@@ -273,7 +312,7 @@ Opens in a new tab
 
 :::
 
-::: {.column width='60%'}
+::: {.column width='70%'}
 
 ```md
 ::: {.value-box title="Documentation" value="README"
