@@ -67,6 +67,19 @@ local function include_icon_stylesheet(href)
   })
 end
 
+-- Link the extension's own stylesheet into the document head. Both Div
+-- branches (value-box and value-box-row) need this, so it's a shared
+-- one-line call rather than two independently-maintained copies of the same
+-- dependency table — Quarto dedupes by name regardless of how many times
+-- either branch calls this.
+local function include_value_box_stylesheet()
+  quarto.doc.add_html_dependency({
+    name = "value-box-styles",
+    version = "1.0.0",
+    stylesheets = {"value-box.css"}
+  })
+end
+
 -- Build a CSS declaration, or nothing at all when the value is empty.
 -- Attributes that default to "" (height, font-size) would otherwise emit
 -- "height:;", an invalid declaration that browsers discard silently.
@@ -556,11 +569,7 @@ function Div(el)
     result:extend(el.content)
     result:insert(pandoc.RawBlock("html", html_close))
 
-    quarto.doc.add_html_dependency({
-      name = "value-box-styles",
-      version = "1.0.0",
-      stylesheets = {"value-box.css"}
-    })
+    include_value_box_stylesheet()
 
     return result
 
@@ -615,11 +624,7 @@ function Div(el)
     result:extend(el.content)
     result:insert(pandoc.RawBlock("html", "</div>"))
 
-    quarto.doc.add_html_dependency({
-      name = "value-box-styles",
-      version = "1.0.0",
-      stylesheets = {"value-box.css"}
-    })
+    include_value_box_stylesheet()
 
     return result
   end
