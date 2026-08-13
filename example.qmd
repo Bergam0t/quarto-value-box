@@ -35,6 +35,8 @@ filters:
 ---
 
 
+# The Basics
+
 ## Simple boxes
 
 ::: {.value-box}
@@ -229,6 +231,8 @@ Opens in a new tab
 ::::
 
 
+# Layout
+
 ## Row layout
 
 ::: {style='font-size: 75%;'}
@@ -340,25 +344,136 @@ Wins
 ```
 
 
-## Fragment types
+## Width
+
+We can manually override the width.
+
+
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
+No width specified - defaults to 80% of container
+:::
+
+```md
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
+No width specified - defaults to 80% of container
+:::
+```
+
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" width="30%"}
+Width of 30% specified.
+:::
+
+```md
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" width="30%"}
+Width of 30% specified.
+:::
+```
+
+
+
+## Height
+
+And we can manually override the height.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
+Example with no height specified - it will fit the contents
+:::
+
+```md
+::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
+Example with no height specified - it will fit the contents
+:::
+```
+
+:::
+
+::: {.column width='50%'}
+
+::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
+Example with height of 400 pixels (400px) specified
+:::
+
+```md
+::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
+Example with height of 400 pixels (400px) specified
+:::
+
+```
+
+:::
+
+::::
+
+## Vertical Alignment
+
+And we can also add vertical alignment options.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px"}
+No valign specified
+:::
+
+```md
+::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px"}
+No valign specified
+:::
+
+```
+
+:::
+
+::: {.column width='50%'}
+
+::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px" valign="top"}
+Top alignment specified
+:::
+
+```md
+::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px" valign="top"}
+Top alignment specified
+:::
+```
+
+:::
+
+::::
+
+## Minimum height & padding
+
+If a box's content is short (or `height` is set below the default floor), `min-height` and `padding` can be lowered to reclaim space — handy on busy slides.
 
 :::: {.columns}
 
 ::: {.column width='40%'}
 
-::: {.value-box fragment="fade-in-then-semi-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" }
-We can use them with special named fragment types like 'fade in, then semi out'
-(this is also the default if you set fragment="true")
+::: {.value-box icon="bi-star" value="42"}
+Default min-height (100px) and padding (1.5rem)
 :::
+
+```md
+::: {.value-box icon="bi-star" value="42"}
+Default min-height (100px) and padding (1.5rem)
+:::
+```
 
 :::
 
 ::: {.column width='60%'}
 
+::: {.value-box icon="bi-star" icon-size="1.5rem" value="42" min-height="40px" padding="0.5rem"}
+Tightened min-height and padding
+:::
+
 ```md
-::: {.value-box fragment="fade-in-then-semi-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}
-We can use them with special named fragment types like 'fade in, then semi out'
-(this is also the default if you set fragment="true")
+::: {.value-box min-height="40px" padding="0.5rem" icon="bi-star" icon-size="1.5rem" value="42" }
+Tightened min-height and padding
 :::
 ```
 
@@ -366,94 +481,7 @@ We can use them with special named fragment types like 'fade in, then semi out'
 
 ::::
 
-
-:::: {.columns}
-
-::: {.column width='40%'}
-
-::: {.value-box fragment="fade-in-then-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" }
-Or standard fragments
-:::
-
-:::
-
-::: {.column width='60%'}
-
-```md
-::: {.value-box fragment="fade-in-then-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}
-Or standard fragments
-:::
-```
-
-:::
-
-::::
-
-
-:::: {.columns}
-
-::: {.column width='40%'}
-
-:::{.fragment}
-Tada!
-:::
-
-
-:::
-
-::: {.column width='60%'}
-
-```md
-:::{.fragment}
-Tada!
-:::
-```
-
-:::
-
-::::
-
-
-
-
-
-
-## Complex icon box layouts with index parameter
-
-By using the 'index' parameter, we can determine the order that fragments appear by passing a number that indicates the order.
-
-:::: {.columns}
-
-::: {.column width="50%"}
-### Left Column
-::: {.value-box fragment="true" index="2" width="70%"}
-This appears SECOND (Index 2)
-:::
-
-```md
-::: {.value-box fragment="true" index="2" width="70%"}
-This appears SECOND (Index 2)
-:::
-```
-
-:::
-
-::: {.column width="50%"}
-### Right Column
-::: {.value-box fragment="true" index="1" width="70%"}
-This appears FIRST (Index 1)
-:::
-
-```md
-::: {.value-box fragment="true" index="1" width="70%"}
-This appears FIRST (Index 1)
-:::
-```
-
-:::
-
-::::
-
+# Icons
 
 ## Icon position
 
@@ -910,6 +938,122 @@ Local png file
 ::::
 
 
+# Colour & Typography
+
+## Icon Color
+
+Font awesome, bootstrap icons, tabler icons, phosphor icons, and material symbols support recoloring
+
+:::: {.columns}
+
+::: {.column width='30%'}
+
+::: {.value-box icon="bi-star" icon-position="left" icon-color="red"}
+Bootstrap icons
+:::
+
+
+
+:::
+
+::: {.column width='70%'}
+
+```md
+
+::: {.value-box icon-color="red" icon="bi-star" icon-position="left" }
+Bootstrap icons
+:::
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {.value-box icon="fa-brands fa-python" icon-position="left" value="42" icon-color="fuchsia"}
+Font awesome icons
+:::
+
+
+
+:::
+
+::: {.column width='70%'}
+```md
+::: {.value-box icon-color="fuchsia" icon="fa-brands fa-python" icon-position="left" }
+Font awesome icons
+:::
+```
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {.value-box icon="home" icon-type="material" icon-position="left" value="42" icon-color="lime"}
+Material Symbols icons
+:::
+
+
+
+:::
+
+::: {.column width='70%'}
+```md
+::: {.value-box icon-color="lime" icon="home" icon-type="material" icon-position="left" }
+Material Symbols icons
+:::
+```
+:::
+
+::::
+
+## Icon Color (continued)
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {.value-box icon="ti-star" icon-position="left" value="42" icon-color="cyan"}
+Tabler icons
+:::
+
+
+
+:::
+
+::: {.column width='70%'}
+```md
+::: {.value-box icon-color="cyan" icon="ti-star" icon-position="left" }
+Tabler icons
+:::
+```
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {.value-box icon="ph ph-star" icon-position="left" value="42" icon-color="orange"}
+Phosphor icons
+:::
+
+
+
+:::
+
+::: {.column width='70%'}
+```md
+::: {.value-box icon-color="orange" icon="ph ph-star" icon-position="left" }
+Phosphor icons
+:::
+```
+:::
+
+::::
 
 ## Box colours
 
@@ -1113,143 +1257,6 @@ Uses the brand's primary colour on an html/dashboard render
 
 
 
-## Width
-
-We can manually override the width.
-
-
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
-No width specified - defaults to 80% of container
-:::
-
-```md
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
-No width specified - defaults to 80% of container
-:::
-```
-
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" width="30%"}
-Width of 30% specified.
-:::
-
-```md
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" width="30%"}
-Width of 30% specified.
-:::
-```
-
-
-
-## Height
-
-And we can manually override the height.
-
-:::: {.columns}
-
-::: {.column width='50%'}
-
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
-Example with no height specified - it will fit the contents
-:::
-
-```md
-::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
-Example with no height specified - it will fit the contents
-:::
-```
-
-:::
-
-::: {.column width='50%'}
-
-::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
-Example with height of 400 pixels (400px) specified
-:::
-
-```md
-::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}
-Example with height of 400 pixels (400px) specified
-:::
-
-```
-
-:::
-
-::::
-
-## Vertical Alignment
-
-And we can also add vertical alignment options.
-
-:::: {.columns}
-
-::: {.column width='50%'}
-
-::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px"}
-No valign specified
-:::
-
-```md
-::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px"}
-No valign specified
-:::
-
-```
-
-:::
-
-::: {.column width='50%'}
-
-::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px" valign="top"}
-Top alignment specified
-:::
-
-```md
-::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px" valign="top"}
-Top alignment specified
-:::
-```
-
-:::
-
-::::
-
-## Minimum height & padding
-
-If a box's content is short (or `height` is set below the default floor), `min-height` and `padding` can be lowered to reclaim space — handy on busy slides.
-
-:::: {.columns}
-
-::: {.column width='40%'}
-
-::: {.value-box icon="bi-star" value="42"}
-Default min-height (100px) and padding (1.5rem)
-:::
-
-```md
-::: {.value-box icon="bi-star" value="42"}
-Default min-height (100px) and padding (1.5rem)
-:::
-```
-
-:::
-
-::: {.column width='60%'}
-
-::: {.value-box icon="bi-star" icon-size="1.5rem" value="42" min-height="40px" padding="0.5rem"}
-Tightened min-height and padding
-:::
-
-```md
-::: {.value-box min-height="40px" padding="0.5rem" icon="bi-star" icon-size="1.5rem" value="42" }
-Tightened min-height and padding
-:::
-```
-
-:::
-
-::::
-
 ## Font Sizing
 
 The font for the general text can be tweaked with the font-size parameter
@@ -1390,28 +1397,27 @@ But they can differ
 
 ::::
 
-## Icon Color
+# Advanced
 
-Font awesome, bootstrap icons, tabler icons, phosphor icons, and material symbols support recoloring
+## Fragment types
 
 :::: {.columns}
 
-::: {.column width='30%'}
+::: {.column width='40%'}
 
-::: {.value-box icon="bi-star" icon-position="left" icon-color="red"}
-Bootstrap icons
+::: {.value-box fragment="fade-in-then-semi-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" }
+We can use them with special named fragment types like 'fade in, then semi out'
+(this is also the default if you set fragment="true")
 :::
 
-
-
 :::
 
-::: {.column width='70%'}
+::: {.column width='60%'}
 
 ```md
-
-::: {.value-box icon-color="red" icon="bi-star" icon-position="left" }
-Bootstrap icons
+::: {.value-box fragment="fade-in-then-semi-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}
+We can use them with special named fragment types like 'fade in, then semi out'
+(this is also the default if you set fragment="true")
 :::
 ```
 
@@ -1419,91 +1425,94 @@ Bootstrap icons
 
 ::::
 
+
 :::: {.columns}
 
-::: {.column width='30%'}
-::: {.value-box icon="fa-brands fa-python" icon-position="left" value="42" icon-color="fuchsia"}
-Font awesome icons
+::: {.column width='40%'}
+
+::: {.value-box fragment="fade-in-then-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center" }
+Or standard fragments
 :::
 
-
-
 :::
 
-::: {.column width='70%'}
+::: {.column width='60%'}
+
 ```md
-::: {.value-box icon-color="fuchsia" icon="fa-brands fa-python" icon-position="left" }
-Font awesome icons
+::: {.value-box fragment="fade-in-then-out" value="Big text" icon="bi-arrow-down-up" icon-size="2rem" color="bg-olive" width="60%" align="center"}
+Or standard fragments
 :::
 ```
+
 :::
 
 ::::
 
+
 :::: {.columns}
 
-::: {.column width='30%'}
-::: {.value-box icon="home" icon-type="material" icon-position="left" value="42" icon-color="lime"}
-Material Symbols icons
+::: {.column width='40%'}
+
+:::{.fragment}
+Tada!
 :::
 
 
-
 :::
 
-::: {.column width='70%'}
+::: {.column width='60%'}
+
 ```md
-::: {.value-box icon-color="lime" icon="home" icon-type="material" icon-position="left" }
-Material Symbols icons
+:::{.fragment}
+Tada!
 :::
 ```
+
 :::
 
 ::::
 
-## Icon Color (continued)
+
+
+
+
+
+## Complex icon box layouts with index parameter
+
+By using the 'index' parameter, we can determine the order that fragments appear by passing a number that indicates the order.
 
 :::: {.columns}
 
-::: {.column width='30%'}
-::: {.value-box icon="ti-star" icon-position="left" value="42" icon-color="cyan"}
-Tabler icons
+::: {.column width="50%"}
+### Left Column
+::: {.value-box fragment="true" index="2" width="70%"}
+This appears SECOND (Index 2)
 :::
 
-
-
-:::
-
-::: {.column width='70%'}
 ```md
-::: {.value-box icon-color="cyan" icon="ti-star" icon-position="left" }
-Tabler icons
+::: {.value-box fragment="true" index="2" width="70%"}
+This appears SECOND (Index 2)
 :::
 ```
+
+:::
+
+::: {.column width="50%"}
+### Right Column
+::: {.value-box fragment="true" index="1" width="70%"}
+This appears FIRST (Index 1)
+:::
+
+```md
+::: {.value-box fragment="true" index="1" width="70%"}
+This appears FIRST (Index 1)
+:::
+```
+
 :::
 
 ::::
 
-:::: {.columns}
-
-::: {.column width='30%'}
-::: {.value-box icon="ph ph-star" icon-position="left" value="42" icon-color="orange"}
-Phosphor icons
-:::
-
-
-
-:::
-
-::: {.column width='70%'}
-```md
-::: {.value-box icon-color="orange" icon="ph ph-star" icon-position="left" }
-Phosphor icons
-:::
-```
-:::
-
-::::
 
 ## Escape hatch: id, extra classes and attributes
 
