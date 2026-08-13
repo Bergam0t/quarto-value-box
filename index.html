@@ -213,7 +213,7 @@
 </section>
 <section id="simple-boxes" class="slide level2">
 <h2>Simple boxes</h2>
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p><strong>Value boxes</strong></p>
 <p>A simple value box can help make points stand out…</p>
 </div></div></div>
@@ -226,7 +226,7 @@
 <section id="values" class="slide level2">
 <h2>Values</h2>
 <p>Or display a metric</p>
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">60</div><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">60</div><div class="details" style="color:white; ">
 <p>Number of bibbles bobbled this week</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="" aria-label="1"></a>::: {.value-box value=60}</span>
@@ -236,7 +236,7 @@
 <section id="icons" class="slide level2">
 <h2>Icons</h2>
 <p>Or display a metric with an icon</p>
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-arrow-down-up" style="font-size:3rem; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">60</div><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left bi bi-arrow-down-up" style="font-size:3rem; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">60</div><div class="details" style="color:white; ">
 <p>Number of bibbles bobbled this week</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="" aria-label="1"></a>::: {.value-box value=60 icon="bi-arrow-down-up" icon-size="3rem"}</span>
@@ -245,7 +245,7 @@
 </section>
 <section id="center-alignment" class="slide level2">
 <h2>Center Alignment</h2>
-<div class="value-box bg-amber" style="width:60%; min-height:100px; padding:1.5rem; text-align:center;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-arrow-down-up" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-amber" style="--vb-width:60%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:center; --vb-justify-content:center; "><i class="icon bi bi-arrow-down-up" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>Here’s a more advanced type of box with an icon and some formatting, but no value</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-arrow-down-up" color="bg-amber" width="60%" align="center"}</span>
@@ -257,7 +257,7 @@
 <p>A <code>title</code> adds a small label above the value — useful when the value alone needs naming.</p>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-arrow-down-up" style="font-size:2em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="title" style="color:white; ">Bibbles bobbled</div><div class="value" style="font-size:2.2rem; color:white; ">60</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon bi bi-arrow-down-up" style="font-size:2em; color:white; "></i><div class="vb-content" style=""><div class="title" style="color:white; ">Bibbles bobbled</div><div class="value" style="font-size:2.2rem; color:white; ">60</div><div class="details" style="color:white; ">
 <p>This week</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
@@ -267,7 +267,7 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-purple" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="title" style="font-size:1.3rem; color:#ffd54f; ">Styled title</div><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box bg-purple" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="font-size:1.3rem; color:#ffd54f; ">Styled title</div><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p><strong>title-color</strong> and <strong>title-font-size</strong> work like their value equivalents</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
@@ -281,7 +281,7 @@
 <p>A <code>delta</code> renders a small badge next to the value, e.g.&nbsp;a change since the last period. The arrow is inferred from a leading <code>+</code>/<code>-</code> in the text unless <code>delta-direction</code> is set explicitly.</p>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-green" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="title" style="color:white; ">Revenue</div><div class="vb-value-row" style="display:flex; align-items:baseline; gap:0.5em; flex-wrap:wrap; "><div class="value" style="font-size:2.2rem; color:white; ">$1.2M</div><div class="delta" style=""><span class="delta-arrow" aria-hidden="true">▲</span> +12%</div></div><div class="details" style="color:white; ">
+<div class="value-box bg-green" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Revenue</div><div class="vb-value-row" style=""><div class="value" style="font-size:2.2rem; color:white; ">$1.2M</div><div class="delta" style=""><span class="delta-arrow" aria-hidden="true">▲</span> +12%</div></div><div class="details" style="color:white; ">
 <p>This quarter</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
@@ -292,7 +292,7 @@
 <p><code>delta-color</code> is never inferred from direction, because “up” is not always good news — a rising cost and a falling cost are both “up” or “down” depending on which one you’re looking at. Set the colour explicitly for a semantic red/green treatment:</p>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-navy" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="title" style="color:white; ">Operating cost</div><div class="vb-value-row" style="display:flex; align-items:baseline; gap:0.5em; flex-wrap:wrap; "><div class="value" style="font-size:2.2rem; color:white; ">$430K</div><div class="delta" style="color:#8bc34a; "><span class="delta-arrow" aria-hidden="true">▼</span> -8%</div></div><div class="details" style="color:white; ">
+<div class="value-box bg-navy" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Operating cost</div><div class="vb-value-row" style=""><div class="value" style="font-size:2.2rem; color:white; ">$430K</div><div class="delta" style="color:#8bc34a; "><span class="delta-arrow" aria-hidden="true">▼</span> -8%</div></div><div class="details" style="color:white; ">
 <p>Lower is better here, so a fall is shown in green</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
@@ -306,14 +306,14 @@
 <div style="font-size: 75%;">
 <p>Wrap value boxes in <code>.value-box-row</code> for an equal-width, equal-height KPI strip — no more hand-rolling <code>.columns</code>/<code>.column</code> scaffolding or hand-setting <code>height</code> on every box to make them match. With no <code>columns</code> set, boxes lay out in a single non-wrapping row:</p>
 </div>
-<div class="value-box-row" style="display:flex; flex-wrap:nowrap; gap:1.5rem; ">
-<div class="value-box bg-teal" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">128</div><div class="details" style="color:white; ">
+<div class="value-box-row" style="--vb-row-gap:1.5rem; ">
+<div class="value-box bg-teal" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">128</div><div class="details" style="color:white; ">
 <p>Signups this week — a longer line of detail text here to show the other boxes stretch to match its height</p>
 </div></div></div>
-<div class="value-box bg-amber" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box bg-amber" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Open tickets</p>
 </div></div></div>
-<div class="value-box bg-green" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">99%</div><div class="details" style="color:white; ">
+<div class="value-box bg-green" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">99%</div><div class="details" style="color:white; ">
 <p>Uptime</p>
 </div></div></div>
 </div>
@@ -338,23 +338,23 @@
 <section id="grid-layout" class="slide level2">
 <h2>Grid layout</h2>
 <p>Set <code>columns</code> to switch to a grid: extra boxes wrap onto further rows once it’s full, with every row — not just each one individually — kept the same height.</p>
-<div class="value-box-row" style="display:grid; grid-template-columns:repeat(3, 1fr); grid-auto-rows:1fr; gap:1.5rem; ">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="title" style="color:white; ">Team A</div><div class="value" style="font-size:2.2rem; color:white; ">12</div><div class="details" style="color:white; ">
+<div class="value-box-row vb-row-grid" style="--vb-row-columns:3; --vb-row-gap:1.5rem; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Team A</div><div class="value" style="font-size:2.2rem; color:white; ">12</div><div class="details" style="color:white; ">
 <p>Wins this season — a much longer line of detail text, to show every row in the grid stretches to match the tallest box anywhere in it</p>
 </div></div></div>
-<div class="value-box bg-purple" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="title" style="color:white; ">Team B</div><div class="value" style="font-size:2.2rem; color:white; ">9</div><div class="details" style="color:white; ">
+<div class="value-box bg-purple" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Team B</div><div class="value" style="font-size:2.2rem; color:white; ">9</div><div class="details" style="color:white; ">
 <p>Wins</p>
 </div></div></div>
-<div class="value-box bg-red" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="title" style="color:white; ">Team C</div><div class="value" style="font-size:2.2rem; color:white; ">15</div><div class="details" style="color:white; ">
+<div class="value-box bg-red" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Team C</div><div class="value" style="font-size:2.2rem; color:white; ">15</div><div class="details" style="color:white; ">
 <p>Wins</p>
 </div></div></div>
-<div class="value-box bg-olive" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="title" style="color:white; ">Team D</div><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
+<div class="value-box bg-olive" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Team D</div><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
 <p>Wins</p>
 </div></div></div>
-<div class="value-box bg-slate" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="title" style="color:white; ">Team E</div><div class="value" style="font-size:2.2rem; color:white; ">11</div><div class="details" style="color:white; ">
+<div class="value-box bg-slate" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Team E</div><div class="value" style="font-size:2.2rem; color:white; ">11</div><div class="details" style="color:white; ">
 <p>Wins</p>
 </div></div></div>
-<div class="value-box bg-pink" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="title" style="color:white; ">Team F</div><div class="value" style="font-size:2.2rem; color:white; ">4</div><div class="details" style="color:white; ">
+<div class="value-box bg-pink" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="title" style="color:white; ">Team F</div><div class="value" style="font-size:2.2rem; color:white; ">4</div><div class="details" style="color:white; ">
 <p>Wins</p>
 </div></div></div>
 </div>
@@ -393,7 +393,7 @@
 <h2>Fragment types</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-olive fragment fade-in-then-semi-out" style="width:60%; min-height:100px; padding:1.5rem; text-align:center;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-arrow-down-up" style="font-size:2rem; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">Big text</div><div class="details" style="color:white; ">
+<div class="value-box bg-olive fragment fade-in-then-semi-out" style="--vb-width:60%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:center; --vb-justify-content:center; "><i class="icon bi bi-arrow-down-up" style="font-size:2rem; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">Big text</div><div class="details" style="color:white; ">
 <p>We can use them with special named fragment types like ‘fade in, then semi out’ (this is also the default if you set fragment=“true”)</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
@@ -404,7 +404,7 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-olive fragment fade-in-then-out" style="width:60%; min-height:100px; padding:1.5rem; text-align:center;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-arrow-down-up" style="font-size:2rem; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">Big text</div><div class="details" style="color:white; ">
+<div class="value-box bg-olive fragment fade-in-then-out" style="--vb-width:60%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:center; --vb-justify-content:center; "><i class="icon bi bi-arrow-down-up" style="font-size:2rem; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">Big text</div><div class="details" style="color:white; ">
 <p>Or standard fragments</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
@@ -429,7 +429,7 @@
 <div class="columns">
 <div class="column" style="width:50%;">
 <h3 id="left-column">Left Column</h3>
-<div class="value-box bg-blue fragment fade-in-then-semi-out" style="width:70%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" data-fragment-index="2"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-blue fragment fade-in-then-semi-out" style="--vb-width:70%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; " data-fragment-index="2"><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>This appears SECOND (Index 2)</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="" aria-label="1"></a>::: {.value-box fragment="true" index="2" width="70%"}</span>
@@ -437,7 +437,7 @@
 <span id="cb14-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
 <h3 id="right-column">Right Column</h3>
-<div class="value-box bg-blue fragment fade-in-then-semi-out" style="width:70%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" data-fragment-index="1"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-blue fragment fade-in-then-semi-out" style="--vb-width:70%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; " data-fragment-index="1"><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>This appears FIRST (Index 1)</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="" aria-label="1"></a>::: {.value-box fragment="true" index="1" width="70%"}</span>
@@ -450,7 +450,7 @@
 <p>Icons can be repositioned with the <code>icon-position</code> parameter. <code>top</code> is the default — the icon, value, and details all stay flush against the same edge for <code>left</code>/<code>right</code> alignment.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon fa-solid fa-clipboard" style="font-size:2em; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">Step 1</div><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left fa-solid fa-clipboard" style="font-size:2em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">Step 1</div><div class="details" style="color:white; ">
 <p>Add logging steps for arrivals, queues, resource use, and departures</p>
 </div></div></div>
 </div><div class="column" style="width:50%;">
@@ -460,7 +460,7 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:2em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon bi bi-star" style="font-size:2em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Left-aligned icon</p>
 </div></div></div>
 </div><div class="column" style="width:50%;">
@@ -473,7 +473,7 @@
 <h2>Icon position (continued)</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row-reverse; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:2em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">99</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-right bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon bi bi-star" style="font-size:2em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">99</div><div class="details" style="color:white; ">
 <p>Right-aligned icon</p>
 </div></div></div>
 </div><div class="column" style="width:50%;">
@@ -483,9 +483,9 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
 <p>Icon below text</p>
-</div></div><i class="icon bi bi-star" style="font-size:1.5rem; color:white;  margin-left:-0.12em;"></i></div>
+</div></div><i class="icon vb-bearing-left bi bi-star" style="font-size:1.5rem; color:white; "></i></div>
 </div><div class="column" style="width:50%;">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="" aria-label="1"></a>::: {.value-box icon-position="bottom" icon="bi-star" icon-size="1.5rem" value="7"}</span>
 <span id="cb19-2"><a href="" aria-label="2"></a>Icon below text</span>
@@ -497,7 +497,7 @@
 <p>The value can be repositioned relative to the details text with the <code>value-position</code> parameter, completely independently of <code>icon-position</code>.</p>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:1.5rem; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=" display:flex; flex-direction:row; align-items:center; gap:0.75em;"><div class="value" style="font-size:2.2rem; color:white;  flex-shrink:0;">42</div><div class="details" style="color:white;  flex:1;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left bi bi-star" style="font-size:1.5rem; color:white; "></i><div class="vb-content vb-value-left" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Left-aligned value</p>
 </div></div></div>
 </div><div class="column" style="width:65%;">
@@ -507,7 +507,7 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:1.5rem; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=" display:flex; flex-direction:row-reverse; align-items:center; gap:0.75em;"><div class="value" style="font-size:2.2rem; color:white;  flex-shrink:0;">99</div><div class="details" style="color:white;  flex:1;">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left bi bi-star" style="font-size:1.5rem; color:white; "></i><div class="vb-content vb-value-right" style=""><div class="value" style="font-size:2.2rem; color:white; ">99</div><div class="details" style="color:white; ">
 <p>Right-aligned value</p>
 </div></div></div>
 </div><div class="column" style="width:65%;">
@@ -517,7 +517,7 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:1.5rem; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left bi bi-star" style="font-size:1.5rem; color:white; "></i><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>Value below details</p>
 </div><div class="value" style="font-size:2.2rem; color:white; ">7</div></div></div>
 </div><div class="column" style="width:65%;">
@@ -534,7 +534,7 @@
 </div>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:right;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:right; --vb-align-items:center; "><i class="icon bi bi-star" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Left-aligned icon with right-aligned text</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
@@ -544,7 +544,7 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-teal" style="width:80%; min-height:100px; padding:1.5rem; text-align:right;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1; display:flex; flex-direction:row; align-items:center; gap:0.75em;"><div class="value" style="font-size:2.2rem; color:white;  flex-shrink:0;">42</div><div class="details" style="color:white;  flex:1;">
+<div class="value-box vb-icon-left bg-teal" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:right; --vb-align-items:center; "><i class="icon bi bi-star" style="font-size:3em; color:white; "></i><div class="vb-content vb-value-left" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Left-aligned icon AND left-aligned value, together</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
@@ -554,7 +554,7 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-red" style="width:80%; min-height:100px; padding:1.5rem; text-align:center;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
+<div class="value-box bg-red" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:center; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
 <p>Icon below text, all centred</p>
 </div></div><i class="icon bi bi-star" style="font-size:1.5rem; color:white; "></i></div>
 </div><div class="column" style="width:60%;">
@@ -567,7 +567,7 @@
 <h2>And we can use different icon types</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon bi bi-star" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Bootstrap icons</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb26-1"><a href="" aria-label="1"></a></span>
@@ -575,7 +575,7 @@
 <span id="cb26-3"><a href="" aria-label="3"></a>Bootstrap icons</span>
 <span id="cb26-4"><a href="" aria-label="4"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-brands fa-python" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Font awesome icons</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb27-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
@@ -584,14 +584,14 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><span class="icon material-symbols-outlined" style="font-size:3em; color:white;  flex-shrink:0;">home</span><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><span class="icon material-symbols-outlined" style="font-size:3em; color:white; ">home</span><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Material Symbols icons</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="" aria-label="1"></a>::: {.value-box icon="home" icon-type="material" icon-position="left" color="bg-blue" value="42"}</span>
 <span id="cb28-2"><a href="" aria-label="2"></a>Material Symbols icons</span>
 <span id="cb28-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><span class="icon material-symbols-rounded" style="font-size:3em; color:white;  flex-shrink:0;">home</span><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><span class="icon material-symbols-rounded" style="font-size:3em; color:white; ">home</span><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Material Symbols icons (rounded)</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb29-1"><a href="" aria-label="1"></a>::: {.value-box icon="home" icon-type="material-rounded" icon-position="left" color="bg-blue" value="42"}</span>
@@ -603,14 +603,14 @@
 <h2>More icon types</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon ti ti-star" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon ti ti-star" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Tabler icons</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="" aria-label="1"></a>::: {.value-box icon="ti-star" icon-position="left" color="bg-blue" value="42"}</span>
 <span id="cb30-2"><a href="" aria-label="2"></a>Tabler icons</span>
 <span id="cb30-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon ph ph-star" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon ph ph-star" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Phosphor icons</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb31-1"><a href="" aria-label="1"></a>::: {.value-box icon="ph ph-star" icon-position="left" color="bg-blue" value="42"}</span>
@@ -625,7 +625,7 @@
 </div>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-amber" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-solid fa-star" style="font-size:2em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:80%; color:white; ">Solid</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-amber" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-solid fa-star" style="font-size:2em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:80%; color:white; ">Solid</div><div class="details" style="color:white; ">
 <p>Filled-in icons</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
@@ -635,7 +635,7 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-teal" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-regular fa-star" style="font-size:2em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:80%; color:white; ">Regular (fa-regular)</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-teal" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-regular fa-star" style="font-size:2em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:80%; color:white; ">Regular (fa-regular)</div><div class="details" style="color:white; ">
 <p>Outlined icons</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
@@ -645,7 +645,7 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:2em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:80%; color:white; ">Brands (fa-brands)</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-brands fa-python" style="font-size:2em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:80%; color:white; ">Brands (fa-brands)</div><div class="details" style="color:white; ">
 <p>Logos, only available in this one style</p>
 </div></div></div>
 </div><div class="column" style="width:60%;">
@@ -661,14 +661,14 @@
 <h2>Including local files</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-grey" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><span class="icon" style="width:128px; height:128px; display:inline-flex; align-items:center; justify-content:center; font-size:inherit; flex-shrink:0;"><!--?xml version="1.0" encoding="utf-8"?--><svg style="width:128px; height:128px; " version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="110px" height="110px" viewbox="0.21 -0.077 110 110" enable-background="new 0.21 -0.077 110 110" space="preserve"><lineargradient id="SVGID_1_" gradientunits="userSpaceOnUse" x1="63.8159" y1="56.6829" x2="118.4934" y2="1.8225" gradienttransform="matrix(1 0 0 -1 -53.2974 66.4321)"> <stop offset="0" style="stop-color:#387EB8"></stop> <stop offset="1" style="stop-color:#366994"></stop></lineargradient><path fill="url(#SVGID_1_)" d="M55.023-0.077c-25.971,0-26.25,10.081-26.25,12.156c0,3.148,0,12.594,0,12.594h26.75v3.781 c0,0-27.852,0-37.375,0c-7.949,0-17.938,4.833-17.938,26.25c0,19.673,7.792,27.281,15.656,27.281c2.335,0,9.344,0,9.344,0 s0-9.765,0-13.125c0-5.491,2.721-15.656,15.406-15.656c15.91,0,19.971,0,26.531,0c3.902,0,14.906-1.696,14.906-14.406 c0-13.452,0-17.89,0-24.219C82.054,11.426,81.515-0.077,55.023-0.077z M40.273,8.392c2.662,0,4.813,2.15,4.813,4.813 c0,2.661-2.151,4.813-4.813,4.813s-4.813-2.151-4.813-4.813C35.46,10.542,37.611,8.392,40.273,8.392z"></path><lineargradient id="SVGID_2_" gradientunits="userSpaceOnUse" x1="97.0444" y1="21.6321" x2="155.6665" y2="-34.5308" gradienttransform="matrix(1 0 0 -1 -53.2974 66.4321)"> <stop offset="0" style="stop-color:#FFE052"></stop> <stop offset="1" style="stop-color:#FFC331"></stop></lineargradient><path fill="url(#SVGID_2_)" d="M55.397,109.923c25.959,0,26.282-10.271,26.282-12.156c0-3.148,0-12.594,0-12.594H54.897v-3.781 c0,0,28.032,0,37.375,0c8.009,0,17.938-4.954,17.938-26.25c0-23.322-10.538-27.281-15.656-27.281c-2.336,0-9.344,0-9.344,0 s0,10.216,0,13.125c0,5.491-2.631,15.656-15.406,15.656c-15.91,0-19.476,0-26.532,0c-3.892,0-14.906,1.896-14.906,14.406 c0,14.475,0,18.265,0,24.219C28.366,100.497,31.562,109.923,55.397,109.923z M70.148,101.454c-2.662,0-4.813-2.151-4.813-4.813 s2.15-4.813,4.813-4.813c2.661,0,4.813,2.151,4.813,4.813S72.809,101.454,70.148,101.454z"></path></svg></span><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-grey" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><span class="icon" style="width:128px; height:128px; display:inline-flex; align-items:center; justify-content:center; font-size:inherit;"><!--?xml version="1.0" encoding="utf-8"?--><svg style="width:128px; height:128px; " version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="110px" height="110px" viewbox="0.21 -0.077 110 110" enable-background="new 0.21 -0.077 110 110" space="preserve"><lineargradient id="SVGID_1_" gradientunits="userSpaceOnUse" x1="63.8159" y1="56.6829" x2="118.4934" y2="1.8225" gradienttransform="matrix(1 0 0 -1 -53.2974 66.4321)"> <stop offset="0" style="stop-color:#387EB8"></stop> <stop offset="1" style="stop-color:#366994"></stop></lineargradient><path fill="url(#SVGID_1_)" d="M55.023-0.077c-25.971,0-26.25,10.081-26.25,12.156c0,3.148,0,12.594,0,12.594h26.75v3.781 c0,0-27.852,0-37.375,0c-7.949,0-17.938,4.833-17.938,26.25c0,19.673,7.792,27.281,15.656,27.281c2.335,0,9.344,0,9.344,0 s0-9.765,0-13.125c0-5.491,2.721-15.656,15.406-15.656c15.91,0,19.971,0,26.531,0c3.902,0,14.906-1.696,14.906-14.406 c0-13.452,0-17.89,0-24.219C82.054,11.426,81.515-0.077,55.023-0.077z M40.273,8.392c2.662,0,4.813,2.15,4.813,4.813 c0,2.661-2.151,4.813-4.813,4.813s-4.813-2.151-4.813-4.813C35.46,10.542,37.611,8.392,40.273,8.392z"></path><lineargradient id="SVGID_2_" gradientunits="userSpaceOnUse" x1="97.0444" y1="21.6321" x2="155.6665" y2="-34.5308" gradienttransform="matrix(1 0 0 -1 -53.2974 66.4321)"> <stop offset="0" style="stop-color:#FFE052"></stop> <stop offset="1" style="stop-color:#FFC331"></stop></lineargradient><path fill="url(#SVGID_2_)" d="M55.397,109.923c25.959,0,26.282-10.271,26.282-12.156c0-3.148,0-12.594,0-12.594H54.897v-3.781 c0,0,28.032,0,37.375,0c8.009,0,17.938-4.954,17.938-26.25c0-23.322-10.538-27.281-15.656-27.281c-2.336,0-9.344,0-9.344,0 s0,10.216,0,13.125c0,5.491-2.631,15.656-15.406,15.656c-15.91,0-19.476,0-26.532,0c-3.892,0-14.906,1.896-14.906,14.406 c0,14.475,0,18.265,0,24.219C28.366,100.497,31.562,109.923,55.397,109.923z M70.148,101.454c-2.662,0-4.813-2.151-4.813-4.813 s2.15-4.813,4.813-4.813c2.661,0,4.813,2.151,4.813,4.813S72.809,101.454,70.148,101.454z"></path></svg></span><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Local svg file</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb35-1"><a href="" aria-label="1"></a>::: {.value-box icon="example-icon.svg" icon-position="left" color="bg-grey" value="42"}</span>
 <span id="cb35-2"><a href="" aria-label="2"></a>Local svg file</span>
 <span id="cb35-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><img class="icon" src="example-icon.png" style="width:256px; height:256px; object-fit:contain; display:block; margin:0 auto; flex-shrink:0;" alt=""><div class="vb-content" style=" flex:1;"><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><img class="icon" src="example-icon.png" style="width:256px; height:256px; object-fit:contain; display:block; margin:0 auto;" alt=""><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>Local png file</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb36-1"><a href="" aria-label="1"></a>::: {.value-box icon="example-icon.png" icon-size="256px" icon-position="left" color="bg-blue"}</span>
@@ -684,43 +684,43 @@
 </div>
 <div class="columns">
 <div class="column" style="width:25%;">
-<div class="value-box bg-blue" style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-height:100px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>bg-blue</p>
 </div></div></div>
-<div class="value-box bg-navy" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-navy" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>bg-navy</p>
 </div></div></div>
-<div class="value-box bg-teal" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-teal" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>bg-teal</p>
 </div></div></div>
 </div><div class="column" style="width:25%;">
-<div class="value-box bg-green" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-green" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>bg-green</p>
 </div></div></div>
-<div class="value-box bg-olive" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-olive" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>bg-olive</p>
 </div></div></div>
-<div class="value-box bg-slate" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-slate" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>bg-slate</p>
 </div></div></div>
 </div><div class="column" style="width:25%;">
-<div class="value-box bg-red" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-red" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>bg-red</p>
 </div></div></div>
-<div class="value-box bg-orange" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-orange" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>bg-orange</p>
 </div></div></div>
-<div class="value-box bg-amber" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-amber" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>bg-amber</p>
 </div></div></div>
 </div><div class="column" style="width:25%;">
-<div class="value-box bg-purple" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-purple" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>bg-purple</p>
 </div></div></div>
-<div class="value-box bg-pink" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-pink" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>bg-pink</p>
 </div></div></div>
-<div class="value-box bg-grey" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-grey" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>bg-grey</p>
 </div></div></div>
 </div></div>
@@ -728,20 +728,20 @@
 <section id="box-colours---custom" class="slide level2">
 <h2>Box colours - custom</h2>
 <p><code>color</code> also accepts a raw CSS colour value directly — no new class needed — for anything starting with <code>#</code>, <code>rgb(</code>/<code>rgba(</code>, <code>hsl(</code>/<code>hsla(</code>, or <code>var(</code>.</p>
-<div class="value-box-row" style="display:grid; grid-template-columns:repeat(3, 1fr); grid-auto-rows:1fr; gap:1.5rem; ">
-<div class="value-box " style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left; background-color:#c8102e;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box-row vb-row-grid" style="--vb-row-columns:3; --vb-row-gap:1.5rem; ">
+<div class="value-box " style="--vb-width:80%; --vb-height:100px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-bg:#c8102e; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>color=“#c8102e”</p>
 </div></div></div>
-<div class="value-box " style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left; background-color:rgb(200, 16, 200);  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box " style="--vb-width:80%; --vb-height:100px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-bg:rgb(200, 16, 200); --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>color=“rgb(200, 16, 200)”</p>
 </div></div></div>
-<div class="value-box " style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left; background-color:rgba(200, 16, 46, 0.3);  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:black; ">
+<div class="value-box " style="--vb-width:80%; --vb-height:100px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-bg:rgba(200, 16, 46, 0.3); --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:black; ">
 <p>color=“rgba(200, 16, 46, 0.3)”</p>
 </div></div></div>
-<div class="value-box " style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left; background-color:hsl(13 74.5% 52.4%);  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box " style="--vb-width:80%; --vb-height:100px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-bg:hsl(13 74.5% 52.4%); --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>color=“hsl(13 74.5% 52.4%)”</p>
 </div></div></div>
-<div class="value-box " style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left; background-color:hsla(13 74.5% 52.4% / 0.5);  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:black; ">
+<div class="value-box " style="--vb-width:80%; --vb-height:100px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-bg:hsla(13 74.5% 52.4% / 0.5); --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:black; ">
 <p>color=“hsla(13 74.5% 52.4% / 0.5)”</p>
 </div></div></div>
 <style>
@@ -756,7 +756,7 @@
 <span id="cb37-2"><a href="" aria-label="2"></a><span class="in">:root</span> { <span class="va">--demo-brand-color</span><span class="ch">:</span> <span class="cn">#2BAC9A</span><span class="op">;</span> }</span>
 <span id="cb37-3"><a href="" aria-label="3"></a>&lt;/style<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="value-box " style="width:80%; height:100px; min-height:100px; padding:1.5rem; text-align:left; background-color:var(--demo-brand-color);  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box " style="--vb-width:80%; --vb-height:100px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-bg:var(--demo-brand-color); --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>color=“var(–demo-brand-color)”</p>
 </div></div></div>
 </div></div>
@@ -771,11 +771,11 @@
 <span id="cb38-3"><a href="" aria-label="3"></a><span class="at">  </span><span class="fu">palette</span><span class="kw">:</span></span>
 <span id="cb38-4"><a href="" aria-label="4"></a><span class="at">    </span><span class="fu">accent</span><span class="kw">:</span><span class="at"> </span><span class="st">"#6F3D9E"</span></span>
 <span id="cb38-5"><a href="" aria-label="5"></a><span class="at">  </span><span class="fu">primary</span><span class="kw">:</span><span class="at"> accent</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="value-box-row" style="display:grid; grid-template-columns:repeat(2, 1fr); grid-auto-rows:1fr; gap:1.5rem; ">
-<div class="value-box " style="width:80%; min-height:100px; padding:1.5rem; text-align:left; background-color:var(--quarto-scss-export-brand-accent);  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box-row vb-row-grid" style="--vb-row-columns:2; --vb-row-gap:1.5rem; ">
+<div class="value-box " style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-bg:var(--quarto-scss-export-brand-accent); --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>color=“var(–quarto-scss-export-brand-accent)”</p>
 </div></div></div>
-<div class="value-box bg-amber" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:2em; color:var(--quarto-scss-export-brand-accent);  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-amber" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon bi bi-star" style="font-size:2em; color:var(--quarto-scss-export-brand-accent); "></i><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>icon-color=“var(–quarto-scss-export-brand-accent)”</p>
 </div></div></div>
 </div>
@@ -804,13 +804,13 @@
 <section id="width" class="slide level2">
 <h2>Width</h2>
 <p>We can manually override the width.</p>
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-brands fa-python" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>No width specified - defaults to 80% of container</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb41-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
 <span id="cb41-2"><a href="" aria-label="2"></a>No width specified - defaults to 80% of container</span>
 <span id="cb41-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="value-box bg-blue" style="width:30%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:30%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-brands fa-python" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Width of 30% specified.</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb42-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42" width="30%"}</span>
@@ -822,14 +822,14 @@
 <p>And we can manually override the height.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-brands fa-python" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Example with no height specified - it will fit the contents</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb43-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
 <span id="cb43-2"><a href="" aria-label="2"></a>Example with no height specified - it will fit the contents</span>
 <span id="cb43-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; height:400px; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-height:400px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-brands fa-python" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Example with height of 400 pixels (400px) specified</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb44-1"><a href="" aria-label="1"></a>::: {.value-box height="400px" icon="fa-brands fa-python" icon-position="left" color="bg-blue" value="42"}</span>
@@ -842,14 +842,14 @@
 <p>And we can also add vertical alignment options.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; height:400px; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-height:400px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left fa-brands fa-python" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>No valign specified</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb45-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px"}</span>
 <span id="cb45-2"><a href="" aria-label="2"></a>No valign specified</span>
 <span id="cb45-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; height:400px; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:flex-start;"><i class="icon fa-brands fa-python" style="font-size:3em; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-height:400px; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:flex-start; "><i class="icon vb-bearing-left fa-brands fa-python" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Top alignment specified</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb46-1"><a href="" aria-label="1"></a>::: {.value-box icon="fa-brands fa-python" color="bg-blue" value="42" height="400px" valign="top"}</span>
@@ -862,14 +862,14 @@
 <p>If a box’s content is short (or <code>height</code> is set below the default floor), <code>min-height</code> and <code>padding</code> can be lowered to reclaim space — handy on busy slides.</p>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:3em; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left bi bi-star" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Default min-height (100px) and padding (1.5rem)</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb47-1"><a href="" aria-label="1"></a>::: {.value-box icon="bi-star" value="42"}</span>
 <span id="cb47-2"><a href="" aria-label="2"></a>Default min-height (100px) and padding (1.5rem)</span>
 <span id="cb47-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:60%;">
-<div class="value-box bg-blue" style="width:80%; min-height:40px; padding:0.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><i class="icon bi bi-star" style="font-size:1.5rem; color:white;  margin-left:-0.12em;"></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:40px; --vb-padding:0.5rem; --vb-text-align:left; --vb-justify-content:center; "><i class="icon vb-bearing-left bi bi-star" style="font-size:1.5rem; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Tightened min-height and padding</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb48-1"><a href="" aria-label="1"></a>::: {.value-box min-height="40px" padding="0.5rem" icon="bi-star" icon-size="1.5rem" value="42" }</span>
@@ -882,14 +882,14 @@
 <p>The font for the general text can be tweaked with the font-size parameter</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>Standard</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb49-1"><a href="" aria-label="1"></a>::: {.value-box}</span>
 <span id="cb49-2"><a href="" aria-label="2"></a>Standard</span>
 <span id="cb49-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="font-size:150%; color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="font-size:150%; color:white; ">
 <p>150% Font Size</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb50-1"><a href="" aria-label="1"></a>::: {.value-box font-size="150%"}</span>
@@ -898,14 +898,14 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="font-size:2rem; color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="font-size:2rem; color:white; ">
 <p>REM units</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb51-1"><a href="" aria-label="1"></a>::: {.value-box font-size="2rem"}</span>
 <span id="cb51-2"><a href="" aria-label="2"></a>REM units</span>
 <span id="cb51-3"><a href="" aria-label="3"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="font-size:2em; color:white; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="font-size:2em; color:white; ">
 <p>EM units</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb52-1"><a href="" aria-label="1"></a>::: {.value-box font-size="2em"}</span>
@@ -917,7 +917,7 @@
 <h2>Font Color</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="details" style="color:yellow; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="details" style="color:yellow; ">
 <p>Yellow Font</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
@@ -927,7 +927,7 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:yellow; ">Value</div><div class="details" style="color:yellow; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:yellow; ">Value</div><div class="details" style="color:yellow; ">
 <p>Value font follows icon font by default</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
@@ -937,7 +937,7 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:fuchsia; ">Value</div><div class="details" style="color:yellow; ">
+<div class="value-box bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; "><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:fuchsia; ">Value</div><div class="details" style="color:yellow; ">
 <p>But they can differ</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
@@ -951,7 +951,7 @@
 <p>Font awesome, bootstrap icons, tabler icons, phosphor icons, and material symbols support recoloring</p>
 <div class="columns">
 <div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon bi bi-star" style="font-size:3em; color:red;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon bi bi-star" style="font-size:3em; color:red; "></i><div class="vb-content" style=""><div class="details" style="color:white; ">
 <p>Bootstrap icons</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
@@ -962,7 +962,7 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon fa-brands fa-python" style="font-size:3em; color:fuchsia;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon fa-brands fa-python" style="font-size:3em; color:fuchsia; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Font awesome icons</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
@@ -972,7 +972,7 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><span class="icon material-symbols-outlined" style="font-size:3em; color:lime;  flex-shrink:0;">home</span><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><span class="icon material-symbols-outlined" style="font-size:3em; color:lime; ">home</span><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Material Symbols icons</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
@@ -985,7 +985,7 @@
 <h2>Icon Color (continued)</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon ti ti-star" style="font-size:3em; color:cyan;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon ti ti-star" style="font-size:3em; color:cyan; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Tabler icons</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
@@ -995,7 +995,7 @@
 </div></div>
 <div class="columns">
 <div class="column" style="width:30%;">
-<div class="value-box bg-blue" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;"><i class="icon ph ph-star" style="font-size:3em; color:orange;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-blue" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; "><i class="icon ph ph-star" style="font-size:3em; color:orange; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>Phosphor icons</p>
 </div></div></div>
 </div><div class="column" style="width:70%;">
@@ -1012,7 +1012,7 @@
 .highlight-box { outline: 7px dashed gold; outline-offset: 4px; }
 </style>
 <p>Beyond the parameters this extension defines, an <code>#id</code> and extra <code>.classes</code> pass through onto the rendered box, along with <code>data-*</code>/<code>aria-*</code> attributes and <code>role</code>/<code>tabindex</code>/<code>lang</code>. Anything else is left off rather than renamed to a <code>data-</code> attribute.</p>
-<div id="kpi-example" class="value-box bg-blue highlight-box" style="width:80%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" role="group" aria-label="Sales this quarter" data-id="kpi-example"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div id="kpi-example" class="value-box bg-blue highlight-box" style="--vb-width:80%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; " role="group" aria-label="Sales this quarter" data-id="kpi-example"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-animate) all survive</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb61-1"><a href="" aria-label="1"></a>&lt;style<span class="op">&gt;</span></span>
@@ -1029,13 +1029,13 @@
 </section>
 <section id="growth" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Growth</h2>
-<div class="value-box bg-blue" style="width:30%; min-height:100px; padding:1.5rem; text-align:center;  display:flex; flex-direction:column; justify-content:center;" data-id="autoanimate-demo"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
+<div class="value-box bg-blue" style="--vb-width:30%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:center; --vb-justify-content:center; " data-id="autoanimate-demo"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">42</div><div class="details" style="color:white; ">
 <p>New customers this quarter</p>
 </div></div></div>
 </section>
 <section id="growth-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Growth</h2>
-<div class="value-box bg-green" style="width:90%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:column; justify-content:center;" data-id="autoanimate-demo"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">1,284</div><div class="details" style="color:white; ">
+<div class="value-box bg-green" style="--vb-width:90%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-justify-content:center; " data-id="autoanimate-demo"><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">1,284</div><div class="details" style="color:white; ">
 <p>New customers this quarter — up from 42 last quarter</p>
 </div></div></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode numberSource md number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode markdown hljs"><span id="cb63-1" class="hljs-ln-code"><a href="" aria-label="1"></a><span class="fu">## Growth {auto-animate="true"}</span></span>
@@ -1066,13 +1066,13 @@
 </section>
 <section id="headline" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Headline</h2>
-<div class="value-box bg-purple" style="width:70%; min-height:100px; padding:1.5rem; text-align:center;  display:flex; flex-direction:column; justify-content:center;" data-id="shrink-demo"><div class="vb-content" style=""><div class="value" style="font-size:4rem; color:white; ">128%</div><div class="details" style="color:white; ">
+<div class="value-box bg-purple" style="--vb-width:70%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:center; --vb-justify-content:center; " data-id="shrink-demo"><div class="vb-content" style=""><div class="value" style="font-size:4rem; color:white; ">128%</div><div class="details" style="color:white; ">
 <p>Year-over-year growth</p>
 </div></div></div>
 </section>
 <section id="headline-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Headline</h2>
-<div class="value-box bg-purple" style="width:20%; min-height:40px; padding:0.5rem; text-align:center;  display:flex; flex-direction:column; justify-content:center;" data-id="shrink-demo"><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">128%</div><div class="details" style="color:white; ">
+<div class="value-box bg-purple" style="--vb-width:20%; --vb-min-height:40px; --vb-padding:0.5rem; --vb-text-align:center; --vb-justify-content:center; " data-id="shrink-demo"><div class="vb-content" style=""><div class="value" style="font-size:1.3rem; color:white; ">128%</div><div class="details" style="color:white; ">
 <p>YoY growth</p>
 </div></div></div>
 <p>Only <code>value-font-size</code>, <code>width</code>, <code>padding</code> and <code>min-height</code> changed between those two slides — the same headline stat condenses into a small summary tile, e.g.&nbsp;to make room as supporting detail appears elsewhere on the next slide of a real deck.</p>
@@ -1090,13 +1090,13 @@
 </section>
 <section id="focus" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Focus</h2>
-<div class="value-box bg-amber" style="width:35%; min-height:100px; padding:1.5rem; text-align:left;  display:flex; flex-direction:row; align-items:center; gap:1em;" data-id="movement-demo"><i class="icon fa-solid fa-clock" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-amber" style="--vb-width:35%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; " data-id="movement-demo"><i class="icon fa-solid fa-clock" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
 <p>Days until launch</p>
 </div></div></div>
 </section>
 <section id="focus-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Focus</h2>
-<div class="value-box bg-amber" style="width:35%; min-height:100px; padding:1.5rem; text-align:left; margin-left:60%; display:flex; flex-direction:row; align-items:center; gap:1em;" data-id="movement-demo"><i class="icon fa-solid fa-rocket" style="font-size:3em; color:white;  flex-shrink:0;"></i><div class="vb-content" style=" flex:1;"><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
+<div class="value-box vb-icon-left bg-amber" style="--vb-width:35%; --vb-min-height:100px; --vb-padding:1.5rem; --vb-text-align:left; --vb-align-items:center; margin-left:60%;" data-id="movement-demo"><i class="icon fa-solid fa-rocket" style="font-size:3em; color:white; "></i><div class="vb-content" style=""><div class="value" style="font-size:2.2rem; color:white; ">7</div><div class="details" style="color:white; ">
 <p>Days until launch</p>
 </div></div></div>
 <p>Here only <code>outer-extra-style</code> and <code>icon</code> changed — same size, same colour, same value, just a different <code>margin-left</code> — so the box visibly slides across the slide with nothing else moving.</p>

@@ -82,7 +82,9 @@ end
 
 -- Build a CSS declaration, or nothing at all when the value is empty.
 -- Attributes that default to "" (height, font-size) would otherwise emit
--- "height:;", an invalid declaration that browsers discard silently.
+-- "height:;", an invalid declaration that browsers discard silently. Also
+-- used to build custom-property declarations (e.g. property="--vb-width") —
+-- the property/value split is the same either way.
 local function css_decl(property, value)
   if value == nil or value == "" then
     return ""
@@ -303,7 +305,9 @@ function Div(el)
       index_data = string.format(' data-fragment-index="%s"', escape_attr(index_attr))
     end
 
-    -- Flex layout styles for left/right icon and value positioning
+    -- Escape hatches: raw CSS text a user can inject into each generated
+    -- element's own style attribute, verbatim, alongside whatever this
+    -- filter itself declares there.
     local outer_extra_style   = escape_attr(el.attributes["outer-extra-style"] or "")
     local icon_extra_style    = escape_attr(el.attributes["icon-extra-style"] or "")
     local content_extra_style = escape_attr(el.attributes["content-extra-style"] or "")
@@ -327,79 +331,89 @@ function Div(el)
       warning = "value-box warning: a literal 'data-fragment-index' attribute is ignored to avoid clashing with the one generated from the index attribute\n",
     })
 
-    -- icon-position controls the outer wrapper: icon vs. everything else
+    -- icon-position controls the outer wrapper: icon vs. everything else.
+    -- The actual flex rules (row direction, gap, icon/content sizing) live in
+    -- value-box.css keyed off these classes — nothing here is a CSS value,
+    -- just a switch.
+    local outer_layout_class = ""
+    local icon_row = (icon_pos == "left" or icon_pos == "right")
     if icon_pos == "left" then
-      outer_extra_style   = outer_extra_style .. " display:flex; flex-direction:row; align-items:center; gap:1em;"
-      icon_extra_style    = icon_extra_style .. " flex-shrink:0;"
-      content_extra_style = content_extra_style .. " flex:1;"
+      outer_layout_class = " vb-icon-left"
     elseif icon_pos == "right" then
-      outer_extra_style   = outer_extra_style .. " display:flex; flex-direction:row-reverse; align-items:center; gap:1em;"
-      icon_extra_style    = icon_extra_style .. " flex-shrink:0;"
-      content_extra_style = content_extra_style .. " flex:1;"
+      outer_layout_class = " vb-icon-right"
     end
 
-    -- value-position controls the inner content wrapper: value vs. details, independent of icon-position.
-    -- Kept separate from content_extra_style because a title has to sit above
-    -- this row rather than become a third item in it — see the content wrapper
-    -- below, which moves these styles onto an inner element when both apply.
-    local value_row_style = ""
+    -- value-position controls the inner content wrapper: value vs. details,
+    -- independent of icon-position. Kept separate from the icon-position
+    -- class because a title has to sit above this row rather than become a
+    -- third item in it — see the content wrapper below, which moves this
+    -- class onto an inner element when both apply.
+    local value_pos_class = ""
     if value_pos == "left" then
-      value_row_style     = " display:flex; flex-direction:row; align-items:center; gap:0.75em;"
-      value_extra_style   = value_extra_style .. " flex-shrink:0;"
-      details_extra_style = details_extra_style .. " flex:1;"
+      value_pos_class = " vb-value-left"
     elseif value_pos == "right" then
-      value_row_style     = " display:flex; flex-direction:row-reverse; align-items:center; gap:0.75em;"
-      value_extra_style   = value_extra_style .. " flex-shrink:0;"
-      details_extra_style = details_extra_style .. " flex:1;"
+      value_pos_class = " vb-value-right"
     end
 
     -- Compensate for icon-font glyphs' built-in optical bearing so a stacked
-    -- icon visually lines up with the left/right edge of the value/details text.
+    -- icon visually lines up with the left/right edge of the value/details
+    -- text. Only meaningful for font-glyph icons (fa/bi/tabler/phosphor/
+    -- material) stacked top/bottom — SVG/PNG icons have no such bearing, and
+    -- left/right icon-position already aligns on the cross axis instead.
+    local icon_bearing_class = ""
     if (icon_pos == "top" or icon_pos == "bottom") and (icon_type == "fa" or icon_type == "bi" or icon_type == "tabler" or icon_type == "phosphor" or material_variants[icon_type]) then
-      local bearing = "0.12em"
       if align == "left" then
-        icon_extra_style = icon_extra_style .. string.format(" margin-left:-%s;", bearing)
+        icon_bearing_class = " vb-bearing-left"
       elseif align == "right" then
-        icon_extra_style = icon_extra_style .. string.format(" margin-right:-%s;", bearing)
+        icon_bearing_class = " vb-bearing-right"
       end
     end
 
-    -- Vertical alignment — requires flex on the outer wrapper
+    -- Vertical alignment. When the icon has already put the wrapper into a
+    -- row (icon-position left/right), valign controls the cross-axis
+    -- align-items; otherwise it controls the column's main-axis
+    -- justify-content. Either way this is just the one custom property the
+    -- corresponding CSS rule reads — see value-box.css.
+    local outer_layout_style = ""
     if valign ~= "" then
       local valign_map = { top = "flex-start", middle = "center", bottom = "flex-end" }
       local align_value = valign_map[valign] or valign  -- fall back to raw value if not a shorthand
-      if outer_extra_style:find("display:flex", 1, true) then
-        -- Already flex (left/right icon position) — just override align-items
-        outer_extra_style = outer_extra_style:gsub("align%-items:[^;]+;", string.format("align-items:%s;", align_value))
+      if icon_row then
+        outer_layout_style = outer_layout_style .. css_decl("--vb-align-items", align_value)
       else
-        -- Add flex column layout so justify-content controls vertical alignment
-        outer_extra_style = outer_extra_style .. string.format(" display:flex; flex-direction:column; justify-content:%s;", align_value)
+        outer_layout_style = outer_layout_style .. css_decl("--vb-justify-content", align_value)
       end
     end
 
-    -- Build the outer wrapper
+    -- Build the outer wrapper's custom properties. The corresponding values
+    -- (and their defaults) live entirely here in Lua, not duplicated as CSS
+    -- fallbacks — an unset custom property simply leaves the property
+    -- undeclared, which is what css_decl already guarantees for a blank
+    -- value (see the "explicitly blanked attributes" test fixture).
     local base_style =
-      css_decl("width", width) ..
-      css_decl("height", height) ..
-      css_decl("min-height", min_height) ..
-      css_decl("padding", padding) ..
-      css_decl("text-align", align) ..
-      (color_is_value and css_decl("background-color", color) or "")
+      css_decl("--vb-width", width) ..
+      css_decl("--vb-height", height) ..
+      css_decl("--vb-min-height", min_height) ..
+      css_decl("--vb-padding", padding) ..
+      css_decl("--vb-text-align", align) ..
+      (color_is_value and css_decl("--vb-bg", color) or "") ..
+      outer_layout_style
+
+    -- Classes: value-box's own name, then this box's layout switches, then
+    -- colour/fragment/user classes — kept in this order so the generated
+    -- class list reads structural-first, same as the style properties above.
+    local outer_class = "value-box" .. outer_layout_class .. " " .. color_class .. fragment_class .. extra_classes
 
     local html_open
     if href ~= "" then
-      -- The valign block above sets display:flex unless valign was explicitly
-      -- blanked. Only fall back to display:block when it did not, so the two
-      -- never both appear on the same element.
-      local link_display = outer_extra_style:find("display:flex", 1, true) and "" or "display:block; "
       html_open = string.format(
-        '<a%s href="%s" class="value-box %s%s%s" style="%s%stext-decoration:none; cursor:pointer;%s"%s%s>',
-        id_attr, href, color_class, fragment_class, extra_classes, base_style, link_display, outer_extra_style, index_data, passthrough_attrs
+        '<a%s href="%s" class="%s" style="%s%s"%s%s>',
+        id_attr, href, outer_class, base_style, outer_extra_style, index_data, passthrough_attrs
       )
     else
       html_open = string.format(
-        '<div%s class="value-box %s%s%s" style="%s%s"%s%s>',
-        id_attr, color_class, fragment_class, extra_classes, base_style, outer_extra_style, index_data, passthrough_attrs
+        '<div%s class="%s" style="%s%s"%s%s>',
+        id_attr, outer_class, base_style, outer_extra_style, index_data, passthrough_attrs
       )
     end
 
@@ -416,7 +430,7 @@ function Div(el)
     if icon ~= "" then
       if icon_type == "fa" then
         include_icon_stylesheet(FONT_AWESOME_CSS)
-        icon_html = string.format('<i class="icon %s" style="%s"></i>', icon_attr, icon_font_style)
+        icon_html = string.format('<i class="icon%s %s" style="%s"></i>', icon_bearing_class, icon_attr, icon_font_style)
 
       elseif icon_type == "svg" then
         local svg_file = io.open(icon, "r")
@@ -443,31 +457,31 @@ function Div(el)
         else
           io.stderr:write(string.format("value-box warning: PNG file not found '%s', falling back to Bootstrap Icons\n", icon))
           include_icon_stylesheet(BOOTSTRAP_ICONS_CSS)
-          icon_html = string.format('<i class="icon bi %s" style="%s"></i>', icon_attr, icon_font_style)
+          icon_html = string.format('<i class="icon%s bi %s" style="%s"></i>', icon_bearing_class, icon_attr, icon_font_style)
         end
 
       elseif material_variants[icon_type] then
         local variant = material_variants[icon_type]
         include_icon_stylesheet(string.format(MATERIAL_SYMBOLS_CSS_FMT, variant.family))
         icon_html = string.format(
-          '<span class="icon %s" style="%s">%s</span>',
-          variant.class, icon_font_style, icon_attr
+          '<span class="icon%s %s" style="%s">%s</span>',
+          icon_bearing_class, variant.class, icon_font_style, icon_attr
         )
 
       elseif icon_type == "tabler" then
         include_icon_stylesheet(TABLER_ICONS_CSS)
-        icon_html = string.format('<i class="icon ti %s" style="%s"></i>', icon_attr, icon_font_style)
+        icon_html = string.format('<i class="icon%s ti %s" style="%s"></i>', icon_bearing_class, icon_attr, icon_font_style)
 
       elseif icon_type == "phosphor" then
         local weight_token = icon:match("^(%S+)")
         local weight_dir = phosphor_weight_dirs[weight_token] or "regular"
         include_icon_stylesheet(string.format(PHOSPHOR_ICONS_CSS_FMT, weight_dir))
-        icon_html = string.format('<i class="icon %s" style="%s"></i>', icon_attr, icon_font_style)
+        icon_html = string.format('<i class="icon%s %s" style="%s"></i>', icon_bearing_class, icon_attr, icon_font_style)
 
       else
         -- Bootstrap Icons (default)
         include_icon_stylesheet(BOOTSTRAP_ICONS_CSS)
-        icon_html = string.format('<i class="icon bi %s" style="%s"></i>', icon_attr, icon_font_style)
+        icon_html = string.format('<i class="icon%s bi %s" style="%s"></i>', icon_bearing_class, icon_attr, icon_font_style)
       end
     end
 
@@ -485,6 +499,10 @@ function Div(el)
     -- alongside the value in a row so the two sit side by side wherever
     -- value_html ends up placed (top/bottom/left/right value-position all
     -- inject value_html the same way, so wrapping it here covers every case).
+    -- The row's own flex rules are static and live in value-box.css under
+    -- .vb-value-row; when value-position is left/right, that same rule also
+    -- protects the row from shrinking (see .vb-value-left/.vb-value-right
+    -- .vb-value-row there).
     if delta ~= "" then
       local arrow_html = ""
       if delta_arrow ~= "" then
@@ -495,15 +513,9 @@ function Div(el)
         css_decl("font-size", delta_font_size), css_decl("color", delta_color),
         delta_extra_style, arrow_html, escape_attr(delta)
       )
-      -- When value-position is left/right, this wrapper — not the .value div
-      -- inside it — is the actual flex item in .vb-row/.vb-content, so it
-      -- needs the same flex-shrink:0 that left/right already gives .value on
-      -- its own (see value_extra_style above); otherwise the value+delta
-      -- pair can be squeezed by .details under space pressure.
-      local value_row_shrink = (value_row_style ~= "") and "flex-shrink:0; min-width:0; " or ""
       value_html = string.format(
-        '<div class="vb-value-row" style="display:flex; align-items:baseline; gap:0.5em; flex-wrap:wrap; %s%s">%s%s</div>',
-        value_row_shrink, value_row_extra_style, value_html, delta_html
+        '<div class="vb-value-row" style="%s">%s%s</div>',
+        value_row_extra_style, value_html, delta_html
       )
     end
 
@@ -524,20 +536,20 @@ function Div(el)
 
     -- A left/right value-position turns the value and details into a flex row.
     -- A title has to sit above that row rather than become a third item in it,
-    -- so when both are in play the row styles move to an inner wrapper and
+    -- so when both are in play the row class moves to an inner wrapper and
     -- .vb-content becomes the column that stacks title above row. With no
     -- title, or no row, the markup is unchanged.
-    local use_row_wrapper = (title ~= "" and value_row_style ~= "")
+    local use_row_wrapper = (title ~= "" and value_pos_class ~= "")
 
     -- Open the content wrapper (holds title, value and details, positioned
     -- independently of the icon)
-    html_open = html_open .. string.format('<div class="vb-content" style="%s%s">',
-      content_extra_style, use_row_wrapper and "" or value_row_style)
+    html_open = html_open .. string.format('<div class="vb-content%s" style="%s">',
+      use_row_wrapper and "" or value_pos_class, content_extra_style)
 
     html_open = html_open .. title_html
 
     if use_row_wrapper then
-      html_open = html_open .. string.format('<div class="vb-row" style="%s">', value_row_style)
+      html_open = html_open .. string.format('<div class="vb-row%s">', value_pos_class)
     end
 
     -- For bottom placement, defer value injection; otherwise inject it now
@@ -581,33 +593,26 @@ function Div(el)
     -- height on every box.
     --
     -- No columns attribute set: a single flex row, one column per child, no
-    -- wrapping. Pandoc filters traverse bottom-up, so by the time this runs,
-    -- any nested value-box divs have already been expanded into several
-    -- RawBlock("html") elements each (open tag/content/close tag) — #el.content
-    -- is therefore not a reliable box count and can't be used to default a
-    -- grid column count from the number of children. Flexbox sidesteps that
-    -- entirely: equal-width columns fall out of "one row, no wrap, every
-    -- child flexes equally" without needing to count anything.
-    --
-    -- columns="N" set: CSS Grid instead, so extra children beyond N wrap onto
-    -- further rows automatically (Grid's default auto-flow), with
-    -- grid-auto-rows:1fr keeping wrapped rows equal height too.
+    -- wrapping — the default in value-box.css, so nothing further to do here.
+    -- columns="N" set: switches to CSS Grid via the vb-row-grid class, so
+    -- extra children beyond N wrap onto further rows automatically (Grid's
+    -- default auto-flow), with grid-auto-rows:1fr (also in the stylesheet)
+    -- keeping wrapped rows equal height too. The column count itself is the
+    -- one part that varies per box, so it travels as a custom property
+    -- rather than being baked into the class.
     local columns_attr = el.attributes["columns"]
-    local layout_style
+    local row_layout_class = ""
+    local columns_style = ""
     if columns_attr and columns_attr ~= "" then
       local columns_n = tonumber(columns_attr)
       if columns_n then
-        layout_style = string.format(
-          "display:grid; grid-template-columns:repeat(%d, 1fr); grid-auto-rows:1fr; ",
-          columns_n)
+        row_layout_class = " vb-row-grid"
+        columns_style = css_decl("--vb-row-columns", tostring(columns_n))
       else
         io.stderr:write(string.format(
           "value-box warning: unrecognised columns value '%s' — expected a number; falling back to a single row\n",
           columns_attr))
-        layout_style = "display:flex; flex-wrap:nowrap; "
       end
-    else
-      layout_style = "display:flex; flex-wrap:nowrap; "
     end
 
     local gap = escape_attr(el.attributes["gap"] or "1.5rem")
@@ -616,8 +621,8 @@ function Div(el)
     local id_attr, extra_classes, passthrough_attrs = build_wrapper_attrs(el, "value-box-row", "extra-style", nil)
 
     local html_open = string.format(
-      '<div%s class="value-box-row%s" style="%s%s%s"%s>',
-      id_attr, extra_classes, layout_style, css_decl("gap", gap), row_extra_style, passthrough_attrs
+      '<div%s class="value-box-row%s%s" style="%s%s%s"%s>',
+      id_attr, row_layout_class, extra_classes, columns_style, css_decl("--vb-row-gap", gap), row_extra_style, passthrough_attrs
     )
 
     local result = pandoc.List({pandoc.RawBlock("html", html_open)})
