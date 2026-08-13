@@ -1473,6 +1473,93 @@ Tada!
 ::::
 
 
+## All fragment types
+
+::: {style='font-size: 65%;'}
+Every fragment style shipped with this version of Reveal.js, one per box — advance through the slide to see each one in turn. All of them fade in on entry; the class name controls what (if anything) happens after that. See the [Reveal.js docs](https://quarto.org/docs/presentations/revealjs/advanced.html#fragment-classes) for the full reference.
+:::
+
+::: {.value-box-row columns="5"}
+
+::: {.value-box fragment="fade-in" value="fade-in" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in, stays visible
+:::
+
+::: {.value-box fragment="fade-out" value="fade-out" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Starts visible, fades out
+:::
+
+::: {.value-box fragment="fade-up" value="fade-up" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in while sliding up
+:::
+
+::: {.value-box fragment="fade-down" value="fade-down" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in while sliding down
+:::
+
+::: {.value-box fragment="fade-left" value="fade-left" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in while sliding left
+:::
+
+::: {.value-box fragment="fade-right" value="fade-right" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in while sliding right
+:::
+
+::: {.value-box fragment="fade-in-then-out" value="fade-in-then-out" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in, fades out next step
+:::
+
+::: {.value-box fragment="fade-in-then-semi-out" value="fade-in-then-semi-out" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in, dims next step (this extension's default)
+:::
+
+::: {.value-box fragment="semi-fade-out" value="semi-fade-out" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Starts visible, dims out
+:::
+
+::: {.value-box fragment="grow" value="grow" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in while growing larger
+:::
+
+::: {.value-box fragment="shrink" value="shrink" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in while shrinking
+:::
+
+::: {.value-box fragment="zoom-in" value="zoom-in" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in while zooming from small
+:::
+
+::: {.value-box fragment="strike" value="strike" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Fades in with a strikethrough
+:::
+
+::: {.value-box fragment="highlight-red" value="highlight-red" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Text turns red on entry
+:::
+
+::: {.value-box fragment="highlight-green" value="highlight-green" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Text turns green on entry
+:::
+
+::: {.value-box fragment="highlight-blue" value="highlight-blue" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Text turns blue on entry
+:::
+
+::: {.value-box fragment="highlight-current-red" value="highlight-current-red" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Red only while current
+:::
+
+::: {.value-box fragment="highlight-current-green" value="highlight-current-green" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Green only while current
+:::
+
+::: {.value-box fragment="highlight-current-blue" value="highlight-current-blue" min-height="70px" padding="0.6rem" value-font-size="1.3rem"}
+Blue only while current
+:::
+
+:::
+
+
 
 
 
