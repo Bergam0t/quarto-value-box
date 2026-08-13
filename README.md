@@ -213,17 +213,33 @@ $brand-neutral:   #4a4f57;
 
 ### Brand colours (`_brand.yml`)
 
-Quarto compiles a project's [`_brand.yml`](https://quarto.org/docs/authoring/brand.html) palette into CSS custom properties, so `color` (and `icon-color`/`font-color`/`value-color`/`title-color`/`delta-color`) can reference it with `var(...)` directly — no SCSS file or `.bg-*` class needed. What's available depends on the output format:
+Quarto compiles a project's [`_brand.yml`](https://quarto.org/docs/authoring/brand.html) palette into CSS custom properties, so `color` (and `icon-color`/`font-color`/`value-color`/`title-color`/`delta-color`) can reference it with `var(...)` directly — no SCSS file or `.bg-*` class needed.
 
-- **Bootstrap-based formats** (`html`, `dashboard`): the whole palette is exposed at `:root` as `--bs-primary`, `--bs-secondary`, `--bs-success`, `--bs-danger`, `--bs-warning`, `--bs-info`, `--bs-light`, `--bs-dark`.
+Every format exports every resolved theme/brand value as a `--quarto-scss-export-<name>` custom property, including one per palette entry under a `brand-` prefix — so a palette key maps onto a variable of the same name, in every format, without needing to know format-internal names like Bootstrap's `--bs-*` or reveal.js's own `--r-link-color`:
 
-  ```md
-  ::: {.value-box color="var(--bs-primary)" value="42"}
-  Picks up the brand's primary colour automatically
-  :::
-  ```
+```yaml
+# _brand.yml
+color:
+  palette:
+    accent: "#3d6a9e"
+  primary: accent
+```
 
-- **`revealjs`**: only `color.primary` (→ `--r-link-color`) and `color.background`/`color.foreground` (→ `--r-background-color`/`--r-main-color`, `--r-heading-color`) come through as variables — other palette entries aren't exposed by the compiled theme, so they'd need the manual `<style>` bridge shown above if you want to key off them.
+```md
+::: {.value-box color="var(--quarto-scss-export-brand-accent)" value="42"}
+Picks up the brand's "accent" palette colour by name, in every format
+:::
+```
+
+The semantic roles (`primary`, `secondary`, `success`, ...) are exported the same way, as `--quarto-scss-export-primary` etc. Bootstrap-based formats (`html`, `dashboard`) additionally expose those same roles under Bootstrap's own names (`--bs-primary`, `--bs-secondary`, ...), if you'd rather use those instead.
+
+To find the exact variable name for any brand or theme value without reading Quarto's SCSS source, render once and grep the compiled theme CSS for the `--quarto-scss-export-` prefix:
+
+```sh
+grep -o -- "--quarto-scss-export-[a-zA-Z0-9_-]*:[^;]*" path/to/theme.css
+```
+
+— for `revealjs` that file is under `<doc>_files/libs/revealjs/dist/theme/quarto-*.css`; for `html`/`dashboard` it's `<doc>_files/libs/bootstrap/bootstrap-*.min.css`.
 
 `icon-color`, `font-color`, `value-color`, `title-color` and `delta-color` already accept `var(...)` (or any CSS colour) regardless of this filter's version — unlike `color`, they were never concatenated into a `class` attribute, so they've always rendered straight into an inline `style`.
 

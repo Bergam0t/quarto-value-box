@@ -1008,7 +1008,7 @@ color="var(--demo-brand-color)"
 ## Box colours - brand.yml
 
 ::: {style='font-size: 75%;'}
-Quarto compiles a project's `_brand.yml` palette into CSS custom properties automatically, so `color` can reference it with `var(...)` too — no manual `<style>` block needed. This deck ships its own `_brand.yml`, setting `color.primary` to `#3d6a9e` (the same blue as `bg-blue` and the footer link, kept consistent on purpose) — on `revealjs` that becomes `--r-link-color`:
+Quarto compiles a project's `_brand.yml` palette into CSS custom properties automatically, so `color` can reference it with `var(...)` too — no manual `<style>` block needed. This deck ships its own `_brand.yml`:
 :::
 
 ```yaml
@@ -1021,20 +1021,35 @@ color:
 
 ::: {.value-box-row columns="2"}
 
-::: {.value-box color="var(--r-link-color)"}
-color="var(--r-link-color)"
+::: {.value-box color="var(--quarto-scss-export-brand-accent)"}
+color="var(--quarto-scss-export-brand-accent)"
 :::
 
-::: {.value-box color="bg-grey" icon="bi-star" icon-color="var(--r-link-color)"}
-icon-color="var(--r-link-color)"
+::: {.value-box color="bg-grey" icon="bi-star" icon-color="var(--quarto-scss-export-brand-accent)"}
+icon-color="var(--quarto-scss-export-brand-accent)"
 :::
 
 :::
 
 ::: {style='font-size: 75%;'}
-`icon-color`/`font-color`/`value-color`/`title-color`/`delta-color` accept `var(...)` the same way — they always render into an inline `style`, so they were never affected by the class/value ambiguity `color` had.
+`--quarto-scss-export-brand-accent` names the `accent` palette entry directly — Quarto exports every resolved theme/brand value this way, in every format, so there's no need to know format-internal names like reveal.js's `--r-link-color` or Bootstrap's `--bs-primary`. `icon-color`/`font-color`/`value-color`/`title-color`/`delta-color` accept `var(...)` the same way — they always render into an inline `style`, so they were never affected by the class/value ambiguity `color` had.
+:::
 
-On Bootstrap-based formats (`html`, `dashboard`) the whole brand palette is exposed the same way, not just the primary colour:
+## Box colours - finding variable names
+
+::: {style='font-size: 80%;'}
+Render once, then grep the compiled theme CSS for the `--quarto-scss-export-` prefix to see every brand/theme value Quarto resolved, under its own name — no need to read Quarto's SCSS source:
+:::
+
+```sh
+grep -o -- "--quarto-scss-export-[a-zA-Z0-9_-]*:[^;]*" path/to/theme.css
+```
+
+::: {style='font-size: 80%;'}
+- `revealjs`: `<doc>_files/libs/revealjs/dist/theme/quarto-*.css`
+- `html`/`dashboard`: `<doc>_files/libs/bootstrap/bootstrap-*.min.css`
+
+The semantic roles (`primary`, `secondary`, `success`, ...) are exported the same way, as `--quarto-scss-export-primary` etc. Bootstrap-based formats additionally expose those same roles under Bootstrap's own names too (`--bs-primary`, `--bs-secondary`, ...), if you'd rather use those instead:
 :::
 
 ```md
