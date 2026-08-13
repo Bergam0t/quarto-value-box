@@ -971,10 +971,6 @@ bg-grey
 
 `color` also accepts a raw CSS colour value directly — no new class needed — for anything starting with `#`, `rgb(`/`rgba(`, `hsl(`/`hsla(`, or `var(`.
 
-<style>
-:root { --demo-brand-color: #6f42c1; }
-</style>
-
 ::: {.value-box-row columns="3"}
 
 ::: {.value-box color="#c8102e" height="100px"}
@@ -998,14 +994,38 @@ color="hsla(13 74.5% 52.4% / 0.5)"
 :::
 
 
+<style>
+:root { --demo-brand-color: #2BAC9A; }
+</style>
+
+:::
+
+<hr>
+<br>
+
+:::: {.columns}
+
+::: {.column width='50%'}
+```css
+<style>
+:root { --demo-brand-color: #2BAC9A; }
+</style>
+```
+:::
+
+::: {.column width='50%'}
+
 ::: {.value-box color="var(--demo-brand-color)" height="100px"}
 color="var(--demo-brand-color)"
 :::
-
-
 :::
 
-## Box colours - brand.yml
+::::
+
+
+
+
+## Box colours - _brand.yml
 
 ::: {style='font-size: 75%;'}
 Quarto compiles a project's `_brand.yml` palette into CSS custom properties automatically, so `color` can reference it with `var(...)` too — no manual `<style>` block needed. This deck ships its own `_brand.yml`:
@@ -1015,7 +1035,7 @@ Quarto compiles a project's `_brand.yml` palette into CSS custom properties auto
 # _brand.yml
 color:
   palette:
-    accent: "#3d6a9e"
+    accent: "#6F3D9E"
   primary: accent
 ```
 
@@ -1025,14 +1045,16 @@ color:
 color="var(--quarto-scss-export-brand-accent)"
 :::
 
-::: {.value-box color="bg-grey" icon="bi-star" icon-color="var(--quarto-scss-export-brand-accent)"}
+::: {.value-box color="bg-amber" icon="bi-star" icon-color="var(--quarto-scss-export-brand-accent)" icon-position="left" icon-size="2em"}
 icon-color="var(--quarto-scss-export-brand-accent)"
 :::
 
 :::
 
 ::: {style='font-size: 75%;'}
-`--quarto-scss-export-brand-accent` names the `accent` palette entry directly — Quarto exports every resolved theme/brand value this way, in every format, so there's no need to know format-internal names like reveal.js's `--r-link-color` or Bootstrap's `--bs-primary`. `icon-color`/`font-color`/`value-color`/`title-color`/`delta-color` accept `var(...)` the same way — they always render into an inline `style`, so they were never affected by the class/value ambiguity `color` had.
+`--quarto-scss-export-brand-accent` names the `accent` palette entry directly — Quarto exports every resolved theme/brand value this way, in every format, so there's no need to know format-internal names like reveal.js's `--r-link-color` or Bootstrap's `--bs-primary`.
+
+`icon-color`/`font-color`/`value-color`/`title-color`/`delta-color` accept `var(...)` the same way.
 :::
 
 ## Box colours - finding variable names
