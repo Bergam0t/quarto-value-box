@@ -20,6 +20,31 @@ a.value-box {
     cursor: pointer;
 }
 
+/* Restated at doubled-class specificity (a.value-box.value-box beats a
+   plain a.value-box) because a host page's own anchor styling can outrank
+   the single-class rule above. Quarto's Reveal.js theme is a concrete
+   case: it ships `.reveal a { color: ...; background-color: rgba(0,0,0,0);
+   ... }`, a class+tag selector that's more specific than ours and loads
+   after value-box.css, so without this a linked (href) box on a revealjs
+   slide silently lost its background and text colour back to the theme's
+   plain-link defaults. Positioned before the .bg-* classes below, at the
+   same doubled specificity, so a named colour still wins the tie the same
+   way it already does for a plain (non-linked) box.
+*/
+a.value-box.value-box {
+    color: white;
+    background-color: var(--vb-bg);
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+/* Only linked boxes hint at interactivity — a static box has no reason to
+   move under the pointer. */
+a.value-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
 .value-box .icon {
     font-size: 4.5rem;
     line-height: 1;
@@ -156,15 +181,19 @@ a.value-box {
     margin-bottom: 0;
 }
 
-.bg-blue    { background-color: #3d6a9e; color: white; }
-.bg-navy    { background-color: #2d4a6b; color: white; }
-.bg-teal    { background-color: #2e7873; color: white; }
-.bg-green   { background-color: #3d7a52; color: white; }
-.bg-olive   { background-color: #5c6e3f; color: white; }
-.bg-amber   { background-color: #8a6523; color: white; }
-.bg-orange  { background-color: #8f4e2e; color: white; }
-.bg-red     { background-color: #8a3535; color: white; }
-.bg-pink    { background-color: #7d3d5e; color: white; }
-.bg-purple  { background-color: #533d7a; color: white; }
-.bg-slate   { background-color: #3d4f63; color: white; }
-.bg-grey    { background-color: #4a4f57; color: white; }
+/* Each also has an a.value-box.<class> variant at the same doubled
+   specificity as a.value-box.value-box above, for the same reason: on a
+   linked box, a plain single-class .bg-* rule loses to a host theme's
+   `<container> a`-style anchor reset (e.g. Reveal.js's `.reveal a`). */
+.bg-blue,   a.value-box.bg-blue    { background-color: #3d6a9e; color: white; }
+.bg-navy,   a.value-box.bg-navy    { background-color: #2d4a6b; color: white; }
+.bg-teal,   a.value-box.bg-teal    { background-color: #2e7873; color: white; }
+.bg-green,  a.value-box.bg-green   { background-color: #3d7a52; color: white; }
+.bg-olive,  a.value-box.bg-olive   { background-color: #5c6e3f; color: white; }
+.bg-amber,  a.value-box.bg-amber   { background-color: #8a6523; color: white; }
+.bg-orange, a.value-box.bg-orange  { background-color: #8f4e2e; color: white; }
+.bg-red,    a.value-box.bg-red     { background-color: #8a3535; color: white; }
+.bg-pink,   a.value-box.bg-pink    { background-color: #7d3d5e; color: white; }
+.bg-purple, a.value-box.bg-purple  { background-color: #533d7a; color: white; }
+.bg-slate,  a.value-box.bg-slate   { background-color: #3d4f63; color: white; }
+.bg-grey,   a.value-box.bg-grey    { background-color: #4a4f57; color: white; }

@@ -216,6 +216,30 @@ function Div(el)
     local align     = escape_attr(el.attributes["align"] or "left")
     local valign = escape_attr(el.attributes["valign"] or "middle")
     local href      = escape_attr(el.attributes["href"] or "")
+    -- Only meaningful alongside href — a target on a plain div has nothing to
+    -- navigate. target="_blank" also gets rel="noopener noreferrer" added
+    -- automatically: an opener-less new tab is the whole point of _blank, and
+    -- leaving window.opener reachable is a known phishing vector (reverse
+    -- tabnabbing) that every other target value doesn't share.
+    --
+    -- Also sets data-preview-link="false" whenever a target is given.
+    -- Reveal.js's previewLinks option (common in slide decks) hijacks the
+    -- click on *every* http(s) anchor and opens the href in an in-slide
+    -- iframe overlay instead — regardless of the anchor's own target
+    -- attribute, so target="_blank" alone silently does nothing under
+    -- previewLinks:true, and the overlay comes up blank for any site that
+    -- blocks framing (e.g. YouTube). data-preview-link="false" is the one
+    -- attribute reveal.js itself checks to exclude an anchor from that
+    -- hijack, so setting target is treated as an explicit request for real
+    -- link semantics.
+    local target    = escape_attr(el.attributes["target"] or "")
+    local target_attr = ""
+    if href ~= "" and target ~= "" then
+      target_attr = string.format(' target="%s" data-preview-link="false"', target)
+      if target == "_blank" then
+        target_attr = target_attr .. ' rel="noopener noreferrer"'
+      end
+    end
     local icon_pos  = el.attributes["icon-position"] or "top" -- "top" | "bottom" | "left" | "right"
     local value_pos = el.attributes["value-position"] or "top" -- "top" | "bottom" | "left" | "right"
     local font_size = escape_attr(el.attributes["font-size"] or "")
@@ -407,8 +431,8 @@ function Div(el)
     local html_open
     if href ~= "" then
       html_open = string.format(
-        '<a%s href="%s" class="%s" style="%s%s"%s%s>',
-        id_attr, href, outer_class, base_style, outer_extra_style, index_data, passthrough_attrs
+        '<a%s href="%s"%s class="%s" style="%s%s"%s%s>',
+        id_attr, href, target_attr, outer_class, base_style, outer_extra_style, index_data, passthrough_attrs
       )
     else
       html_open = string.format(

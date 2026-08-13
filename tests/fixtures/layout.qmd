@@ -65,6 +65,10 @@ Font and colour options
 Wrapped in a link
 :::
 
+::: {.value-box href="https://example.com" target="_blank" value="11"}
+Wrapped in a link, opened in a new tab
+:::
+
 ::: {.value-box fragment="true" index="2" value="12"}
 Fragment, second
 :::

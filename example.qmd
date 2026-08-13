@@ -198,6 +198,37 @@ Lower is better here, so a fall is shown in green
 ::::
 
 
+## Linked boxes
+
+Set `href` to wrap the whole box in a link — it gets a subtle hover lift/shadow (static boxes don't wobble). Add `target="_blank"` to open it in a new tab; that automatically adds `rel="noopener noreferrer"` too.
+
+Hover over the box below to see it lift:
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+::: {.value-box title="Documentation" value="README" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" icon="fa-solid fa-book" color="bg-slate" align="center"}
+Opens in a new tab
+:::
+
+:::
+
+::: {.column width='60%'}
+
+```md
+::: {.value-box title="Documentation" value="README"
+  href="https://github.com/Bergam0t/quarto-value-box?tab=readme-ov-file"
+  target="_blank" icon="bi-box-arrow-up-right" color="bg-slate"}
+Opens in a new tab
+:::
+```
+
+:::
+
+::::
+
+
 ## Row layout
 
 ::: {style='font-size: 75%;'}
@@ -1508,13 +1539,13 @@ id, an extra class, ARIA attributes and a data-id (useful for revealjs auto-anim
 
 `data-id` is what actually drives [Reveal.js auto-animate](https://quarto.org/docs/presentations/revealjs/advanced.html#auto-animate): give two *consecutive* slides `auto-animate="true"` in the heading, give a value box the same `data-id` on both, and Reveal.js treats it as the same element and smoothly morphs its position, size and colour between them as you advance. The next two slides are that pair — present the deck (not the static preview pane) to see it animate.
 
-## Growth {auto-animate="true"}
+## Auto-animate: Growth {auto-animate="true"}
 
 ::: {.value-box data-id="autoanimate-demo" value="42" width="30%" color="bg-blue" align="center"}
 New customers this quarter
 :::
 
-## Growth {auto-animate="true"}
+## Auto-animate: Growth {auto-animate="true"}
 
 ::: {.value-box data-id="autoanimate-demo" value="1,284" width="90%" color="bg-green" align="left"}
 New customers this quarter — up from 42 last quarter
@@ -1522,13 +1553,13 @@ New customers this quarter — up from 42 last quarter
 
 
 ```md
-## Growth {auto-animate="true"}
+## Auto-animate: Growth {auto-animate="true"}
 
 ::: {.value-box data-id="autoanimate-demo" value="42" width="30%" color="bg-blue" align="center"}
 New customers this quarter
 :::
 
-## Growth {auto-animate="true"}
+## Auto-animate: Growth {auto-animate="true"}
 
 ::: {.value-box data-id="autoanimate-demo" value="1,284" width="90%" color="bg-green" align="left"}
 New customers this quarter — up from 42 last quarter
@@ -1552,13 +1583,13 @@ The next two pairs isolate shrink and movement on their own, so it's clear which
 
 :::
 
-## Headline {auto-animate="true"}
+## Auto-animate: Headline {auto-animate="true"}
 
 ::: {.value-box data-id="shrink-demo" value="128%" value-font-size="4rem" width="70%" color="bg-purple" align="center"}
 Year-over-year growth
 :::
 
-## Headline {auto-animate="true"}
+## Auto-animate: Headline {auto-animate="true"}
 
 ::: {.value-box data-id="shrink-demo" value="128%" value-font-size="1.3rem" width="20%" padding="0.5rem" min-height="40px" color="bg-purple" align="center"}
 YoY growth
@@ -1567,26 +1598,26 @@ YoY growth
 Only `value-font-size`, `width`, `padding` and `min-height` changed between those two slides — the same headline stat condenses into a small summary tile, e.g. to make room as supporting detail appears elsewhere on the next slide of a real deck.
 
 ```md
-## Headline {auto-animate="true"}
+## Auto-animate: Headline {auto-animate="true"}
 
 ::: {.value-box data-id="shrink-demo" value="128%" value-font-size="4rem" width="70%" color="bg-purple" align="center"}
 Year-over-year growth
 :::
 
-## Headline {auto-animate="true"}
+## Auto-animate: Headline {auto-animate="true"}
 
 ::: {.value-box data-id="shrink-demo" value="128%" value-font-size="1.3rem" width="20%" padding="0.5rem" min-height="40px" color="bg-purple" align="center"}
 YoY growth
 :::
 ```
 
-## Focus {auto-animate="true"}
+## Auto-animate: Focus {auto-animate="true"}
 
 ::: {.value-box data-id="movement-demo" value="7" width="35%" color="bg-amber" icon="fa-solid fa-clock" icon-position="left"}
 Days until launch
 :::
 
-## Focus {auto-animate="true"}
+## Auto-animate: Focus {auto-animate="true"}
 
 ::: {.value-box data-id="movement-demo" outer-extra-style="margin-left:60%;" value="7" width="35%" color="bg-amber" icon="fa-solid fa-rocket" icon-position="left"}
 Days until launch
@@ -1595,13 +1626,13 @@ Days until launch
 Here only `outer-extra-style` and `icon` changed — same size, same colour, same value, just a different `margin-left` — so the box visibly slides across the slide with nothing else moving.
 
 ```md
-## Focus {auto-animate="true"}
+## Auto-animate: Focus {auto-animate="true"}
 
 ::: {.value-box data-id="movement-demo" value="7" width="35%" color="bg-amber" icon="fa-solid fa-clock" icon-position="left"}
 Days until launch
 :::
 
-## Focus {auto-animate="true"}
+## Auto-animate: Focus {auto-animate="true"}
 
 ::: {.value-box data-id="movement-demo" outer-extra-style="margin-left:60%;" value="7" width="35%" color="bg-amber" icon="fa-solid fa-rocket" icon-position="left"}
 Days until launch

@@ -308,6 +308,15 @@ for fmt in "${formats[@]}"; do
           assert_present "fragment fade-in-then-semi-out" "$out" "$fixture/$fmt fragment=true expands to the default effect"
           assert_present "fragment fade-in-then-out"   "$out" "$fixture/$fmt explicit fragment effect passes through"
           assert_present '<a href="https://example.com"' "$out" "$fixture/$fmt href wraps the box in an anchor"
+          # target="_blank" must also get rel="noopener noreferrer" — an
+          # opener-less new tab is the whole point of _blank, and leaving
+          # window.opener reachable is a known phishing vector (reverse
+          # tabnabbing) other target values don't share. It must also get
+          # data-preview-link="false", or reveal.js's previewLinks option
+          # hijacks the click and opens the href in an in-slide iframe
+          # instead of a real new tab, regardless of target.
+          assert_present '<a href="https://example.com" target="_blank" data-preview-link="false" rel="noopener noreferrer" class="value-box bg-blue"' \
+            "$out" "$fixture/$fmt target=_blank adds rel=noopener noreferrer and opts out of reveal.js preview-link hijacking"
           # These five must be anchored to filter-generated markup. Pandoc
           # echoes unrecognised div attributes back out as data-* attributes,
           # so asserting on the bare user string (e.g. "opacity:0.5") passes
@@ -529,6 +538,19 @@ if stage "$work/demo"; then
   if render "$work/demo" revealjs example; then
     ok "example.qmd renders to revealjs"
     assert_absent "value-box warning" "$work/demo/example.revealjs.log" "example.qmd emits no filter warnings"
+    # Regression guard for a real bug: Quarto's Reveal.js theme ships
+    # `.reveal a { background-color: rgba(0,0,0,0); ... }`, a class+tag
+    # selector more specific than a plain `.value-box`/`.bg-*` class rule and
+    # loaded after value-box.css, so a linked (href) box on a revealjs slide
+    # silently lost its background/text colour back to the theme's plain-link
+    # defaults. The fix restates those properties at doubled-class
+    # specificity (a.value-box.value-box, a.value-box.bg-*) so they win
+    # regardless of load order — assert both are still present in the CSS
+    # this stylesheet.
+    assert_present "a.value-box.value-box" "$work/demo/_extensions/value-box/value-box.css" \
+      "value-box.css keeps the doubled-specificity override for a linked box's base colour/background"
+    assert_present "a.value-box.bg-slate" "$work/demo/_extensions/value-box/value-box.css" \
+      "value-box.css keeps the doubled-specificity override for a linked box's named background colour"
   else
     fail "example.qmd renders to revealjs" "see tests/_work/demo/example.revealjs.log"
   fi
