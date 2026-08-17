@@ -244,14 +244,20 @@ grep -o -- "--quarto-scss-export-[a-zA-Z0-9_-]*:[^;]*" path/to/theme.css
 
 `icon-color`, `font-color`, `value-color`, `title-color` and `delta-color` already accept `var(...)` (or any CSS colour) regardless of this filter's version — unlike `color`, they were never concatenated into a `class` attribute, so they've always rendered straight into an inline `style`.
 
-### Contributing
+## Acknowledgements
+
+This work started with a solution provided by [Guillaume CHRETIEN](https://github.com/GuillaumeChretienCerema) in [this issue](https://github.com/quarto-dev/quarto-cli/issues/8475), which I used and tweaked across several projects before realising I needed a filter to keep it consistent as I added new features.
+
+Thank you for creating such a brilliant starting point, Guillaume!
+
+## Contributing
 
 Please take a look at our [contributor guidance](CONTRIBUTING) and [code of conduct](CODE_OF_CONDUCT)
 
 Changes are checked by a test suite that renders a set of fixtures to every supported output format — run it with `bash tests/run-tests.sh`. If you have not tested a Quarto extension before, [tests/README.md](tests/README.md) walks through what is being tested and why, and how to add a check for a new feature.
 
 
-### Generative AI use disclosure and policy
+## Generative AI use disclosure and policy
 
 This filter has been written with the help of Claude Sonnet 4.6, Claude Sonnet 5.0, Claude Opus 5.0, and Gemini 3.1 Pro.
 
